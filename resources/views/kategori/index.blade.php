@@ -43,7 +43,7 @@ Dashboard
                 //     url: '{{ route('kategori.data') }}',
                 // }
             });
-        });
+        };
 
         function addForm() {
             $('#modal-form').modal('show');
