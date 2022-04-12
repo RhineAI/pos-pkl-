@@ -35,7 +35,7 @@ Dashboard
     <script>
         let table;
 
-        $function () {
+        $(function () {
             table = $('.table').DataTable({
                 processing: true,
                 autoWidth: false,
@@ -43,11 +43,13 @@ Dashboard
                 //     url: '{{ route('kategori.data') }}',
                 // }
             });
-        };
+
+        }); 
 
         function addForm() {
             $('#modal-form').modal('show');
             $('#modal-form .modal-title').text('Tambah Kategori');
         }
+
     </script>
 @endpush
