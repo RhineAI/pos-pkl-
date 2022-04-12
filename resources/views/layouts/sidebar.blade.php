@@ -1,10 +1,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="#" class="brand-link">
-          <img src="{{ ('AdminLTE-master/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-              class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <a href="/" class="brand-link">
+        <i class="ml-3 mr-3 nav-icon fa fa-store"></i>
+        <span class="brand-text font-weight-light"><b>{{ config ('app.name') }}</b></span>
       </a>
 
       <!-- Sidebar -->
@@ -20,19 +19,6 @@
               </div>
           </div>
 
-          {{-- <!-- SidebarSearch Form -->
-          <div class="form-inline">
-              <div class="input-group" data-widget="sidebar-search">
-                  <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                      aria-label="Search">
-                  <div class="input-group-append">
-                      <button class="btn btn-sidebar">
-                          <i class="fas fa-search fa-fw"></i>
-                      </button>
-                  </div>
-              </div>
-          </div> --}}
-
           <!-- Sidebar Menu -->
           <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -42,7 +28,7 @@
 
                {{-- Dashboard --}}
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('dashboard') }}" class="nav-link">
                         <i class="nav-icon fa fa-home"></i>
                         <p>
                             Dashboard
@@ -61,9 +47,9 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="nav nav-treeview ml-4">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('kategori.index') }}" class="nav-link">
                                 <p>Kategori Produk</p>
                             </a>
                         </li>
@@ -99,7 +85,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="nav nav-treeview ml-4">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <p>Pembelian</p>
@@ -132,7 +118,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="nav nav-treeview ml-4">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <p>Laporan Penjualan</p>
