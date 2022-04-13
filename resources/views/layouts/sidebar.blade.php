@@ -54,7 +54,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('satuan.index') }}" class="nav-link">
                                 <p>Satuan Produk</p>
                             </a>
                         </li>

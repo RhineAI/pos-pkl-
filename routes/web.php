@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\SatuanController;
+use App\Models\Satuan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +34,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/kategori', KategoriController::class);
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/satuan/data', [SatuanController::class, 'data'])->name('satuan.data');
+    Route::resource('/satuan', SatuanController::class);
+});
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

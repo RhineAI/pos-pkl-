@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
 
-class KategoriController extends Controller
+class SatuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +13,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        return view('kategori.index');
-    }
-
-    public function data()
-    {
-        $kategori = Kategori::orderBy('id_kategori', 'desc')->get();
-
-        return datatables()
-            ->of($kategori)
-            ->make(true);
+        return view('satuan.index');
     }
 
     /**
@@ -34,8 +23,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-       //
-
+        //
     }
 
     /**
@@ -46,17 +34,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'nama_kategori' => 'required|max:255'
-        // ]);
-
-        // return redirect('/kategori')->with('success', 'New Category has been added');
-
-        $kategori = new Kategori();
-        $kategori->nama_kategori= $request->nama_kategori;
-        $kategori->save();
-
-        return response()->json('Data berhasil disimpan', 200);
+        //
     }
 
     /**
