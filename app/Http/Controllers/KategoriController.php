@@ -24,6 +24,14 @@ class KategoriController extends Controller
 
         return datatables()
             ->of($kategori)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($kategori) {
+                return '
+                    <button class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i></button>
+                    <button class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
+                ';
+            })
+            ->rawColumns(['aksi'])
             ->make(true);
     }
 

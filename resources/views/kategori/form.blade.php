@@ -16,17 +16,18 @@
                     <div class="form-group row">
                         <label for="nama_kategori" class="col-md-2 col-md-offset-1 control-label">Kategori</label>
                             <div class="col-md-9">
-                               <input type="text" name="nama_kategori" id="nama_kategori" class="form-control @error('nama_kategori') is-invalid @enderror" required autofocus value="{{ old('nama_kategori') }}">
-                               @error('nama_kategori')
+                               <input type="text" name="nama_kategori" id="nama_kategori" class="form-control" autofocus>
+                               {{-- @error('nama_kategori') is-invalid @enderror" required autofocus value="{{ old('nama_kategori') }}" --}}
+                               {{-- @error('nama_kategori')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                               @enderror
+                               @enderror --}}
                             </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
