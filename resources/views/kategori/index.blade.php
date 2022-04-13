@@ -48,7 +48,7 @@ Dashboard
 
         function addForm() {
             $('#modal-form').modal('show');
-            $('#modal-form .modal-title').text('Tambah Kategori');
+            $('#modal-form .modal-title').text('sad');
         }
 
     </script>
