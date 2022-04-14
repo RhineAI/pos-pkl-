@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Satuan;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class SatuanController extends Controller
 {
@@ -14,6 +16,23 @@ class SatuanController extends Controller
     public function index()
     {
         return view('satuan.index');
+    }
+
+    public function data()
+    {
+        $satuan = Satuan::orderBy('id_satuan', 'desc')->get();
+
+        return datatables()
+            ->of($satuan)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($satuan) {
+                return '
+                    <button onclick="editForm(`'. route('satuan.update', $satuan->id_satuan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
+                    <button onclick="deleteData(`'. route('satuan.destroy', $satuan->id_satuan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
 
     /**
@@ -34,7 +53,11 @@ class SatuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $satuan = new Satuan();
+        $satuan->nama_satuan= $request->nama_satuan;
+        $satuan->save();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -45,7 +68,9 @@ class SatuanController extends Controller
      */
     public function show($id)
     {
-        //
+        $satuan = Satuan::find($id);
+        
+        return response()->json($satuan);
     }
 
     /**
@@ -68,7 +93,11 @@ class SatuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $satuan = Satuan::find($id);
+        $satuan->nama_satuan = $request->nama_satuan;
+        $satuan->update();
+
+        return response()->json('Data berhasil diubah', 200);
     }
 
     /**
@@ -79,6 +108,9 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $satuan = Satuan::find($id);
+        $satuan->delete();
+
+        return response(null,204);
     }
 }

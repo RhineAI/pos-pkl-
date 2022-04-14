@@ -11,6 +11,7 @@ Dashboard
 
 @section('content')
 
+
 <div class="row mx-3" style="background-color: white">
         <div class="col-md-12">
             <div class="box">
@@ -49,7 +50,9 @@ Dashboard
         $(function () {
             table = $('.table').DataTable({
                 processing: true,
+                responsive: true,
                 autoWidth: false,
+                serverSide: true,
                 ajax: {
                     url: '{{ route('kategori.data') }}',
                 },
@@ -62,21 +65,33 @@ Dashboard
 
             $('#modal-form').validator().on('submit', function (e) {
                 if (! e.preventDefault()) {
-                    $.ajax({ 
-                        url: $('#modal-form form').attr('action'),
-                        type: 'post',
-                        data: $('#modal-form form').serialize()
-                    })
-                    
-                     .done((response) => {
-                         $('#modal-form').modal('hide');
-                         table.ajax.reload();
-                     })
+                    $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
+                        .done((response) => {
+                            $('#modal-form').modal('hide');
+                            alert(
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: 'Lanjut gak nih?',
+                                    icon: 'success',
+                                    confirmButtonText: 'Yoi'
+                                })
+                            );
+                            table.ajax.reload();
+                        })
 
-                     .fail((errors) => {
-                         alert('Tidak dapat menyimpan data')
-                         return;
-                     });
+                        .fail((errors) => {
+                            alert(
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Te baleg',
+                                    icon: 'error',
+                                    confirmButtonText: 'meh'
+                                })
+                            );
+                            table.ajax.reload();
+            
+                            return;
+                        });
                 }
             });
         }); 
@@ -90,6 +105,59 @@ Dashboard
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=nama_kategori]').focus();
         }
+        
+        function editForm(url) {
+            $('#modal-form').modal('show')
+            $('#modal-form .modal-title').text('Edit Kategori');
 
+            $('#modal-form form')[0].reset();
+            $('#modal-form form').attr('action', url);
+            $('#modal-form [name=_method]').val('put');
+            $('#modal-form [name=nama_kategori]').focus();
+
+            $.get(url)
+                .done((response) => {
+                    $('#modal-form [name=nama_kategori]').val(response.nama_kategori);
+                })
+                .fail((errors) => {
+                    alert('Gagal mengubah data!');
+                    return;
+                });
+        }
+
+        function deleteData(url) {
+            $.post(url, {
+                '_token': $('[name=csrf-token]').attr('content'),
+                '_method': 'delete'
+            })
+            .done((response) => {
+                $('#modal-form').modal('hide');
+                 alert(
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Lanjut gak nih?',
+                    icon: 'success',
+                    buttons: 'true',
+                    dangerMode: 'true',
+                })
+            );
+                table.ajax.reload();
+            })
+
+            .fail((errors) => {
+                alert(
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Te baleg',
+                    icon: 'error',
+                    confirmButtonText: 'meh'
+             })
+            );
+                table.ajax.reload();
+        
+                return;
+             });
+            
+        }
     </script>
 @endpush
