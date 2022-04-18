@@ -126,21 +126,22 @@ Dashboard
         }
 
         function deleteData(url) {
-            $.post(url, {
+            if (confirm('Ar u sure?')) {
+                $.post(url, {
                 '_token': $('[name=csrf-token]').attr('content'),
                 '_method': 'delete'
             })
             .done((response) => {
                 $('#modal-form').modal('hide');
                  alert(
-                Swal.fire({
+                    Swal.fire({
                     title: 'Success',
                     text: 'Lanjut gak nih?',
                     icon: 'success',
                     buttons: 'true',
                     dangerMode: 'true',
-                })
-            );
+                    })
+                );
                 table.ajax.reload();
             })
 
@@ -151,12 +152,13 @@ Dashboard
                     text: 'Te baleg',
                     icon: 'error',
                     confirmButtonText: 'meh'
-             })
-            );
+                    })
+                );
                 table.ajax.reload();
         
                 return;
              });
+            }
             
         }
     </script>
