@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-Dashboard
+Data Satuan Produk
 @endsection
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Dashboard</li>
+<li class="breadcrumb-item active">Data Satuan Produk</li>
 @endsection
 
 @section('content')

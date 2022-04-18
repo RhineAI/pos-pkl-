@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-Data Kategori Produk
+Data Produk
 @endsection
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Data Kategori Produk</li>
+<li class="breadcrumb-item active">Data Produk</li>
 @endsection
 
 @section('content')
@@ -32,7 +32,14 @@ Data Kategori Produk
                     <table class="table table-stiped table-bordered">
                         <thead>
                             <th width="8%">No</th>
+                            <th>Barcode</th>
+                            <th>Nama</th>
+                            <th>Satuan</th>
                             <th>Kategori</th>
+                            <th>Harga Beli</th>
+                            <th>Harga Jual</th>
+                            <th>Stok</th>
+                            <th>Total</th>
                             <th width="15%">Aksi</th>
                         </thead>
                     </table>
