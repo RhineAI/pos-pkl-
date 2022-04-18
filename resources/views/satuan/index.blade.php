@@ -137,21 +137,37 @@ Dashboard
         }
 
         function deleteData(url) {
-            if(confirm('Yakin gk bang?')) {
-                $.post(url, {
-                    '_token': $('[name=csrf-token]').attr('content'),
-                    '_method': 'delete'
-                })
-                    .done((response) => {
-                        table.ajax.reload();
-                    })
-                    .fail((errors) => {
-                        alert('huu');
-                        table.ajax.reload();
+            $.post(url, {
+                '_token': $('[name=csrf-token]').attr('content'),
+                '_method': 'delete'
+            })
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showCancelButton: true,
+                confirmButtonText: 'Yakin banh?',                
+                }).then((response) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (response.isConfirmed) {
+                    Swal.fire('Blok!', '', 'success')
+                    table.ajax.reload();
+                } 
+            });
 
-                        return;
-                    });
-            }
+            // if(confirm('Yakin gk bang?')) {
+            //     $.post(url, {
+            //         '_token': $('[name=csrf-token]').attr('content'),
+            //         '_method': 'delete'
+            //     })
+            //         .done((response) => {
+            //             table.ajax.reload();
+            //         })
+            //         .fail((errors) => {
+            //             alert('huu');
+            //             table.ajax.reload();
+
+            //             return;
+            //         });
+            // }
         }
 
     

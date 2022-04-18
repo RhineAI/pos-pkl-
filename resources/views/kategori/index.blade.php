@@ -126,39 +126,21 @@ Dashboard
         }
 
         function deleteData(url) {
-            if (confirm('Ar u sure?')) {
-                $.post(url, {
+            $.post(url, {
                 '_token': $('[name=csrf-token]').attr('content'),
                 '_method': 'delete'
             })
-            .done((response) => {
-                $('#modal-form').modal('hide');
-                 alert(
-                    Swal.fire({
-                    title: 'Success',
-                    text: 'Lanjut gak nih?',
-                    icon: 'success',
-                    buttons: 'true',
-                    dangerMode: 'true',
-                    })
-                );
-                table.ajax.reload();
-            })
-
-            .fail((errors) => {
-                alert(
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Te baleg',
-                    icon: 'error',
-                    confirmButtonText: 'meh'
-                    })
-                );
-                table.ajax.reload();
-        
-                return;
-             });
-            }
+            Swal.fire({
+                title: 'Do you want to save the changes?',               
+                showCancelButton: true,
+                confirmButtonText: 'Yakin banh',                
+                }).then((response) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (response.isConfirmed) {
+                    Swal.fire('Blok!', '', 'success')
+                    table.ajax.reload();
+                }
+            });
             
         }
     </script>
