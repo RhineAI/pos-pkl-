@@ -50,7 +50,7 @@
                     </div>
                     <!-- /.col -->
                     <div>
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" onclick="" class="btn btn-primary btn-block">Sign In</button>
                     </div>
                     <!-- /.col -->
             </div>
@@ -67,6 +67,14 @@
     <script src="{{ ('AdminLTE-master/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ ('AdminLTE-master/dist/js/adminlte.min.js') }}"></script>
+
+
+    <script>
+            
+        }
+    </script>
+
+
 </body>
 
 </html>

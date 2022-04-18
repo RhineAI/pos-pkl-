@@ -16,7 +16,7 @@ Data Satuan Produk
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <button onclick="addForm('{{ route('satuan.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
+                    <button onclick="add('{{ route('satuan.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
                 </div>
 
                 {{-- @if (session()->has('success'))
@@ -45,35 +45,35 @@ Data Satuan Produk
 
 @push('scripts')
     <script>
-        let table;
+        let table; 
 
         $(function () {
             table = $('.table').DataTable({
-                processing: true,
-                responsive: true,
-                autoWidth: false,
-                serverSide: true,
-                ajax: {
-                    url: '{{ route('satuan.data') }}',
-                },
-                columns: [
-                   {data:'DT_RowIndex', searchable: false, sortable: false},
-                   {data:'nama_satuan'},
-                   {data:'aksi', searchable: false, sortable: false},
-                ]
-            });
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            autoWidth: false,
+            ajax: {
+                url: '{{ route('satuan.data') }}',
+            },
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'nama_satuan'},
+                {data: 'act', searchable: false, sortable: false},
+            ]
+        });
 
-            $('#modal-form').validator().on('submit', function (e) {
+        $('#modal-form').validator().on('submit', function (e) {
                 if (! e.preventDefault()) {
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
                             $('#modal-form').modal('hide');
                             alert(
                                 Swal.fire({
-                                    title: 'Success',
-                                    text: 'Lanjut gak nih?',
-                                    icon: 'success',
-                                    confirmButtonText: 'Yoi'
+                                title: 'Success',
+                                text: 'Lanjut gak nih?',
+                                icon: 'success',
+                                confirmButtonText: 'Yoi'
                                 })
                             );
                             table.ajax.reload();
@@ -82,10 +82,10 @@ Data Satuan Produk
                         .fail((errors) => {
                             alert(
                                 Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Te baleg',
-                                    icon: 'error',
-                                    confirmButtonText: 'meh'
+                                title: 'Error!',
+                                text: 'Te baleg',
+                                icon: 'error',
+                                confirmButtonText: 'meh'
                                 })
                             );
                             table.ajax.reload();
@@ -93,34 +93,45 @@ Data Satuan Produk
                             return;
                         });
                 }
-            });
-        }); 
+        })
+    });
 
-        function addForm(url) {
-            $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Tambah Satuan');
-
-            $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', url);
-            $('#modal-form [name=_method]').val('post');
-            $('#modal-form [name=nama_satuan]').focus();
-        }
+    function add(url) {
+        $('#modal-form').modal('show');
+        $('#modal-form .modal-title').text('Tambah Satuan');
         
-        function editForm(url) {
-            $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Satuan');
+        $('#modal-form form')[0].reset();
+        $('#modal-form form').attr('action', url);
+        $('#modal-form [name=_method]').val('post');
+        $('#modal-form [name=nama_satuan]').focus();
+    }
 
-            $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', url);
-            $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama_satuan]').focus();
+    function edit(url) {
+        $('#modal-form').modal('show');
+        $('#modal-form .modal-title').text('Edit Satuan');
+        
+        $('#modal-form form')[0].reset();
+        $('#modal-form form').attr('action', url);
+        $('#modal-form [name=_method]').val('put');
+        $('#modal-form [name=nama_satuan]').focus();
 
-            $.get(url)
-                .done((response) => {
-                    $('#modal-form [name=nama_satuan]').val(response.nama_satuan);
+        $.get(url)
+            .done((response) => {
+                $('#modal-form [name=nama_satuan]').val(response.nama_satuan);
+                    table.ajax.reload();
                 })
+
                 .fail((errors) => {
-                    alert('Gagal mengubah data!');
+                    alert(
+                        Swal.fire({
+                        title: 'Error!',
+                        text: 'Te baleg',
+                        icon: 'error',
+                        confirmButtonText: 'meh'
+                        })
+                    );
+                    table.ajax.reload();
+            
                     return;
                 });
         }
@@ -130,34 +141,35 @@ Data Satuan Produk
                 '_token': $('[name=csrf-token]').attr('content'),
                 '_method': 'delete'
             })
-            .done((response) => {
-                $('#modal-form').modal('hide');
-                 alert(
-                Swal.fire({
-                    title: 'Success',
-                    text: 'Lanjut gak nih?',
-                    icon: 'success',
-                    buttons: 'true',
-                    dangerMode: 'true',
-                })
-            );
-                table.ajax.reload();
-            })
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showCancelButton: true,
+                confirmButtonText: 'Yakin banh?',                
+                }).then((response) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (response.isConfirmed) {
+                    Swal.fire('Blok!', '', 'success')
+                    table.ajax.reload();
+                } 
+            });
 
-            .fail((errors) => {
-                alert(
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Te baleg',
-                    icon: 'error',
-                    confirmButtonText: 'meh'
-             })
-            );
-                table.ajax.reload();
-        
-                return;
-             });
-            
+            // if(confirm('Yakin gk bang?')) {
+            //     $.post(url, {
+            //         '_token': $('[name=csrf-token]').attr('content'),
+            //         '_method': 'delete'
+            //     })
+            //         .done((response) => {
+            //             table.ajax.reload();
+            //         })
+            //         .fail((errors) => {
+            //             alert('huu');
+            //             table.ajax.reload();
+
+            //             return;
+            //         });
+            // }
         }
+
+    
     </script>
 @endpush

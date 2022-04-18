@@ -25,13 +25,13 @@ class SatuanController extends Controller
         return datatables()
             ->of($satuan)
             ->addIndexColumn()
-            ->addColumn('aksi', function ($satuan) {
+            ->addColumn('act', function ($satuan) {
                 return '
-                    <button onclick="editForm(`'. route('satuan.update', $satuan->id_satuan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
-                    <button onclick="deleteData(`'. route('satuan.destroy', $satuan->id_satuan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
+                <button onclick="edit(`'. route('satuan.update', $satuan->id_satuan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
+                <button onclick="deleteData(`'. route('satuan.destroy', $satuan->id_satuan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
                 ';
             })
-            ->rawColumns(['aksi'])
+            ->rawColumns(['act'])
             ->make(true);
     }
 

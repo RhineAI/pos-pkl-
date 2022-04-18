@@ -14,15 +14,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="nama_satuan" class="col-md-2 col-md-offset-1 control-label">Kategori</label>
+                        <label for="nama_satuan" class="col-md-2 col-md-offset-1 control-label">Satuan</label>
                             <div class="col-md-9">
-                               <input type="text" name="nama_satuan" id="nama_satuan" class="form-control" autofocus>
-                               {{-- @error('nama_kategori') is-invalid @enderror" required autofocus value="{{ old('nama_kategori') }}" --}}
-                               {{-- @error('nama_kategori')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                               @enderror --}}
+                               <input type="text" name="nama_satuan" id="nama_satuan" class="form-control" required autofocus>
                             </div>
                     </div>
                 </div>
