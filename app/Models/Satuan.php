@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Satuan extends Model
 {
     use HasFactory;
+
+    protected $table = 'satuan';
+    protected $primaryKey = 'id_satuan';
+    protected $guarded = [];
 }

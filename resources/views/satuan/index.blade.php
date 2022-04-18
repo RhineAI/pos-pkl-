@@ -16,7 +16,7 @@ Dashboard
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <button onclick="addForm('{{ route('kategori.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
+                    <button onclick="addForm('{{ route('satuan.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
                 </div>
 
                 {{-- @if (session()->has('success'))
@@ -32,7 +32,7 @@ Dashboard
                     <table class="table table-stiped table-bordered">
                         <thead>
                             <th width="8%">No</th>
-                            <th>Kategori</th>
+                            <th>Satuan</th>
                             <th width="15%">Aksi</th>
                         </thead>
                     </table>
@@ -40,7 +40,7 @@ Dashboard
             </div>
         </div>
 </div>
-@includeIf('kategori.form')
+@includeIf('satuan.form')
 @endsection
 
 @push('scripts')
@@ -54,11 +54,11 @@ Dashboard
                 autoWidth: false,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('kategori.data') }}',
+                    url: '{{ route('satuan.data') }}',
                 },
                 columns: [
                    {data:'DT_RowIndex', searchable: false, sortable: false},
-                   {data:'nama_kategori'},
+                   {data:'nama_satuan'},
                    {data:'aksi', searchable: false, sortable: false},
                 ]
             });
@@ -98,26 +98,26 @@ Dashboard
 
         function addForm(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Tambah Kategori');
+            $('#modal-form .modal-title').text('Tambah Satuan');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
-            $('#modal-form [name=nama_kategori]').focus();
+            $('#modal-form [name=nama_satuan]').focus();
         }
         
         function editForm(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Kategori');
+            $('#modal-form .modal-title').text('Edit Satuan');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama_kategori]').focus();
+            $('#modal-form [name=nama_satuan]').focus();
 
             $.get(url)
                 .done((response) => {
-                    $('#modal-form [name=nama_kategori]').val(response.nama_kategori);
+                    $('#modal-form [name=nama_satuan]').val(response.nama_satuan);
                 })
                 .fail((errors) => {
                     alert('Gagal mengubah data!');

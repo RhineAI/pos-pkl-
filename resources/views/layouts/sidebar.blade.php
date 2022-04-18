@@ -15,7 +15,7 @@
                       alt="User Image">
               </div>
               <div class="info">
-                  <a href="#" class="d-block">Alexander Pierce</a>
+                  <a href="#" class="d-block">Alexander Udin</a>
               </div>
           </div>
 
@@ -54,7 +54,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('satuan.index') }}" class="nav-link">
                                 <p>Satuan Produk</p>
                             </a>
                         </li>

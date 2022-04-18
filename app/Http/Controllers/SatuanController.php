@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
+use App\Models\Satuan;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
-class KategoriController extends Controller
+class SatuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,20 +15,20 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        return view('kategori.index');
+        return view('satuan.index');
     }
 
     public function data()
     {
-        $kategori = Kategori::orderBy('id_kategori', 'desc')->get();
+        $satuan = Satuan::orderBy('id_satuan', 'desc')->get();
 
         return datatables()
-            ->of($kategori)
+            ->of($satuan)
             ->addIndexColumn()
-            ->addColumn('aksi', function ($kategori) {
+            ->addColumn('aksi', function ($satuan) {
                 return '
-                    <button onclick="editForm(`'. route('kategori.update', $kategori->id_kategori) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
-                    <button onclick="deleteData(`'. route('kategori.destroy', $kategori->id_kategori) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
+                    <button onclick="editForm(`'. route('satuan.update', $satuan->id_satuan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
+                    <button onclick="deleteData(`'. route('satuan.destroy', $satuan->id_satuan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
                 ';
             })
             ->rawColumns(['aksi'])
@@ -42,8 +42,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-       //
-
+        //
     }
 
     /**
@@ -54,15 +53,9 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'nama_kategori' => 'required|max:255'
-        // ]);
-
-        // return redirect('/kategori')->with('success', 'New Category has been added');
-
-        $kategori = new Kategori();
-        $kategori->nama_kategori= $request->nama_kategori;
-        $kategori->save();
+        $satuan = new Satuan();
+        $satuan->nama_satuan= $request->nama_satuan;
+        $satuan->save();
 
         return response()->json('Data berhasil disimpan', 200);
     }
@@ -75,10 +68,10 @@ class KategoriController extends Controller
      */
     public function show($id)
     {
-        $kategori = Kategori::find($id);
+        $satuan = Satuan::find($id);
         
-        return response()->json($kategori);
-    }    
+        return response()->json($satuan);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -100,14 +93,11 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $kategori = Kategori::find($id);
-        $kategori->nama_kategori = $request->nama_kategori;
-        $kategori->update();
+        $satuan = Satuan::find($id);
+        $satuan->nama_satuan = $request->nama_satuan;
+        $satuan->update();
 
         return response()->json('Data berhasil diubah', 200);
-
-        
     }
 
     /**
@@ -118,8 +108,8 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategori = Kategori::find($id);
-        $kategori->delete();
+        $satuan = Satuan::find($id);
+        $satuan->delete();
 
         return response(null,204);
     }
