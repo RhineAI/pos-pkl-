@@ -78,7 +78,6 @@ Dashboard
                             );
                             table.ajax.reload();
                         })
-
                         .fail((errors) => {
                             alert(
                                 Swal.fire({
@@ -134,14 +133,14 @@ Dashboard
                 title: 'Do you want to save the changes?',               
                 showCancelButton: true,
                 confirmButtonText: 'Yakin banh',                
-                }).then((response) => {
+                })
+                .then((response) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (response.isConfirmed) {
                     Swal.fire('Blok!', '', 'success')
                     table.ajax.reload();
                 }
-            });
-            
+            });  
         }
     </script>
 @endpush
