@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-Data Kategori Produk
+Data Produk
 @endsection
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Data Kategori Produk</li>
+<li class="breadcrumb-item active">Data Produk</li>
 @endsection
 
 @section('content')
@@ -32,7 +32,14 @@ Data Kategori Produk
                     <table class="table table-stiped table-bordered">
                         <thead>
                             <th width="8%">No</th>
+                            <th>Barcode</th>
+                            <th>Nama</th>
+                            <th>Satuan</th>
                             <th>Kategori</th>
+                            <th>Harga Beli</th>
+                            <th>Harga Jual</th>
+                            <th>Stok</th>
+                            <th>Total</th>
                             <th width="15%">Aksi</th>
                         </thead>
                     </table>
@@ -78,6 +85,7 @@ Data Kategori Produk
                             );
                             table.ajax.reload();
                         })
+
                         .fail((errors) => {
                             alert(
                                 Swal.fire({
@@ -129,18 +137,34 @@ Data Kategori Produk
                 '_token': $('[name=csrf-token]').attr('content'),
                 '_method': 'delete'
             })
-            Swal.fire({
-                title: 'Do you want to save the changes?',               
-                showCancelButton: true,
-                confirmButtonText: 'Yakin banh',                
+            .done((response) => {
+                $('#modal-form').modal('hide');
+                 alert(
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Lanjut gak nih?',
+                    icon: 'success',
+                    buttons: 'true',
+                    dangerMode: 'true',
                 })
-                .then((response) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (response.isConfirmed) {
-                    Swal.fire('Blok!', '', 'success')
-                    table.ajax.reload();
-                }
-            });  
+            );
+                table.ajax.reload();
+            })
+
+            .fail((errors) => {
+                alert(
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Te baleg',
+                    icon: 'error',
+                    confirmButtonText: 'meh'
+             })
+            );
+                table.ajax.reload();
+        
+                return;
+             });
+            
         }
     </script>
 @endpush

@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\SatuanController;
 use App\Models\Satuan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/satuan/data', [SatuanController::class, 'data'])->name('satuan.data');
     Route::resource('/satuan', SatuanController::class);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/data/data', [DataController::class, 'data'])->name('data.data');
+    Route::resource('/data', DataController::class);
 });
 
 
