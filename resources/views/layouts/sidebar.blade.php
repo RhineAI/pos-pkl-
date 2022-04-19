@@ -69,13 +69,26 @@
                 {{-- Stok --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fa fa-box-open"></i>
+                        <i class="nav-icon fas fa-box"></i>
                         <p>
-                            Stock
+                            Stok
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview ml-4">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <p>Stok Masuk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <p>Stok Keluar</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-
+                
                 {{-- Transaksi --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -137,7 +150,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
-                            Users
+                            Pengguna
                         </p>
                     </a>
                 </li>
@@ -147,7 +160,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-cog"></i>
                         <p>
-                            Settings
+                            Pengaturan
                         </p>
                     </a>
                 </li>
