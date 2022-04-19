@@ -16,7 +16,7 @@ Data Produk
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <button onclick="addForm('{{ route('kategori.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
+                    <button onclick="addForm('{{ route('produk.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
                 </div>
 
                 {{-- @if (session()->has('success'))
@@ -47,7 +47,7 @@ Data Produk
             </div>
         </div>
 </div>
-@includeIf('kategori.form')
+@includeIf('produk.form')
 @endsection
 
 @push('scripts')
@@ -61,11 +61,18 @@ Data Produk
                 autoWidth: false,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('kategori.data') }}',
+                    url: '{{ route('produk.data') }}',
                 },
                 columns: [
                    {data:'DT_RowIndex', searchable: false, sortable: false},
+                   {data:'barcode'},
+                   {data:'nama_produk'},
+                   {data:'nama_satuan'},
                    {data:'nama_kategori'},
+                   {data:'harga_beli'},
+                   {data:'harga_jual'},
+                   {data:'diskon'},
+                   {data:'stok'},
                    {data:'aksi', searchable: false, sortable: false},
                 ]
             });
@@ -105,7 +112,7 @@ Data Produk
 
         function addForm(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Tambah Kategori');
+            $('#modal-form .modal-title').text('Tambah Produk');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
@@ -115,7 +122,7 @@ Data Produk
         
         function editForm(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Kategori');
+            $('#modal-form .modal-title').text('Edit Produk');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);

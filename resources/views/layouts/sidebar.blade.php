@@ -59,7 +59,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data.index') }}" class="nav-link">
+                            <a href="{{ route('produk.index') }}" class="nav-link">
                                 <p>Data Produk</p>
                             </a>
                         </li>

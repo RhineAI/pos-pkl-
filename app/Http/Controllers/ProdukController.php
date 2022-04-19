@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
+use App\Models\Kategori;
+use App\Models\Satuan;
 
-class DataController extends Controller
+class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,26 @@ class DataController extends Controller
      */
     public function index()
     {
-        return view('data.index');
+        $kategori = Kategori::all()->pluck('nama_kategori', 'id_kategori');
+        $satuan = Satuan::all()->pluck('nama_satuan', 'id_satuan');
+        return view('produk.index', compact('kategori'), compact('satuan'));
+    }
+
+    public function data()
+    {
+        $produk = Produk::orderBy('id_produk', 'desc')->get();
+
+        return datatables()
+            ->of($produk)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($produk) {
+                return '
+                    <button onclick="editForm(`'. route('produk.update', $produk->id_produk) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
+                    <button onclick="deleteData(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
 
     /**
@@ -34,7 +56,11 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $produk = new Produk();
+        $produk->nama_produk= $request->nama_produk;
+        $produk->save();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**

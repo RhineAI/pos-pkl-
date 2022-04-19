@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('produk', function (Blueprint $table) {
             $table->increments('id_produk');
+            $table->string('barcode');
+            $table->string('nama_produk');
             $table->integer('id_kategori');
             $table->integer('id_satuan');
-            $table->string('nama_produk');
             $table->integer('harga_beli');
             $table->integer('diskon');
             $table->integer('harga_jual');
