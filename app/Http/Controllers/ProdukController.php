@@ -23,19 +23,48 @@ class ProdukController extends Controller
 
     public function data()
     {
-        $produk = Produk::orderBy('id_produk', 'desc')->get();
+        $produk = Produk::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')
+                    ->leftJoin('satuan', 'satuan.id_satuan', 'produk.id_satuan')
+                    ->select('produk.*', 'nama_kategori', 'nama_satuan')
+                    
+                    ->orderBy('id_produk', 'desc')
+                    ->get();
 
         return datatables()
             ->of($produk)
             ->addIndexColumn()
-            ->addColumn('aksi', function ($produk) {
-                return '
-                    <button onclick="editForm(`'. route('produk.update', $produk->id_produk) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
-                    <button onclick="deleteData(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
-                ';
+            ->addColumn('barcode', function ($produk) {
+                return '<span class="badge badge-info">'. $produk->barcode .'</span>';
             })
-            ->rawColumns(['aksi'])
+            ->addColumn('harga_beli', function ($produk) {
+                return format_uang($produk->harga_beli);
+            })
+            ->addColumn('harga_jual', function ($produk) {
+                return format_uang($produk->harga_jual);
+            })
+            ->addColumn('stok', function ($produk) {
+                return format_uang($produk->stok);
+            })
+            ->addColumn('ud', function($produk) { 
+                return '
+                    <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-info btn-flat><i class=bi bi-pencil-square"><i/>Edit</button> 
+                    <button onclick="deleteForm(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
+                    '; 
+                })
+            ->rawColumns(['ud', 'barcode'])
             ->make(true);
+
+        // return datatables()
+        //     ->of($produk)
+        //     ->addIndexColumn()
+        //     ->addColumn('act', function ($produk) {
+        //         return '
+        //             <button onclick="editForm(`'. route('produk.update', $produk->id_produk) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
+        //             <button onclick="deleteData(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
+        //         ';
+        //     })
+        //     ->rawColumns(['act'])
+        //     ->make(true);
     }
 
     /**
@@ -56,9 +85,20 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $produk = new Produk();
-        $produk->nama_produk= $request->nama_produk;
-        $produk->save();
+        $produk = Produk::latest()->first();
+        $request['barcode'] = '202004'. tambah_nol_didepan((int)$produk->id_produk +1, 4);
+
+        $produk = Produk::create($request->all());
+        // $produk->save();
+        // $produk = new Produk();
+        // $produk->nama_produk= $request->nama_produk;
+        // $produk->nama_kategori= $request->id_kategori;
+        // $produk->nama_satuan= $request->id_satuan;
+        // $produk->harga_beli= $request->harga_beli;
+        // $produk->harga_jual= $request->harga_jual;
+        // $produk->diskon= $request->diskon;
+        // $produk->stok= $request->stok;
+        // $produk->save();
 
         return response()->json('Data berhasil disimpan', 200);
     }
@@ -71,7 +111,9 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        //
+        $produk = Produk::find($id);
+        
+        return response()->json($produk);
     }
 
     /**
@@ -94,7 +136,10 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produk = Produk::find($id);
+        $produk->update($request->all());
+
+        return response()->json('Data berhasil diubah', 200);
     }
 
     /**
@@ -105,6 +150,9 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produk = Produk::find($id);
+        $produk->delete();
+
+        return response(null,204);
     }
 }

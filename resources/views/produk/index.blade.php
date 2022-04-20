@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Data Produk
+Data Produk 
 @endsection
 
 @section('breadcrumb')
@@ -16,7 +16,7 @@ Data Produk
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <button onclick="addForm('{{ route('produk.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
+                    <button onclick="addData('{{ route('produk.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
                 </div>
 
                 {{-- @if (session()->has('success'))
@@ -34,13 +34,13 @@ Data Produk
                             <th width="8%">No</th>
                             <th>Barcode</th>
                             <th>Nama</th>
-                            <th>Satuan</th>
                             <th>Kategori</th>
+                            <th>Satuan</th>
                             <th>Harga Beli</th>
                             <th>Harga Jual</th>
+                            <th>Diskon</th>
                             <th>Stok</th>
-                            <th>Total</th>
-                            <th width="15%">Aksi</th>
+                            <th width="9%">Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -63,17 +63,18 @@ Data Produk
                 ajax: {
                     url: '{{ route('produk.data') }}',
                 },
+                
                 columns: [
                    {data:'DT_RowIndex', searchable: false, sortable: false},
                    {data:'barcode'},
                    {data:'nama_produk'},
-                   {data:'nama_satuan'},
-                   {data:'nama_kategori'},
+                   {data:'id_kategori'},
+                   {data:'id_satuan'},
                    {data:'harga_beli'},
                    {data:'harga_jual'},
                    {data:'diskon'},
                    {data:'stok'},
-                   {data:'aksi', searchable: false, sortable: false},
+                   {data:'ud', searchable: false, sortable: false},
                 ]
             });
 
@@ -82,26 +83,27 @@ Data Produk
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
                             $('#modal-form').modal('hide');
+                            // alert('berhasil');
                             alert(
                                 Swal.fire({
                                     title: 'Success',
-                                    text: 'Lanjut gak nih?',
+                                    text: 'Selamat Menempuh Hidup Baru',
                                     icon: 'success',
-                                    confirmButtonText: 'Yoi'
+                                    confirmButtonText: 'Buset cok'
                                 })
                             );
                             table.ajax.reload();
                         })
-
                         .fail((errors) => {
-                            alert(
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Te baleg',
-                                    icon: 'error',
-                                    confirmButtonText: 'meh'
-                                })
-                            );
+                            alert('gagal');
+                            // alert(
+                            //     Swal.fire({
+                            //         title: 'Error!',
+                            //         text: 'Te baleg',
+                            //         icon: 'error',
+                            //         confirmButtonText: 'gagal'
+                            //     })
+                            // );
                             table.ajax.reload();
             
                             return;
@@ -110,68 +112,73 @@ Data Produk
             });
         }); 
 
-        function addForm(url) {
-            $('#modal-form').modal('show')
+        function addData(url) {
+            $('#modal-form').modal('show');
             $('#modal-form .modal-title').text('Tambah Produk');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
-            $('#modal-form [name=nama_kategori]').focus();
         }
+        // function addForm(url) {
+        //     $('#modal-form').modal('show')
+        //     $('#modal-form .modal-title').text('Tambah Produk');
+
+        //     $('#modal-form form')[0].reset();
+        //     $('#modal-form form').attr('action', url);
+        //     $('#modal-form [name=_method]').val('post');
+        // }
         
-        function editForm(url) {
+        function editData(url) {
             $('#modal-form').modal('show')
             $('#modal-form .modal-title').text('Edit Produk');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama_kategori]').focus();
+            $('#modal-form [name=nama_produk]').focus();
 
             $.get(url)
                 .done((response) => {
-                    $('#modal-form [name=nama_kategori]').val(response.nama_kategori);
+                    $('#modal-form [name=nama_produk]').val(response.nama_produk);
+                    $('#modal-form [name=id_kategori]').val(response.id_kategori);
+                    $('#modal-form [name=id_satuan]').val(response.id_satuan);
+                    $('#modal-form [name=harga_beli]').val(response.harga_beli);
+                    $('#modal-form [name=harga_jual]').val(response.harga_jual);
+                    $('#modal-form [name=diskon]').val(response.diskon);
+                    $('#modal-form [name=stok]').val(response.stok);
+                    
                 })
                 .fail((errors) => {
-                    alert('Gagal mengubah data!');
+                    alert(
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Ada yang salah keknya nich?',
+                            icon: 'error',
+                            confirmButtonText: 'Dahlah males'
+                        })
+                    );
                     return;
                 });
         }
 
-        function deleteData(url) {
+        function deleteForm(url) {
             $.post(url, {
                 '_token': $('[name=csrf-token]').attr('content'),
                 '_method': 'delete'
             })
-            .done((response) => {
-                $('#modal-form').modal('hide');
-                 alert(
-                Swal.fire({
-                    title: 'Success',
-                    text: 'Lanjut gak nih?',
-                    icon: 'success',
-                    buttons: 'true',
-                    dangerMode: 'true',
+            Swal.fire({
+                title: 'Do you want to save the changes?',               
+                showCancelButton: true,
+                confirmButtonText: 'Yakin banh',                
                 })
-            );
-                table.ajax.reload();
-            })
-
-            .fail((errors) => {
-                alert(
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Te baleg',
-                    icon: 'error',
-                    confirmButtonText: 'meh'
-             })
-            );
-                table.ajax.reload();
-        
-                return;
-             });
-            
+                .then((response) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (response.isConfirmed) {
+                    Swal.fire('Blok!', '', 'success')
+                    table.ajax.reload();
+                }
+            });  
         }
     </script>
 @endpush

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('produk', function (Blueprint $table) {
             $table->increments('id_produk');
-            $table->string('barcode');
-            $table->string('nama_produk');
+            $table->string('barcode')->unique();
+            $table->string('nama_produk')->unique();
             $table->integer('id_kategori');
             $table->integer('id_satuan');
             $table->integer('harga_beli');

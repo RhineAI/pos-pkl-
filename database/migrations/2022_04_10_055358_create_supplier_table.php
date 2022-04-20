@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('supplier', function (Blueprint $table) {
             $table->increments('id_supplier');
             $table->integer('kode');
-            $table->string('nama');
+            $table->string('nama')->unique();
             $table->text('alamat');
             $table->char('telepon');
             $table->timestamps();
