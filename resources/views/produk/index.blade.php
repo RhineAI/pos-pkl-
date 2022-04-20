@@ -31,15 +31,16 @@ Data Produk
                 <div class="box-body table-responsive">
                     <table class="table table-stiped table-bordered">
                         <thead>
-                            <th width="8%">No</th>
+                            <th width="4%">No</th>
                             <th>Barcode</th>
                             <th>Nama</th>
                             <th>Kategori</th>
-                            <th>Satuan</th>
+                            <th width="4%">Satuan</th>
                             <th>Harga Beli</th>
                             <th>Harga Jual</th>
                             <th>Diskon</th>
                             <th>Stok</th>
+                            <th>Total</th>
                             <th width="9%">Aksi</th>
                         </thead>
                     </table>
@@ -62,18 +63,18 @@ Data Produk
                 serverSide: true,
                 ajax: {
                     url: '{{ route('produk.data') }}',
-                },
-                
+                },          
                 columns: [
                    {data:'DT_RowIndex', searchable: false, sortable: false},
                    {data:'barcode'},
                    {data:'nama_produk'},
-                   {data:'id_kategori'},
-                   {data:'id_satuan'},
+                   {data:'kategori'},
+                   {data:'satuan'},
                    {data:'harga_beli'},
                    {data:'harga_jual'},
                    {data:'diskon'},
                    {data:'stok'},
+                   {data:'total'},
                    {data:'ud', searchable: false, sortable: false},
                 ]
             });
@@ -119,6 +120,7 @@ Data Produk
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
+            $('#modal-form [name=nama_produk]').focus();
         }
         // function addForm(url) {
         //     $('#modal-form').modal('show')

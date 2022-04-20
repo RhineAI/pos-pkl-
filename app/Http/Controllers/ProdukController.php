@@ -16,8 +16,8 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::all()->pluck('nama_kategori', 'id_kategori');
-        $satuan = Satuan::all()->pluck('nama_satuan', 'id_satuan');
+        $kategori = Kategori::all()->pluck('id_kategori', 'nama_kategori');
+        $satuan = Satuan::all()->pluck('id_satuan', 'nama_satuan');
         return view('produk.index', compact('kategori'), compact('satuan'));
     }
 
@@ -25,8 +25,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')
                     ->leftJoin('satuan', 'satuan.id_satuan', 'produk.id_satuan')
-                    ->select('produk.*', 'nama_kategori', 'nama_satuan')
-                    
+                    ->select('produk.*', 'nama_kategori', 'nama_satuan')     
                     ->orderBy('id_produk', 'desc')
                     ->get();
 
@@ -35,6 +34,12 @@ class ProdukController extends Controller
             ->addIndexColumn()
             ->addColumn('barcode', function ($produk) {
                 return '<span class="badge badge-info">'. $produk->barcode .'</span>';
+            })
+            ->addColumn('kategori', function ($produk) {
+                return $produk->nama_kategori;
+            })
+            ->addColumn('satuan', function ($produk) {
+                return $produk->nama_satuan;
             })
             ->addColumn('harga_beli', function ($produk) {
                 return format_uang($produk->harga_beli);
@@ -47,8 +52,8 @@ class ProdukController extends Controller
             })
             ->addColumn('ud', function($produk) { 
                 return '
-                    <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-info btn-flat><i class=bi bi-pencil-square"><i/>Edit</button> 
-                    <button onclick="deleteForm(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
+                    <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-info btn-flat><i class=bi bi-pencil-square"><i/></button> 
+                    <button onclick="deleteForm(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
                     '; 
                 })
             ->rawColumns(['ud', 'barcode'])
@@ -86,7 +91,7 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $produk = Produk::latest()->first();
-        $request['barcode'] = '202004'. tambah_nol_didepan((int)$produk->id_produk +1, 4);
+        $request['barcode'] = '202204'. tambah_nol_didepan((int)$produk->id_produk +1, 4). '-B';
 
         $produk = Produk::create($request->all());
         // $produk->save();

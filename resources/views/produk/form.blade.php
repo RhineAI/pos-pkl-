@@ -28,7 +28,7 @@
                                <select name="id_kategori" id="id_kategori" class="form-control">
                                     <option value="">Pilih Kategori</option>
                                     @foreach ($kategori as $key => $item )
-                                        <option value="{{ $key }}">{{ $item }}</option>
+                                        <option value="{{ $item }}">{{ $key }}</option>
                                     @endforeach
                                 </select>  
                             </div>
@@ -40,7 +40,7 @@
                                <select name="id_satuan" id="id_satuan" class="form-control" >
                                     <option value="">Pilih Satuan</option>
                                     @foreach ($satuan as $sat => $items )
-                                        <option value="{{ $sat }}">{{ $items }}</option>
+                                        <option value="{{ $items }}">{{ $sat }}</option>
                                     @endforeach
                                 </select>  
                             </div>
