@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SupplierController;
+use App\Models\Supplier;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
     Route::resource('/produk', ProdukController::class);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
+    Route::resource('/supplier', SupplierController::class);
 });
 
 

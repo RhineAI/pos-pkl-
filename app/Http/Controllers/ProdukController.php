@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Produk;
 use App\Models\Satuan;
 
 class ProdukController extends Controller
@@ -35,12 +35,12 @@ class ProdukController extends Controller
             ->addColumn('barcode', function ($produk) {
                 return '<span class="badge badge-info">'. $produk->barcode .'</span>';
             })
-            ->addColumn('kategori', function ($produk) {
-                return $produk->nama_kategori;
-            })
-            ->addColumn('satuan', function ($produk) {
-                return $produk->nama_satuan;
-            })
+            // ->addColumn('kategori', function ($produk) {
+            //     return $produk->nama_kategori;
+            // })
+            // ->addColumn('satuan', function ($produk) {
+            //     return $produk->nama_satuan;
+            // })
             ->addColumn('harga_beli', function ($produk) {
                 return format_uang($produk->harga_beli);
             })
@@ -94,18 +94,19 @@ class ProdukController extends Controller
         $request['barcode'] = '202204'. tambah_nol_didepan((int)$produk->id_produk +1, 4). '-B';
 
         $produk = Produk::create($request->all());
-        // $produk->save();
+        $produk->save();
+        
+        return response()->json($produk);
         // $produk = new Produk();
         // $produk->nama_produk= $request->nama_produk;
-        // $produk->nama_kategori= $request->id_kategori;
-        // $produk->nama_satuan= $request->id_satuan;
+        // $produk->nama_kategori= $request->nama_kategori;
+        // $produk->nama_satuan= $request->nama_satuan;
         // $produk->harga_beli= $request->harga_beli;
         // $produk->harga_jual= $request->harga_jual;
         // $produk->diskon= $request->diskon;
         // $produk->stok= $request->stok;
         // $produk->save();
 
-        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
