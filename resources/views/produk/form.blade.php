@@ -18,14 +18,14 @@
                     <div class="form-group row">
                         <label for="nama_produk" class="col-md-2 col-md-offset-1 control-label">Nama</label>
                             <div class="col-md-9">
-                               <input type="text" name="nama_produk" id="nama_produk" class="form-control" autofocus  placeholder="Product">
+                               <input type="text" name="nama_produk" id="nama_produk" class="form-control" autofocus required placeholder="Product">
                             </div>
                     </div>
                 
                     <div class="form-group row">
                         <label for="id_kategori" class="col-md-2 col-md-offset-1 control-label">Kategori</label>
                             <div class="col-md-9">
-                               <select name="id_kategori" id="id_kategori" class="form-control">
+                               <select name="id_kategori" id="id_kategori" class="form-control" required>
                                     <option value="">Pilih Kategori</option>
                                     @foreach ($kategori as $key => $item )
                                         <option value="{{ $item }}">{{ $key }}</option>
@@ -37,7 +37,7 @@
                     <div class="form-group row">
                         <label for="id_satuan" class="col-md-2 col-md-offset-1 control-label">Satuan</label>
                             <div class="col-md-9">
-                               <select name="id_satuan" id="id_satuan" class="form-control" >
+                               <select name="id_satuan" id="id_satuan" class="form-control" required>
                                     <option value="">Pilih Satuan</option>
                                     @foreach ($satuan as $sat => $items )
                                         <option value="{{ $items }}">{{ $sat }}</option>
@@ -49,28 +49,28 @@
                     <div class="form-group row">
                         <label for="harga_beli" class="col-md-2 col-md-offset-1 control-label">Harga Beli</label>
                             <div class="col-md-9">
-                               <input type="number" name="harga_beli" id="harga_beli" class="form-control" >
+                               <input type="number" name="harga_beli" id="harga_beli" class="form-control" required>
                             </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="harga_jual" class="col-md-2 col-md-offset-1 control-label">Harga Jual</label>
                             <div class="col-md-9">
-                               <input type="number" name="harga_jual" id="harga_jual" class="form-control" >
+                               <input type="number" name="harga_jual" id="harga_jual" class="form-control" required >
                             </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="diskon" class="col-md-2 col-md-offset-1 control-label">Diskon</label>
                             <div class="col-md-9">
-                               <input type="number" name="diskon" id="diskon" class="form-control" value="0">
+                               <input type="number" name="diskon" id="diskon" class="form-control" value="0" required>
                             </div>
                     </div>
                 
                     <div class="form-group row">
                         <label for="stok" class="col-md-2 col-md-offset-1 control-label">Stok</label>
                             <div class="col-md-9">
-                               <input type="number" name="stok" id="stok" class="form-control"  value="0">
+                               <input type="number" name="stok" id="stok" class="form-control" value="0" required>
                             </div>
                     </div>
 
