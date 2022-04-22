@@ -6,6 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\StokMasukController;
+use App\Http\Controllers\StokKeluarController;
+use App\Http\Controllers\BuyController;
+use App\Http\Controllers\SellController;
+use App\Http\Controllers\ReportPenjualanController;
+use App\Http\Controllers\ReportKeuntunganController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,19 +38,60 @@ Route::middleware([
     })->name('dashboard');
 });
 
+// Route kategori
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
     Route::resource('/kategori', KategoriController::class);
 });
-
+// Route satuan
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/satuan/data', [SatuanController::class, 'data'])->name('satuan.data');
     Route::resource('/satuan', SatuanController::class);
 });
-
+// Route data produk
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
     Route::resource('/produk', ProdukController::class);
+});
+// Route stok masuk
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/stokmasuk/data', [StokMasukController::class, 'data'])->name('stokmasuk.data');
+    Route::resource('/stokmasuk', StokMasukController::class);
+});
+// Route stok keluar
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/stokkeluar/data', [StokKeluarController::class, 'data'])->name('stokkeluar.data');
+    Route::resource('/stokkeluar', StokKeluarController::class);
+});
+// Route stok pembelian
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/pembelian/data', [BuyController::class, 'data'])->name('pembelian.data');
+    Route::resource('/pembelian', BuyController::class);
+});
+// Route stok penjualan
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/penjualan/data', [SellController::class, 'data'])->name('penjualan.data');
+    Route::resource('/penjualan', SellController::class);
+});
+// Route stok laporan penjualan
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/reportpenjualan/data', [ReportPenjualanController::class, 'data'])->name('reportpenjualan.data');
+    Route::resource('/reportpenjualan', ReportPenjualanController::class);
+});
+// Route stok laporan keuntungan
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/reportkeuntungan/data', [ReportKeuntunganController::class, 'data'])->name('reportkeuntungan.data');
+    Route::resource('/reportkeuntungan', ReportKeuntunganController::class);
+});
+// Route pengguna
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/users/data', [UserController::class, 'data'])->name('users.data');
+    Route::resource('/users', UserController::class);
+});
+// Route pengaturan
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/settings/data', [SettingsController::class, 'data'])->name('settings.data');
+    Route::resource('/settings', SettingsController::class);
 });
 
 

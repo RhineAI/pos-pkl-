@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Data Produk 
+Data Produk
 @endsection
 
 @section('breadcrumb')
@@ -13,40 +13,32 @@ Data Produk
 
 
 <div class="row mx-3" style="background-color: white">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <button onclick="addData('{{ route('produk.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
-                </div>
-
-                {{-- @if (session()->has('success'))
-                    <div class="alert alert-success d-flex align-items-center" role="alert">
-                        <div>
-                          <i class="bi bi-check-lg"  style="font-size: 1.2rem;"></i>
-                           {{ session('success') }}
-                        </div>
-                      </div>
-                @endif --}}
-
-                <div class="box-body table-responsive">
-                    <table class="table table-stiped table-bordered">
-                        <thead>
-                            <th width="4%">No</th>
-                            <th>Barcode</th>
-                            <th>Nama</th>
-                            <th>Kategori</th>
-                            <th width="4%">Satuan</th>
-                            <th>Harga Beli</th>
-                            <th>Harga Jual</th>
-                            <th>Diskon</th>
-                            <th>Stok</th>
-                            <th>Total</th>
-                            <th width="9%">Aksi</th>
-                        </thead>
-                    </table>
-                </div>
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <button onclick="addData('{{ route('produk.store') }}')"
+                    class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
+                    Tambah</button>
+            </div>
+            <div class="box-body table-responsive">
+                <table class="table table-stiped table-bordered">
+                    <thead>
+                        <th width="7%">No</th>
+                        <th>Barcode</th>
+                        <th>Nama</th>
+                        <th>Kategori</th>
+                        <th width="4%">Satuan</th>
+                        <th>Harga Beli</th>
+                        <th>Harga Jual</th>
+                        <th>Diskon</th>
+                        <th>Stok</th>
+                        <th>Total</th>
+                        <th width="7%">Aksi</th>
+                    </thead>
+                </table>
             </div>
         </div>
+    </div>
 </div>
 @includeIf('produk.form')
 @endsection
@@ -68,8 +60,8 @@ Data Produk
                    {data:'DT_RowIndex', searchable: false, sortable: false},
                    {data:'barcode'},
                    {data:'nama_produk'},
-                   {data:'kategori'},
-                   {data:'satuan'},
+                   {data:'nama_kategori'},
+                   {data:'nama_satuan'},
                    {data:'harga_beli'},
                    {data:'harga_jual'},
                    {data:'diskon'},
@@ -87,24 +79,23 @@ Data Produk
                             // alert('berhasil');
                             alert(
                                 Swal.fire({
-                                    title: 'Success',
-                                    text: 'Selamat Menempuh Hidup Baru',
+                                    title: 'Success!',
+                                    text: 'Data Produk berhasil ditambahkan',
                                     icon: 'success',
-                                    confirmButtonText: 'Buset cok'
+                                    confirmButtonText: 'Lanjut'
                                 })
                             );
                             table.ajax.reload();
                         })
                         .fail((errors) => {
-                            alert('gagal');
-                            // alert(
-                            //     Swal.fire({
-                            //         title: 'Error!',
-                            //         text: 'Te baleg',
-                            //         icon: 'error',
-                            //         confirmButtonText: 'gagal'
-                            //     })
-                            // );
+                            alert(
+                                Swal.fire({
+                                    title:'Error!',
+                                    text: 'Data Produk gagal ditambahkan',
+                                    icon: 'error',
+                                    confirmButtonText: 'Kembali'
+                                })
+                            );
                             table.ajax.reload();
             
                             return;
@@ -122,14 +113,6 @@ Data Produk
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=nama_produk]').focus();
         }
-        // function addForm(url) {
-        //     $('#modal-form').modal('show')
-        //     $('#modal-form .modal-title').text('Tambah Produk');
-
-        //     $('#modal-form form')[0].reset();
-        //     $('#modal-form form').attr('action', url);
-        //     $('#modal-form [name=_method]').val('post');
-        // }
         
         function editData(url) {
             $('#modal-form').modal('show')
@@ -154,7 +137,7 @@ Data Produk
                 .fail((errors) => {
                     alert(
                         Swal.fire({
-                            title: 'Error',
+                            title: 'Error!',
                             text: 'Ada yang salah keknya nich?',
                             icon: 'error',
                             confirmButtonText: 'Dahlah males'
@@ -170,14 +153,20 @@ Data Produk
                 '_method': 'delete'
             })
             Swal.fire({
-                title: 'Do you want to save the changes?',               
+                title: 'Hapus data produk yang dipilih?',               
                 showCancelButton: true,
-                confirmButtonText: 'Yakin banh',                
+                cancelButtonText: 'Tidak',
+                confirmButtonText: 'Iya',                
                 })
                 .then((response) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (response.isConfirmed) {
-                    Swal.fire('Blok!', '', 'success')
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Data Produk berhasil dihapus',
+                        icon: 'success',
+                        confirmButtonText: 'Lanjut'
+                    })
                     table.ajax.reload();
                 }
             });  
