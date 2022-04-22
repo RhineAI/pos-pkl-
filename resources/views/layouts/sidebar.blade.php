@@ -65,6 +65,7 @@
                       </ul>
                   </li>
 
+<<<<<<< HEAD
                   {{-- Stok --}}
                   <li class="nav-item">
                       <a href="#" class="nav-link">
@@ -87,6 +88,17 @@
                           </li>
                       </ul>
                   </li>
+=======
+                {{-- Supplier --}}
+                <li class="nav-item">
+                    <a href="{{ route('supplier.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-truck"></i>
+                        <p>
+                            Supplier
+                        </p>
+                    </a>
+                </li>
+>>>>>>> d5761e5323ac3f5f3516ea0f2fa2d97040b5e2c4
 
                   {{-- Transaksi --}}
                   <li class="nav-item">

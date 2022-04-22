@@ -1,0 +1,9 @@
+Plugin
+
+1. composer install
+2. npm install -g npm
+3. npm install sweetalert2
+4. composer require yajra/laravel-datatables-oracle:"~9.0"
+5. php artisan vendor:publish --tag=datatables
+6. composer require doctrine/dbal
+7. composer dump-autoload
