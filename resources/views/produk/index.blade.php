@@ -16,26 +16,41 @@ Data Produk
     <div class="col-md-12">
         <div class="box">
             <div class="box-header with-border">
-                <button onclick="addData('{{ route('produk.store') }}')"
-                    class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
-                    Tambah</button>
+                <div class="btn-group">
+                    <button onclick="addData('{{ route('produk.store') }}')"
+                        class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
+                        Tambah
+                    </button> 
+
+                    <button onclick="deleteSelected('{{ route('produk.delete_selected') }}')"
+                        class="btn btn-sm btn-flat btn-danger btn-flat mx-2 my-3"><i class="bi bi-trash3-fill"></i>
+                        Hapus
+                    </button> 
+                </div>
             </div>
             <div class="box-body table-responsive">
-                <table class="table table-stiped table-bordered">
-                    <thead>
-                        <th width="7%">No</th>
-                        <th>Barcode</th>
-                        <th>Nama</th>
-                        <th>Kategori</th>
-                        <th width="4%">Satuan</th>
-                        <th>Harga Beli</th>
-                        <th>Harga Jual</th>
-                        <th>Diskon</th>
-                        <th>Stok</th>
-                        <th>Total</th>
-                        <th width="7%">Aksi</th>
-                    </thead>
-                </table>
+                <form action="" class="form-produk">
+                    @csrf
+
+                    <table class="table table-stiped table-bordered">
+                        <thead>
+                            <th width="5.5%">
+                                <input type="checkbox" name="select_all" id="select_all">
+                            </th>
+                            <th>No</th>
+                            <th>Barcode</th>
+                            <th>Nama</th>
+                            <th>Kategori</th>
+                            <th width="4%">Satuan</th>
+                            <th>Harga Beli</th>
+                            <th>Harga Jual</th>
+                            <th>Diskon</th>
+                            <th>Stok</th>
+                            
+                            <th width="7%">Aksi</th>
+                        </thead>
+                    </table>
+                </form>
             </div>
         </div>
     </div>
@@ -57,6 +72,7 @@ Data Produk
                     url: '{{ route('produk.data') }}',
                 },          
                 columns: [
+                   {data:'select_all',  sortable: false},
                    {data:'DT_RowIndex', searchable: false, sortable: false},
                    {data:'barcode'},
                    {data:'nama_produk'},
@@ -66,7 +82,6 @@ Data Produk
                    {data:'harga_jual'},
                    {data:'diskon'},
                    {data:'stok'},
-                   {data:'total'},
                    {data:'ud', searchable: false, sortable: false},
                 ]
             });
@@ -102,6 +117,13 @@ Data Produk
                         });
                 }
             });
+
+
+            $('[name=select_all]').on('click', function() {
+                $(':checkbox').prop('checked', this.checked);
+            });
+
+
         }); 
 
         function addData(url) {
@@ -168,8 +190,38 @@ Data Produk
                         confirmButtonText: 'Lanjut'
                     })
                     table.ajax.reload();
+                    
                 }
             });  
         }
+
+        function deleteSelected(url) {
+            if ($('input:checked').length > 1) {
+                $.post(url, $('.form-produk').serialize()
+            )
+                Swal.fire({
+                    title: 'Hapus data produk yang dipilih?',               
+                    showCancelButton: true,
+                    cancelButtonText: 'Tidak',
+                    confirmButtonText: 'Iya',                
+                    })
+                    .then((response) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (response.isConfirmed) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Data Produk berhasil dihapus',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut'
+                        })
+                        table.ajax.reload();
+                    }
+                }); 
+            } else {
+                alert('Pilih data nya dong');
+                return;
+            };
+        }
+
     </script>
 @endpush

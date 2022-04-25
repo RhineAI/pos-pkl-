@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('harga_beli');
             $table->integer('diskon');
             $table->integer('harga_jual');
-            $table->integer('id_stok');
+            $table->integer('stok');
             $table->timestamps();
         });
     }

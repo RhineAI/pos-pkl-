@@ -1,12 +1,11 @@
 <?php
 
-use App\Models\Satuan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\ProdukController;
-<<<<<<< HEAD
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\StokMasukController;
 use App\Http\Controllers\StokKeluarController;
 use App\Http\Controllers\BuyController;
@@ -15,10 +14,8 @@ use App\Http\Controllers\ReportPenjualanController;
 use App\Http\Controllers\ReportKeuntunganController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingsController;
-=======
-use App\Http\Controllers\SupplierController;
-use App\Models\Supplier;
->>>>>>> d5761e5323ac3f5f3516ea0f2fa2d97040b5e2c4
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
 // Route data produk
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
+    Route::post('/produk/delete-selected', [ProdukController::class, 'deleteSelected'])->name('produk.delete_selected');
     Route::resource('/produk', ProdukController::class);
 });
 // Route stok masuk

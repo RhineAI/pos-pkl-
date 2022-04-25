@@ -32,6 +32,10 @@ class ProdukController extends Controller
         return datatables()
             ->of($produk)
             ->addIndexColumn()
+            ->addColumn('select_all', function ($produk) {
+                return '<input type="checkbox" name="id_produk[]" value=" '. $produk->id_produk.' ">
+                ';
+            })
             ->addColumn('barcode', function ($produk) {
                 return '<span class="badge badge-info">'. $produk->barcode .'</span>';
             })
@@ -56,7 +60,7 @@ class ProdukController extends Controller
                     <button onclick="deleteForm(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
                     '; 
                 })
-            ->rawColumns(['ud', 'barcode'])
+            ->rawColumns(['ud', 'barcode', 'select_all'])
             ->make(true);
 
         // return datatables()
@@ -91,12 +95,15 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $produk = Produk::latest()->first();
-        $request['barcode'] = '202204'. tambah_nol_didepan((int)$produk->id_produk +1, 4). '-B';
+        $request['barcode'] = 'iL-202204'. tambah_nol_didepan((int)$produk->id_produk +1, 4);
 
-        $produk = Produk::create($request->all());
-        $produk->save();
+        $produk = Produk::create($request->all())->save();
+
+        return $produk;
+
+        // $produk->save();
         
-        return response()->json($produk);
+        // return response()->json('Data simpan', 200);
         // $produk = new Produk();
         // $produk->nama_produk= $request->nama_produk;
         // $produk->nama_kategori= $request->nama_kategori;
@@ -160,5 +167,15 @@ class ProdukController extends Controller
         $produk->delete();
 
         return response(null,204);
+    }
+
+    public function deleteSelected(Request $request) {
+
+        foreach ($request->id_produk as $key => $id) {
+            $produk = Produk::find($id);
+            $produk->delete();
+
+        }
+        return response(null, 204);
     }
 }
