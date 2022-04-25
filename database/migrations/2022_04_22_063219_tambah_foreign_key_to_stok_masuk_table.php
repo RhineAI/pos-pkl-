@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('id_stok')->change();
             $table->foreign('id_stok')
                   ->references('id_stok')
-                  ->on('stok')
+                  ->on('stok_masuk')
                   ->onUpdate('restrict')
                   ->onDelete('restrict');
         });
@@ -30,8 +30,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('stok', function (Blueprint $table) {
-            //
+        Schema::table('stok_masuk', function (Blueprint $table) {
+            $table->unsignedInteger('id_stok')->change();
+            $table->dropForeign('produk_id_stok_foreign1');
         });
     }
 };
