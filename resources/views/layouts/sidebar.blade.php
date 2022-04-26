@@ -14,7 +14,7 @@
                   <img src="/images/monster.png" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <a href="{{ route('dashboard') }}" class="d-block">Alexander Udin</a>
+                  <a href="{{ route('dashboard') }}" class="d-block">}</a>
               </div>
           </div>
 
@@ -86,17 +86,7 @@
                               </a>
                           </li>
                       </ul>
-                  </li>
-
-                {{-- Supplier --}}
-                <li class="nav-item">
-                    <a href="{{ route('supplier.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-truck"></i>
-                        <p>
-                            Supplier
-                        </p>
-                    </a>
-                </li>
+                  </li>         
 
                   {{-- Transaksi --}}
                   <li class="nav-item">
@@ -122,14 +112,14 @@
                   </li>
 
                   {{-- Supplier --}}
-                  <li class="nav-item">
-                      <a href="#" class="nav-link">
-                          <i class="nav-icon fa fa-truck"></i>
-                          <p>
-                              Supplier
-                          </p>
-                      </a>
-                  </li>
+                <li class="nav-item">
+                    <a href="{{ route('supplier.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-truck"></i>
+                        <p>
+                            Supplier
+                        </p>
+                    </a>
+                </li>
 
                   {{-- Laporan --}}
                   <li class="nav-item">

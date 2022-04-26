@@ -32,7 +32,7 @@ Data Produk
                         {{-- <th width="6%">
                             <input type="checkbox" name="select_all" id="select_all">
                         </th> --}}
-                        <th width="4%">No</th>
+                        <th width="6%">No</th>
                         <th>Barcode</th>
                         <th width="20%">Nama Produk</th>
                         <th>Kategori</th>
@@ -143,8 +143,7 @@ Data Produk
                     $('#modal-form [name=harga_beli]').val(response.harga_beli);
                     $('#modal-form [name=harga_jual]').val(response.harga_jual);
                     $('#modal-form [name=diskon]').val(response.diskon);
-                    $('#modal-form [name=stok]').val(response.stok);
-                    
+                    $('#modal-form [name=stok]').val(response.stok);    
                 })
                 .fail((errors) => {
                     alert(

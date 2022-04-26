@@ -20,6 +20,7 @@
                         <div class="col-md-10">
                             <input type="text" name="nama_kategori" id="nama_kategori" class="form-control" required
                                 autofocus>
+                            <span class="help-block with-errors"></span>
                         </div>
                     </div>
                 </div>

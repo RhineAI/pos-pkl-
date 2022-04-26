@@ -19,7 +19,8 @@
                         </label>
                         <div class="col-md-10">
                             <input type="text" name="nama_satuan" id="nama_satuan" class="form-control" required
-                                autofocus>
+                            autofocus>
+                            <span class="help-block with-errors"></span>
                         </div>
                     </div>
                 </div>

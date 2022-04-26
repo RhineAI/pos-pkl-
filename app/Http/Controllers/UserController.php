@@ -19,7 +19,19 @@ class UserController extends Controller
 
     public function data()
     {
-        // 
+        $user = User::IsNotAdmin()->orderBy('id', 'DESC')->get();
+
+            return datatables()
+                ->of($user)
+                ->addIndexColumn()                
+                ->addColumn('aksi', function($user) { 
+                    return '
+                        <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-info btn-flat><i class=bi bi-pencil-square"><i/></button> 
+                        <button onclick="deleteForm(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
+                        '; 
+                    })
+                ->rawColumns(['aksi'])
+                ->make(true);
     }
 
     /**
@@ -40,7 +52,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // 
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->level= 2;
+        $user->foto ='/images/monster.png';
+        $user->save();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -51,7 +72,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        return response()->json($user);
     }
 
     /**
@@ -74,7 +97,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        if ($request->has('password') && $request->password != "" ) {
+            $user->request = $request->password;
+        }
+        $user->update();
+
+        return response()->json('Data berhasil diubah', 200);
     }
 
     /**
@@ -85,6 +117,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return response(null,204);
     }
 }
