@@ -27,6 +27,13 @@ return new class extends Migration
                   ->on('satuan')
                   ->onUpdate('restrict')
                   ->onDelete('restrict');
+
+            // $table->unsignedInteger('id_stok')->change();
+            // $table->foreign('id_stok')
+            //       ->references('id_stok')
+            //       ->on('stok_masuk')
+            //       ->onUpdate('restrict')
+            //       ->onDelete('restrict');
         });
     }
 

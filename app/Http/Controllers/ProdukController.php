@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Satuan;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProdukController extends Controller
 {
@@ -94,8 +95,20 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $produk = Produk::latest()->first();
-        $request['barcode'] = 'iL-202204'. tambah_nol_didepan((int)$produk->id_produk +1, 4);
+        $produk = Produk::select('barcode')->orderBy('created_at', 'DESC')->first();
+        
+        $kode = '';
+
+        if($produk == NULL) {
+            $kode = 'BRC-00000001';
+        } else {
+            $kode = sprintf('BRC-%08d', substr($produk->barcode, 4) + 1);
+        }
+
+        $request['barcode'] = $kode;
+
+        // $produk = Produk::latest()->first() ?? new Produk();
+        // $request['barcode'] = 'iL-'. tambah_nol_didepan((int)$produk->id_produk + 1, 4);
 
         $produk = Produk::create($request->all())->save();
 
@@ -169,13 +182,27 @@ class ProdukController extends Controller
         return response(null,204);
     }
 
-    public function deleteSelected(Request $request) {
+    // public function deleteSelected(Request $request) 
+    // {
 
-        foreach ($request->id_produk as $key => $id) {
-            $produk = Produk::find($id);
-            $produk->delete();
+    //     foreach ($request->id_produk as $produk => $id) {
+    //         $produk = Produk::find($id);
+    //         $produk->delete();
 
-        }
-        return response(null, 204);
-    }
+    //     }
+    //     return response(null, 204);
+    // }
+
+    // public function cetakBarcode(Request $request) 
+    // {
+    //     $dataProduk = array();
+    //     foreach ($request->id_produk as $id) {
+    //         $produk = Produk::find($id);
+    //         $dataProduk[] = $produk;
+    //     }
+
+    //     $pdf = Pdf::loadView('produk.barcode', compact('dataProduk'));
+    //     $pdf->setPaper('a4', 'potrait');
+    //     return $pdf;
+    // }
 }

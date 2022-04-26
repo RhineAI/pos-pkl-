@@ -6,7 +6,7 @@ Data Produk
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Data Produk</li>
+<li class="breadcrumb-item active">Produk</li>
 @endsection
 
 @section('content')
@@ -16,41 +16,34 @@ Data Produk
     <div class="col-md-12">
         <div class="box">
             <div class="box-header with-border">
-                <div class="btn-group">
-                    <button onclick="addData('{{ route('produk.store') }}')"
-                        class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
-                        Tambah
-                    </button> 
+                <button onclick="addData('{{ route('produk.store') }}')"
+                    class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
+                     Tambah
+                </button>
 
-                    <button onclick="deleteSelected('{{ route('produk.delete_selected') }}')"
-                        class="btn btn-sm btn-flat btn-danger btn-flat mx-2 my-3"><i class="bi bi-trash3-fill"></i>
-                        Hapus
-                    </button> 
-                </div>
+                {{-- <button onclick="deleteSelected('{{ route('produk.delete_selected') }}')"
+                    class="btn btn-sm btn-flat btn-danger btn-flat mx-2 my-3"><i class="bi bi-recycle"></i>
+                     Hupus
+                </button> --}}
             </div>
             <div class="box-body table-responsive">
-                <form action="" class="form-produk">
-                    @csrf
-
-                    <table class="table table-stiped table-bordered">
-                        <thead>
-                            <th width="5.5%">
-                                <input type="checkbox" name="select_all" id="select_all">
-                            </th>
-                            <th>No</th>
-                            <th>Barcode</th>
-                            <th>Nama</th>
-                            <th>Kategori</th>
-                            <th width="4%">Satuan</th>
-                            <th>Harga Beli</th>
-                            <th>Harga Jual</th>
-                            <th>Diskon</th>
-                            <th>Stok</th>
-                            
-                            <th width="7%">Aksi</th>
-                        </thead>
-                    </table>
-                </form>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        {{-- <th width="6%">
+                            <input type="checkbox" name="select_all" id="select_all">
+                        </th> --}}
+                        <th width="4%">No</th>
+                        <th>Barcode</th>
+                        <th width="20%">Nama Produk</th>
+                        <th>Kategori</th>
+                        <th>Satuan</th>
+                        <th>Harga Beli</th>
+                        <th>Harga Jual</th>
+                        <th>Diskon</th>
+                        <th>Stok</th>
+                        <th width="7%">Aksi</th>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
@@ -72,17 +65,17 @@ Data Produk
                     url: '{{ route('produk.data') }}',
                 },          
                 columns: [
-                   {data:'select_all',  sortable: false},
-                   {data:'DT_RowIndex', searchable: false, sortable: false},
-                   {data:'barcode'},
-                   {data:'nama_produk'},
-                   {data:'nama_kategori'},
-                   {data:'nama_satuan'},
-                   {data:'harga_beli'},
-                   {data:'harga_jual'},
-                   {data:'diskon'},
-                   {data:'stok'},
-                   {data:'ud', searchable: false, sortable: false},
+                    // {data:'select_all', searchable: false, sortable: false},
+                    {data:'DT_RowIndex', searchable: false, sortable: false},
+                    {data:'barcode'},
+                    {data:'nama_produk'},
+                    {data:'nama_kategori'},
+                    {data:'nama_satuan'},
+                    {data:'harga_beli'},
+                    {data:'harga_jual'},
+                    {data:'diskon'},
+                    {data:'stok'},
+                    {data:'ud', searchable: false, sortable: false},
                 ]
             });
 
@@ -95,7 +88,7 @@ Data Produk
                             alert(
                                 Swal.fire({
                                     title: 'Success!',
-                                    text: 'Data Produk berhasil ditambahkan',
+                                    text: 'Data Produk baru berhasil ditambahkan',
                                     icon: 'success',
                                     confirmButtonText: 'Lanjut'
                                 })
@@ -106,7 +99,7 @@ Data Produk
                             alert(
                                 Swal.fire({
                                     title:'Error!',
-                                    text: 'Data Produk gagal ditambahkan',
+                                    text: 'Data Produk baru gagal ditambahkan',
                                     icon: 'error',
                                     confirmButtonText: 'Kembali'
                                 })
@@ -118,12 +111,9 @@ Data Produk
                 }
             });
 
-
-            $('[name=select_all]').on('click', function() {
-                $(':checkbox').prop('checked', this.checked);
+                $('[name=select_all]').on('click', function() {
+                $(':checkbox').prop('checked', this.checked);                              
             });
-
-
         }); 
 
         function addData(url) {
@@ -175,7 +165,9 @@ Data Produk
                 '_method': 'delete'
             })
             Swal.fire({
-                title: 'Hapus data produk yang dipilih?',               
+                title: 'Apakah anda yakin?', 
+                text: 'Penghapusan bersifat permanen',
+                icon: 'warning',             
                 showCancelButton: true,
                 cancelButtonText: 'Tidak',
                 confirmButtonText: 'Iya',                
@@ -185,43 +177,46 @@ Data Produk
                 if (response.isConfirmed) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Data Produk berhasil dihapus',
+                        text: 'Data Produk yang dipilih berhasil dihapus',
                         icon: 'success',
                         confirmButtonText: 'Lanjut'
                     })
                     table.ajax.reload();
-                    
                 }
             });  
         }
 
-        function deleteSelected(url) {
-            if ($('input:checked').length > 1) {
-                $.post(url, $('.form-produk').serialize()
-            )
-                Swal.fire({
-                    title: 'Hapus data produk yang dipilih?',               
-                    showCancelButton: true,
-                    cancelButtonText: 'Tidak',
-                    confirmButtonText: 'Iya',                
-                    })
-                    .then((response) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (response.isConfirmed) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'Data Produk berhasil dihapus',
-                            icon: 'success',
-                            confirmButtonText: 'Lanjut'
-                        })
-                        table.ajax.reload();
-                    }
-                }); 
-            } else {
-                alert('Pilih data nya dong');
-                return;
-            };
-        }
+        // function deleteSelected(url) {
+        //     if ($('input:checked').length >= 1) {
+        //         $.post(url, $('.form-produk').serialize()
+        //     )
+        //         Swal.fire({
+        //             title: 'Hapus data produk yang dipilih?',               
+        //             showCancelButton: true,
+        //             cancelButtonText: 'Tidak',
+        //             confirmButtonText: 'Iya',                
+        //             })
+        //             .then((response) => {
+        //             /* Read more about isConfirmed, isDenied below */
+        //             if (response.isConfirmed) {
+        //                 Swal.fire({
+        //                     title: 'Success!',
+        //                     text: 'Data Produk yang dipilih berhasil dihapus',
+        //                     icon: 'success',
+        //                     confirmButtonText: 'Lanjut',
+        //                 })
+        //                 .then(() => {
+        //                     table.ajax.reload();
+        //                 })                    
+        //                 // table.ajax.reload();
+        //             }
+        //         });
+        //     } else {
+        //         alert('Pilih data nya dong');
+        //         return;
+        //     };
+        // }
+
 
     </script>
 @endpush
