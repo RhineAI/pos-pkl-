@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->increments('id_penjualan');
+            $table->string('kode_penjualan');
             $table->integer('total_item');
             $table->integer('total_harga');
             $table->integer('diskon');  

@@ -14,7 +14,7 @@
                   <img src="/images/monster.png" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <a href="{{ route('dashboard') }}" class="d-block">}</a>
+                  <a href="{{ route('dashboard') }}" class="d-block">{{ auth()->user()->username }}</a>
               </div>
           </div>
 
