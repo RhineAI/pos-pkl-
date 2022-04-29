@@ -93,8 +93,9 @@ Route::group(['middleware' => 'auth'], function () {
 });
 // Route pengaturan
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/settings/data', [SettingsController::class, 'data'])->name('settings.data');
+    // Route::get('/settings/data', [SettingsController::class, 'data'])->name('settings.data');
     Route::resource('/settings', SettingsController::class);
+    Route::post('/setting', [SettingsController::class, 'update'])->name('settings.update');
 });
 
 Route::group(['middleware' => 'auth'], function () {
