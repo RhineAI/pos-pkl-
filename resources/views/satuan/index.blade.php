@@ -130,28 +130,58 @@ Data Satuan Produk
         }
 
         function deleteData(url) {
+            if (confirm('Yakin ingin menghapus data terpilih?')) {
             $.post(url, {
-                '_token': $('[name=csrf-token]').attr('content'),
-                '_method': 'delete'
-            })
-            Swal.fire({
-                title: 'Hapus satuan yang dipilih?',               
-                showCancelButton: true,
-                cancelButtonText: 'Tidak',
-                confirmButtonText: 'Iya',                
+                    '_token': $('[name=csrf-token]').attr('content'),
+                    '_method': 'delete'
                 })
-                .then((response) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (response.isConfirmed) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Satuan berhasil dihapus',
-                        icon: 'success',
-                        confirmButtonText: 'Lanjut'
-                    })
+                .done((response) => {
+                    alert(
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Kategori berhasil dihapus',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut'
+                        })                       
+                    );
                     table.ajax.reload();
-                } 
-            });
+                })
+                .fail((errors) => {
+                    alert(
+                        Swal.fire({
+                            title: 'Failed!',
+                            text: 'Kategori gagal dihapus',
+                            icon: 'warning',
+                            confirmButtonText: 'next'
+                        })                       
+                    );
+                    return;
+                });
+            }
         }
+        // function deleteData(url) {
+        //     $.post(url, {
+        //         '_token': $('[name=csrf-token]').attr('content'),
+        //         '_method': 'delete'
+        //     })
+        //     Swal.fire({
+        //         title: 'Hapus satuan yang dipilih?',               
+        //         showCancelButton: true,
+        //         cancelButtonText: 'Tidak',
+        //         confirmButtonText: 'Iya',                
+        //         })
+        //         .then((response) => {
+        //         /* Read more about isConfirmed, isDenied below */
+        //         if (response.isConfirmed) {
+        //             Swal.fire({
+        //                 title: 'Success!',
+        //                 text: 'Satuan berhasil dihapus',
+        //                 icon: 'success',
+        //                 confirmButtonText: 'Lanjut'
+        //             })
+        //             table.ajax.reload();
+        //         } 
+        //     });
+        // }
     </script>
 @endpush

@@ -136,11 +136,6 @@
                                   <p>Laporan Penjualan</p>
                               </a>
                           </li>
-                          <li class="nav-item">
-                              <a href="{{ route('reportkeuntungan.index') }}" class="nav-link">
-                                  <p>Laporan Keuntungan</p>
-                              </a>
-                          </li>
                       </ul>
                   </li>
 

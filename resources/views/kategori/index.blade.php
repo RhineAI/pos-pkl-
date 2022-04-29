@@ -118,28 +118,57 @@ Data Kategori Produk
         }
 
         function deleteData(url) {
+            if (confirm('Yakin ingin menghapus data terpilih?')) {
             $.post(url, {
-                '_token': $('[name=csrf-token]').attr('content'),
-                '_method': 'delete'
-            })
-            Swal.fire({
-                title: 'Hapus kategori yang dipilih?',               
-                showCancelButton: true,
-                cancelButtonText: 'Tidak',
-                confirmButtonText: 'Iya',                
+                    '_token': $('[name=csrf-token]').attr('content'),
+                    '_method': 'delete'
                 })
-                .then((response) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (response.isConfirmed) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Kategori berhasil dihapus',
-                        icon: 'success',
-                        confirmButtonText: 'Lanjut'
-                    })
+                .done((response) => {
+                    alert(
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Kategori berhasil dihapus',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut'
+                        })                       
+                    );
                     table.ajax.reload();
-                }
-            });  
+                })
+                .fail((errors) => {
+                    alert(
+                        Swal.fire({
+                            title: 'Failed!',
+                            text: 'Kategori gagal dihapus',
+                            icon: 'warning',
+                            confirmButtonText: 'next'
+                        })                       
+                    );
+                    return;
+                });
+            }
         }
+
+          //    $('.delete').click( function() {
+        //         var kategori = $(this).attr('action');
+        //         Swal.fire({
+        //         title: 'Do you want to save the changes?',
+        //         showDenyButton: true,
+        //         confirmButtonText: 'Hapus',
+        //         denyButtonText: `Gajadi`,
+        //         }).then((result) => {
+        //         /* Read more about isConfirmed, isDenied below */
+        //             if (result.isConfirmed) {
+        //                 Swal.fire('Saved!', '', 'success')
+        //                 table.ajax.reload();
+        //             } else{
+        //                 Swal.fire('Changes are not saved', '', 'info')
+        //             }
+        //         })
+        //    });
+          
+      
+       
+
+        
     </script>
 @endpush

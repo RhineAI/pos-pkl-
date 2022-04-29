@@ -100,9 +100,9 @@ class ProdukController extends Controller
         $kode = '';
 
         if($produk == NULL) {
-            $kode = 'BRC-00000001';
+            $kode = 'BRC-202204001';
         } else {
-            $kode = sprintf('BRC-%08d', substr($produk->barcode, 4) + 1);
+            $kode = sprintf('BRC-202204%03d', substr($produk->barcode, 10) + 1);
         }
 
         $request['barcode'] = $kode;

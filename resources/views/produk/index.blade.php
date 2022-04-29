@@ -158,32 +158,59 @@ Data Produk
                 });
         }
 
-        function deleteForm(url) {
+        function deleteData(url) {
+            if (confirm('Yakin ingin menghapus data terpilih?')) {
             $.post(url, {
-                '_token': $('[name=csrf-token]').attr('content'),
-                '_method': 'delete'
-            })
-            Swal.fire({
-                title: 'Apakah anda yakin?', 
-                text: 'Penghapusan bersifat permanen',
-                icon: 'warning',             
-                showCancelButton: true,
-                cancelButtonText: 'Tidak',
-                confirmButtonText: 'Iya',                
+                    '_token': $('[name=csrf-token]').attr('content'),
+                    '_method': 'delete'
                 })
-                .then((response) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (response.isConfirmed) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Data Produk yang dipilih berhasil dihapus',
-                        icon: 'success',
-                        confirmButtonText: 'Lanjut'
-                    })
+                .done((response) => {
+                    alert(
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Kategori berhasil dihapus',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut'
+                        })                       
+                    );
                     table.ajax.reload();
-                }
-            });  
+                })
+                .fail((errors) => {
+                    alert(
+                        Swal.fire({
+                            title: 'Failed!',
+                            text: 'Kategori gagal dihapus',
+                            icon: 'warning',
+                            confirmButtonText: 'next'
+                        })                       
+                    );
+                    return;
+                });
+            }
         }
+
+        // function deleteForm(url) {
+        //     $.post(url, {
+        //         '_token': $('[name=csrf-token]').attr('content'),
+        //         '_method': 'delete'
+        //     })
+        //     Swal.fire({
+        //         title: 'Do you want to save the changes?',
+        //         showDenyButton: true,
+        //         confirmButtonText: 'Save',
+        //         denyButtonText: `Don't save`,
+        //         }).then((result) => {
+        //         /* Read more about isConfirmed, isDenied below */
+        //         if (result.isConfirmed) {
+        //             Swal.fire('Saved!', '', 'success')
+        //             table.ajax.reload();
+        //         } else if (result.isDenied) {
+        //             Swal.fire('Changes are not saved', '', 'info')
+                    
+        //         }
+                
+        //     });
+            
 
         // function deleteSelected(url) {
         //     if ($('input:checked').length >= 1) {
