@@ -20,6 +20,8 @@ return new class extends Migration
                   ->on('supplier')
                   ->onUpdate('restrict')
                   ->onDelete('restrict');
+
+            
         });
     }
 
