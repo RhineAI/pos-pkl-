@@ -6,7 +6,7 @@ Data Satuan Produk
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Data Satuan Produk</li>
+<li class="breadcrumb-item active">Satuan</li>
 @endsection
 
 @section('content')
@@ -24,9 +24,9 @@ Data Satuan Produk
             <div class="box-body table-responsive">
                 <table class="table table-stiped table-bordered">
                     <thead>
-                        <th width="8%">No</th>
+                        <th width="6%">No</th>
                         <th>Satuan</th>
-                        <th width="12%">Aksi</th>
+                        <th width="7%">Aksi</th>
                     </thead>
                 </table>
             </div>
@@ -63,10 +63,11 @@ Data Satuan Produk
                             $('#modal-form').modal('hide');
                             alert(
                                 Swal.fire({
-                                    title: 'Success!',
-                                    text: 'Satuan berhasil ditambahkan',
+                                    title: 'Sukses!',
+                                    text: 'Satuan baru berhasil ditambahkan',
                                     icon: 'success',
-                                    confirmButtonText: 'Lanjut'
+                                    confirmButtonText: 'Lanjut',
+                                    confirmButtonColor: '#28A745'
                                 })
                             );
                             table.ajax.reload();
@@ -75,10 +76,11 @@ Data Satuan Produk
                         .fail((errors) => {
                             alert(
                                 Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Satuan gagal ditambahkan',
+                                    title: 'Gagal!',
+                                    text: 'Satuan baru gagal ditambahkan',
                                     icon: 'error',
-                                    confirmButtonText: 'Kembali'
+                                    confirmButtonText: 'Kembali',
+                                    confirmButtonColor: '#DC3545'
                                 })
                             );
                             table.ajax.reload();
@@ -130,7 +132,7 @@ Data Satuan Produk
         }
 
         function deleteData(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
+            if (confirm('Hapus Satuan yang dipilih?')) {
             $.post(url, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'delete'
@@ -138,10 +140,11 @@ Data Satuan Produk
                 .done((response) => {
                     alert(
                         Swal.fire({
-                            title: 'Success!',
-                            text: 'Kategori berhasil dihapus',
+                            title: 'Sukses!',
+                            text: 'Satuan berhasil dihapus',
                             icon: 'success',
-                            confirmButtonText: 'Lanjut'
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
                         })                       
                     );
                     table.ajax.reload();
@@ -149,10 +152,11 @@ Data Satuan Produk
                 .fail((errors) => {
                     alert(
                         Swal.fire({
-                            title: 'Failed!',
-                            text: 'Kategori gagal dihapus',
-                            icon: 'warning',
-                            confirmButtonText: 'next'
+                            title: 'Gagal!',
+                            text: 'Satuan gagal dihapus',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
                         })                       
                     );
                     return;

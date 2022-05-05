@@ -6,7 +6,7 @@ Data Pengguna
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Data Pengguna</li>
+<li class="breadcrumb-item active">Pengguna</li>
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@ Data Pengguna
                             <th>Nama</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Aksi</th>
+                            <th width="7%">Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -65,10 +65,11 @@ Data Pengguna
                             // alert('berhasil');
                             alert(
                                 Swal.fire({
-                                    title: 'Success!',
-                                    text: 'Data Produk baru berhasil ditambahkan',
+                                    title: 'Sukses!',
+                                    text: 'Pengguna baru berhasil ditambahkan',
                                     icon: 'success',
-                                    confirmButtonText: 'Lanjut'
+                                    confirmButtonText: 'Lanjut',
+                                    confirmButtonColor: '#28A745'
                                 })
                             );
                             table.ajax.reload();
@@ -76,10 +77,11 @@ Data Pengguna
                         .fail((errors) => {
                             alert(
                                 Swal.fire({
-                                    title:'Error!',
-                                    text: 'Data Produk baru gagal ditambahkan',
+                                    title: 'Gagal!',
+                                    text: 'Pengguna baru gagal ditambahkan',
                                     icon: 'error',
-                                    confirmButtonText: 'Kembali'
+                                    confirmButtonText: 'Kembali',
+                                    confirmButtonColor: '#DC3545'
                                 })
                             );
                             table.ajax.reload();
@@ -137,7 +139,7 @@ Data Pengguna
         }
 
         function deleteForm(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
+            if (confirm('Hapus Pengguna yang dipilih?')) {
             $.post(url, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'delete'
@@ -145,10 +147,11 @@ Data Pengguna
                 .done((response) => {
                     alert(
                         Swal.fire({
-                            title: 'Success!',
-                            text: 'Kategori berhasil dihapus',
+                            title: 'Sukses!',
+                            text: 'Pengguna berhasil dihapus',
                             icon: 'success',
-                            confirmButtonText: 'Lanjut'
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
                         })                       
                     );
                     table.ajax.reload();
@@ -156,10 +159,11 @@ Data Pengguna
                 .fail((errors) => {
                     alert(
                         Swal.fire({
-                            title: 'Failed!',
-                            text: 'Kategori gagal dihapus',
-                            icon: 'warning',
-                            confirmButtonText: 'next'
+                            title: 'Gagal!',
+                            text: 'Pengguna gagal dihapus',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
                         })                       
                     );
                     return;
