@@ -16,7 +16,7 @@ Data Pengguna
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <button onclick="addData('{{ route('users.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>Tambah</button>
+                    <button onclick="addData('{{ route('users.store') }}')" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>Tambah</button>
                 </div>
                 <div class="box-body table-responsive">
                     <table class="table table-stiped table-bordered">

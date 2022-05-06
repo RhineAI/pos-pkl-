@@ -16,7 +16,7 @@ Data Supplier
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <button onclick="addForm('{{ route('supplier.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
+                    <button onclick="addForm('{{ route('supplier.store') }}')" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
                 </div>
 
                 <div class="box-body table-responsive">
@@ -26,7 +26,7 @@ Data Supplier
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>Telepon</th>
-                            <th width="7%">Aksi</th>
+                            <th width="12%">Aksi</th>
                         </thead>
                     </table>
                 </div>

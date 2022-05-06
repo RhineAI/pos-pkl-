@@ -17,7 +17,7 @@ Data Satuan Produk
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="add('{{ route('satuan.store') }}')"
-                    class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
+                    class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
                     Tambah</button>
             </div>
 
@@ -26,7 +26,7 @@ Data Satuan Produk
                     <thead>
                         <th width="6%">No</th>
                         <th>Satuan</th>
-                        <th width="7%">Aksi</th>
+                        <th width="12%">Aksi</th>
                     </thead>
                 </table>
             </div>

@@ -13,7 +13,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ ('AdminLTE-master/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ ('AdminLTE-master/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
@@ -44,13 +44,13 @@
                         <input type="password" name="password" class="form-control" placeholder="Password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                <span class="fas fa-key"></span>
                             </div>
                         </div>
                     </div>
                     <!-- /.col -->
                     <div>
-                        <button type="submit" onclick="" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" onclick="" class="btn btn-primary btn-block"><i class="fa fa-right-to-bracket"></i> Login</button>
                     </div>
                     <!-- /.col -->
             </div>

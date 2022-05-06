@@ -17,7 +17,7 @@ Data Semua Produk
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addData('{{ route('produk.store') }}')"
-                    class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
+                    class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
                      Tambah
                 </button>
 
