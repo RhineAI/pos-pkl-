@@ -120,7 +120,7 @@ Data Semua Produk
 
         function addData(url) {
             $('#modal-form').modal('show');
-            $('#modal-form .modal-title').text('Tambah Produk');
+            $('#modal-form .modal-title').text('Tambah Data Produk Baru');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);

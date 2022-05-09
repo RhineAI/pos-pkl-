@@ -20,7 +20,7 @@ Data Supplier
                 </div>
 
                 <div class="box-body table-responsive">
-                    <table class="table table-stiped table-bordered">
+                    <table class="table table-striped table-bordered">
                         <thead>
                             <th width="6%">No</th>
                             <th>Nama</th>
@@ -94,7 +94,7 @@ Data Supplier
 
         function addForm(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Tambah Supplier');
+            $('#modal-form .modal-title').text('Tambah Supplier Baru');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);

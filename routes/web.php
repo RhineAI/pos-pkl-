@@ -8,7 +8,8 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\StokMasukController;
 use App\Http\Controllers\StokKeluarController;
-use App\Http\Controllers\BuyController;
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PembelianDetailController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\ReportPenjualanController;
 use App\Http\Controllers\ReportKeuntunganController;
@@ -68,8 +69,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 // Route stok pembelian
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/pembelian/data', [BuyController::class, 'data'])->name('pembelian.data');
-    Route::resource('/pembelian', BuyController::class);
+    Route::get('/pembelian/{id}create', [PembelianController::class, 'create'])->name('pembelian.create');
+    Route::resource('/pembelian', PembelianController::class)
+    ->except('create');
+// Route pembelian detail
+    Route::resource('/pembelian_detail', PembelianDetailController::class)
+    ->except('create', 'show', 'edit' );
 });
 // Route stok penjualan
 Route::group(['middleware' => 'auth'], function () {

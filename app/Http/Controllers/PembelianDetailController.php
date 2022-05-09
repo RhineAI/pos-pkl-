@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Supplier;
+use App\Models\Produk;
 
-class BuyController extends Controller
+class PembelianDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,8 +14,16 @@ class BuyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('pembelian.index');
+    {   
+        $id_pembelian = session('id_pembelian');
+        $supplier = Supplier::find(session('id_supplier'));
+        $produk = Produk::orderBy('nama_produk')->get();
+
+        if (! $supplier) {
+            abort(404);
+        }
+
+        return view('pembelian_detail.index', compact('id_pembelian', 'produk', 'supplier'));
     }
 
     /**
