@@ -19,13 +19,13 @@ Data Pengguna
                     <button onclick="addData('{{ route('users.store') }}')" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>Tambah</button>
                 </div>
                 <div class="box-body table-responsive">
-                    <table class="table table-stiped table-bordered">
+                    <table class="table table-striped table-bordered">
                         <thead>
                             <th width="6%">No</th>
                             <th>Nama</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th width="7%">Aksi</th>
+                            <th width="13%">Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -98,7 +98,7 @@ Data Pengguna
 
         function addData(url) {
             $('#modal-form').modal('show');
-            $('#modal-form .modal-title').text('Tambah User');
+            $('#modal-form .modal-title').text('Tambah User Baru');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
