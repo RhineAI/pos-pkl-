@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-Daftar Pembelian
+Transaksi Pembelian
 @endsection
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Daftar Pembelian</li>
+<li class="breadcrumb-item active">Transaksi Pembelian</li>
 @endsection
 
 @section('content')
@@ -16,20 +16,44 @@ Daftar Pembelian
     <div class="col-md-12">
         <div class="box">
             <div class="box-header with-border">
-                <button onclick="addForm()" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i
-                        class="fa fa-plus-circle"></i> Tambah Transaksi</button>
+                <table class="my-3">
+                    <tr>
+                        <td>Supplier</td>
+                        <td>: {{ $supplier->nama }}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>: {{ $supplier->alamat }}</td>
+                    </tr>
+                    <tr>
+                        <td>No. Telepon</td>
+                        <td>: {{ $supplier->telepon }}</td>
+                    </tr>
+                </table>
             </div>
 
             <div class="box-body table-responsive">
+
+                <div class="form-group row">
+                    <label for="barcode" class="col-lg-2">Kode Produk</label>
+                    <div class="col-lg-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="barcode" id="barcode">
+                            <span class="input-group-btn">
+                                <button onclick="TampilProduk()" class="btn btn-primary btn-flat" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Tanggal</th>
-                        <th width="20%">Nama Supplier</th>
-                        <th>Total Item</th>
-                        <th>Total Harga</th>
-                        <th>Diskon</th>
-                        <th>Total Bayar</th>
+                        <th>Barcode</th>
+                        <th>Nama</th>
+                        <th>Harga</th>
+                        <th>Jumlah</th>
+                        <th>SubTotal</th>
                         <th width="12%">Aksi</th>
                     </thead>
                 </table>
@@ -37,7 +61,7 @@ Daftar Pembelian
         </div>
     </div>
 </div>
-@includeIf('pembelian.supplier')
+@includeIf('pembelian_detail.produk')
 @endsection
 
 @push('scripts')
@@ -96,9 +120,9 @@ Daftar Pembelian
             // });
         }); 
 
-        function addForm(url) {
-            $('#modal-supplier').modal('show')
-            $('#modal-supplier .modal-title').text('Pilih Supplier');
+        function TampilProduk() {
+            $('#modal-produk').modal('show')
+            $('#modal-produk .modal-title').text('Pilih Produk');
 
             // $('#modal-form form')[0].reset();
             // $('#modal-form form').attr('action', url);

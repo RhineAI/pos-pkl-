@@ -19,7 +19,7 @@ class PembelianDetailController extends Controller
         $supplier = Supplier::find(session('id_supplier'));
         $produk = Produk::orderBy('nama_produk')->get();
 
-        if (!$supplier) {
+        if (! $supplier) {
             abort(404);
         }
 

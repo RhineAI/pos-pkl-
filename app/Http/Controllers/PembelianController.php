@@ -28,7 +28,7 @@ class PembelianController extends Controller
     public function create($id)
     {
         $pembelian = new Pembelian();
-        $pembelian->kode_pembelian = $id;
+        $pembelian->kode_pembelian = 0;
         $pembelian->id_supplier = $id;
         $pembelian->total_item  = 0;
         $pembelian->total_harga = 0;

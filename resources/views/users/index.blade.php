@@ -25,7 +25,7 @@ Data Pengguna
                             <th>Nama</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th width="7%">Aksi</th>
+                            <th width="13%">Aksi</th>
                         </thead>
                     </table>
                 </div>
