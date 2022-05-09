@@ -57,7 +57,7 @@ class ProdukController extends Controller
             })
             ->addColumn('ud', function($produk) { 
                 return '
-                    <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-info btn-flat><i class=bi bi-pencil-square"><i/></button> 
+                    <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/></button> 
                     <button onclick="deleteForm(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
                     '; 
                 })
@@ -100,9 +100,9 @@ class ProdukController extends Controller
         $kode = '';
 
         if($produk == NULL) {
-            $kode = 'BRC-202204001';
+            $kode = 'BRC-202205001';
         } else {
-            $kode = sprintf('BRC-202204%03d', substr($produk->barcode, 10) + 1);
+            $kode = sprintf('BRC-202205%03d', substr($produk->barcode, 10) + 1);
         }
 
         $request['barcode'] = $kode;

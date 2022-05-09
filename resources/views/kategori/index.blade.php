@@ -6,7 +6,7 @@ Data Kategori Produk
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Data Kategori Produk</li>
+<li class="breadcrumb-item active">Kategori</li>
 @endsection
 
 @section('content')
@@ -17,14 +17,14 @@ Data Kategori Produk
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addForm('{{ route('kategori.store') }}')"
-                    class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
+                    class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
                     Tambah</button>
             </div>
 
             <div class="box-body table-responsive">
                 <table class="table table-stiped table-bordered">
                     <thead>
-                        <th width="8%">No</th>
+                        <th width="6%">No</th>
                         <th>Kategori</th>
                         <th width="12%">Aksi</th>
                     </thead>
@@ -63,10 +63,11 @@ Data Kategori Produk
                             $('#modal-form').modal('hide');
                             alert(
                                 Swal.fire({
-                                    title: 'Success!',
-                                    text: 'Kategori berhasil ditambahkan',
+                                    title: 'Sukses!',
+                                    text: 'Kategori baru berhasil ditambahkan',
                                     icon: 'success',
-                                    confirmButtonText: 'Lanjut'
+                                    confirmButtonText: 'Lanjut',
+                                    confirmButtonColor: '#28A745'
                                 })
                             );
                             table.ajax.reload();
@@ -74,10 +75,11 @@ Data Kategori Produk
                         .fail((errors) => {
                             alert(
                                 Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Kategori gagal ditambahkan',
+                                    title: 'Gagal!',
+                                    text: 'Kategori baru gagal ditambahkan',
                                     icon: 'error',
-                                    confirmButtonText: 'Kembali'
+                                    confirmButtonText: 'Kembali',
+                                    confirmButtonColor: '#DC3545'
                                 })
                             );
                             table.ajax.reload();
@@ -118,7 +120,7 @@ Data Kategori Produk
         }
 
         function deleteData(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
+            if (confirm('Hapus Kategori yang dipilih?')) {
             $.post(url, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'delete'
@@ -126,10 +128,11 @@ Data Kategori Produk
                 .done((response) => {
                     alert(
                         Swal.fire({
-                            title: 'Success!',
+                            title: 'Sukses!',
                             text: 'Kategori berhasil dihapus',
                             icon: 'success',
-                            confirmButtonText: 'Lanjut'
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
                         })                       
                     );
                     table.ajax.reload();
@@ -137,10 +140,11 @@ Data Kategori Produk
                 .fail((errors) => {
                     alert(
                         Swal.fire({
-                            title: 'Failed!',
+                            title: 'Gagal!',
                             text: 'Kategori gagal dihapus',
-                            icon: 'warning',
-                            confirmButtonText: 'next'
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
                         })                       
                     );
                     return;

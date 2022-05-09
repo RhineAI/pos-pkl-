@@ -2,7 +2,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="/" class="brand-link">
-          <i class="ml-3 mr-3 nav-icon fa fa-store"></i>
+          <i class="ml-3 mr-3 nav-icon fa fa-shop"></i>
           <span class="brand-text font-weight-light"><b>{{ config ('app.name') }}</b></span>
       </a>
 
@@ -28,7 +28,7 @@
                   {{-- Dashboard --}}
                   <li class="nav-item">
                       <a href="{{ route('dashboard') }}" class="nav-link">
-                          <i class="nav-icon fa fa-home"></i>
+                          <i class="nav-icon fa fa-house-chimney"></i>
                           <p>
                               Dashboard
                           </p>

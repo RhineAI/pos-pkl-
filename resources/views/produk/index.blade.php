@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Data Produk
+Data Semua Produk
 @endsection
 
 @section('breadcrumb')
@@ -17,7 +17,7 @@ Data Produk
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addData('{{ route('produk.store') }}')"
-                    class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
+                    class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
                      Tambah
                 </button>
 
@@ -87,10 +87,11 @@ Data Produk
                             // alert('berhasil');
                             alert(
                                 Swal.fire({
-                                    title: 'Success!',
+                                    title: 'Sukses!',
                                     text: 'Data Produk baru berhasil ditambahkan',
                                     icon: 'success',
-                                    confirmButtonText: 'Lanjut'
+                                    confirmButtonText: 'Lanjut',
+                                    confirmButtonColor: '#28A745'
                                 })
                             );
                             table.ajax.reload();
@@ -98,10 +99,11 @@ Data Produk
                         .fail((errors) => {
                             alert(
                                 Swal.fire({
-                                    title:'Error!',
+                                    title: 'Gagal!',
                                     text: 'Data Produk baru gagal ditambahkan',
                                     icon: 'error',
-                                    confirmButtonText: 'Kembali'
+                                    confirmButtonText: 'Kembali',
+                                    confirmButtonColor: '#DC3545'
                                 })
                             );
                             table.ajax.reload();
@@ -159,7 +161,7 @@ Data Produk
         }
 
         function deleteData(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
+            if (confirm('Hapus Data Produk yang dipilih?')) {
             $.post(url, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'delete'
@@ -167,10 +169,11 @@ Data Produk
                 .done((response) => {
                     alert(
                         Swal.fire({
-                            title: 'Success!',
-                            text: 'Kategori berhasil dihapus',
+                            title: 'Sukses!',
+                            text: 'Data Produk berhasil dihapus',
                             icon: 'success',
-                            confirmButtonText: 'Lanjut'
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
                         })                       
                     );
                     table.ajax.reload();
@@ -178,10 +181,11 @@ Data Produk
                 .fail((errors) => {
                     alert(
                         Swal.fire({
-                            title: 'Failed!',
-                            text: 'Kategori gagal dihapus',
-                            icon: 'warning',
-                            confirmButtonText: 'next'
+                            title: 'Gagal!',
+                            text: 'Data Produk gagal dihapus',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
                         })                       
                     );
                     return;

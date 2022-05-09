@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Supplier
+Data Supplier
 @endsection
 
 @section('breadcrumb')
@@ -16,26 +16,17 @@ Supplier
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <button onclick="addForm('{{ route('supplier.store') }}')" class="btn btn-sm btn-flat btn-success btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
+                    <button onclick="addForm('{{ route('supplier.store') }}')" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>
                 </div>
-
-                {{-- @if (session()->has('success'))
-                    <div class="alert alert-success d-flex align-items-center" role="alert">
-                        <div>
-                          <i class="bi bi-check-lg"  style="font-size: 1.2rem;"></i>
-                           {{ session('success') }}
-                        </div>
-                      </div>
-                @endif --}}
 
                 <div class="box-body table-responsive">
                     <table class="table table-stiped table-bordered">
                         <thead>
-                            <th width="8%">No</th>
+                            <th width="6%">No</th>
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>Telepon</th>
-                            <th width="15%">Aksi</th>
+                            <th width="12%">Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -74,10 +65,11 @@ Supplier
                             $('#modal-form').modal('hide');
                             alert(
                                 Swal.fire({
-                                    title: 'Success',
-                                    text: 'Lanjut gak nih?',
+                                    title: 'Sukses!',
+                                    text: 'Supplier baru berhasil ditambahkan',
                                     icon: 'success',
-                                    confirmButtonText: 'Yoi'
+                                    confirmButtonText: 'Lanjut',
+                                    confirmButtonColor: '#28A745'
                                 })
                             );
                             table.ajax.reload();
@@ -85,10 +77,11 @@ Supplier
                         .fail((errors) => {
                             alert(
                                 Swal.fire({
-                                    title: 'Error!',
-                                    text: 'error gengs',
+                                    title: 'Gagal!',
+                                    text: 'Supplier baru gagal ditambahkan',
                                     icon: 'error',
-                                    confirmButtonText: 'meh'
+                                    confirmButtonText: 'Kembali',
+                                    confirmButtonColor: '#DC3545'
                                 })
                             );
                             table.ajax.reload();
@@ -139,10 +132,11 @@ Supplier
                 .done((response) => {
                     alert(
                         Swal.fire({
-                            title: 'Success!',
-                            text: 'Kategori berhasil dihapus',
+                            title: 'Sukses!',
+                            text: 'Supplier berhasil dihapus',
                             icon: 'success',
-                            confirmButtonText: 'Lanjut'
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
                         })                       
                     );
                     table.ajax.reload();
@@ -150,10 +144,11 @@ Supplier
                 .fail((errors) => {
                     alert(
                         Swal.fire({
-                            title: 'Failed!',
-                            text: 'Kategori gagal dihapus',
-                            icon: 'warning',
-                            confirmButtonText: 'next'
+                            title: 'Gagal!',
+                            text: 'Supplier gagal dihapus',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
                         })                       
                     );
                     return;
