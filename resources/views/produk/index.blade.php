@@ -41,7 +41,7 @@ Data Semua Produk
                         <th>Harga Jual</th>
                         <th>Diskon</th>
                         <th>Stok</th>
-                        <th width="7%">Aksi</th>
+                        <th width="8%">Aksi</th>
                     </thead>
                 </table>
             </div>
