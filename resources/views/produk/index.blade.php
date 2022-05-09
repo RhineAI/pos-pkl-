@@ -41,7 +41,7 @@ Data Semua Produk
                         <th>Harga Jual</th>
                         <th>Diskon</th>
                         <th>Stok</th>
-                        <th width="7%">Aksi</th>
+                        <th width="8%">Aksi</th>
                     </thead>
                 </table>
             </div>
@@ -160,7 +160,7 @@ Data Semua Produk
                 });
         }
 
-        function deleteData(url) {
+        function deleteForm(url) {
             if (confirm('Hapus Data Produk yang dipilih?')) {
             $.post(url, {
                     '_token': $('[name=csrf-token]').attr('content'),
