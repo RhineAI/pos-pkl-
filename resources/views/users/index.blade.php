@@ -25,6 +25,7 @@ Data Pengguna
                             <th>Nama</th>
                             <th>Username</th>
                             <th>Email</th>
+                            {{-- <th>Foto</th> --}}
                             <th width="7%">Aksi</th>
                         </thead>
                     </table>
@@ -53,6 +54,7 @@ Data Pengguna
                     {data:'name'},
                     {data:'username'},
                     {data:'email'},
+                    // {data:'foto'},
                     {data:'aksi', searchable: false, sortable: false},
                 ]
             });
@@ -124,6 +126,7 @@ Data Pengguna
                     $('#modal-form [name=name]').val(response.name);
                     $('#modal-form [name=username]').val(response.username);
                     $('#modal-form [name=email]').val(response.email);                   
+                    $('#modal-form [name=email]').val(response.foto);                   
                 })
                 .fail((errors) => {
                     alert(

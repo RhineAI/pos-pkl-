@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
@@ -58,8 +59,26 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->level= 2;
-        $user->foto ='/images/monster.png';
+        // $user->foto = $request->foto;
+        $user->foto = '/images/monster.png';
         $user->save();
+
+        // $validateData = $request->validate([
+        //     'user' => 'required',
+        //     'name' => 'required',
+        //     'username' => 'required',
+        //     'email' => 'required|email:dns',
+        //     'password' => 'required',
+        //     'foto' => 'image|file|max:1024'
+        // ]);
+
+        // $validateData['password'] = Hash::make($validateData['password']);
+
+        // if($request->file('foto')) {
+        //     $validateData['foto'] = $request->file('image');
+        // } 
+
+        // User::create($validateData);
 
         return response()->json('Data berhasil disimpan', 200);
     }

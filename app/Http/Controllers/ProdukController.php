@@ -103,6 +103,7 @@ class ProdukController extends Controller
             $kode = 'BRC-202205001';
         } else {
             $kode = sprintf('BRC-202205%03d', substr($produk->barcode, 10) + 1);
+            // $kode = sprintf('BRC-202205%03d' + 1);
         }
 
         $request['barcode'] = $kode;
