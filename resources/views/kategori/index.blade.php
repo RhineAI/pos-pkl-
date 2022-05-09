@@ -22,7 +22,7 @@ Data Kategori Produk
             </div>
 
             <div class="box-body table-responsive">
-                <table class="table table-stiped table-bordered">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <th width="6%">No</th>
                         <th>Kategori</th>
@@ -92,7 +92,7 @@ Data Kategori Produk
 
         function addForm(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Tambah Kategori');
+            $('#modal-form .modal-title').text('Tambah Kategori Baru');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
