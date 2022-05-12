@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Setting;
 
-class SellController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class SellController extends Controller
      */
     public function index()
     {
-        return view('penjualan.index');
+        return view('setting.index');
     }
 
     /**

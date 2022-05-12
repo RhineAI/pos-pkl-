@@ -21,9 +21,8 @@
                             <div class="input-group date">
                                 <input type="text" class="form-control datepicker" autocomplete="off" name="date"
                                     id="date" data-provide="datepicker" value="">
-                                    <span class="input-group-text" id="basic-addon1"><i
-                                        class="fa fa-calendar"></i>
-                                    </span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -34,7 +33,8 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="barcode" id="">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-info btn-flat btn-search" data-toggle="modal" data-target="#modal-produk"><i class="fa fa-search"></i></button>
+                                    <button type="button" class="btn btn-info btn-flat btn-search" data-toggle="modal"
+                                        data-target="#modal-produk"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                         <label for="" class="col-md-3 col-form-label">Keterangan</label>
                         <div class="col-md-9">
                             <select name="" id="" class="form-control">
-                                <option></option>
+                                <option>Tambah Keterangan</option>
                                 <option value="Hilang">Hilang</option>
                                 <option value="Rusak">Rusak</option>
                                 <option value="Kadaluarsa">Kadaluarsa</option>
@@ -126,22 +126,22 @@
                         <th>Harga Beli</th>
                         <th width="6%">Aksi</th>
                     </thead>
-                    {{-- <tbody>
+                    <tbody>
                         @foreach ($produk as $key => $item)
-                            <tr>
-                                <td width="6%">{{ $key+1 }}</td>
-                                <td><span class="badge badge-info">{{ $item->barcode }}</span></td>
-                                <td>{{ $item->nama_produk }}</td>
-                                <td>{{ $item->harga_beli }}</td>
-                                <td width="6%">
-                                    <a href="#" class="btn btn-primary btn-xs btn-flat">
-                                        <i class="fa fa-check-circle"></i>
-                                        Pilih
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td width="6%">{{ $key+1 }}</td>
+                            <td><span class="badge badge-info">{{ $item->barcode }}</span></td>
+                            <td>{{ $item->nama_produk }}</td>
+                            <td>{{ $item->harga_beli }}</td>
+                            <td width="6%">
+                                <a href="#" class="btn btn-primary btn-xs btn-flat">
+                                    <i class="fa fa-check-circle"></i>
+                                    Pilih
+                                </a>
+                            </td>
+                        </tr>
                         @endforeach
-                    </tbody> --}}
+                    </tbody>
                 </table>
             </div>
         </div>

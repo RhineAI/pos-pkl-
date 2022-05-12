@@ -12,8 +12,8 @@ Data Stok Keluar
 @section('content')
 
 
-<div class="row mx-3" style="background-color: white">
-    <div class="col-md-12">
+<div class="row mx-3">
+    <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addForm()" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i
@@ -43,65 +43,12 @@ Data Stok Keluar
         let table;
 
         $(function () {
-            table = $('.table').DataTable({
-            //     processing: true,
-            //     responsive: true,
-            //     autoWidth: false,
-            //     serverSide: true,
-            //     ajax: {
-            //         url: '{{ route('supplier.data') }}',
-            //     },
-            //     columns: [
-            //        {data:'DT_RowIndex', searchable: false, sortable: false},
-            //        {data:'nama'},
-            //        {data:'alamat'},
-            //        {data:'telepon'},
-            //        {data:'aksi', searchable: false, sortable: false},
-            //     ]
-            });
-
-            // $('#modal-form').validator().on('submit', function (e) {
-            //     if (! e.preventDefault()) {
-            //         $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
-            //             .done((response) => {
-            //                 $('#modal-form').modal('hide');
-            //                 alert(
-            //                     Swal.fire({
-            //                         title: 'Sukses!',
-            //                         text: 'Supplier baru berhasil ditambahkan',
-            //                         icon: 'success',
-            //                         confirmButtonText: 'Lanjut',
-            //                         confirmButtonColor: '#28A745'
-            //                     })
-            //                 );
-            //                 table.ajax.reload();
-            //             })
-            //             .fail((errors) => {
-            //                 alert(
-            //                     Swal.fire({
-            //                         title: 'Gagal!',
-            //                         text: 'Supplier baru gagal ditambahkan',
-            //                         icon: 'error',
-            //                         confirmButtonText: 'Kembali',
-            //                         confirmButtonColor: '#DC3545'
-            //                     })
-            //                 );
-            //                 table.ajax.reload();
-            
-            //                 return;
-            //             });
-            //     }
-            // });
+            table = $('.table').DataTable({});
         }); 
 
         function addForm(url) {
             $('#modal-tambah').modal('show')
             $('#modal-tambah .modal-title').text('Tambah Stok Keluar');
-
-            // $('#modal-form form')[0].reset();
-            // $('#modal-form form').attr('action', url);
-            // $('#modal-form [name=_method]').val('post');
-            // $('#modal-form [name=nama]').focus();
         }
         
         function editForm(url) {

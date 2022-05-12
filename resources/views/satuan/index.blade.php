@@ -12,8 +12,8 @@ Data Satuan Produk
 @section('content')
 
 
-<div class="row mx-3" style="background-color: white">
-    <div class="col-md-12">
+<div class="row mx-3">
+    <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="add('{{ route('satuan.store') }}')"
@@ -163,29 +163,5 @@ Data Satuan Produk
                 });
             }
         }
-        // function deleteData(url) {
-        //     $.post(url, {
-        //         '_token': $('[name=csrf-token]').attr('content'),
-        //         '_method': 'delete'
-        //     })
-        //     Swal.fire({
-        //         title: 'Hapus satuan yang dipilih?',               
-        //         showCancelButton: true,
-        //         cancelButtonText: 'Tidak',
-        //         confirmButtonText: 'Iya',                
-        //         })
-        //         .then((response) => {
-        //         /* Read more about isConfirmed, isDenied below */
-        //         if (response.isConfirmed) {
-        //             Swal.fire({
-        //                 title: 'Success!',
-        //                 text: 'Satuan berhasil dihapus',
-        //                 icon: 'success',
-        //                 confirmButtonText: 'Lanjut'
-        //             })
-        //             table.ajax.reload();
-        //         } 
-        //     });
-        // }
     </script>
 @endpush

@@ -13,18 +13,22 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Barcode</th>
-                        <th>Nama</th>
-                        <th>Harga</th>
+                        <th width="8%">Barcode</th>
+                        <th>Nama Produk</th>
+                        <th width="8%">Satuan</th>
+                        <th width="20%">Harga Beli</th>
+                        <th width="6%">Stok</th>
                         <th width="6%">Aksi</th>
                     </thead>
                     <tbody>
                         @foreach ($produk as $key => $item)
                             <tr>
                                 <td width="6%">{{ $key+1 }}</td>
-                                <td><span class="badge badge-info">{{ $item->barcode }}</span></td>
+                                <td width="8%"><span class="badge badge-info">{{ $item->barcode }}</span></td>
                                 <td>{{ $item->nama_produk }}</td>
-                                <td>{{ $item->harga_beli }}</td>
+                                <td width="8%">{{ $item->nama_satuan }}</td>
+                                <td width="20%">{{ $item->harga_beli }}</td>
+                                <td width="8%">{{ $item->stok }}</td>
                                 <td width="6%">
                                     <a href="#" class="btn btn-primary btn-xs btn-flat">
                                         <i class="fa fa-check-circle"></i>
@@ -35,6 +39,10 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat btn-sm" data-dismiss="modal"><i
+                        class="fa fa-circle-xmark"></i> Tutup</button>
             </div>
         </div>
     </div>
