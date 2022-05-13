@@ -12,26 +12,18 @@ Data Semua Produk
 @section('content')
 
 
-<div class="row mx-3" style="background-color: white">
-    <div class="col-md-12">
+<div class="row mx-3">
+    <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addData('{{ route('produk.store') }}')"
                     class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
-                     Tambah
+                    Tambah
                 </button>
-
-                {{-- <button onclick="deleteSelected('{{ route('produk.delete_selected') }}')"
-                    class="btn btn-sm btn-flat btn-danger btn-flat mx-2 my-3"><i class="bi bi-recycle"></i>
-                     Hupus
-                </button> --}}
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        {{-- <th width="6%">
-                            <input type="checkbox" name="select_all" id="select_all">
-                        </th> --}}
                         <th width="6%">No</th>
                         <th>Barcode</th>
                         <th width="20%">Nama Produk</th>
@@ -192,61 +184,5 @@ Data Semua Produk
                 });
             }
         }
-
-        // function deleteForm(url) {
-        //     $.post(url, {
-        //         '_token': $('[name=csrf-token]').attr('content'),
-        //         '_method': 'delete'
-        //     })
-        //     Swal.fire({
-        //         title: 'Do you want to save the changes?',
-        //         showDenyButton: true,
-        //         confirmButtonText: 'Save',
-        //         denyButtonText: `Don't save`,
-        //         }).then((result) => {
-        //         /* Read more about isConfirmed, isDenied below */
-        //         if (result.isConfirmed) {
-        //             Swal.fire('Saved!', '', 'success')
-        //             table.ajax.reload();
-        //         } else if (result.isDenied) {
-        //             Swal.fire('Changes are not saved', '', 'info')
-                    
-        //         }
-                
-        //     });
-            
-
-        // function deleteSelected(url) {
-        //     if ($('input:checked').length >= 1) {
-        //         $.post(url, $('.form-produk').serialize()
-        //     )
-        //         Swal.fire({
-        //             title: 'Hapus data produk yang dipilih?',               
-        //             showCancelButton: true,
-        //             cancelButtonText: 'Tidak',
-        //             confirmButtonText: 'Iya',                
-        //             })
-        //             .then((response) => {
-        //             /* Read more about isConfirmed, isDenied below */
-        //             if (response.isConfirmed) {
-        //                 Swal.fire({
-        //                     title: 'Success!',
-        //                     text: 'Data Produk yang dipilih berhasil dihapus',
-        //                     icon: 'success',
-        //                     confirmButtonText: 'Lanjut',
-        //                 })
-        //                 .then(() => {
-        //                     table.ajax.reload();
-        //                 })                    
-        //                 // table.ajax.reload();
-        //             }
-        //         });
-        //     } else {
-        //         alert('Pilih data nya dong');
-        //         return;
-        //     };
-        // }
-
-
     </script>
 @endpush

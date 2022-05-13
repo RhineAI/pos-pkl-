@@ -16,7 +16,7 @@
                         <th width="6%">No</th>
                         <th>Barcode</th>
                         <th>Nama</th>
-                        <th>Harga Beli</th>
+                        <th>Harga</th>
                         <th width="6%">Aksi</th>
                     </thead>
                     <tbody>

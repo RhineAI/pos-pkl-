@@ -12,8 +12,8 @@ Data Kategori Produk
 @section('content')
 
 
-<div class="row mx-3" style="background-color: white">
-    <div class="col-md-12">
+<div class="row mx-3">
+    <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addForm('{{ route('kategori.store') }}')"
@@ -152,27 +152,5 @@ Data Kategori Produk
             }
         }
 
-          //    $('.delete').click( function() {
-        //         var kategori = $(this).attr('action');
-        //         Swal.fire({
-        //         title: 'Do you want to save the changes?',
-        //         showDenyButton: true,
-        //         confirmButtonText: 'Hapus',
-        //         denyButtonText: `Gajadi`,
-        //         }).then((result) => {
-        //         /* Read more about isConfirmed, isDenied below */
-        //             if (result.isConfirmed) {
-        //                 Swal.fire('Saved!', '', 'success')
-        //                 table.ajax.reload();
-        //             } else{
-        //                 Swal.fire('Changes are not saved', '', 'info')
-        //             }
-        //         })
-        //    });
-          
-      
-       
-
-        
     </script>
 @endpush

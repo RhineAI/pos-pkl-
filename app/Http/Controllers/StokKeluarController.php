@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
 
 class StokKeluarController extends Controller
 {
@@ -13,7 +14,9 @@ class StokKeluarController extends Controller
      */
     public function index()
     {
-        return view('stokkeluar.index');
+        $produk = Produk::orderBy('nama_produk')->get();
+
+        return view('stokkeluar.index', compact('produk'));
     }
 
     /**

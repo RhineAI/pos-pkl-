@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Settings;
+use App\Models\Produk;
 
-class SettingsController extends Controller
+class PenjualanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,10 @@ class SettingsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('settings.index');
+    {   
+        $produk = Produk::orderBy('nama_produk')->get();
+
+        return view('penjualan.index', compact('produk'));
     }
 
     /**

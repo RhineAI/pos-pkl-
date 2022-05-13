@@ -12,8 +12,8 @@ Daftar Pembelian
 @section('content')
 
 
-<div class="row mx-3" style="background-color: white">
-    <div class="col-md-12">
+<div class="row mx-3">
+    <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addForm()" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah Transaksi</button>
@@ -84,16 +84,12 @@ Daftar Pembelian
                    {data:'subtotal'},
                 ]
             })
+            table = $('.table').DataTable({});
         }); 
 
         function addForm(url) {
             $('#modal-supplier').modal('show')
             $('#modal-supplier .modal-title').text('Pilih Supplier');
-
-            // $('#modal-form form')[0].reset();
-            // $('#modal-form form').attr('action', url);
-            // $('#modal-form [name=_method]').val('post');
-            // $('#modal-form [name=nama]').focus();
         }
         
         function showDetail(url) {
