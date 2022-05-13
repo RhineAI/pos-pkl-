@@ -12,8 +12,8 @@ Data Supplier
 @section('content')
 
 
-<div class="row mx-3" style="background-color: white">
-        <div class="col-md-12">
+<div class="row mx-3">
+        <div class="col-md-12 p-2 mb-3" style="background-color: white">
             <div class="box">
                 <div class="box-header with-border">
                     <button onclick="addForm('{{ route('supplier.store') }}')" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah</button>

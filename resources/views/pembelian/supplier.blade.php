@@ -20,18 +20,19 @@
                     </thead>
                     <tbody>
                         @foreach ($supplier as $key => $item)
-                            <tr>
-                                <td width="6%">{{ $key+1 }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->alamat }}</td>
-                                <td>{{ $item->telepon }}</td>
-                                <td width="6%">
-                                    <a href="{{ route('pembelian.create', $item->id_supplier) }}" class="btn btn-primary btn-xs btn-flat">
-                                        <i class="fa fa-check-circle"></i>
-                                        Pilih
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td width="6%">{{ $key+1 }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->alamat }}</td>
+                            <td>{{ $item->telepon }}</td>
+                            <td width="6%">
+                                <a href="{{ route('pembelian.create', $item->id_supplier) }}"
+                                    class="btn btn-primary btn-xs btn-flat">
+                                    <i class="fa fa-check-circle"></i>
+                                    Pilih
+                                </a>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

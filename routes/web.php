@@ -10,11 +10,10 @@ use App\Http\Controllers\StokMasukController;
 use App\Http\Controllers\StokKeluarController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembelianDetailController;
-use App\Http\Controllers\SellController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ReportPenjualanController;
-use App\Http\Controllers\ReportKeuntunganController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SettingController;
 
 
 
@@ -78,18 +77,18 @@ Route::group(['middleware' => 'auth'], function () {
 });
 // Route stok penjualan
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/penjualan/data', [SellController::class, 'data'])->name('penjualan.data');
-    Route::resource('/penjualan', SellController::class);
+    Route::get('/penjualan/data', [PenjualanController::class, 'data'])->name('penjualan.data');
+    Route::resource('/penjualan', PenjualanController::class);
+});
+// Route Supplier
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
+    Route::resource('/supplier', SupplierController::class);
 });
 // Route stok laporan penjualan
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/reportpenjualan/data', [ReportPenjualanController::class, 'data'])->name('reportpenjualan.data');
     Route::resource('/reportpenjualan', ReportPenjualanController::class);
-});
-// Route stok laporan keuntungan
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/reportkeuntungan/data', [ReportKeuntunganController::class, 'data'])->name('reportkeuntungan.data');
-    Route::resource('/reportkeuntungan', ReportKeuntunganController::class);
 });
 // Route pengguna
 Route::group(['middleware' => 'auth'], function () {
@@ -98,16 +97,9 @@ Route::group(['middleware' => 'auth'], function () {
 });
 // Route pengaturan
 Route::group(['middleware' => 'auth'], function () {
-    // Route::get('/settings/data', [SettingsController::class, 'data'])->name('settings.data');
-    Route::resource('/settings', SettingsController::class);
-    Route::post('/setting', [SettingsController::class, 'update'])->name('settings.update');
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
 });
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
-    Route::resource('/supplier', SupplierController::class);
-});
-
 
 Auth::routes();
 
