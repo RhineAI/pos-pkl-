@@ -11,7 +11,7 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu open">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="/images/monster.png" class="user-image img-profil"
+                    <img src="/images/iqbal.jpeg" class="user-image img-profil"
                         alt="User Image">
                 </a>
                 <ul class="dropdown-menu">
