@@ -52,8 +52,8 @@ class PembelianController extends Controller
             })
             ->addColumn('aksi', function ($pembelian) {
                 return '
-                    <button onclick="showDetail(`'. route('pembelian.show', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-info"><i class="bi bi-eye-fill"></i></button>
-                    <button onclick="deleteForm(`'. route('pembelian.destroy', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-danger"><i class="bi bi-trash"></i></button>                   
+                    <button onclick="showDetail(`'. route('pembelian.show', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-info delete"><i class="bi bi-eye-fill"></i></button>
+                    <button onclick="deleteData(`'. route('pembelian.destroy', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-danger delete"><i class="bi bi-trash"></i></button>
                 ';
             })
             ->rawColumns(['aksi'])
@@ -101,7 +101,7 @@ class PembelianController extends Controller
         $detail = PembelianDetail::Where('id_pembelian', $pembelian->id_pembelian)->get();
         foreach ($detail as $item) {
             $produk = Produk::find($item->id_produk);
-            $produk->stok = $item->jumlah;
+            $produk->stok += $item->jumlah;
             $produk->update();
         }
 
@@ -125,7 +125,7 @@ class PembelianController extends Controller
                 return '<span class="badge badge-info">'. $detail->produk->barcode .'</span>';
             })
             ->addColumn('nama_produk', function($detail) {
-                return $detail->produk->nama_produk;
+                return $detail->nama_produk . ' %';
             })
             ->addColumn('harga_beli', function($detail) {
                 return 'Rp. ' . format_uang($detail->harga_beli) . ' ,-';
@@ -136,7 +136,6 @@ class PembelianController extends Controller
             ->addColumn('subtotal', function($detail) {
                 return 'Rp. ' . format_uang($detail->subtotal) . ' ,-';
             })
-            ->rawColumns(['barcode'])
             ->make(true);
     }
 

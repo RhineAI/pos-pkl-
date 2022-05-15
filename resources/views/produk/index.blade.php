@@ -76,8 +76,6 @@ Data Semua Produk
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
                             $('#modal-form').modal('hide');
-                            // alert('berhasil');
-                            alert(
                                 Swal.fire({
                                     title: 'Sukses!',
                                     text: 'Data Produk baru berhasil ditambahkan',
@@ -85,19 +83,16 @@ Data Semua Produk
                                     confirmButtonText: 'Lanjut',
                                     confirmButtonColor: '#28A745'
                                 })
-                            );
                             table.ajax.reload();
                         })
                         .fail((errors) => {
-                            alert(
-                                Swal.fire({
-                                    title: 'Gagal!',
-                                    text: 'Data Produk baru gagal ditambahkan',
-                                    icon: 'error',
-                                    confirmButtonText: 'Kembali',
-                                    confirmButtonColor: '#DC3545'
-                                })
-                            );
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Data Produk baru gagal ditambahkan',
+                                icon: 'error',
+                                confirmButtonText: 'Kembali',
+                                confirmButtonColor: '#DC3545'
+                            })
                             table.ajax.reload();
             
                             return;
@@ -109,6 +104,45 @@ Data Semua Produk
                 $(':checkbox').prop('checked', this.checked);                              
             });
         }); 
+
+        // function formatRupiah(angka, prefix){
+        //     var number_string   = angka.replace(/[^,\d]/g, '').toString(),
+        //     split               = number_string.split(','),
+        //     sisa                = split[0].length % 3,
+        //     rupiah              = split[0].substr(0, sisa),
+        //     ribuan              = split[0].substr(sisa).match(/\d{3}/gi);
+
+        //     if(ribuan){
+        //         separator = sisa ? '.' : '';
+        //         rupiah += separator + ribuan.join('.');
+        //     }
+
+        //     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        //     return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
+        // }
+
+        // function generateRupiah(elemValue) {
+        //     return $(elemValue).val(formatRupiah($(elemValue).val(), 'Rp. '))
+        // }
+
+        //     $(document).on('keyup', '#harga_beli', function(e){
+        //         generateRupiah(this);
+        //     })
+        //     $(document).on('keyup', '#harga_beli_ins', function(e){
+        //         generateRupiah(this);
+        //     })
+
+        //     $(document).on('keyup', '#harga_jual', function(e){
+        //         generateRupiah(this);
+        //     })
+        //     $(document).on('keyup', '#harga_jual_ins', function(e){
+        //         generateRupiah(this);
+        //         $(this).val(formatRupiah($(this).val(), 'Rp.'))
+        //         $("#harga_jual_ins").val(parseInt($(this).val().split('.').join('')))
+        //     })
+                
+            
+
 
         function addData(url) {
             $('#modal-form').modal('show');
@@ -140,38 +174,44 @@ Data Semua Produk
                     $('#modal-form [name=stok]').val(response.stok);    
                 })
                 .fail((errors) => {
-                    alert(
+
                         Swal.fire({
                             title: 'Error!',
                             text: 'Ada yang salah keknya nich?',
                             icon: 'error',
                             confirmButtonText: 'Dahlah males'
                         })
-                    );
                     return;
                 });
         }
 
         function deleteForm(url) {
-            if (confirm('Hapus Data Produk yang dipilih?')) {
-            $.post(url, {
-                    '_token': $('[name=csrf-token]').attr('content'),
-                    '_method': 'delete'
-                })
-                .done((response) => {
-                    alert(
+            Swal.fire({
+                title: 'Hapus Produk yang dipilih?',
+                icon: 'question',
+                iconColor: '#DC3545',
+                showDenyButton: true,
+                denyButtonColor: '#838383',
+                denyButtonText: 'Batal',
+                confirmButtonText: 'Hapus',
+                confirmButtonColor: '#DC3545'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
+                        '_token': $('[name=csrf-token]').attr('content'),
+                        '_method': 'delete'
+                    })
+                    .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
                             text: 'Data Produk berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
-                        })                       
-                    );
-                    table.ajax.reload();
-                })
-                .fail((errors) => {
-                    alert(
+                        }) 
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
                             text: 'Data Produk gagal dihapus',
@@ -179,10 +219,15 @@ Data Semua Produk
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'
                         })                       
-                    );
-                    return;
-                });
-            }
+                        return;
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Data Produk batal dihapus',
+                        icon: 'warning',
+                    })
+                }
+            })
         }
     </script>
 @endpush

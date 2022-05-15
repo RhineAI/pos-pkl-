@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stok_keluar', function (Blueprint $table) {
-            $table->increments('id_stok');
-            $table->integer('stok_keluar');
+            $table->increments('id_stok_keluar'); 
+            $table->integer('id_produk');
+            $table->integer('jumlah');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

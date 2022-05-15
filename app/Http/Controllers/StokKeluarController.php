@@ -14,9 +14,12 @@ class StokKeluarController extends Controller
      */
     public function index()
     {
-        $produk = Produk::orderBy('nama_produk')->get();
+        $produk = Produk::orderBy('id_produk')->get();
 
         return view('stokkeluar.index', compact('produk'));
+
+        // $produk = Produk::all()->pluck('id_produk', 'nama_produk');
+        // return view('stokkeluar.index', compact('produk'));
     }
 
     /**

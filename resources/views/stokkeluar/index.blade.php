@@ -51,26 +51,6 @@ Data Stok Keluar
             $('#modal-tambah .modal-title').text('Tambah Stok Keluar');
         }
         
-        function editForm(url) {
-            $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Supplier');
-
-            $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', url);
-            $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama]').focus();
-
-            $.get(url)
-                .done((response) => {
-                    $('#modal-form [name=nama]').val(response.nama);
-                    $('#modal-form [name=alamat]').val(response.alamat);
-                    $('#modal-form [name=telepon]').val(response.telepon);
-                })
-                .fail((errors) => {
-                    alert('Gagal mengubah data!');
-                    return;
-                });
-        }
 
         function deleteData(url) {
             if (confirm('Yakin ingin menghapus data terpilih?')) {

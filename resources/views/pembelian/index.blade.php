@@ -1,17 +1,15 @@
 @extends('layouts.main')
 
 @section('title')
-Daftar Pembelian
+    Daftar Pembelian
 @endsection
 
 @section('breadcrumb')
-@parent
-<li class="breadcrumb-item active">Daftar Pembelian</li>
+    @parent
+    <li class="active">Daftar Pembelian</li>
 @endsection
 
 @section('content')
-
-
 <div class="row mx-3">
     <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
@@ -41,84 +39,106 @@ Daftar Pembelian
         </div>
     </div>
 </div>
+
 @includeIf('pembelian.supplier')
 @includeIf('pembelian.detail')
 @endsection
 
 @push('scripts')
-    <script>
-        let table, table1;
+<script>
+    let table, table1;
 
-        $(function () {
-            table = $('.table-pembelian').DataTable({
-                processing: true,
-                responsive: true,
-                autoWidth: false,
-                serverSide: true,
-                ajax: {
-                    url: '{{ route('pembelian.data') }}',
-                },
-                columns: [
-                   {data:'DT_RowIndex', searchable: false, sortable: false},
-                   {data:'tanggal'},
-                   {data:'supplier'},
-                   {data:'total_item'},
-                   {data:'total_harga'},
-                   {data:'diskon'},
-                   {data:'bayar'},
-                   {data:'aksi', searchable: false, sortable: false},
-                ]
-            });
-            
-            $('.table-supplier').DataTable();
-            table1 = $('.table-detail').DataTable({
-                processing: true,
-                bSort: false,
-                dom: 'Brt',
-                columns: [
-                   {data:'DT_RowIndex', searchable: false, sortable: false},
-                   {data:'barcode'},
-                   {data:'nama_produk'},
-                   {data:'harga_beli'},
-                   {data:'jumlah'},
-                   {data:'subtotal'},
-                ]
-            })
-            table = $('.table').DataTable({});
-        }); 
+    $(function () {
+        table = $('.table-pembelian').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            autoWidth: false,
+            ajax: {
+                url: '{{ route('pembelian.data') }}',
+            },
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'tanggal'},
+                {data: 'supplier'},
+                {data: 'total_item'},
+                {data: 'total_harga'},
+                {data: 'diskon'},
+                {data: 'bayar'},
+                {data: 'aksi', searchable: false, sortable: false},
+            ]
+        });
 
-        function addForm(url) {
-            $('#modal-supplier').modal('show')
-            $('#modal-supplier .modal-title').text('Pilih Supplier');
-        }
-        
-        function showDetail(url) {
-            $('#modal-detail').modal('show');
+        $('.table-supplier').DataTable();
+        table1 = $('.table-detail').DataTable({
+            processing: true,
+            bSort: false,
+            dom: 'Brt',
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'barcode'},
+                {data: 'nama_produk'},
+                {data: 'harga_beli'},
+                {data: 'jumlah'},
+                {data: 'subtotal'},
+            ]
+        })
+    });
 
-            table1.ajax.url(url);
-            table1.ajax.reload();
-        }
+    function addForm() {
+        $('#modal-supplier').modal('show');
+    }
 
-        function deleteForm(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
-                $.post(url, {
+    function showDetail(url) {
+        $('#modal-detail').modal('show');
+
+        table1.ajax.url(url);
+        table1.ajax.reload();
+    }
+
+    function deleteData(url) {
+            Swal.fire({
+                title: 'Hapus Data yang dipilih?',
+                icon: 'question',
+                iconColor: '#DC3545',
+                showDenyButton: true,
+                denyButtonColor: '#838383',
+                denyButtonText: 'Batal',
+                confirmButtonText: 'Hapus',
+                confirmButtonColor: '#DC3545'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
                         '_token': $('[name=csrf-token]').attr('content'),
                         '_method': 'delete'
                     })
                     .done((response) => {
+                        Swal.fire({
+                            title: 'Sukses!',
+                            text: 'Data Pembelian berhasil dihapus',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
+                        }) 
                         table.ajax.reload();
                     })
                     .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Tidak bisa menghapus data',
+                            text: 'Data Pembelian gagal dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
-                            confirmButtonColor: '#e80c29'
+                            confirmButtonColor: '#DC3545'
                         })                       
                         return;
                     });
-            }
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Data Pembelian batal dihapus',
+                        icon: 'warning',
+                    })
+                }
+            })
         }
-    </script>
+</script>
 @endpush

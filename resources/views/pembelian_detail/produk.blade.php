@@ -25,7 +25,7 @@
                                 <td width="6%">{{ $key+1 }}</td>
                                 <td><span class="badge badge-info">{{ $item->barcode }}</span></td>
                                 <td>{{ $item->nama_produk }}</td>
-                                <td>{{ $item->harga_beli }}</td>
+                                <td>{{ 'Rp. '. format_uang($item->harga_beli) }}</td>
                                 <td width="6%">
                                     <a href="#" class="btn btn-primary btn-xs btn-flat"
                                     onclick="pilihProduk('{{ $item->id_produk }}', '{{ $item->barcode }}') ">    

@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('produk', function (Blueprint $table) {
-            // $table->unsignedInteger('id_stok')->change();
-            // $table->foreign('id_stok')
-            //       ->references('id_stok')
+            // $table->unsignedInteger('id_produk')->change();
+            // $table->foreign('id_produk')
+            //       ->references('id_produk')
             //       ->on('stok_keluar')
             //       ->onUpdate('restrict')
             //       ->onDelete('restrict');
@@ -31,8 +31,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('stok_keluar', function (Blueprint $table) {
-            $table->unsignedInteger('id_stok')->change();
-            $table->dropForeign('produk_id_stok_foreign2');
+            $table->unsignedInteger('id_produk')->change();
+            $table->dropForeign('produk_id_produk_foreign');
         });
     }
 };
