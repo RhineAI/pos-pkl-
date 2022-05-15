@@ -12,4 +12,11 @@ class StokMasuk extends Model
     protected $table = 'stok_masuk';
     protected $primaryKey = 'id_stok';
     protected $guarded = [];
+    protected $fillable = ['jumlah', 'keterangan'];
+
+
+    public function produk() 
+    {
+        return $this->hasOne(Produk::class, 'id_produk', 'id_produk');
+    }
 }

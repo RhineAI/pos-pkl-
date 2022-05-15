@@ -56,6 +56,14 @@
                         </div>
                     </div>
 
+                    {{-- <div class="form-group row">
+                        <label for="foto" class="col-md-3 col-md-offset-1 control-label">Foto </label>
+                        <div class="col-md-9">
+                            <input type="file" name="foto" id="foto" class="form-control" >
+                        </div>
+                        <span class="help-block with-errors"></span>
+                    </div>  --}}
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-flat btn-sm" data-dismiss="modal"><i class="fa fa-circle-xmark"></i> Batal</button>

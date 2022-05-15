@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
 
 class UserController extends Controller
 {
@@ -59,10 +60,11 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->level= 2;
-        $user->foto ='/images/monster.png';
+        // $user->foto = $request->foto;
+        $user->foto = '/images/monster.png';
         $user->save();
 
-        return response()->json('User baru berhasil ditambahkan');
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**

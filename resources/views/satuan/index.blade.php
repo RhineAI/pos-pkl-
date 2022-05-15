@@ -170,7 +170,7 @@ Data Satuan Produk
                     .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
-                            text: 'Satuan berhasil dihapus',
+                            text: 'Data Satuan berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
@@ -180,7 +180,7 @@ Data Satuan Produk
                     .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Satuan gagal dihapus',
+                            text: 'Data Satuan gagal dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'

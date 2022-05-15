@@ -53,6 +53,7 @@ Data Semua Pengguna
                     {data:'name'},
                     {data:'username'},
                     {data:'email'},
+                    // {data:'foto'},
                     {data:'aksi', searchable: false, sortable: false},
                 ]
             });
@@ -143,6 +144,7 @@ Data Semua Pengguna
                     $('#modal-form [name=name]').val(response.name);
                     $('#modal-form [name=username]').val(response.username);
                     $('#modal-form [name=email]').val(response.email);                   
+                    $('#modal-form [name=email]').val(response.foto);                   
                 })
                 .fail((errors) => {
                     alert('Gagal mengubah data!');

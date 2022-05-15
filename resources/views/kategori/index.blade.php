@@ -139,7 +139,7 @@ Data Kategori Produk
                     .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
-                            text: 'Kategori berhasil dihapus',
+                            text: 'Data Kategori berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
@@ -149,7 +149,7 @@ Data Kategori Produk
                     .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Kategori gagal dihapus',
+                            text: 'Data Kategori gagal dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'

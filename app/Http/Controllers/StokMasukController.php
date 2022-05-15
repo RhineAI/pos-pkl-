@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\PembelianDetail;
 use App\Models\Produk;
 use App\Models\Satuan;
+use App\Models\StokMasuk;
+use Illuminate\Http\Request;
 
 class StokMasukController extends Controller
 {
@@ -20,6 +22,40 @@ class StokMasukController extends Controller
 
         return view('stokmasuk.index', compact('produk'), compact('satuan'));
     }
+
+    public function data() {
+        $stokmasuk = StokMasuk::leftJoin('produk', 'produk.id_produk', 'produk.id_produk')
+                            ->select('stok_masuk.*','nama_produk')
+                            ->orderBy('id_stok_masuk', 'desc')
+                            ->get();               
+                            
+        return datatables()
+        ->of($stokmasuk)
+        ->addIndexColumn()
+        ->addColumn('tanggal', function($stokmasuk) {
+            return tanggal_indonesia($stokmasuk->created_at, false);
+        })
+        ->addColumn('jumlah', function($stokmasuk) {
+            return format_uang($stokmasuk->jumlah) . ' qty';
+        })
+        ->addColumn('barcode', function ($stokmasuk) {
+            return '<span class="badge badge-info">'. $stokmasuk->produk->barcode .'</span>';
+        })
+        // ->addColumn('nama_produk', function($stokmasuk) {
+        //     return $stokmasuk->produk->nama_produk;
+        // })
+        ->addColumn('keterangan', function($stokmasuk) {
+            return $stokmasuk->keterangan;
+        })
+        ->addColumn('aksi', function ($stokmasuk) {
+            return '
+                <button onclick="deleteData(`'. route('stokmasuk.destroy', $stokmasuk->id_stok_masuk) .'`)" class="btn btn-xs btn-danger delete"><i class="bi bi-trash"></i></button>
+            ';
+        })
+        ->rawColumns(['aksi', 'barcode'])
+        ->make(true);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -39,7 +75,28 @@ class StokMasukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $produk = Produk::where('id_produk', $request->id_produk)->first();
+
+        // if(! $produk) {
+        //     return response()->json('Data gagal', 400);
+        // }
+
+        $detail = new StokMasuk();
+        $detail->id_produk = $request->id_produk;
+        $detail->jumlah = $request->jumlah;
+        $detail->keterangan = $request->keterangan;
+        $detail->save();
+        
+        // $tambahData = StokMasuk::Where('id_stok_masuk', $detail->id_stok_masuk)->get();
+        // foreach ($tambahData as $item) {
+        //     $produk = Produk::find($item->id_produk);
+        //     $produk->stok += $item->jumlah;
+        //     $produk->update();
+        // }
+
+       return $detail;
+
+        // $detail = StokMasuk::create($request->all())->save();
     }
 
     /**
@@ -50,7 +107,7 @@ class StokMasukController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -84,6 +141,9 @@ class StokMasukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = StokMasuk::find($id);
+        $data->delete();
+
+        return response(null,204);
     }
 }

@@ -12,4 +12,9 @@ class StokKeluar extends Model
     protected $table = 'stok_keluar';
     protected $primaryKey = 'id_stok';
     protected $guarded = [];
+
+    public function produk() 
+    {
+        return $this->hasOne(Produk::class, 'id_produk', 'id_produk');
+    }
 }

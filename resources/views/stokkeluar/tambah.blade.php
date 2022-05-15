@@ -15,7 +15,7 @@
 
                 <div class="modal-body">
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="" class="col-md-3 col-form-label">Tanggal</label>
                         <div class="col-md-9">
                             <div class="input-group">
@@ -23,7 +23,7 @@
                                     id="date" value="">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row">
                         <label for="" class="col-md-3">Barcode</label>
@@ -39,34 +39,18 @@
                     </div>
 
 
-                    <div class="form-group row">
-                        <label for="" class="col-md-3">Nama Produk</label>
+                    {{-- <div class="form-group row">
+                        <label for="id_produk" class="col-md-3 col-md-offset-1 control-label">Produk</label>
                         <div class="col-md-9">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="nama_produk" id="">
-                            </div>
+                            <select name="id_produk" id="id_produk" class="form-control" required>
+                                <option value="">Pilih Produk</option>
+                                    @foreach ($produk as $key => $item )
+                                        <option value="{{ $item }}">{{ $key }}</option>
+                                    @endforeach
+                            </select>
+                            <span class="help-block with-errors"></span>
                         </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="" class="col-md-3">Harga Beli</label>
-                        <div class="col-md-9">
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                <input type="text" class="form-control" name="harga_beli" id="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="" class="col-md-3">Harga Jual</label>
-                        <div class="col-md-9">
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                <input type="text" class="form-control" name="harga_jual" id="">
-                            </div>
-                        </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row">
                         <label for="stok" class="col-md-3">Stok</label>

@@ -16,19 +16,20 @@ Data Stok Masuk
     <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
-                <button onclick="addForm()" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i
-                        class="fa fa-plus-circle"></i>Tambah</button>
+                <button onclick="addForm('{{ route('stokmasuk.store') }}')"
+                    class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
+                    Tambah</button>
             </div>
-
             <div class="box-body table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered table-stokmasuk">
                     <thead>
                         <th width="6%">No</th>
                         <th>Tanggal</th>
                         <th>Barcode</th>
                         <th>Nama Produk</th>
-                        <th>Keterangan</th>
                         <th>Jumlah (Stok)</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
                     </thead>
                 </table>
             </div>
@@ -38,77 +39,116 @@ Data Stok Masuk
 @includeIf('stokmasuk.tambah')
 @endsection
 
-@push('scripts')
-    <script>
+@includeIf('stokmasuk.form')
 
-        $(".flatpickr").flatpickr({
-            enableTime: true,
-            dateFormat: "d-m-Y H:i",
+@push('scripts')
+<script>
+    let table;
+
+    $(function () {
+        table = $('.table').DataTable({
+            processing: true,
+            responsive: true,
+            autoWidth: false,
+            serverSide: true,
+            ajax: {
+                url: '{{ route('stokmasuk.data') }}',
+            },
+            columns: [
+               {data:'DT_RowIndex', searchable: false, sortable: false},
+               {data:'tanggal'},
+               {data:'barcode'},
+               {data:'nama_produk'},
+               {data:'jumlah'},
+               {data:'keterangan'},
+               {data:'aksi', searchable: false, sortable: false},
+            ]
         });
 
-        let table;
-
-        $(function () {
-            table = $('.table').DataTable({});
-        }); 
-
-        function addForm(url) {
-            $('#modal-tambah').modal('show')
-            $('#modal-tambah .modal-title').text('Tambah Stok Masuk');
-        }
+        $('#modal-form').validator().on('submit', function (e) {
+            if (! e.preventDefault()) {
+                $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
+                    .done((response) => {
+                        $('#modal-form').modal('hide');
+                            Swal.fire({
+                                title: 'Sukses!',
+                                text: 'Stok baru berhasil ditambahkan',
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut',
+                                confirmButtonColor: '#28A745'
+                            })
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Stok baru gagal ditambahkan',
+                                icon: 'error',
+                                confirmButtonText: 'Kembali',
+                                confirmButtonColor: '#DC3545'
+                            })
+                        table.ajax.reload();
         
-        function editForm(url) {
-            $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Supplier');
+                        return;
+                    });
+            }
+        });
+    }); 
 
-            $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', url);
-            $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama]').focus();
+    function addForm(url) {
+        $('#modal-form').modal('show')
+        $('#modal-form .modal-title').text('Tambah Stok Baru');
 
-            $.get(url)
-                .done((response) => {
-                    $('#modal-form [name=nama]').val(response.nama);
-                    $('#modal-form [name=alamat]').val(response.alamat);
-                    $('#modal-form [name=telepon]').val(response.telepon);
-                })
-                .fail((errors) => {
-                    alert('Gagal mengubah data!');
-                    return;
-                });
-        }
-
-        function deleteData(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
-            $.post(url, {
+        $('#modal-form form')[0].reset();
+        $('#modal-form form').attr('action', url);
+        $('#modal-form [name=_method]').val('post');
+        $('#modal-form [name=nama_kategori]').focus();
+    }
+    
+    
+    function deleteForm(url) {
+        Swal.fire({
+            title: 'Hapus Kategori yang dipilih?',
+            icon: 'question',
+            iconColor: '#DC3545',
+            showDenyButton: true,
+            denyButtonColor: '#838383',
+            denyButtonText: 'Batal',
+            confirmButtonText: 'Hapus',
+            confirmButtonColor: '#DC3545'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.post(url, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'delete'
                 })
                 .done((response) => {
-                    alert(
-                        Swal.fire({
-                            title: 'Sukses!',
-                            text: 'Supplier berhasil dihapus',
-                            icon: 'success',
-                            confirmButtonText: 'Lanjut',
-                            confirmButtonColor: '#28A745'
-                        })                       
-                    );
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data Stok berhasil dihapus',
+                        icon: 'success',
+                        confirmButtonText: 'Lanjut',
+                        confirmButtonColor: '#28A745'
+                    }) 
                     table.ajax.reload();
                 })
                 .fail((errors) => {
-                    alert(
-                        Swal.fire({
-                            title: 'Gagal!',
-                            text: 'Supplier gagal dihapus',
-                            icon: 'error',
-                            confirmButtonText: 'Kembali',
-                            confirmButtonColor: '#DC3545'
-                        })                       
-                    );
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data Stok gagal dihapus',
+                        icon: 'error',
+                        confirmButtonText: 'Kembali',
+                        confirmButtonColor: '#DC3545'
+                    })                       
                     return;
                 });
+            } else if (result.isDenied) {
+                Swal.fire({
+                    title: 'Data Stok batal dihapus',
+                    icon: 'warning',
+                })
             }
-        }
+        })
+    }
     </script>
 @endpush

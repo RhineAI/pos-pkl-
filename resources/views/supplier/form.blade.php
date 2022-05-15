@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form">
     <div class="modal-dialog" role="document">
-       <form action="" method="post" class="form-horizontal">
+       <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             @method('post')
 
@@ -31,9 +31,10 @@
                     <div class="form-group row">
                         <label for="telepon" class="col-md-2 col-md-offset-1 control-label"><h5 class="my-2">Telepon</h5></label>
                             <div class="col-md-10">
-                               <input type="text" name="telepon" id="telepon" class="form-control" required autofocus>
+                               <input type="text" name="telepon" id="telepon" class="form-control" required>
                             </div>
                     </div>
+    
                 </div>
 
                 <div class="modal-footer">

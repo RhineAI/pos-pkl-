@@ -47,13 +47,16 @@ class ProdukController extends Controller
             //     return $produk->nama_satuan;
             // })
             ->addColumn('harga_beli', function ($produk) {
-                return format_uang($produk->harga_beli);
+                return 'Rp. '. format_uang($produk->harga_beli);
             })
             ->addColumn('harga_jual', function ($produk) {
-                return format_uang($produk->harga_jual);
+                return 'Rp. '. format_uang($produk->harga_jual);
             })
             ->addColumn('stok', function ($produk) {
                 return format_uang($produk->stok);
+            })
+            ->addColumn('diskon', function ($produk) {
+                return $produk->diskon .' %';
             })
             ->addColumn('ud', function($produk) { 
                 return '
@@ -103,6 +106,7 @@ class ProdukController extends Controller
             $kode = 'BRC-202205001';
         } else {
             $kode = sprintf('BRC-202205%03d', substr($produk->barcode, 10) + 1);
+            // $kode = sprintf('BRC-202205%03d' + 1);
         }
 
         $request['barcode'] = $kode;

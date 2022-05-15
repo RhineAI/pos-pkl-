@@ -1,27 +1,29 @@
 @extends('layouts.main')
 
 @section('title')
-Daftar Pembelian
+    Daftar Pembelian
 @endsection
 
 @section('breadcrumb')
-@parent
-<li class="breadcrumb-item active">Daftar Pembelian</li>
+    @parent
+    <li class="active">Daftar Pembelian</li>
 @endsection
 
 @section('content')
-
-
 <div class="row mx-3">
     <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
-                <button onclick="addForm()" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i
-                        class="fa fa-plus-circle"></i> Tambah Transaksi</button>
+                <button onclick="addForm()" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah Transaksi</button>
+
+                @empty(! session('id_pembelian'))
+                    <a href="{{ route('pembelian_detail.index') }}" class="btn btn-flat btn-info btn-sm mx-2 my-3"><i class="fa fa-pencil"></i> Transaksi Aktif</a>
+                @endempty
+                    
             </div>
 
             <div class="box-body table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered table-pembelian">
                     <thead>
                         <th width="6%">No</th>
                         <th>Tanggal</th>
@@ -37,74 +39,106 @@ Daftar Pembelian
         </div>
     </div>
 </div>
+
 @includeIf('pembelian.supplier')
+@includeIf('pembelian.detail')
 @endsection
 
 @push('scripts')
-    <script>
-        let table;
+<script>
+    let table, table1;
 
-        $(function () {
-            table = $('.table').DataTable({});
-        }); 
+    $(function () {
+        table = $('.table-pembelian').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            autoWidth: false,
+            ajax: {
+                url: '{{ route('pembelian.data') }}',
+            },
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'tanggal'},
+                {data: 'supplier'},
+                {data: 'total_item'},
+                {data: 'total_harga'},
+                {data: 'diskon'},
+                {data: 'bayar'},
+                {data: 'aksi', searchable: false, sortable: false},
+            ]
+        });
 
-        function addForm(url) {
-            $('#modal-supplier').modal('show')
-            $('#modal-supplier .modal-title').text('Pilih Supplier');
-        }
-        
-        function editForm(url) {
-            $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Supplier');
+        $('.table-supplier').DataTable();
+        table1 = $('.table-detail').DataTable({
+            processing: true,
+            bSort: false,
+            dom: 'Brt',
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'barcode'},
+                {data: 'nama_produk'},
+                {data: 'harga_beli'},
+                {data: 'jumlah'},
+                {data: 'subtotal'},
+            ]
+        })
+    });
 
-            $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', url);
-            $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama]').focus();
+    function addForm() {
+        $('#modal-supplier').modal('show');
+    }
 
-            $.get(url)
-                .done((response) => {
-                    $('#modal-form [name=nama]').val(response.nama);
-                    $('#modal-form [name=alamat]').val(response.alamat);
-                    $('#modal-form [name=telepon]').val(response.telepon);
-                })
-                .fail((errors) => {
-                    alert('Gagal mengubah data!');
-                    return;
-                });
-        }
+    function showDetail(url) {
+        $('#modal-detail').modal('show');
 
-        function deleteData(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
-            $.post(url, {
-                    '_token': $('[name=csrf-token]').attr('content'),
-                    '_method': 'delete'
-                })
-                .done((response) => {
-                    alert(
+        table1.ajax.url(url);
+        table1.ajax.reload();
+    }
+
+    function deleteData(url) {
+            Swal.fire({
+                title: 'Hapus Data yang dipilih?',
+                icon: 'question',
+                iconColor: '#DC3545',
+                showDenyButton: true,
+                denyButtonColor: '#838383',
+                denyButtonText: 'Batal',
+                confirmButtonText: 'Hapus',
+                confirmButtonColor: '#DC3545'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
+                        '_token': $('[name=csrf-token]').attr('content'),
+                        '_method': 'delete'
+                    })
+                    .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
-                            text: 'Supplier berhasil dihapus',
+                            text: 'Data Pembelian berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
-                        })                       
-                    );
-                    table.ajax.reload();
-                })
-                .fail((errors) => {
-                    alert(
+                        }) 
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Supplier gagal dihapus',
+                            text: 'Data Pembelian gagal dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'
                         })                       
-                    );
-                    return;
-                });
-            }
+                        return;
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Data Pembelian batal dihapus',
+                        icon: 'warning',
+                    })
+                }
+            })
         }
-    </script>
+</script>
 @endpush
