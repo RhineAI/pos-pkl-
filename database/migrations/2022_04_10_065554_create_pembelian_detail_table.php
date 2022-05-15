@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pembelian_detail', function (Blueprint $table) {
             $table->increments('id_pembelian_detail');
             $table->integer('id_pembelian');
-            $table->integer('id_stok_masuk');
+            // $table->integer('id_stok_masuk');
             $table->integer('id_produk');
             $table->integer('harga_beli');
             $table->integer('jumlah');

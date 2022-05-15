@@ -28,10 +28,10 @@
                     </div> --}}
 
                     <div class="form-group row">
-                        <label for="id_produk" class="col-md-3">Barcode</label>
+                        <label for="" class="col-md-3">Barcode</label>
                         <div class="col-md-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="id_produk" id="id_produk">
+                                <input type="text" class="form-control" name="barcode" id="">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-info btn-flat btn-search" data-toggle="modal"
                                         data-target="#modal-produk"><i class="fa fa-search"></i></button>

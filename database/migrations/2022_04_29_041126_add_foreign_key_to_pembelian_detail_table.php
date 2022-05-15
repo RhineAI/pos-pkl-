@@ -21,12 +21,12 @@ return new class extends Migration
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
 
-            $table->unsignedInteger('id_stok_masuk')->change();
-            $table->foreign('id_stok_masuk')
-                ->references('id_stok_masuk')
-                ->on('stok_masuk')
-                ->onUpdate('restrict')
-                ->onDelete('restrict');
+            // $table->unsignedInteger('id_stok_masuk')->change();
+            // $table->foreign('id_stok_masuk')
+            //     ->references('id_stok_masuk')
+            //     ->on('stok_masuk')
+            //     ->onUpdate('restrict')
+            //     ->onDelete('restrict');
         });
     }
 
@@ -41,8 +41,8 @@ return new class extends Migration
             $table->unsignedInteger('id_pembelian')->change();
             $table->dropForeign('pembelian_id_pembelian_foreign');
 
-            $table->unsignedInteger('id_stok_masuk')->change();
-            $table->dropForeign('stok_masuk_id_stok_masuk_foreign');
+            // $table->unsignedInteger('id_stok_masuk')->change();
+            // $table->dropForeign('stok_masuk_id_stok_masuk_foreign');
         });
     }
 };

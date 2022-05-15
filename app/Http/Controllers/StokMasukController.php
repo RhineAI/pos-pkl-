@@ -40,9 +40,9 @@ class StokMasukController extends Controller
         ->addColumn('barcode', function ($stokmasuk) {
             return '<span class="badge badge-info">'. $stokmasuk->produk->barcode .'</span>';
         })
-        ->addColumn('nama_produk', function($stokmasuk) {
-            return $stokmasuk->produk->nama_produk;
-        })
+        // ->addColumn('nama_produk', function($stokmasuk) {
+        //     return $stokmasuk->produk->nama_produk;
+        // })
         ->addColumn('keterangan', function($stokmasuk) {
             return $stokmasuk->keterangan;
         })
@@ -86,17 +86,14 @@ class StokMasukController extends Controller
         $detail->keterangan = $request->keterangan;
         $detail->save();
         
-        $tambahData = StokMasuk::Where('id_stok_masuk', $detail->id_stok_masuk)->get();
-        foreach ($tambahData as $item) {
-            $produk = Produk::find($item->id_produk);
-            $produk->stok += $item->jumlah;
-            $produk->update();
-        }
+        // $tambahData = StokMasuk::Where('id_stok_masuk', $detail->id_stok_masuk)->get();
+        // foreach ($tambahData as $item) {
+        //     $produk = Produk::find($item->id_produk);
+        //     $produk->stok += $item->jumlah;
+        //     $produk->update();
+        // }
 
        return $detail;
-
-
-        
 
         // $detail = StokMasuk::create($request->all())->save();
     }
