@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Produk;
-use App\Models\Satuan;
 
-class StokKeluarController extends Controller
+class ReportPembelianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +13,7 @@ class StokKeluarController extends Controller
      */
     public function index()
     {
-        $produk = Produk::orderBy('nama_produk')->get();
-        $satuan = Satuan::orderBy('id_satuan', 'desc')->get();
-
-        return view('stokkeluar.index', compact('produk'), compact('satuan'));
+        return view('reportpembelian.index');
     }
 
     /**

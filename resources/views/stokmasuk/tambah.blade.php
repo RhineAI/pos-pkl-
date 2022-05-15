@@ -82,9 +82,7 @@
                         <div class="col-md-9">
                             <select name="" id="" class="form-control">
                                 <option>Tambah Keterangan</option>
-                                <option value="Hilang">Hilang</option>
-                                <option value="Rusak">Rusak</option>
-                                <option value="Kadaluarsa">Kadaluarsa</option>
+                                <option value="Tambah Stok">Tambah Stok</option>
                                 <option value="Lainnya">Lainnya</option>
                             </select>
                         </div>

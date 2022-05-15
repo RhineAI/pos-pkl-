@@ -61,27 +61,23 @@ Data Kategori Produk
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
                             $('#modal-form').modal('hide');
-                            alert(
-                                Swal.fire({
-                                    title: 'Sukses!',
-                                    text: 'Kategori baru berhasil ditambahkan',
-                                    icon: 'success',
-                                    confirmButtonText: 'Lanjut',
-                                    confirmButtonColor: '#28A745'
-                                })
-                            );
+                            Swal.fire({
+                                title: 'Sukses!',
+                                text: response,
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut',
+                                confirmButtonColor: '#28A745'
+                            })
                             table.ajax.reload();
                         })
                         .fail((errors) => {
-                            alert(
-                                Swal.fire({
-                                    title: 'Gagal!',
-                                    text: 'Kategori baru gagal ditambahkan',
-                                    icon: 'error',
-                                    confirmButtonText: 'Kembali',
-                                    confirmButtonColor: '#DC3545'
-                                })
-                            );
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Kategori yang diinput sudah ada',
+                                icon: 'error',
+                                confirmButtonText: 'Kembali',
+                                confirmButtonColor: '#DC3545'
+                            })
                             table.ajax.reload();
             
                             return;
@@ -99,46 +95,58 @@ Data Kategori Produk
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=nama_kategori]').focus();
         }
+
+        $(document).on('click', '.edit', function (event) {
+            let nama_kategori = $(this).data('kategori')
+            let url = $(this).data('route')
+
+            let data = {
+                nama_kategori: nama_kategori,
+                url: url
+            }
+
+            editForm(data)
+        })
         
-        function editForm(url) {
+        function editForm(data) {
             $('#modal-form').modal('show')
             $('#modal-form .modal-title').text('Edit Kategori');
 
             $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', url);
+            $('#modal-form form').attr('action', data.url);
             $('#modal-form [name=_method]').val('put');
             $('#modal-form [name=nama_kategori]').focus();
 
-            $.get(url)
-                .done((response) => {
-                    $('#modal-form [name=nama_kategori]').val(response.nama_kategori);
-                })
-                .fail((errors) => {
-                    alert('Gagal mengubah kategori!');
-                    return;
-                });
+            $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
         }
 
         function deleteData(url) {
-            if (confirm('Hapus Kategori yang dipilih?')) {
-            $.post(url, {
-                    '_token': $('[name=csrf-token]').attr('content'),
-                    '_method': 'delete'
-                })
-                .done((response) => {
-                    alert(
+            Swal.fire({
+                title: 'Hapus Kategori yang dipilih?',
+                icon: 'question',
+                iconColor: '#DC3545',
+                showDenyButton: true,
+                denyButtonColor: '#838383',
+                denyButtonText: 'Batal',
+                confirmButtonText: 'Hapus',
+                confirmButtonColor: '#DC3545'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
+                        '_token': $('[name=csrf-token]').attr('content'),
+                        '_method': 'delete'
+                    })
+                    .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
                             text: 'Kategori berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
-                        })                       
-                    );
-                    table.ajax.reload();
-                })
-                .fail((errors) => {
-                    alert(
+                        }) 
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
                             text: 'Kategori gagal dihapus',
@@ -146,10 +154,15 @@ Data Kategori Produk
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'
                         })                       
-                    );
-                    return;
-                });
-            }
+                        return;
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Kategori batal dihapus',
+                        icon: 'warning',
+                    })
+                }
+            })
         }
 
     </script>

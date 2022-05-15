@@ -1,20 +1,20 @@
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-2">
+      {{-- <!-- Brand Logo -->
       <a href="/" class="brand-link">
           <i class="ml-3 mr-3 nav-icon fa fa-shop"></i>
           <span class="brand-text font-weight-light"><b>{{ config ('app.name') }}</b></span>
-      </a>
+      </a> --}}
 
       <!-- Sidebar -->
       <div class="sidebar">
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
               <div class="image">
-                  <img src="/images/monster.png" class="img-circle elevation-2" alt="User Image">
+                  <img src="{{ $setting->path_logo }}" class="img-circle" alt="Logo Image">
               </div>
               <div class="info">
-                  <a href="{{ route('dashboard') }}" class="d-block">{{ auth()->user()->username }}</a>
+                  <a href="{{ route('dashboard') }}" class="d-block"><h5>{{ $setting->nama_perusahaan }}</h5></a>
               </div>
           </div>
 
@@ -131,6 +131,11 @@
                           </p>
                       </a>
                       <ul class="nav nav-treeview ml-4">
+                          <li class="nav-item">
+                              <a href="{{ route('reportpembelian.index') }}" class="nav-link">
+                                  <p>Laporan Pembelian</p>
+                              </a>
+                          </li>
                           <li class="nav-item">
                               <a href="{{ route('reportpenjualan.index') }}" class="nav-link">
                                   <p>Laporan Penjualan</p>

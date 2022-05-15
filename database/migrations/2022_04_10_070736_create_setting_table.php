@@ -19,7 +19,6 @@ return new class extends Migration
             $table->text('alamat');
             $table->char('telepon');
             $table->string('path_logo');
-            $table->string('barcode');
             $table->timestamps();
         });
     }

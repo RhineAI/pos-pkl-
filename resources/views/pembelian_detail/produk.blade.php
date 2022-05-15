@@ -13,18 +13,18 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Barcode</th>
+                        <th width="10%">Barcode</th>
                         <th>Nama</th>
-                        <th>Harga</th>
+                        <th width="10%">Harga</th>
                         <th width="6%">Aksi</th>
                     </thead>
                     <tbody>
                         @foreach ($produk as $key => $item)
                             <tr>
                                 <td width="6%">{{ $key+1 }}</td>
-                                <td><span class="badge badge-info">{{ $item->barcode }}</span></td>
+                                <td width="10%"><span class="badge badge-info">{{ $item->barcode }}</span></td>
                                 <td>{{ $item->nama_produk }}</td>
-                                <td>{{ $item->harga_beli }}</td>
+                                <td width="10%">{{ $item->harga_beli }}</td>
                                 <td width="6%">
                                     <a href="#" class="btn btn-primary btn-xs btn-flat">
                                         <i class="fa fa-check-circle"></i>

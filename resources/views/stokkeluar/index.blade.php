@@ -40,6 +40,12 @@ Data Stok Keluar
 
 @push('scripts')
     <script>
+
+        $(".flatpickr").flatpickr({
+            enableTime: true,
+            dateFormat: "d-m-Y H:i",
+        });
+
         let table;
 
         $(function () {

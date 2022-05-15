@@ -35,8 +35,8 @@ Transaksi Pembelian
             <div class="box-body table-responsive">
 
                 <div class="form-group row">
-                    <label for="barcode" class="col-lg-2">Kode Produk</label>
-                    <div class="col-lg-3">
+                    <label for="barcode" class="col-md-2">Pilih Produk</label>
+                    <div class="col-md-3">
                         <div class="input-group">
                             <input type="text" class="form-control" name="barcode" id="barcode">
                             <span class="input-group-btn">
@@ -50,11 +50,11 @@ Transaksi Pembelian
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Barcode</th>
+                        <th width="10%">Barcode</th>
                         <th>Nama</th>
-                        <th>Harga</th>
-                        <th>Jumlah</th>
-                        <th>SubTotal</th>
+                        <th width="10%">Harga</th>
+                        <th width="10%">Jumlah</th>
+                        <th width="10%">SubTotal</th>
                         <th width="12%">Aksi</th>
                     </thead>
                 </table>

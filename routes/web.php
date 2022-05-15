@@ -11,6 +11,7 @@ use App\Http\Controllers\StokKeluarController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembelianDetailController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\ReportPembelianController;
 use App\Http\Controllers\ReportPenjualanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
@@ -87,6 +88,11 @@ Route::group(['middleware' => 'auth'], function () {
 });
 // Route stok laporan penjualan
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/reportpembelian/data', [ReportPembelianController::class, 'data'])->name('reportpembelian.data');
+    Route::resource('/reportpembelian', ReportPembelianController::class);
+});
+// Route stok laporan penjualan
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/reportpenjualan/data', [ReportPenjualanController::class, 'data'])->name('reportpenjualan.data');
     Route::resource('/reportpenjualan', ReportPenjualanController::class);
 });
@@ -98,7 +104,11 @@ Route::group(['middleware' => 'auth'], function () {
 // Route pengaturan
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
     Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
+
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
 });
 
 Auth::routes();
