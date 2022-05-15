@@ -26,13 +26,8 @@ class SupplierController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($supplier) {
                 return '
-<<<<<<< HEAD
                     <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"> Edit</i></button>
                     <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"> Hapus</i></button>
-=======
-                    <button onclick="editForm(`'. route('supplier.update', $supplier->id_supplier) .'`)" class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>
-                    <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
->>>>>>> 04b89d37455f39bf9a927a9bb99ae116758a97d5
                 ';
             })
             ->rawColumns(['aksi'])

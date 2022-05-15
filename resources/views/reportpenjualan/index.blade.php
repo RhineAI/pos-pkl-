@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-Laporan Pembelian
+Laporan Penjualan
 @endsection
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Laporan Pembelian</li>
+<li class="breadcrumb-item active">Laporan Penjualan</li>
 @endsection
 
 @section('content')

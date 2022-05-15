@@ -60,11 +60,10 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->level= 2;
-        // $user->foto = $request->foto;
         $user->foto = '/images/monster.png';
         $user->save();
 
-        return response()->json('Data berhasil disimpan', 200);
+        return response()->json('Pengguna baru berhasil ditambahkan', 200);
     }
 
     /**
