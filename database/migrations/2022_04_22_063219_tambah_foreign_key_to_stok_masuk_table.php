@@ -30,9 +30,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('stok_masuk', function (Blueprint $table) {
-            $table->unsignedInteger('id_stok')->change();
-            $table->dropForeign('produk_id_stok_foreign1');
-        });
+        // Schema::table('stok_masuk', function (Blueprint $table) {
+        //     $table->unsignedInteger('id_stok')->change();
+        //     $table->dropForeign('produk_id_stok_foreign1');
+        // });
     }
 };

@@ -63,7 +63,6 @@ Data Supplier
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
                             $('#modal-form').modal('hide');
-                            alert(
                                 Swal.fire({
                                     title: 'Sukses!',
                                     text: 'Supplier baru berhasil ditambahkan',
@@ -71,11 +70,9 @@ Data Supplier
                                     confirmButtonText: 'Lanjut',
                                     confirmButtonColor: '#28A745'
                                 })
-                            );
                             table.ajax.reload();
                         })
                         .fail((errors) => {
-                            alert(
                                 Swal.fire({
                                     title: 'Gagal!',
                                     text: 'Supplier baru gagal ditambahkan',
@@ -83,7 +80,6 @@ Data Supplier
                                     confirmButtonText: 'Kembali',
                                     confirmButtonColor: '#DC3545'
                                 })
-                            );
                             table.ajax.reload();
             
                             return;
@@ -130,7 +126,6 @@ Data Supplier
                     '_method': 'delete'
                 })
                 .done((response) => {
-                    alert(
                         Swal.fire({
                             title: 'Sukses!',
                             text: 'Supplier berhasil dihapus',
@@ -138,11 +133,9 @@ Data Supplier
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
                         })                       
-                    );
                     table.ajax.reload();
                 })
                 .fail((errors) => {
-                    alert(
                         Swal.fire({
                             title: 'Gagal!',
                             text: 'Supplier gagal dihapus',
@@ -150,7 +143,6 @@ Data Supplier
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'
                         })                       
-                    );
                     return;
                 });
             }

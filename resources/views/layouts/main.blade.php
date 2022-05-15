@@ -38,6 +38,7 @@
         href="{{ ('/AdminLTE-master/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ ('/AdminLTE-master/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
+    @stack('css')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

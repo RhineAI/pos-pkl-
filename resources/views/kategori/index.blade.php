@@ -119,37 +119,49 @@ Data Kategori Produk
                 });
         }
 
-        function deleteData(url) {
-            if (confirm('Hapus Kategori yang dipilih?')) {
-            $.post(url, {
-                    '_token': $('[name=csrf-token]').attr('content'),
-                    '_method': 'delete'
-                })
-                .done((response) => {
-                    alert(
+        function deleteForm(url) {
+            Swal.fire({
+                title: 'Hapus Kategori yang dipilih?',
+                icon: 'question',
+                iconColor: '#DC3545',
+                showDenyButton: true,
+                denyButtonColor: '#838383',
+                denyButtonText: 'Batal',
+                confirmButtonText: 'Hapus',
+                confirmButtonColor: '#DC3545'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
+                        '_token': $('[name=csrf-token]').attr('content'),
+                        '_method': 'delete'
+                    })
+                    .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
-                            text: 'Kategori berhasil dihapus',
+                            text: 'Data Kategori berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
-                        })                       
-                    );
-                    table.ajax.reload();
-                })
-                .fail((errors) => {
-                    alert(
+                        }) 
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Kategori gagal dihapus',
+                            text: 'Data Kategori gagal dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'
                         })                       
-                    );
-                    return;
-                });
-            }
+                        return;
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Data Kategori batal dihapus',
+                        icon: 'warning',
+                    })
+                }
+            })
         }
 
     </script>
