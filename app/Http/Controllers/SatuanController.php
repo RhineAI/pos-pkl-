@@ -57,7 +57,7 @@ class SatuanController extends Controller
         $satuan->nama_satuan= $request->nama_satuan;
         $satuan->save();
 
-        return response()->json('Data berhasil disimpan', 200);
+        return response()->json('Satuan baru berhasil ditambahkan', 200);
     }
 
     /**
@@ -97,7 +97,7 @@ class SatuanController extends Controller
         $satuan->nama_satuan = $request->nama_satuan;
         $satuan->update();
 
-        return response()->json('Data berhasil diubah', 200);
+        return response()->json('Satuan berhasil diupdate', 200);
     }
 
     /**

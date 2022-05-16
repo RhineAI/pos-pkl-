@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-Laporan Penjualan
+Laporan Pembelian
 @endsection
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Laporan Penjualan</li>
+<li class="breadcrumb-item active">Laporan Pembelian</li>
 @endsection
 
 @section('content')
@@ -52,16 +52,17 @@ Laporan Penjualan
                             <thead>
                                 <tr role="row">
                                     <th width="4%" colspan="1" rowspan="2">No</th>
-                                    <th colspan="2" rowspan="1">INFORMASI PENJUALAN</th>
+                                    <th colspan="3" rowspan="1">INFORMASI PEMBELIAN</th>
                                     <th colspan="3" rowspan="1">TOTAL HARGA</th> 
                                     <th colspan="2" rowspan="1">KETERANGAN</th> 
                                 </tr>
                                 <tr role="row">
                                     <th colspan="1">Tanggal</th>
+                                    <th width="20%" colspan="1">Nama Supplier</th>
                                     <th width="20%" colspan="1">Nama Produk</th>
-                                    <th width="13%" colspan="1">Harga</th>
-                                    <th width="13%" colspan="1">Diskon</th>
-                                    <th width="13%" colspan="1">Total Harga</th>
+                                    <th width="15%" colspan="1">Harga</th>
+                                    <th width="15%" colspan="1">Diskon</th>
+                                    <th width="15%" colspan="1">Total Harga</th>
                                     <th colspan="1">Kasir</th>
                                     <th width="13%" colspan="1">Aksi</th>
                                 </tr>

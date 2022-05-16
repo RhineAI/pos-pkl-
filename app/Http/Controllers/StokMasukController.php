@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PembelianDetail;
 use App\Models\Produk;
+use App\Models\Satuan;
 use App\Models\StokMasuk;
 use Illuminate\Http\Request;
 
@@ -15,11 +16,11 @@ class StokMasukController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // $produk = Produk::orderBy('nama_produk')->get();
+    {   
+        $produk = Produk::orderBy('nama_produk')->get();
+        $satuan = Satuan::orderBy('id_satuan', 'desc')->get();
 
-        $produk = Produk::all()->pluck('id_produk', 'nama_produk');
-        return view('stokmasuk.index', compact('produk'));
+        return view('stokmasuk.index', compact('produk'), compact('satuan'));
     }
 
     public function data() {

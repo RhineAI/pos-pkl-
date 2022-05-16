@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Data Pengguna
+Data Semua Pengguna
 @endsection
 
 @section('breadcrumb')
@@ -63,28 +63,23 @@ Data Pengguna
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
                             $('#modal-form').modal('hide');
-                            // alert('berhasil');
-                            alert(
-                                Swal.fire({
-                                    title: 'Sukses!',
-                                    text: 'Pengguna baru berhasil ditambahkan',
-                                    icon: 'success',
-                                    confirmButtonText: 'Lanjut',
-                                    confirmButtonColor: '#28A745'
-                                })
-                            );
+                            Swal.fire({
+                                title: 'Sukses!',
+                                text: response,
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut',
+                                confirmButtonColor: '#28A745'
+                            })
                             table.ajax.reload();
                         })
                         .fail((errors) => {
-                            alert(
-                                Swal.fire({
-                                    title: 'Gagal!',
-                                    text: 'Pengguna baru gagal ditambahkan',
-                                    icon: 'error',
-                                    confirmButtonText: 'Kembali',
-                                    confirmButtonColor: '#DC3545'
-                                })
-                            );
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Pengguna yang diinput sudah ada',
+                                icon: 'error',
+                                confirmButtonText: 'Kembali',
+                                confirmButtonColor: '#DC3545'
+                            })
                             table.ajax.reload();
             
                             return;
@@ -108,10 +103,34 @@ Data Pengguna
 
             $('#password , #password_confirmation').attr('required', true);
         }
+
+        // $(document).on('click', '.edit', function (event) {
+        //         let nama_kategori = $(this).data('kategori')
+        //         let url = $(this).data('route')
+
+        //         let data = {
+        //             nama_kategori: nama_kategori,
+        //             url: url
+        //         }
+
+        //         editForm(data)
+        // })
+
+        // function editForm(data) {
+        //         $('#modal-form').modal('show')
+        //         $('#modal-form .modal-title').text('Edit Kategori');
+
+        //         $('#modal-form form')[0].reset();
+        //         $('#modal-form form').attr('action', data.url);
+        //         $('#modal-form [name=_method]').val('put');
+        //         $('#modal-form [name=nama_kategori]').focus();
+
+        //         $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
+        // }
         
         function editData(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Data User');
+            $('#modal-form .modal-title').text('Edit Pengguna');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
@@ -128,38 +147,38 @@ Data Pengguna
                     $('#modal-form [name=email]').val(response.foto);                   
                 })
                 .fail((errors) => {
-                    alert(
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Ada yang salah keknya nich?',
-                            icon: 'error',
-                            confirmButtonText: 'Dahlah males'
-                        })
-                    );
+                    alert('Gagal mengubah data!');
                     return;
                 });
         }
 
         function deleteForm(url) {
-            if (confirm('Hapus Pengguna yang dipilih?')) {
-            $.post(url, {
-                    '_token': $('[name=csrf-token]').attr('content'),
-                    '_method': 'delete'
-                })
-                .done((response) => {
-                    alert(
+            Swal.fire({
+                title: 'Hapus Pengguna yang dipilih?',
+                icon: 'question',
+                iconColor: '#DC3545',
+                showDenyButton: true,
+                denyButtonColor: '#838383',
+                denyButtonText: 'Batal',
+                confirmButtonText: 'Hapus',
+                confirmButtonColor: '#DC3545'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
+                        '_token': $('[name=csrf-token]').attr('content'),
+                        '_method': 'delete'
+                    })
+                    .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
                             text: 'Pengguna berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
-                        })                       
-                    );
-                    table.ajax.reload();
-                })
-                .fail((errors) => {
-                    alert(
+                        }) 
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
                             text: 'Pengguna gagal dihapus',
@@ -167,10 +186,48 @@ Data Pengguna
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'
                         })                       
-                    );
-                    return;
-                });
-            }
+                        return;
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Pengguna batal dihapus',
+                        icon: 'warning',
+                    })
+                }
+            })
         }
+
+        // function deleteForm(url) {
+        //     if (confirm('Hapus Pengguna yang dipilih?')) {
+        //     $.post(url, {
+        //             '_token': $('[name=csrf-token]').attr('content'),
+        //             '_method': 'delete'
+        //         })
+        //         .done((response) => {
+        //             alert(
+        //                 Swal.fire({
+        //                     title: 'Sukses!',
+        //                     text: 'Pengguna berhasil dihapus',
+        //                     icon: 'success',
+        //                     confirmButtonText: 'Lanjut',
+        //                     confirmButtonColor: '#28A745'
+        //                 })                       
+        //             );
+        //             table.ajax.reload();
+        //         })
+        //         .fail((errors) => {
+        //             alert(
+        //                 Swal.fire({
+        //                     title: 'Gagal!',
+        //                     text: 'Pengguna gagal dihapus',
+        //                     icon: 'error',
+        //                     confirmButtonText: 'Kembali',
+        //                     confirmButtonColor: '#DC3545'
+        //                 })                       
+        //             );
+        //             return;
+        //         });
+        //     }
+        // }
     </script>
 @endpush

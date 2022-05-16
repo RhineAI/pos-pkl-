@@ -44,9 +44,9 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return Setting::first();
     }
 
     /**
@@ -67,9 +67,24 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request)
+    {    
+        $setting = Setting::first();
+        $setting->nama_perusahaan = $request->nama_perusahaan;
+        $setting->telepon = $request->telepon;
+        $setting->alamat = $request->alamat;
+
+        if ($request->hasFile('path_logo')) {
+            $file = $request->file('path_logo');
+            $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('/images'), $nama);
+
+            $setting->path_logo = "/images/$nama";
+        }
+
+        $setting->update();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**

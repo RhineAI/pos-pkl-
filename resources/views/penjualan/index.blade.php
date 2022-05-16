@@ -19,8 +19,8 @@ Transaksi Penjualan
                 <div class="row">
                     <div class="col-md-9">
                         <div class="form-group row">
-                            <label for="Barcode" class="col-md-2">Barcode</label>
-                            <div class="col-md-3">
+                            <label for="Barcode" class="col-md-2">Pilih Produk</label>
+                            <div class="col-md-4">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="barcode" id="Barcode">
                                     <span class="input-group-btn">
@@ -107,6 +107,11 @@ Transaksi Penjualan
 @push('scripts')
 <script>
     let table;
+
+    $(".flatpickr").flatpickr({
+            enableTime: true,
+            dateFormat: "d-m-Y H:i",
+        });
 
     $(function () {
         table = $('.table').DataTable({});

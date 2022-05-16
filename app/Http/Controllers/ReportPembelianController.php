@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Supplier;
 
-class SupplierController extends Controller
+class ReportPembelianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,26 +13,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('supplier.index');
+        return view('reportpembelian.index');
     }
-
-    public function data() 
-    {
-        $supplier = Supplier::orderBy('id_supplier', 'desc')->get();
-
-        return datatables()
-            ->of($supplier)
-            ->addIndexColumn()
-            ->addColumn('aksi', function ($supplier) {
-                return '
-                    <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"> Edit</i></button>
-                    <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"> Hapus</i></button>
-                ';
-            })
-            ->rawColumns(['aksi'])
-            ->make(true);
-    }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -53,8 +34,7 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        $supplier = Supplier::create($request->all());
-        $supplier->save();
+        //
     }
 
     /**
@@ -65,9 +45,7 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        $supplier = Supplier::find($id);
-        
-        return response()->json($supplier);
+        //
     }
 
     /**
@@ -90,10 +68,7 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $supplier = Supplier::find($id);
-        $supplier->update($request->all());
-
-        return response()->json('Supplier berhasil diupdate', 200);
+        //
     }
 
     /**
@@ -104,9 +79,6 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        $supplier = Supplier::find($id);
-        $supplier->delete();
-
-        return response(null,204);
+        //
     }
 }

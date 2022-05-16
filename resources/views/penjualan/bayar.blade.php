@@ -14,15 +14,12 @@
                 </div>
 
                 <div class="modal-body">
-
                     <div class="form-group row">
                         <label for="" class="col-md-3 col-form-label">Tanggal</label>
                         <div class="col-md-9">
-                            <div class="input-group date">
-                                <input type="text" class="form-control datepicker" autocomplete="off" name="date"
-                                    id="date" data-provide="datepicker" value="">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i>
-                                </span>
+                            <div class="input-group">
+                                <input type="text" class="form-control flatpickr" autocomplete="off" name="date"
+                                    id="date" value="">
                             </div>
                         </div>
                     </div>

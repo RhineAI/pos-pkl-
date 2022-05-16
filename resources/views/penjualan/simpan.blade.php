@@ -12,21 +12,21 @@
             <div class="modal-body">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <th width="6%">No</th>
+                        <th width="4%">No</th>
                         <th width="8%">Tanggal</th>
                         <th width="15%">Nama Produk</th>
                         <th width="8%">Jumlah</th>
-                        <th width="17%">Total Bayar</th>
+                        <th width="13%">Total Bayar</th>
                         <th width="15%">Aksi</th>
                     </thead>
                     <tbody>
                         @foreach ($produk as $key => $item)
                             <tr>
-                                <td width="6%"></td>
+                                <td width="4%"></td>
                                 <td width="8%"></td>
                                 <td width="15%"></td>
                                 <td width="8%"></td>
-                                <td width="17%"></td>
+                                <td width="13%"></td>
                                 <td width="15%">
                                     <a href="#" class="btn btn-success btn-xs btn-flat">
                                         <i class="fa fa-money-bill"></i>

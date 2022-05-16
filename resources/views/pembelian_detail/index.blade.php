@@ -38,7 +38,7 @@
 
 @section('content')
 <div class="row mx-4">
-    <div class="col-lg-12" style="background-color: white;">
+    <div class="col-lg-12 p-3" style="background-color: white;">
         <div class="box">
             <div class="box-header with-border">
                 <table>

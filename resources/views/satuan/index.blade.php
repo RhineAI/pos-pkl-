@@ -61,28 +61,24 @@ Data Satuan Produk
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
                             $('#modal-form').modal('hide');
-                            alert(
-                                Swal.fire({
-                                    title: 'Sukses!',
-                                    text: 'Satuan baru berhasil ditambahkan',
-                                    icon: 'success',
-                                    confirmButtonText: 'Lanjut',
-                                    confirmButtonColor: '#28A745'
-                                })
-                            );
+                            Swal.fire({
+                                title: 'Sukses!',
+                                text: response,
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut',
+                                confirmButtonColor: '#28A745'
+                            })
                             table.ajax.reload();
                         })
 
                         .fail((errors) => {
-                            alert(
-                                Swal.fire({
-                                    title: 'Gagal!',
-                                    text: 'Satuan baru gagal ditambahkan',
-                                    icon: 'error',
-                                    confirmButtonText: 'Kembali',
-                                    confirmButtonColor: '#DC3545'
-                                })
-                            );
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Satuan yang diinput sudah ada',
+                                icon: 'error',
+                                confirmButtonText: 'Kembali',
+                                confirmButtonColor: '#DC3545'
+                            })
                             table.ajax.reload();
             
                             return;
@@ -100,6 +96,30 @@ Data Satuan Produk
         $('#modal-form [name=_method]').val('post');
         $('#modal-form [name=nama_satuan]').focus();
     }
+
+    // $(document).on('click', '.edit', function (event) {
+    //         let nama_kategori = $(this).data('kategori')
+    //         let url = $(this).data('route')
+
+    //         let data = {
+    //             nama_kategori: nama_kategori,
+    //             url: url
+    //         }
+
+    //         editForm(data)
+    // })
+
+    // function editForm(data) {
+    //         $('#modal-form').modal('show')
+    //         $('#modal-form .modal-title').text('Edit Kategori');
+
+    //         $('#modal-form form')[0].reset();
+    //         $('#modal-form form').attr('action', data.url);
+    //         $('#modal-form [name=_method]').val('put');
+    //         $('#modal-form [name=nama_kategori]').focus();
+
+    //         $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
+    // }
 
     function edit(url) {
         $('#modal-form').modal('show');
@@ -131,7 +151,7 @@ Data Satuan Produk
                 });
         }
 
-        function deleteForm(url) {
+        function deleteData(url) {
             Swal.fire({
                 title: 'Hapus Satuan yang dipilih?',
                 icon: 'question',
@@ -169,11 +189,44 @@ Data Satuan Produk
                     });
                 } else if (result.isDenied) {
                     Swal.fire({
-                        title: 'Data Satuan batal dihapus',
+                        title: 'Satuan batal dihapus',
                         icon: 'warning',
                     })
                 }
             })
         }
+
+        // function deleteData(url) {
+        //     if (confirm('Yakin ingin menghapus data terpilih?')) {
+        //     $.post(url, {
+        //             '_token': $('[name=csrf-token]').attr('content'),
+        //             '_method': 'delete'
+        //         })
+        //         .done((response) => {
+        //             alert(
+        //                 Swal.fire({
+        //                     title: 'Sukses!',
+        //                     text: 'Supplier berhasil dihapus',
+        //                     icon: 'success',
+        //                     confirmButtonText: 'Lanjut',
+        //                     confirmButtonColor: '#28A745'
+        //                 })                       
+        //             );
+        //             table.ajax.reload();
+        //         })
+        //         .fail((errors) => {
+        //             alert(
+        //                 Swal.fire({
+        //                     title: 'Gagal!',
+        //                     text: 'Supplier gagal dihapus',
+        //                     icon: 'error',
+        //                     confirmButtonText: 'Kembali',
+        //                     confirmButtonColor: '#DC3545'
+        //                 })                       
+        //             );
+        //             return;
+        //         });
+        //     }
+        // }
     </script>
 @endpush
