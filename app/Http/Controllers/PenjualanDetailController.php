@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penjualan;
-use Illuminate\Http\Request;
 use App\Models\Produk;
+use App\Models\Setting;
+use Illuminate\Http\Request;
 
-class PenjualanController extends Controller
+class PenjualanDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +15,25 @@ class PenjualanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        // $produk = Produk::orderBy('nama_produk')->get();
+    {
+        $produk = Produk::orderBy('nama_produk')->get();
+        // $setting = Setting::first();
 
-        // return view('penjualan.index', compact('produk'));
+        
+
+        // Cek Apakah ada Transaksi yang sedang berjalan
+
+        if($id_penjualan = session('id_penjualan')) {
+            return view('penjualandetail.index', compact('produk', 'id_penjualan'));
+        } else {
+            if(auth()->user()->level == 1) {
+                return redirect()->route('transaksi.baru');
+            } else {
+                return redirect()->route('home');
+            }
+        }
+
+
     }
 
     /**
@@ -28,23 +44,6 @@ class PenjualanController extends Controller
     public function create()
     {
         $penjualan = new Penjualan();
-        $kode = $penjualan->id_penjualan+1*2;
-
-        
-
-        // $request['kode_penjualan'] = $kode;
-        $penjualan->kode_penjualan = $kode;
-        $penjualan->total_item = 0;
-        $penjualan->total_harga = 0;
-        $penjualan->diskon = 0;
-        $penjualan->bayar = 0;
-        $penjualan->diterima = 0;
-        $penjualan->id_user = auth()->id();
-        $penjualan->save();
-
-        session(['id_penjualan' => $penjualan->id_penjualan]);
-        return redirect()->route('transaksi.index');
-
     }
 
     /**

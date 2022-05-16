@@ -104,10 +104,25 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ route('penjualan.index') }}" class="nav-link">
+                              <a href="" class="nav-link">
                                   <p>Penjualan</p>
+                                  <i class="right fas fa-angle-left"></i>
                               </a>
+                              <ul class="nav nav-treeview ml-4">
+                                <li class="nav-item">
+                                    <a href="{{ route('transaksi.baru') }}" class="nav-link">
+                                        <p>Transaksi Baru</p>                 
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ route('transaksi.index') }}" class="nav-link">
+                                        <p>Transaksi Lama</p>
+                                    </a>
+                                </li>
+                              </ul>
                           </li>
+                          
                       </ul>
                   </li>
 

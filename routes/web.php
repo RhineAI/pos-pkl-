@@ -11,6 +11,7 @@ use App\Http\Controllers\StokKeluarController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembelianDetailController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\PenjualanDetailController;
 use App\Http\Controllers\ReportPenjualanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
@@ -85,11 +86,18 @@ Route::group(['middleware' => 'auth'], function () {
     ->except('create', 'show', 'edit' );
 });
 
-// Route stok penjualan
+// Route stok penjualan 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/penjualan/data', [PenjualanController::class, 'data'])->name('penjualan.data');
-    Route::resource('/penjualan', PenjualanController::class);
+    Route::get('/transaksi/baru', [PenjualanController::class, 'create'])->name('transaksi.baru');
+    Route::resource('/transaksi', PenjualanDetailController::class)->except('show');
 });
+
+// Route stok penjualan lama
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::get('/penjualandetail/data', [PenjualanDetailController::class, 'data'])->name('penjualandetail.data');
+//     Route::resource('/penjualandetail', PenjualanDetailController::class);
+// });
+
 // Route Supplier
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
