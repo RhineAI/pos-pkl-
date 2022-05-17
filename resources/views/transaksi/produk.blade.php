@@ -16,7 +16,7 @@
                         <th width="8%">Barcode</th>
                         <th>Nama Produk</th>
                         <th width="8%">Satuan</th>
-                        <th width="20%">Harga Beli</th>
+                        <th width="16%">Harga Jual</th>
                         <th width="6%">Stok</th>
                         <th width="6%">Aksi</th>
                     </thead>
@@ -27,7 +27,7 @@
                                 <td width="8%"><span class="badge badge-info">{{ $item->barcode }}</span></td>
                                 <td>{{ $item->nama_produk }}</td>
                                 <td width="8%">{{ $item->nama_satuan }}</td>
-                                <td width="20%">{{ $item->harga_beli }}</td>
+                                <td width="16%">{{ $item->harga_jual }}</td>
                                 <td width="8%">{{ $item->stok }}</td>
                                 <td width="6%">
                                     <a href="#" class="btn btn-primary btn-xs btn-flat">

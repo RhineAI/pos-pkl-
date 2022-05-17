@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Setting;
+use App\Models\Produk;
+use App\Models\Supplier;
 
-
-class SettingController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,19 @@ class SettingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // $this->authorize('admin');
-        return view('setting.index');
+    {      
+        $produk = Produk::count();
+        $supplier = Supplier::count();
+
+        $tanggal_awal = date('Y-m-01');
+        $tanggal_akhir = date('Y-m-d');
+
+        if (auth()->user()->level == 1) {
+            return view('admin.dashboard', compact('produk', 'supplier', 'tanggal_awal', 'tanggal_akhir'));
+        } else {
+            return view('kasir.dashboard');
+        }
+        
     }
 
     /**
@@ -46,9 +56,9 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        return Setting::first();
+        //
     }
 
     /**
@@ -69,24 +79,9 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {    
-        $setting = Setting::first();
-        $setting->nama_perusahaan = $request->nama_perusahaan;
-        $setting->telepon = $request->telepon;
-        $setting->alamat = $request->alamat;
-
-        if ($request->hasFile('path_logo')) {
-            $file = $request->file('path_logo');
-            $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('/images'), $nama);
-
-            $setting->path_logo = "/images/$nama";
-        }
-
-        $setting->update();
-
-        return response()->json('Data berhasil disimpan', 200);
+    public function update(Request $request, $id)
+    {
+        //
     }
 
     /**

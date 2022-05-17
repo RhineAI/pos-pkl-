@@ -60,7 +60,7 @@ class ProdukController extends Controller
             })
             ->addColumn('ud', function($produk) { 
                 return '
-                    <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/></button> 
+                    <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/></button>
                     <button onclick="deleteForm(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
                     '; 
                 })
@@ -116,7 +116,7 @@ class ProdukController extends Controller
 
         $produk = Produk::create($request->all())->save();
 
-        return $produk;
+        return response()->json('Data Produk baru berhasil ditambahkan', 200);
 
         // $produk->save();
         
@@ -169,7 +169,7 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         $produk->update($request->all());
 
-        return response()->json('Data berhasil diubah', 200);
+        return response()->json('Data Produk berhasil diupdate', 200);
     }
 
     /**

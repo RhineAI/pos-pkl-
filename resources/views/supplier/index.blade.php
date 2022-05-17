@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Data Supplier
+Data Semua Supplier
 @endsection
 
 @section('breadcrumb')
@@ -63,23 +63,23 @@ Data Supplier
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
                             $('#modal-form').modal('hide');
-                                Swal.fire({
-                                    title: 'Sukses!',
-                                    text: 'Supplier baru berhasil ditambahkan',
-                                    icon: 'success',
-                                    confirmButtonText: 'Lanjut',
-                                    confirmButtonColor: '#28A745'
-                                })
+                            Swal.fire({
+                                title: 'Sukses!',
+                                text: response,
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut',
+                                confirmButtonColor: '#28A745'
+                            })
                             table.ajax.reload();
                         })
                         .fail((errors) => {
-                                Swal.fire({
-                                    title: 'Gagal!',
-                                    text: 'Supplier baru gagal ditambahkan',
-                                    icon: 'error',
-                                    confirmButtonText: 'Kembali',
-                                    confirmButtonColor: '#DC3545'
-                                })
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: 'Supplier yang diinput sudah ada',
+                                icon: 'error',
+                                confirmButtonText: 'Kembali',
+                                confirmButtonColor: '#DC3545'
+                            })
                             table.ajax.reload();
             
                             return;
@@ -97,8 +97,36 @@ Data Supplier
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=nama]').focus();
         }
+
+        // $(document).on('click', '.edit', function (event) {
+        //         let nama = $(this).data('supplier')
+        //         let alamat = $(this).data('supplier')
+        //         let telepon = $(this).data('supplier')
+        //         let url = $(this).data('route')
+
+        //         let data = {
+        //             nama: nama,
+        //             alamat: alamat ,
+        //             telepon: telepon,
+        //             url: url
+        //         }
+
+        //         editForm(data)
+        // })
+
+        // function editForm(data) {
+        //         $('#modal-form').modal('show')
+        //         $('#modal-form .modal-title').text('Edit Supplier');
+
+        //         $('#modal-form form')[0].reset();
+        //         $('#modal-form form').attr('action', data.url);
+        //         $('#modal-form [name=_method]').val('put');
+        //         $('#modal-form [name=nama]').focus();
+
+        //         $('#modal-form [name=nama]').val(data.nama);
+        // }
         
-        function editForm(url) {
+        function editData(url) {
             $('#modal-form').modal('show')
             $('#modal-form .modal-title').text('Edit Supplier');
 
@@ -118,24 +146,34 @@ Data Supplier
                     return;
                 });
         }
-
+        
         function deleteData(url) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
-            $.post(url, {
-                    '_token': $('[name=csrf-token]').attr('content'),
-                    '_method': 'delete'
-                })
-                .done((response) => {
+            Swal.fire({
+                title: 'Hapus Supplier yang dipilih?',
+                icon: 'question',
+                iconColor: '#DC3545',
+                showDenyButton: true,
+                denyButtonColor: '#838383',
+                denyButtonText: 'Batal',
+                confirmButtonText: 'Hapus',
+                confirmButtonColor: '#DC3545'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(url, {
+                        '_token': $('[name=csrf-token]').attr('content'),
+                        '_method': 'delete'
+                    })
+                    .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
                             text: 'Supplier berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
-                        })                       
-                    table.ajax.reload();
-                })
-                .fail((errors) => {
+                        }) 
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
                             text: 'Supplier gagal dihapus',
@@ -143,9 +181,48 @@ Data Supplier
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'
                         })                       
-                    return;
-                });
-            }
+                        return;
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Supplier batal dihapus',
+                        icon: 'warning',
+                    })
+                }
+            })
         }
+
+        // function deleteData(url) {
+        //     if (confirm('Yakin ingin menghapus data terpilih?')) {
+        //     $.post(url, {
+        //             '_token': $('[name=csrf-token]').attr('content'),
+        //             '_method': 'delete'
+        //         })
+        //         .done((response) => {
+        //             alert(
+        //                 Swal.fire({
+        //                     title: 'Sukses!',
+        //                     text: 'Supplier berhasil dihapus',
+        //                     icon: 'success',
+        //                     confirmButtonText: 'Lanjut',
+        //                     confirmButtonColor: '#28A745'
+        //                 })                       
+        //             );
+        //             table.ajax.reload();
+        //         })
+        //         .fail((errors) => {
+        //             alert(
+        //                 Swal.fire({
+        //                     title: 'Gagal!',
+        //                     text: 'Supplier gagal dihapus',
+        //                     icon: 'error',
+        //                     confirmButtonText: 'Kembali',
+        //                     confirmButtonColor: '#DC3545'
+        //                 })                       
+        //             );
+        //             return;
+        //         });
+        //     }
+        // }
     </script>
 @endpush

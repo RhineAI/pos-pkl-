@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
+
 class UserController extends Controller
 {
     /**
@@ -59,28 +60,10 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->level= 2;
-        // $user->foto = $request->foto;
         $user->foto = '/images/monster.png';
         $user->save();
 
-        // $validateData = $request->validate([
-        //     'user' => 'required',
-        //     'name' => 'required',
-        //     'username' => 'required',
-        //     'email' => 'required|email:dns',
-        //     'password' => 'required',
-        //     'foto' => 'image|file|max:1024'
-        // ]);
-
-        // $validateData['password'] = Hash::make($validateData['password']);
-
-        // if($request->file('foto')) {
-        //     $validateData['foto'] = $request->file('image');
-        // } 
-
-        // User::create($validateData);
-
-        return response()->json('Data berhasil disimpan', 200);
+        return response()->json('Pengguna baru berhasil ditambahkan', 200);
     }
 
     /**
@@ -125,7 +108,7 @@ class UserController extends Controller
         }
         $user->update();
 
-        return response()->json('Data berhasil diubah', 200);
+        return response()->json('Pengguna berhasil diupdate', 200);
     }
 
     /**
@@ -141,4 +124,70 @@ class UserController extends Controller
 
         return response(null,204);
     }
+
+    public function profile()
+    {
+        $profile = auth()->user();
+        return view('users.profile', compact('profile'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+        
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+
+        if ($request->has('password') && $request->password != "") {
+            if (Hash::check($request->old_password, $user->password)) {
+                if ($request->password == $request->password_confirmation) {
+                    $user->password = bcrypt($request->password);
+                } else {
+                    return response()->json('Konfirmasi password tidak sesuai', 422);
+                }
+            } else {
+                return response()->json('Password lama tidak sesuai', 422);
+            }
+        }
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('/images'), $nama);
+
+            $user->foto = $nama;
+        }
+        $user->update();
+
+        return response()->json('Data berhasil disimpan', 200);
+    }
+
+    // public function profile()
+    // {   
+    //     $profile = auth()->user();
+    //     return view('users.profile', compact('profile'));
+    // }
+
+    // public function updateProfile(Request $request)
+    // {
+    //     $user = auth()->user();
+
+    //     $user->name = $request->name;
+    //     $user->username = $request->username;
+    //     $user->email = $request->email;
+
+    //     if ($request->hasFile('foto')) {
+    //         $file = $request->file('foto');
+    //         $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
+    //         $file->move(public_path('/images'), $nama);
+
+    //         $user->foto = "/images/$nama";
+    //     }
+
+    //     $user->update();
+
+    //     return response()->json('$user', 200);
+    // }
+    
 }

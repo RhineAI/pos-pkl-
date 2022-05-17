@@ -23,7 +23,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/') }}"><b>{{ config ('app.name') }}</b></a>
+            <a href="{{ url('/') }}"><b>{{ $setting->nama_perusahaan }}</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -67,14 +67,6 @@
     <script src="{{ ('AdminLTE-master/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ ('AdminLTE-master/dist/js/adminlte.min.js') }}"></script>
-
-
-    <script>
-            
-        }
-    </script>
-
-
 </body>
 
 </html>

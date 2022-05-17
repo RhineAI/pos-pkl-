@@ -1,9 +1,8 @@
 @extends('layouts.main')
 
 @section('title')
-    Transaksi Pembelian
+Transaksi Pembelian
 @endsection
-
 @push('css')
 <style>
     .tampil-bayar {
@@ -30,17 +29,16 @@
     }
 </style>
 @endpush
-
 @section('breadcrumb')
-    @parent
-    <li class="active">Transaksi Pembelian</li>
+@parent
+<li class="breadcrumb-item active">Transaksi Pembelian</li>
 @endsection
 
 @section('content')
 <div class="row mx-4">
-    <div class="col-lg-12" style="background-color: white;">
+    <div class="col-lg-12 mb-3" style="background-color: white;">
         <div class="box">
-            <div class="box-header with-border">
+            <div class="box-header with-border p-2">
                 <table>
                     <tr>
                         <td>Supplier</td>
@@ -61,8 +59,8 @@
                 <form class="form-produk">
                     @csrf
                     <div class="form-group row">
-                        <label for="kode_produk" class="col-lg-3">Pilih Produk</label>
-                        <div class="col-lg-2">
+                        <label for="kode_produk" class="col-md-2">Pilih Produk</label>
+                        <div class="col-md-2">
                             <div class="input-group">
                                 <input type="hidden" name="id_pembelian" id="id_pembelian" value="{{ $id_pembelian }}">
                                 <input type="hidden" name="id_produk" id="id_produk">
@@ -77,19 +75,19 @@
 
                 <table class="table table-stiped table-bordered table-pembelian">
                     <thead>
-                        <th width="5%">No</th>
-                        <th>Kode</th>
+                        <th width="6%%">No</th>
+                        <th width="6%">Kode</th>
                         <th>Nama</th>
-                        <th>Harga</th>
-                        <th width="15%">Jumlah</th>
-                        <th>Subtotal</th>
-                        <th width="15%"><i class="fa fa-cog"></i></th>
+                        <th width="10%">Harga</th>
+                        <th width="10%">Jumlah</th>
+                        <th width="10%">Subtotal</th>
+                        <th width="6%">Aksi</th>
                     </thead>
                 </table>
 
                 <div class="row mt-4">
                     <div class="col-lg-8">
-                        <div class="tampil-bayar bg-default mb-4">Rp. 0 ,-</div>
+                        <div class="tampil-bayar mb-4">Rp. 0 ,-</div>
                         <div class="tampil-terbilang">Nol Rupiah</div>
                     </div>
                     <div class="col-lg-4">
@@ -175,7 +173,7 @@
                 Swal.fire({
                     title: 'Gagal!',
                     text: 'Jumlah tidak boleh kurang dari 1',
-                    icon: 'warning',
+                    icon: 'error',
                     confirmButtonText: 'Kembali',
                     confirmButtonColor: '#e80c29'
                 })    
@@ -186,7 +184,7 @@
                 Swal.fire({
                     title: 'Gagal!',
                     text: 'Jumlah tidak boleh lebih dari 10K',
-                    icon: 'warning',
+                    icon: 'error',
                     confirmButtonText: 'Kembali',
                     confirmButtonColor: '#e80c29'
                 })            

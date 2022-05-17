@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Setting;
 
-
-class SettingController extends Controller
+class ReportPembelianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +13,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        // $this->authorize('admin');
-        return view('setting.index');
+        return view('reportpembelian.index');
     }
 
     /**
@@ -46,9 +43,9 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        return Setting::first();
+        //
     }
 
     /**
@@ -69,24 +66,9 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {    
-        $setting = Setting::first();
-        $setting->nama_perusahaan = $request->nama_perusahaan;
-        $setting->telepon = $request->telepon;
-        $setting->alamat = $request->alamat;
-
-        if ($request->hasFile('path_logo')) {
-            $file = $request->file('path_logo');
-            $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('/images'), $nama);
-
-            $setting->path_logo = "/images/$nama";
-        }
-
-        $setting->update();
-
-        return response()->json('Data berhasil disimpan', 200);
+    public function update(Request $request, $id)
+    {
+        //
     }
 
     /**

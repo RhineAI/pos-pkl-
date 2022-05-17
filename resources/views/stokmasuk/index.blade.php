@@ -36,6 +36,7 @@ Data Stok Masuk
         </div>
     </div>
 </div>
+@includeIf('stokmasuk.tambah')
 @endsection
 
 @includeIf('stokmasuk.form')

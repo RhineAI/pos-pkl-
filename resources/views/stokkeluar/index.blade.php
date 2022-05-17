@@ -41,8 +41,14 @@ Data Stok keluar
 @includeIf('stokkeluar.tambah')
 
 @push('scripts')
-<script>
-    let table;
+    <script>
+
+        $(".flatpickr").flatpickr({
+            enableTime: true,
+            dateFormat: "d-m-Y H:i",
+        });
+
+        let table;
 
     $(function () {
         table = $('.table').DataTable({

@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar Pembelian
+Daftar Pembelian
 @endsection
 
 @section('breadcrumb')
-    @parent
-    <li class="active">Daftar Pembelian</li>
+@parent
+<li class="breadcrumb-item active">Daftar Pembelian</li>
 @endsection
 
 @section('content')
@@ -98,7 +98,7 @@
 
     function deleteData(url) {
             Swal.fire({
-                title: 'Hapus Data yang dipilih?',
+                title: 'Hapus Data Pembelian  yang dipilih?',
                 icon: 'question',
                 iconColor: '#DC3545',
                 showDenyButton: true,
@@ -125,7 +125,7 @@
                     .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Data Pembelian gagal dihapus',
+                            text: 'Data Pembelian batal dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'

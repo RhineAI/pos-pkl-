@@ -27,7 +27,7 @@ class KategoriController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($kategori) {
                 return '
-                    <button onclick="editForm(`'. route('kategori.update', $kategori->id_kategori) .'`)" class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"> Edit</i></button>
+                    <button data-kategori="'.$kategori->nama_kategori.'" data-route="' . route('kategori.update', $kategori->id_kategori) . '" class="edit btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"> Edit</i></button>
                     <button onclick="deleteData(`'. route('kategori.destroy', $kategori->id_kategori) .'`)" class="btn btn-xs btn-danger btn-flat delete"><i class="bi bi-trash"> Hapus</i></button>
                 ';
             })
@@ -54,17 +54,11 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'nama_kategori' => 'required|max:255'
-        // ]);
-
-        // return redirect('/kategori')->with('success', 'New Category has been added');
-
         $kategori = new Kategori();
         $kategori->nama_kategori= $request->nama_kategori;
         $kategori->save();
 
-        return response()->json('Data berhasil disimpan', 200);
+        return response()->json('Kategori baru berhasil ditambahkan', 200);
     }
 
     /**
@@ -105,7 +99,7 @@ class KategoriController extends Controller
         $kategori->nama_kategori = $request->nama_kategori;
         $kategori->update();
 
-        return response()->json('Data berhasil diubah', 200);
+        return response()->json('Kategori berhasil diupdate', 200);
 
         
     }

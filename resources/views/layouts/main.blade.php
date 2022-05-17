@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config ('app.name') }} | @yield('title')</title>
+    <title>POS | {{ $setting->nama_perusahaan }}</title>
     
+    <link rel="icon" href="{{ url($setting->path_logo) }}" type="image/png">
 
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -37,8 +38,8 @@
     <link rel="stylesheet"
         href="{{ ('/AdminLTE-master/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ ('/AdminLTE-master/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
-    @stack('css')
+    <!-- FlatPickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -60,6 +61,7 @@
     </div>
     <!-- ./wrapper -->
 
+    
     <!-- jQuery -->
     <script src="{{ ('AdminLTE-master/plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -116,6 +118,15 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- Bootbox Confirm Delete --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+    <!-- FlatPickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        function preview(selector, temporaryFile, width = 200) {
+            $(selector).empty();
+            $(selector).append(`<img src="${window.URL.createObjectURL(temporaryFile)}" width="${width}">`);
+        }
+    </script>
 
     @stack('scripts')
 </body>

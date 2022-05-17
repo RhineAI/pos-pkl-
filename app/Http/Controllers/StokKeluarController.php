@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\PembelianDetail;
 use App\Models\Produk;
 use App\Models\StokKeluar;
-use App\Models\StokMasuk;
 use Illuminate\Http\Request;
 
 class StokKeluarController extends Controller

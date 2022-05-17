@@ -26,8 +26,8 @@ class SupplierController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($supplier) {
                 return '
-                    <button onclick="editForm(`'. route('supplier.update', $supplier->id_supplier) .'`)" class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>
-                    <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
+                    <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"> Edit</i></button>
+                    <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"> Hapus</i></button>
                 ';
             })
             ->rawColumns(['aksi'])
@@ -55,6 +55,8 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::create($request->all());
         $supplier->save();
+
+        return response()->json('Supplier baru berhasil ditambahkan', 200);
     }
 
     /**
@@ -93,7 +95,7 @@ class SupplierController extends Controller
         $supplier = Supplier::find($id);
         $supplier->update($request->all());
 
-        return response()->json('Data berhasil diubah', 200);
+        return response()->json('Supplier berhasil diupdate', 200);
     }
 
     /**
