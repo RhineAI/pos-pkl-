@@ -20,8 +20,9 @@ class SettingTableSeeder extends Seeder
             'nama_perusahaan' => 'Madtive Store',
             'alamat' => 'Jl.Mayor Harun Kabir, Bojong Herang, Kec. Cianjur, Kab. Cianjur, Jawa Barat 43216',
             'telepon' => '087836370765',
-            'path_logo' => '/images/monster.png'
-
+            'tipe_nota' => 1, //kecil
+            'path_logo' => '/images/monster.png',
+            'barcode' => 'MS-'
         ]);
     }
 }

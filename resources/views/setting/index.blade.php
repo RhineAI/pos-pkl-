@@ -51,8 +51,27 @@ Pengaturan Toko
                     <div class="form-group row">
                         <label for="Logo_Perusahaan" class="col-sm-3 control-label">Logo Perusahaan</label>
                         <div class="col-sm-5">
-                            <input type="file" name="path_logo" class="form-control" id="Logo_Perusahaan"
-                                onchange="preview('.tampil-logo', this.files[0])">
+                            <input type="file" name="path_logo" class="form-control" id="Logo_Perusahaan">
+                            <span class="help-block with-errors"></span>
+                            <div class="tampil-logo"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="tipe_nota" class="col-sm-3 control-label">Tipe Nota</label>
+                        <div class="col-sm-4">
+                            <select name="tipe_nota" class="form-control" id="tipe_nota" required>
+                                <option value="1">Nota Kecil</option>
+                                <option value="2">Nota Besar</option>
+                            </select>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Barcode" class="col-sm-3 control-label">Barcode</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="barcode" class="form-control" id="Barcode" required>
                             <span class="help-block with-errors"></span>
                             <div class="tampil-logo mt-3"></div>
                         </div>

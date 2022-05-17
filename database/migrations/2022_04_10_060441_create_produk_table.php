@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('nama_produk')->unique();
             $table->integer('id_kategori');
             $table->integer('id_satuan');
-            
             $table->integer('harga_beli');
             $table->integer('diskon');
             $table->integer('harga_jual');

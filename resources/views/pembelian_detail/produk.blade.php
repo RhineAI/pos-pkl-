@@ -16,7 +16,8 @@
                         <th width="6%">No</th>
                         <th width="10%">Barcode</th>
                         <th>Nama</th>
-                        <th width="10%">Harga</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
                         <th width="6%">Aksi</th>
                     </thead>
                     <tbody>
@@ -26,6 +27,7 @@
                                 <td width="10%"><span class="badge badge-info">{{ $item->barcode }}</span></td>
                                 <td>{{ $item->nama_produk }}</td>
                                 <td>{{ 'Rp. '. format_uang($item->harga_beli) }}</td>
+                                <td>{{ $item->stok }}</td>
                                 <td width="6%">
                                     <a href="#" class="btn btn-primary btn-xs btn-flat"
                                     onclick="pilihProduk('{{ $item->id_produk }}', '{{ $item->barcode }}') ">    
