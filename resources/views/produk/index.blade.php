@@ -78,7 +78,7 @@ Data Semua Produk
                             $('#modal-form').modal('hide');
                             Swal.fire({
                                 title: 'Sukses!',
-                                text: 'Data Produk baru berhasil ditambahkan',
+                                text: response,
                                 icon: 'success',
                                 confirmButtonText: 'Lanjut',
                                 confirmButtonColor: '#28A745'

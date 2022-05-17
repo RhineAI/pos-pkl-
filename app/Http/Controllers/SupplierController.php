@@ -55,6 +55,8 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::create($request->all());
         $supplier->save();
+
+        return response()->json('Supplier baru berhasil ditambahkan', 200);
     }
 
     /**

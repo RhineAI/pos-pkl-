@@ -125,7 +125,7 @@ class PembelianController extends Controller
                 return '<span class="badge badge-info">'. $detail->produk->barcode .'</span>';
             })
             ->addColumn('nama_produk', function($detail) {
-                return $detail->nama_produk . ' %';
+                return $detail->produk->nama_produk;
             })
             ->addColumn('harga_beli', function($detail) {
                 return 'Rp. ' . format_uang($detail->harga_beli) . ' ,-';
@@ -136,6 +136,7 @@ class PembelianController extends Controller
             ->addColumn('subtotal', function($detail) {
                 return 'Rp. ' . format_uang($detail->subtotal) . ' ,-';
             })
+            ->rawColumns(['aksi', 'barcode'])
             ->make(true);
     }
 

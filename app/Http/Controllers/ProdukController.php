@@ -116,7 +116,7 @@ class ProdukController extends Controller
 
         $produk = Produk::create($request->all())->save();
 
-        return $produk;
+        return response()->json('Data Produk baru berhasil ditambahkan', 200);
 
         // $produk->save();
         

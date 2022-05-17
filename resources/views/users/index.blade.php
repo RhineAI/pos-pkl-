@@ -53,7 +53,6 @@ Data Semua Pengguna
                     {data:'name'},
                     {data:'username'},
                     {data:'email'},
-                    // {data:'foto'},
                     {data:'aksi', searchable: false, sortable: false},
                 ]
             });
@@ -94,7 +93,7 @@ Data Semua Pengguna
 
         function addData(url) {
             $('#modal-form').modal('show');
-            $('#modal-form .modal-title').text('Tambah User Baru');
+            $('#modal-form .modal-title').text('Tambah Pengguna Baru');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
@@ -143,8 +142,7 @@ Data Semua Pengguna
                 .done((response) => {
                     $('#modal-form [name=name]').val(response.name);
                     $('#modal-form [name=username]').val(response.username);
-                    $('#modal-form [name=email]').val(response.email);                   
-                    $('#modal-form [name=email]').val(response.foto);                   
+                    $('#modal-form [name=email]').val(response.email);                                     
                 })
                 .fail((errors) => {
                     alert('Gagal mengubah data!');

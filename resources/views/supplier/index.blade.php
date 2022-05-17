@@ -65,7 +65,7 @@ Data Semua Supplier
                             $('#modal-form').modal('hide');
                             Swal.fire({
                                 title: 'Sukses!',
-                                text: 'Supplier baru berhasil ditambahkan',
+                                text: response,
                                 icon: 'success',
                                 confirmButtonText: 'Lanjut',
                                 confirmButtonColor: '#28A745'
@@ -99,11 +99,15 @@ Data Semua Supplier
         }
 
         // $(document).on('click', '.edit', function (event) {
-        //         let nama_supplier = $(this).data('supplier')
+        //         let nama = $(this).data('supplier')
+        //         let alamat = $(this).data('supplier')
+        //         let telepon = $(this).data('supplier')
         //         let url = $(this).data('route')
 
         //         let data = {
-        //             nama_supplier: nama_supplier,
+        //             nama: nama,
+        //             alamat: alamat ,
+        //             telepon: telepon,
         //             url: url
         //         }
 
@@ -117,9 +121,9 @@ Data Semua Supplier
         //         $('#modal-form form')[0].reset();
         //         $('#modal-form form').attr('action', data.url);
         //         $('#modal-form [name=_method]').val('put');
-        //         $('#modal-form [name=nama_supplier]').focus();
+        //         $('#modal-form [name=nama]').focus();
 
-        //         $('#modal-form [name=nama_supplier]').val(data.nama_supplier);
+        //         $('#modal-form [name=nama]').val(data.nama);
         // }
         
         function editData(url) {

@@ -158,14 +158,6 @@ class UserController extends Controller
 
             $user->foto = $nama;
         }
-        // if ($request->hasFile('foto')) {
-        //     $file = $request->file('foto');
-        //     $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
-        //     $file->move(public_path('/images'), $nama);
-
-        //     $user->foto = "/images/$nama";
-        // }
-
         $user->update();
 
         return response()->json('Data berhasil disimpan', 200);

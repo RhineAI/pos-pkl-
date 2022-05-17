@@ -59,9 +59,9 @@ Laporan Penjualan
                                 <tr role="row">
                                     <th colspan="1">Tanggal</th>
                                     <th width="20%" colspan="1">Nama Produk</th>
-                                    <th width="13%" colspan="1">Harga</th>
-                                    <th width="13%" colspan="1">Diskon</th>
-                                    <th width="13%" colspan="1">Total Harga</th>
+                                    <th width="15%" colspan="1">Harga</th>
+                                    <th width="15%" colspan="1">Diskon</th>
+                                    <th width="15%" colspan="1">Total Harga</th>
                                     <th colspan="1">Kasir</th>
                                     <th width="13%" colspan="1">Aksi</th>
                                 </tr>

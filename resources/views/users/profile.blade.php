@@ -6,7 +6,7 @@ Update Profile
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Pengaturan</li>
+<li class="breadcrumb-item active">Profile</li>
 @endsection
 
 @section('content')
@@ -120,7 +120,7 @@ Update Profile
                     $('[name=name]').val(response.name);
                     $('[name=username]').val(response.username);
                     $('[name=email]').val(response.email);
-                    $('.tampil-foto').html(`<img src="{{ url('/') }}${response.foto}" width="200">`);
+                    $('.tampil-foto').html(`<img src="{{ url('/') }}${response.foto}" width="100">`);
                     $('.images-profile').attr('src', `{{ url('/') }}/${response.foto}`);
                     $('.alert').fadeIn();
                     setTimeout(() => {
