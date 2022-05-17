@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Kategori;
+use App\Models\Produk;
 use App\Models\Satuan;
 use App\Models\Supplier;
 use App\Models\User;
@@ -32,6 +33,17 @@ class DatabaseSeeder extends Seeder
 
         Satuan::create([
             'nama_satuan' => 'pcs'
+        ]);
+
+        Produk::create([
+            'barcode' => 'BRC-202205001',
+            'nama_produk' => 'Nasi Goreng',
+            'id_kategori' => 1,
+            'id_satuan' => 1,
+            'harga_beli' => 12000,
+            'diskon' => 0,
+            'harga_jual' => 18000,
+            'stok' => 100,
         ]);
 
         Supplier::create([

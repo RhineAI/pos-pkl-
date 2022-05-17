@@ -251,19 +251,48 @@
     }
 
     function deleteData(url) {
-        if (confirm('Yakin ingin menghapus data terpilih?')) {
-            $.post(url, {
+        Swal.fire({
+            title: 'Hapus Kategori yang dipilih?',
+            icon: 'question',
+            iconColor: '#DC3545',
+            showDenyButton: true,
+            denyButtonColor: '#838383',
+            denyButtonText: 'Batal',
+            confirmButtonText: 'Hapus',
+            confirmButtonColor: '#DC3545'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.post(url, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'delete'
                 })
                 .done((response) => {
-                    table.ajax.reload(() => loadForm($('#diskon').val()));
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data Kategori berhasil dihapus',
+                        icon: 'success',
+                        confirmButtonText: 'Lanjut',
+                        confirmButtonColor: '#28A745'
+                    }) 
+                    table.ajax.reload();
                 })
                 .fail((errors) => {
-                    alert('Tidak dapat menghapus data');
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data Kategori gagal dihapus',
+                        icon: 'error',
+                        confirmButtonText: 'Kembali',
+                        confirmButtonColor: '#DC3545'
+                    })                       
                     return;
                 });
-        }
+            } else if (result.isDenied) {
+                Swal.fire({
+                    title: 'Data Kategori batal dihapus',
+                    icon: 'warning',
+                })
+            }
+        })
     }
 
     function loadForm(diskon = 0) {

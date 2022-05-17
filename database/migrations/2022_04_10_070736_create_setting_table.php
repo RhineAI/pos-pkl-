@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama_perusahaan');
             $table->text('alamat');
             $table->char('telepon');
+            $table->tinyInteger('tipe_nota');
             $table->string('path_logo');
             $table->string('barcode');
             $table->timestamps();

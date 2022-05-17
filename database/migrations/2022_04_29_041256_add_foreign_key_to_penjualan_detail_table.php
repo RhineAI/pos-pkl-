@@ -21,12 +21,12 @@ return new class extends Migration
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
 
-            $table->unsignedInteger('id_produk')->change();
-            $table->foreign('id_produk')
-                ->references('id_produk')
-                ->on('produk')
-                ->onUpdate('restrict')
-                ->onDelete('restrict');
+            // $table->unsignedInteger('id_produk')->change();
+            // $table->foreign('id_produk')
+            //     ->references('id_produk')
+            //     ->on('produk')
+            //     ->onUpdate('restrict')
+            //     ->onDelete('restrict');
     });
     }
 

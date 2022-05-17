@@ -48,6 +48,8 @@ Data Semua Produk
         let table;
 
         $(function () {
+            $('body').addClass('sidebar-collapse');
+            
             table = $('.table').DataTable({
                 processing: true,
                 responsive: true,

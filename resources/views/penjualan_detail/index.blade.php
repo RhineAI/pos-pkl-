@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
 @section('title')
-    Transaksi Pembelian
+    Transaksi Penjualan
 @endsection
 
 @push('css')
 <style>
     .tampil-bayar {
-        font-size: 5em;
+        font-size: 4em;
         text-align: center;
         height: 100px;
     }
@@ -33,7 +33,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="active">Transaksi Pembelian</li>
+    <li class="active">Transaksi Penjualan</li>
 @endsection
 
 @section('content')
@@ -60,13 +60,14 @@
                     </div>
                 </form>
 
-                <table class="table table-stiped table-bordered table-pembelian">
+                <table class="table table-stiped table-bordered table-penjualan">
                     <thead>
                         <th width="5%">No</th>
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Harga</th>
                         <th width="15%">Jumlah</th>
+                        <th>Diskon</th>
                         <th>Subtotal</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
@@ -78,7 +79,7 @@
                         <div class="tampil-terbilang">Nol Rupiah</div>
                     </div>
                     <div class="col-lg-4">
-                        <form action="{{ route('pembelian.store') }}" class="form-pembelian" method="post">
+                        <form action="{{ route('transaksi.simpan') }}" class="form-pembelian" method="post">
                             @csrf
                             <input type="hidden" name="id_penjualan" value="{{ $id_penjualan }}">
                             <input type="hidden" name="total" id="total">
@@ -86,21 +87,35 @@
                             <input type="hidden" name="bayar" id="bayar">
 
                             <div class="form-group row">
-                                <label for="totalrp" class="col-lg-2 control-label">Total</label>
+                                <label for="totalrp" class="col-lg-3 control-label">Total</label>
                                 <div class="col-lg-8">
                                     <input type="text" id="totalrp" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="diskon" class="col-lg-2 control-label">Diskon</label>
+                                <label for="diskon" class="col-lg-3 control-label" >Diskon</label>
                                 <div class="col-lg-8">
-                                    <input type="number" name="diskon" id="diskon" class="form-control" value="0">
+                                    <input type="number" name="diskon" id="diskon" class="form-control" value="0" >
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="bayar" class="col-lg-2 control-label">Bayar</label>
+                                <label for="bayar" class="col-lg-3 control-label">Total Bayar</label>
                                 <div class="col-lg-8">
-                                    <input type="text" id="bayarrp" class="form-control">
+                                    <input type="text" id="bayarrp" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="diterima" class="col-lg-3 control-label">Uang Diterima</label>
+                                <div class="col-lg-8">
+                                    <input type="text" id="diterima" class="form-control" name="diterima" value="{{ $penjualan->diterima ?? 0 }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="kembali" class="col-lg-3 control-label">Kembalian</label>
+                                <div class="col-lg-8">
+                                    <input type="text" id="kembali" name="kembali" class="form-control" value="0" readonly>
                                 </div>
                             </div>
                         </form>
@@ -115,7 +130,7 @@
     </div>
 </div>
 
-@includeIf('penjualandetail.produk')
+@includeIf('penjualan_detail.produk')
 @endsection
 
 @push('scripts')
@@ -125,20 +140,21 @@
     $(function () {
         $('body').addClass('sidebar-collapse');
 
-        table = $('.table-pembelian').DataTable({
+        table = $('.table-penjualan').DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('pembelian_detail.data', $id_penjualan) }}',
+                url: '{{ route('transaksi.data', $id_penjualan) }}',
             },
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'barcode'},
                 {data: 'nama_produk'},
-                {data: 'harga_beli'},
+                {data: 'harga_jual'},
                 {data: 'jumlah'},
+                {data: 'diskon'},
                 {data: 'subtotal'},
                 {data: 'aksi', searchable: false, sortable: false},
             ],
@@ -148,6 +164,9 @@
         })
         .on('draw.dt', function () {
             loadForm($('#diskon').val());
+            setTimeout(() => {
+                $('#diterima').trigger('input');
+            }, 300);
         });
         table2 = $('.table-produk').DataTable();
 
@@ -179,7 +198,7 @@
             }
 
 
-            $.post(`{{ url('/pembelian_detail') }}/${id}`, {
+            $.post(`{{ url('/transaksi') }}/${id}`, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'put',
                     'jumlah': jumlah
@@ -203,6 +222,18 @@
             loadForm($(this).val());
         });
 
+        // Fitur Buat Bayar + Kembalian
+
+        $('#diterima').on('input', function() {
+            if ($(this).val() == "") {
+                $(this).val(0).select();
+            }
+
+            loadForm($('#diskon').val(), $(this).val());
+        }).focus(function () {
+            $(this).select();
+        });
+
         $('.btn-simpan').on('click', function () {
             $('.form-pembelian').submit();
         });
@@ -224,7 +255,7 @@
     }
 
     function tambahProduk() {
-        $.post('{{ route('pembelian_detail.store') }}', $('.form-produk').serialize())
+        $.post('{{ route('transaksi.store') }}', $('.form-produk').serialize())
             .done(response => {
                 $('#barcode').focus();
                 table.ajax.reload(() => loadForm($('#diskon').val()));
@@ -236,32 +267,67 @@
     }
 
     function deleteData(url) {
-        if (confirm('Yakin ingin menghapus data terpilih?')) {
-            $.post(url, {
+        Swal.fire({
+            title: 'Hapus Kategori yang dipilih?',
+            icon: 'question',
+            iconColor: '#DC3545',
+            showDenyButton: true,
+            denyButtonColor: '#838383',
+            denyButtonText: 'Batal',
+            confirmButtonText: 'Hapus',
+            confirmButtonColor: '#DC3545'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.post(url, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'delete'
                 })
                 .done((response) => {
-                    table.ajax.reload(() => loadForm($('#diskon').val()));
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data Kategori berhasil dihapus',
+                        icon: 'success',
+                        confirmButtonText: 'Lanjut',
+                        confirmButtonColor: '#28A745'
+                    }) 
+                    table.ajax.reload();
                 })
                 .fail((errors) => {
-                    alert('Tidak dapat menghapus data');
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data Kategori gagal dihapus',
+                        icon: 'error',
+                        confirmButtonText: 'Kembali',
+                        confirmButtonColor: '#DC3545'
+                    })                       
                     return;
                 });
-        }
+            } else if (result.isDenied) {
+                Swal.fire({
+                    title: 'Data Kategori batal dihapus',
+                    icon: 'warning',
+                })
+            }
+        })
     }
 
-    function loadForm(diskon = 0) {
+    function loadForm(diskon = 0, diterima = 0) {
         $('#total').val($('.total').text());
         $('#total_item').val($('.total_item').text());
 
-        $.get(`{{ url('/pembelian_detail/loadform') }}/${diskon}/${$('.total').text()}`)
+        $.get(`{{ url('/transaksi/loadform') }}/${diskon}/${$('.total').text()}/${diterima}`)
             .done(response => {
                 $('#totalrp').val('Rp. '+ response.totalrp);
                 $('#bayarrp').val('Rp. '+ response.bayarrp);
                 $('#bayar').val(response.bayar);
-                $('.tampil-bayar').text('Rp. '+ response.bayarrp);
+                $('.tampil-bayar').text('Bayar : Rp. '+ response.bayarrp);
                 $('.tampil-terbilang').text(response.terbilang);
+
+                $('#kembali').val('Rp. '+ response.kembalirp);
+                if ($('#diterima').val() != 0) {
+                    $('.tampil-bayar').text('Kembali : Rp. '+ response.kembalirp);
+                    $('.tampil-terbilang').text(response.kembali_terbilang);
+                }
             })
             .fail(errors => {
                 alert('Tidak dapat menampilkan data');

@@ -117,7 +117,7 @@
 
                                 <li class="nav-item">
                                     <a href="{{ route('transaksi.index') }}" class="nav-link">
-                                        <p>Transaksi Lama</p>
+                                        <p>Transaksi Aktif</p>
                                     </a>
                                 </li>
                               </ul>
@@ -125,6 +125,16 @@
                           
                       </ul>
                   </li>
+
+                  {{-- Daftar Penjualan --}}
+                <li class="nav-item">
+                    <a href="{{ route('daftarpenjualan.index') }}" class="nav-link">
+                        <i class="nav-icon fa-solid fa-clipboard-list"></i>
+                        <p>
+                            Daftar Penjualan
+                        </p>
+                    </a>
+                </li>
 
                   {{-- Supplier --}}
                 <li class="nav-item">
