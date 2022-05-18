@@ -6,6 +6,7 @@
 
 @push('css')
 <style>
+
     .tampil-bayar {
         font-size: 4em;
         text-align: center;
@@ -14,11 +15,19 @@
 
     .tampil-terbilang {
         padding: 10px;
-        background: #f0f0f0;
+        color: white;
+        background: #615d5d;
     }
 
     .table-pembelian tbody tr:last-child {
         display: none;
+    }
+
+    .btn-simpan {
+        float: right;
+        margin-top: 10px;
+        margin-right: 30px;
+        margin-bottom: 40px;
     }
 
     @media(max-width: 768px) {

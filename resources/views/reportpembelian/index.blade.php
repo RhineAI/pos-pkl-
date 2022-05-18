@@ -74,6 +74,7 @@ Laporan Pembelian
         </div>
     </div>
 </div>
+@includeIf('reportpenjualan.form')
 @endsection
 
 @push('scripts')

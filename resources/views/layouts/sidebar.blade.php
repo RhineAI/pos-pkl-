@@ -115,6 +115,7 @@
                     </a>
                 </li>
 
+                
                   {{-- Supplier --}}
                 <li class="nav-item">
                     <a href="{{ route('supplier.index') }}" class="nav-link">
@@ -125,28 +126,7 @@
                     </a>
                 </li>
 
-                {{-- Transaksi --}}
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-shopping-cart"></i>
-                        <p>
-                            Transaksi
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview ml-4">
-                        <li class="nav-item">
-                            <a href="{{ route('pembelian.index') }}" class="nav-link">
-                                <p>Pembelian</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('penjualan.index') }}" class="nav-link">
-                                <p>Penjualan</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
                 {{-- Laporan --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -159,12 +139,12 @@
                     <ul class="nav nav-treeview ml-4">
                         <li class="nav-item">
                             <a href="{{ route('reportpembelian.index') }}" class="nav-link">
-                                <p>Laporan Pembelian</p>
+                                <p>Pendapatan Pembelian</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('reportpenjualan.index') }}" class="nav-link">
-                                <p>Laporan Penjualan</p>
+                                <p>Pendapatan Penjualan</p>
                             </a>
                         </li>
                     </ul>

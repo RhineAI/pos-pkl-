@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="{{ ('/AdminLTE-master/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <!-- FlatPickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    @stack('css')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

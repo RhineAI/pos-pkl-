@@ -5,19 +5,27 @@ Transaksi Pembelian
 @endsection
 @push('css')
 <style>
-    .tampil-bayar {
+    .bayar {
         font-size: 5em;
         text-align: center;
         height: 100px;
     }
 
-    .tampil-terbilang {
+    .terbilang {
         padding: 10px;
-        background: #f0f0f0;
+        color: white;
+        background: #615d5d;
     }
 
     .table-pembelian tbody tr:last-child {
         display: none;
+    }
+    
+    .btn-simpan {
+        float: right;
+        margin-top: 10px;
+        margin-right: 30px;
+        margin-bottom: 40px;
     }
 
     @media(max-width: 768px) {
@@ -78,17 +86,17 @@ Transaksi Pembelian
                         <th width="6%%">No</th>
                         <th width="6%">Kode</th>
                         <th>Nama</th>
-                        <th width="10%">Harga</th>
-                        <th width="10%">Jumlah</th>
-                        <th width="10%">Subtotal</th>
+                        <th width="16%">Harga</th>
+                        <th width="12%">Jumlah</th>
+                        <th width="17%">Subtotal</th>
                         <th width="6%">Aksi</th>
                     </thead>
                 </table>
 
                 <div class="row mt-4">
                     <div class="col-lg-8">
-                        <div class="tampil-bayar mb-4">Rp. 0 ,-</div>
-                        <div class="tampil-terbilang">Nol Rupiah</div>
+                        <div class="tampil-bayar bayar mb-4 ">Rp. 0 ,-</div>
+                        <div class="tampil-terbilang terbilang">Nol Rupiah</div>
                     </div>
                     <div class="col-lg-4">
                         <form action="{{ route('pembelian.store') }}" class="form-pembelian" method="post">
@@ -190,7 +198,6 @@ Transaksi Pembelian
                 })            
                 return;
             }
-
 
             $.post(`{{ url('/pembelian_detail') }}/${id}`, {
                     '_token': $('[name=csrf-token]').attr('content'),
