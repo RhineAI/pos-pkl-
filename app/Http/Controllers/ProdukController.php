@@ -22,6 +22,21 @@ class ProdukController extends Controller
         return view('produk.index', compact('kategori'), compact('satuan'));
     }
 
+    public function checkPrice($value)
+    {
+        if (gettype($value) == "string") {
+            $temp = 0;
+            for ($i = 0; $i < strlen($value); $i++) {
+                if ((isset($value[$i]) == true && $value[$i] != ".") && $value[$i] != ",") {
+                    $temp = ($temp * 10) + (int)$value[$i];
+                }
+            }
+            return $temp;
+        } else {
+            return $value;
+        }
+    }
+
     public function data()
     {
         $produk = Produk::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')
@@ -29,6 +44,8 @@ class ProdukController extends Controller
                     ->select('produk.*', 'nama_kategori', 'nama_satuan')     
                     ->orderBy('id_produk', 'desc')
                     ->get();
+
+        
 
         return datatables()
             ->of($produk)
@@ -55,9 +72,9 @@ class ProdukController extends Controller
             ->addColumn('stok', function ($produk) {
                 return format_uang($produk->stok);
             })
-            ->addColumn('diskon', function ($produk) {
-                return $produk->diskon .' %';
-            })
+            // ->addColumn('diskon', function ($produk) {
+            //     return $produk->diskon .' %';
+            // })
             ->addColumn('ud', function($produk) { 
                 return '
                     <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/></button>
@@ -66,18 +83,6 @@ class ProdukController extends Controller
                 })
             ->rawColumns(['ud', 'barcode', 'select_all'])
             ->make(true);
-
-        // return datatables()
-        //     ->of($produk)
-        //     ->addIndexColumn()
-        //     ->addColumn('act', function ($produk) {
-        //         return '
-        //             <button onclick="editForm(`'. route('produk.update', $produk->id_produk) .'`)" class="btn btn-xs btn-info btn-flat"><i class="bi bi-pencil-square"></i>Edit</button>
-        //             <button onclick="deleteData(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i>Delete</button>
-        //         ';
-        //     })
-        //     ->rawColumns(['act'])
-        //     ->make(true);
     }
 
     /**
@@ -113,6 +118,9 @@ class ProdukController extends Controller
 
         // $produk = Produk::latest()->first() ?? new Produk();
         // $request['barcode'] = 'iL-'. tambah_nol_didepan((int)$produk->id_produk + 1, 4);
+
+        $request['harga_beli'] = $this->checkPrice($request->harga_beli);
+        $request['harga_jual'] = $this->checkPrice($request->harga_jual);
 
         $produk = Produk::create($request->all())->save();
 

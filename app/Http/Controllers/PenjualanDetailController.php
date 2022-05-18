@@ -21,6 +21,8 @@ class PenjualanDetailController extends Controller
         $produk = Produk::orderBy('nama_produk')->get();
         // $diskon = Penjualan::find($id_penjualan)->diskon ?? 0;
         $diskon = Penjualan::first()->diskon ?? 0;
+
+        $detail = PenjualanDetail::orderBy('id_penjualan_detail', 'DESC');
         // $setting = Setting::first();
 
         
@@ -85,6 +87,8 @@ class PenjualanDetailController extends Controller
             ->rawColumns(['aksi', 'barcode', 'jumlah'])
             ->make(true);
     }
+
+    
 
     function loadForm($diskon = 0, $total, $diterima)
     {
@@ -174,7 +178,7 @@ class PenjualanDetailController extends Controller
         $detail->update();
     }
 
-    /**
+    /** bagi tutor crud
      * Remove the specified resource from storage.
      *
      * @param  int  $id

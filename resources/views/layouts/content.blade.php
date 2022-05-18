@@ -4,12 +4,12 @@
       <div class="content-header">
           <div class="container-fluid">
               <div class="row mb-2">
-                  <div class="col-sm-6">
+                  <div class="col-sm-8">
                       <h1 class="m-0">
                           @yield('title')
                       </h1>
                   </div><!-- /.col -->
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                       <ol class="breadcrumb float-sm-right">
                           @section('breadcrumb')
                           <li class="breadcrumb-item"><a href="/">Home</a></li>

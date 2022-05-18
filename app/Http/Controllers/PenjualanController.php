@@ -190,21 +190,31 @@ class PenjualanController extends Controller
 
         $penjualan->delete();
 
+        // return redirect('daftarpenjualan.index');
         return response(null);
     }
 
 
     public function done() {
         $setting = Setting::first();
+        $produk = Produk::first();
+
+        $penjualan = Penjualan::find(session('id_penjualan'));
+        if (! $penjualan) 
+        {
+            abort(404);
+        }
+        $detail = PenjualanDetail::with('produk')->where('id_penjualan', session('id_penjualan'))->get();
+
         
-        return view('transaksi.done', compact('setting'));
+        return view('transaksi.done', compact('setting' , 'penjualan', 'detail', 'produk'));
     }
 
     public function notaKecil() 
     {
         $setting = Setting::first();
-        $penjualan = Penjualan::find(session('id_penjualan'));
         $produk = Produk::first();
+        $penjualan = Penjualan::find(session('id_penjualan'));
         if (! $penjualan) 
         {
             abort(404);

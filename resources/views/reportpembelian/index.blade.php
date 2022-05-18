@@ -1,12 +1,16 @@
 @extends('layouts.main')
 
 @section('title')
-Laporan Pembelian
+Total Pendapatan Pembelian 
 @endsection
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('/AdminLTE-2/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+@endpush
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Laporan Pembelian</li>
+<li class="breadcrumb-item active">Laporan Penjualan</li>
 @endsection
 
 @section('content')
@@ -17,55 +21,63 @@ Laporan Pembelian
         <div class="box">
             <div class="box-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <form action="{{ route('reportpembelian.index') }}" method="get">
                         <div class="form-group row">
-                            <label for="" class="col-md-3 col-form-label">Tanggal :</label>
-                            <div class="col-md-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control flatpickr" autocomplete="off" name="date"
-                                        id="date" value="">
-                                </div>
+                            <label for="tanggal_awal" class="col-lg-2 control-label">Tanggal Awal</label>
+                            <div class="col-md-3">
+                                <input type="text" name="tanggal_awal" id="tanggal_awal" class="form-control flatpickr" required autofocus readonly
+                                    value="{{ request('tanggal_awal') }}"
+                                    style="border-radius: 0 !important;">
+                                <span class="help-block with-errors"></span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="form-group-row">
-                            <label for="" class="col-md-2 col-form-label">s/d</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <div class="col-md-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control flatpickr" autocomplete="off" name="date"
-                                        id="date" value="">
-                                </div>
+                            
+                            <label class="mx-3" for="" class="col-md-2 col-form-label">s/d</label>
+    
+                            <label for="tanggal_akhir" class="col-lg-2 control-label">Tanggal Akhir</label>
+                            <div class="col-md-3">
+                                <input type="text" name="tanggal_akhir" id="tanggal_akhir" class="form-control flatpickr" required readonly             
+                                value="{{ request('tanggal_akhir') }}"
+                                style="border-radius: 0 !important;">
+    
+                                <span class="help-block with-errors"></span>
                             </div>
-                            <button onclick="TampilProduk()" class="btn btn-primary btn-flat" type="button"><i
-                                class="fa fa-search"></i></button>
+
+                            <button type="" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                         
                         </div>
-                    </div>
+                    </form>
                 </div>
-                <div class="row mt-3">
+
+                <br>
+                <h5>Laporan {{ tanggal_indonesia($tanggalAwal) }} s/d {{ tanggal_indonesia($tanggalAkhir) }}</h5>
+                <br>
+{{-- 
+                <button onclick="ubahPeriode()" class="btn btn-primary btn-sm btn-flat" type="button"><i
+                    class="fa fa-search"></i> Ubah Periode</button> --}}
+                <a href="{{ route('reportpembelian.export_pdf', [$tanggalAwal, $tanggalAkhir] ) }}" target="_blank" class="btn btn-danger btn-sm btn-flat" ><i class="bi bi-filetype-pdf"></i> Export PDF</a>
+
+                <div class="row mt-4 mb-4">
+
                     <div class="box-body table-responsive">
                         <table class="table table-striped table-bordered">
                             <thead>
-                                <tr role="row">
+                                {{-- <tr role="row">
                                     <th width="4%" colspan="1" rowspan="2">No</th>
-                                    <th colspan="3" rowspan="1">INFORMASI PEMBELIAN</th>
-                                    <th colspan="3" rowspan="1">TOTAL HARGA</th> 
-                                    <th colspan="2" rowspan="1">KETERANGAN</th> 
-                                </tr>
-                                <tr role="row">
-                                    <th colspan="1">Tanggal</th>
-                                    <th width="20%" colspan="1">Nama Supplier</th>
-                                    <th width="20%" colspan="1">Nama Produk</th>
-                                    <th width="15%" colspan="1">Harga</th>
-                                    <th width="15%" colspan="1">Diskon</th>
-                                    <th width="15%" colspan="1">Total Harga</th>
-                                    <th colspan="1">Kasir</th>
-                                    <th width="13%" colspan="1">Aksi</th>
-                                </tr>
+                                    <th colspan="2" rowspan="1" class="text-center">INFORMASI PENJUALAN</th>
+                                    {{-- <th colspan="3" rowspan="1"class="text-center">TOTAL</th>  --}}
+                                    {{-- <th colspan="2" rowspan="1"class="text-center">KETERANGAN</th> 
+                                </tr> --}} 
+                                
+                                    <th width="6%" class="">No</th>
+                                    <th width="12%">Tanggal</th>
+                                    {{-- <th width="10%" colspan="1">Nota</th> --}}
+                                    {{-- <th width="12%" colspan="1" class="text-center">Harga</th>
+                                    <th width="10%" colspan="1" class="text-center">Diskon</th>
+                                    <th width="13%" colspan="1" class="text-center">Total Bayar</th> --}}
+                                    {{-- <th width="11%" colspan="1" class="text-center">Kasir</th> --}}
+                                    <th width=13% colspan="1" class="text-center"> Total Pengeluaran</th>
+                                    <th width="13%" colspan="1" class="text-center"><i class="fas fa-cog"></i> Aksi</th>
+                              
                             </thead>
                         </table>
                     </div>
@@ -74,79 +86,66 @@ Laporan Pembelian
         </div>
     </div>
 </div>
+
+@includeIf('reportpenjualan.form')
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('/AdminLTE-2/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script>
+        $('body').addClass('sidebar-collapse');
 
         $(".flatpickr").flatpickr({
-            enableTime: true,
-            dateFormat: "d-m-Y H:i",
+            enableTime: false,
+            dateFormat: "d-m-Y",
+            autoclose: true,
+            // ubahPeriode();
         });
 
         let table;
 
         $(function () {
-            table = $('.table').DataTable({});
-        }); 
+            table = $('.table').DataTable({
+                processing: true,
+                responsive: true,
+                autoWidth: false,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('reportpembelian.data', [$tanggalAwal, $tanggalAkhir]) }}',
+                },          
+                columns: [
+                    // {data:'select_all', searchable: false, sortable: false},
+                    {data:'DT_RowIndex', searchable: false, sortable: false},
+                    {data:'tanggal'},
+                    // {data:'nota'},
+                    // {data:'total_harga'},
+                    // {data:'diskon'},
+                    // {data:'bayar'},
+                    // {data:'id_user'},
+                    {data:'penjualan'},
+                    {data:'aksi', searchable: false, sortable: false},
+                ],
+                dom: 'Brt',
+                bSort : false,
+                bPaginate : false,
+            });
 
-        // function addForm(url) {
-        //     $('#modal-tambah').modal('show')
-        //     $('#modal-tambah .modal-title').text('Tambah Stok Masuk');
-        // }
-        
-        // function editForm(url) {
-        //     $('#modal-form').modal('show')
-        //     $('#modal-form .modal-title').text('Edit Supplier');
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            });
 
-        //     $('#modal-form form')[0].reset();
-        //     $('#modal-form form').attr('action', url);
-        //     $('#modal-form [name=_method]').val('put');
-        //     $('#modal-form [name=nama]').focus();
+           
+        });
 
-        //     $.get(url)
-        //         .done((response) => {
-        //             $('#modal-form [name=nama]').val(response.nama);
-        //             $('#modal-form [name=alamat]').val(response.alamat);
-        //             $('#modal-form [name=telepon]').val(response.telepon);
-        //         })
-        //         .fail((errors) => {
-        //             alert('Gagal mengubah data!');
-        //             return;
-        //         });
-        // }
+        function ubahPeriode() {
+            $('#modal-form').modal('show');
+        }
 
-        // function deleteData(url) {
-        //     if (confirm('Yakin ingin menghapus data terpilih?')) {
-        //     $.post(url, {
-        //             '_token': $('[name=csrf-token]').attr('content'),
-        //             '_method': 'delete'
-        //         })
-        //         .done((response) => {
-        //             alert(
-        //                 Swal.fire({
-        //                     title: 'Sukses!',
-        //                     text: 'Supplier berhasil dihapus',
-        //                     icon: 'success',
-        //                     confirmButtonText: 'Lanjut',
-        //                     confirmButtonColor: '#28A745'
-        //                 })                       
-        //             );
-        //             table.ajax.reload();
-        //         })
-        //         .fail((errors) => {
-        //             alert(
-        //                 Swal.fire({
-        //                     title: 'Gagal!',
-        //                     text: 'Supplier gagal dihapus',
-        //                     icon: 'error',
-        //                     confirmButtonText: 'Kembali',
-        //                     confirmButtonColor: '#DC3545'
-        //                 })                       
-        //             );
-        //             return;
-        //         });
-        //     }
-        // }
+        function detailData(url) {
+            
+        }
+
+    
     </script>
 @endpush

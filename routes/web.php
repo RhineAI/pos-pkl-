@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     PembelianController,
     PembelianDetailController,
     PenjualanController,
+    PenjualanDetailController,
     ReportPembelianController,
     ReportPenjualanController,
     UserController,
@@ -41,6 +42,7 @@ Route::middleware([
 Route::group(['middleware' => 'auth'], function () {
     // Route dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
     
     Route::group(['middleware' => 'level:1'], function () {
     // Route kategori
@@ -63,7 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Route stok keluar
     Route::get('/stokkeluar/data', [StokKeluarController::class, 'data'])->name('stokkeluar.data');
     Route::resource('/stokkeluar', StokKeluarController::class);
-
+});
 
 // Route record pembelian
 Route::group(['middleware' => 'auth'], function () {
@@ -74,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Route pembelian detail
     Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
-    Route::get('/pembelian_detail/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
+    Route::get('/pembelian_detail/loadform/{diskon}/{total}/{diterima}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
     Route::resource('/pembelian_detail', PembelianDetailController::class)
     ->except('create', 'show', 'edit' );
 
@@ -110,8 +112,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
     Route::resource('/supplier', SupplierController::class);
 
-    // Route stok laporan penjualan
-    Route::get('/reportpembelian/data', [ReportPembelianController::class, 'data'])->name('reportpembelian.data');
+    // Route stok laporan pembelian
+    Route::get('/reportpembelian/data/{awal}/{akhir}', [ReportPembelianController::class, 'data'])->name('reportpembelian.data');
+    Route::get('/reportpembelian/pdf/{awal}/{akhir}', [ReportPembelianController::class, 'exportPDF'])->name('reportpembelian.export_pdf');
     Route::resource('/reportpembelian', ReportPembelianController::class);
 
     //Route pengguna
@@ -122,16 +125,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
     Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
-
-    });
+});
 
     // Route stok penjualan
     Route::get('/penjualan/data', [PenjualanController::class, 'data'])->name('penjualan.data');
     Route::resource('/penjualan', PenjualanController::class);
 
     // Route stok laporan penjualan
-    Route::get('/reportpenjualan/data', [ReportPenjualanController::class, 'data'])->name('reportpenjualan.data');
     Route::resource('/reportpenjualan', ReportPenjualanController::class);
+    // Route::get('/reportpenjualan', [ReportPenjualanController::class, 'refresh'])->name('reportpenjualan.refresh');
+    Route::get('/reportpenjualan/data/{awal}/{akhir}', [ReportPenjualanController::class, 'data'])->name('reportpenjualan.data');
+    Route::get('/reportpenjualan/pdf/{awal}/{akhir}', [ReportPenjualanController::class, 'exportPDF'])->name('reportpenjualan.export_pdf');
 
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');

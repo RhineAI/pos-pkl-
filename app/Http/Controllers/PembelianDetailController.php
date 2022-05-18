@@ -50,8 +50,8 @@ class PembelianDetailController extends Controller
         }
         $data[] = [
             'barcode' => '
-                <div class="total hide style="visibility : hidden"">'. $total .'</div>
-                <div class="total_item style="visibility : hidden" hide">'. $total_item .'</div>',
+                <div class="total hide" style="visibility : hidden">'. $total .'</div>
+                <div class="total_item hide" style="visibility : hidden">'. $total_item .'</div>',
             'nama_produk' => '',
             'harga_beli'  => '',
             'jumlah'      => '',
@@ -100,14 +100,17 @@ class PembelianDetailController extends Controller
         return response(null, 204);
     }
 
-    public function loadForm($diskon, $total)
+    function loadForm($diskon = 0, $total, $diterima)
     {
-        $bayar = $total - ($diskon / 100 * $total);
+        $bayar = $total - ($diskon / 100 * $total) ;
+        $kembali = ($diterima != 0) ? $diterima - $bayar : 0;
         $data  = [
             'totalrp' => format_uang($total),
             'bayar' => $bayar,
             'bayarrp' => format_uang($bayar),
-            'terbilang' => ucwords(terbilang($bayar). ' Rupiah')
+            'terbilang' => ucwords(terbilang($bayar). ' Rupiah'),
+            'kembalirp' => format_uang($kembali),
+            'kembali_terbilang' => ucwords(terbilang($kembali). ' Rupiah')
         ];
 
         return response()->json($data);
