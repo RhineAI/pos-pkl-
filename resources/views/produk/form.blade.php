@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <form action="" method="post" class="form-horizontal">
             @csrf
             @method('post')
@@ -49,32 +49,41 @@
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <label for="harga_beli" class="col-md-2 col-md-offset-1 control-label">Harga Beli</label>
-                        <div class="col-md-10">
-                            <input type="text" name="harga_beli" id="harga_beli" class="form-control" required placeholder="0">
-                            {{-- <input type="hidden" name="harga_beli_ins" id="harga_beli_ins" class="form-control" > --}}
-                            <span class="help-block with-errors"></span>
-                        </div>
+                    
+                    <div class="input-group mb-3 row"> 
+                        <label for="harga_beli" class="col-md-2 col-md-offset-1 control-label pr-2">Harga Beli</label>
+                        <div class="input-group-prepend"> 
+                            <span class="input-group-text">RP.</span> 
+                        </div> 
+                        <input type="text" name="harga_beli" id="harga_beli" class="form-control" required placeholder="0" aria-describedby="basic-addon1">
+                        <span class="help-block with-errors"></span>
+                    </div>
+                
+                    <div class="input-group mb-3 row"> 
+                        <label for="harga_jual" class="col-md-2 col-md-offset-1 control-label pr-2">Harga Jual</label>
+                        <div class="input-group-prepend"> 
+                            <span class="input-group-text">RP.</span> 
+                        </div> 
+                        <input type="text" name="harga_jual" id="harga_jual" class="form-control" required placeholder="0" aria-describedby="basic-addon1">
+                        <span class="help-block with-errors"></span>
                     </div>
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="harga_jual" class="col-md-2 col-md-offset-1 control-label">Harga Jual</label>
                         <div class="col-md-10">
                             <input type="text" name="harga_jual" id="harga_jual" class="form-control" required placeholder="0">
                             {{-- <input type="hidden" name="harga_beli_ins" id="harga_jual_ins" class="form-control"> --}}
-                            <span class="help-block with-errors"></span>
+                            {{-- <span class="help-block with-errors"></span>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="diskon" class="col-md-2 col-md-offset-1 control-label">Diskon</label>
                         <div class="col-md-10">
                             <input type="number" name="diskon" id="diskon" class="form-control" value="0" required>
                             <span class="help-block with-errors"></span>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row">
                         <label for="stok" class="col-md-2 col-md-offset-1 control-label">Stok</label>

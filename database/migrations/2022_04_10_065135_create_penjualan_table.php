@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('kode_penjualan');
             $table->integer('total_item');
             $table->integer('total_harga');
-            $table->tinyInteger('diskon')->default(0);  
+            $table->float('diskon')->default(0);  
             $table->integer('bayar')->default(0);  
             $table->integer('diterima')->default(0);  
             $table->integer('id_user');  

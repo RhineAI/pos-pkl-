@@ -174,7 +174,7 @@ class PenjualanDetailController extends Controller
         $detail->update();
     }
 
-    /**
+    /** bagi tutor crud
      * Remove the specified resource from storage.
      *
      * @param  int  $id

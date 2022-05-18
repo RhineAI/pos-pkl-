@@ -34,13 +34,12 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="" class="col-md-3">Diskon</label>
-                        <div class="col-md-9">
-                            <div class="input-group">
-                                <input type="number" name="" id="" class="form-control" value="0" required>
-                            </div>
+                    <div class="form-group row ">
+                        <label for="diskon" class="control-label col-lg-2">Diskon</label>
+                        <div class="col-lg-3">
+                                <input type="number" name="diskon" id="diskon" class="form-control" placeholder="" value="0" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         </div>
+                        <span class="input-group-text" id="basic-addon2">%</span>
                     </div>
 
                     <div class="form-group row">

@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Route pembelian detail
     Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
-    Route::get('/pembelian_detail/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
+    Route::get('/pembelian_detail/loadform/{diskon}/{total}/{diterima}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
     Route::resource('/pembelian_detail', PembelianDetailController::class)
     ->except('create', 'show', 'edit' );
 
@@ -113,7 +113,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/supplier', SupplierController::class);
 
     // Route stok laporan pembelian
-    Route::get('/reportpembelian/data', [ReportPembelianController::class, 'data'])->name('reportpembelian.data');
+    Route::get('/reportpembelian/data/{awal}/{akhir}', [ReportPembelianController::class, 'data'])->name('reportpembelian.data');
+    Route::get('/reportpembelian/pdf/{awal}/{akhir}', [ReportPembelianController::class, 'exportPDF'])->name('reportpembelian.export_pdf');
     Route::resource('/reportpembelian', ReportPembelianController::class);
 
     //Route pengguna

@@ -100,14 +100,17 @@ class PembelianDetailController extends Controller
         return response(null, 204);
     }
 
-    public function loadForm($diskon, $total)
+    function loadForm($diskon = 0, $total, $diterima)
     {
-        $bayar = $total - ($diskon / 100 * $total);
+        $bayar = $total - ($diskon / 100 * $total) ;
+        $kembali = ($diterima != 0) ? $diterima - $bayar : 0;
         $data  = [
             'totalrp' => format_uang($total),
             'bayar' => $bayar,
             'bayarrp' => format_uang($bayar),
-            'terbilang' => ucwords(terbilang($bayar). ' Rupiah')
+            'terbilang' => ucwords(terbilang($bayar). ' Rupiah'),
+            'kembalirp' => format_uang($kembali),
+            'kembali_terbilang' => ucwords(terbilang($kembali). ' Rupiah')
         ];
 
         return response()->json($data);
