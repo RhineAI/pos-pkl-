@@ -102,30 +102,6 @@ Data Semua Pengguna
 
             $('#password , #password_confirmation').attr('required', true);
         }
-
-        // $(document).on('click', '.edit', function (event) {
-        //         let nama_kategori = $(this).data('kategori')
-        //         let url = $(this).data('route')
-
-        //         let data = {
-        //             nama_kategori: nama_kategori,
-        //             url: url
-        //         }
-
-        //         editForm(data)
-        // })
-
-        // function editForm(data) {
-        //         $('#modal-form').modal('show')
-        //         $('#modal-form .modal-title').text('Edit Kategori');
-
-        //         $('#modal-form form')[0].reset();
-        //         $('#modal-form form').attr('action', data.url);
-        //         $('#modal-form [name=_method]').val('put');
-        //         $('#modal-form [name=nama_kategori]').focus();
-
-        //         $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
-        // }
         
         function editData(url) {
             $('#modal-form').modal('show')
@@ -195,37 +171,6 @@ Data Semua Pengguna
             })
         }
 
-        // function deleteForm(url) {
-        //     if (confirm('Hapus Pengguna yang dipilih?')) {
-        //     $.post(url, {
-        //             '_token': $('[name=csrf-token]').attr('content'),
-        //             '_method': 'delete'
-        //         })
-        //         .done((response) => {
-        //             alert(
-        //                 Swal.fire({
-        //                     title: 'Sukses!',
-        //                     text: 'Pengguna berhasil dihapus',
-        //                     icon: 'success',
-        //                     confirmButtonText: 'Lanjut',
-        //                     confirmButtonColor: '#28A745'
-        //                 })                       
-        //             );
-        //             table.ajax.reload();
-        //         })
-        //         .fail((errors) => {
-        //             alert(
-        //                 Swal.fire({
-        //                     title: 'Gagal!',
-        //                     text: 'Pengguna gagal dihapus',
-        //                     icon: 'error',
-        //                     confirmButtonText: 'Kembali',
-        //                     confirmButtonColor: '#DC3545'
-        //                 })                       
-        //             );
-        //             return;
-        //         });
-        //     }
-        // }
+       
     </script>
 @endpush

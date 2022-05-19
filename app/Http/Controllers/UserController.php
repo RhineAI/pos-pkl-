@@ -151,6 +151,11 @@ class UserController extends Controller
             }
         }
 
+        $request->validate([
+            'foto' => 'image|file|max:3072',
+        ]);
+
+
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
@@ -158,8 +163,10 @@ class UserController extends Controller
 
             $user->foto = $nama;
         }
+
+        
         $user->update();
-        return response()->json('Data berhasil disimpan', 200);
+        return redirect('/dashboard');
     }
 
     // public function profile()
