@@ -26,6 +26,8 @@ class PembelianController extends Controller
     }
 
     
+
+    
     public function data() {
         $pembelian = Pembelian::orderBy('id_pembelian', 'desc')->get();
 
@@ -172,14 +174,18 @@ class PembelianController extends Controller
     public function destroy($id)
     {
         $pembelian = Pembelian::find($id);
-        $detail = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
-        foreach ($detail as $item)
-        {
+        $detail    = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
+        foreach ($detail as $item) {
+            $produk = Produk::find($item->id_produk);
+            if ($produk) {
+                $produk->stok -= $item->jumlah;
+                $produk->update();
+            }
             $item->delete();
         }
 
         $pembelian->delete();
 
-        return response(null);
+        return response(null, 204);
     }
 }

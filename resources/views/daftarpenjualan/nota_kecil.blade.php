@@ -102,11 +102,11 @@
             <td class="text-right">Rp. {{ format_uang($penjualan->bayar) }}</td>
         </tr>
         <tr>
-            <td>Diterima:</td>
+            <td>Bayar:</td>
             <td class="text-right">Rp. {{ format_uang($penjualan->diterima) }}</td>
         </tr>
         <tr>
-            <td>Kembali:</td>
+            <td>Kembalian:</td>
             <td class="text-right">Rp. {{ format_uang($penjualan->diterima - $penjualan->bayar) }}</td>
         </tr>
     </table>

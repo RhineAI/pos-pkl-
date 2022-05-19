@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('setting', function (Blueprint $table) {
             $table->increments('id_setting');
-            $table->string('nama_perusahaan');
+            $table->string(30)('nama_perusahaan');
             $table->text('alamat');
             $table->char('telepon');
             $table->tinyInteger('tipe_nota');

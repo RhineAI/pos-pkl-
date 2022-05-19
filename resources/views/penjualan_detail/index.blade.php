@@ -274,7 +274,13 @@
                 $('#barcode').val('');
             })
             .fail(errors => {
-                alert('Tidak dapat menyimpan data');
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Stok habis, tidak bisa di ditambahkan',
+                    icon: 'warning',
+                    confirmButtonText: 'Kembali',
+                    confirmButtonColor: '#e80c29'
+                })    
                 return;
             });
     }

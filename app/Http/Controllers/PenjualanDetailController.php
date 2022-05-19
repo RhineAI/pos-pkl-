@@ -59,6 +59,7 @@ class PenjualanDetailController extends Controller
             $row['nama_produk'] = $item->produk['nama_produk'];
             $row['harga_jual']  = 'Rp. '. format_uang($item->produk->harga_jual);
             $row['jumlah']      = '<input type="number" class="form-control input-sm quantity" data-id="'. $item->id_penjualan_detail .'" value="'. $item->jumlah .'">';
+                
             $row['diskon']      = $item->diskon .' %';
             $row['subtotal']    = 'Rp. '. format_uang($item->subtotal);
             $row['aksi']        = '<div class="btn-group">
@@ -133,7 +134,15 @@ class PenjualanDetailController extends Controller
         $detail->id_penjualan = $request->id_penjualan;
         $detail->id_produk = $produk->id_produk;
         $detail->harga_jual = $produk->harga_jual;
-        $detail->jumlah = 1;
+        
+        if ($produk->stok <= $request->jumlah)
+        {
+            $this->session->set_flashdata('error', 'Jumlah Barang melebihi stok');
+        } else
+        {
+            $detail->jumlah = 1;
+        }
+
         $detail->diskon = 0;
         $detail->subtotal = $produk->harga_jual;
         $detail->save();
