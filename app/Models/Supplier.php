@@ -12,4 +12,9 @@ class Supplier extends Model
     protected $table = 'supplier';
     protected $primaryKey = 'id_supplier';
     protected $guarded = [];
+
+    public function produk() 
+    {
+        return $this->hasOne(Produk::class, 'id_produk', 'id_produk');
+    }
 }

@@ -122,6 +122,10 @@ class ProdukController extends Controller
         $request['harga_beli'] = $this->checkPrice($request->harga_beli);
         $request['harga_jual'] = $this->checkPrice($request->harga_jual);
 
+        // $stok = '';
+
+        // $request['stok'] = 
+
         $produk = Produk::create($request->all())->save();
 
         return response()->json('Data Produk baru berhasil ditambahkan', 200);

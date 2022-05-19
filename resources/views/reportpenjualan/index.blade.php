@@ -127,7 +127,7 @@ Total Pendapatan Penjualan
                 ],
                 dom: 'Brt',
                 bSort : false,
-                bPaginate : false,
+                
             });
 
             $('.datepicker').datepicker({

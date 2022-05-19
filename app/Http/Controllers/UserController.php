@@ -28,8 +28,8 @@ class UserController extends Controller
                 ->addIndexColumn()                
                 ->addColumn('aksi', function($user) { 
                     return '
-                        <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"> Edit<i/></button> 
-                        <button onclick="deleteForm(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"> Hapus</i></button>
+                        <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/></button> 
+                        <button onclick="deleteForm(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
                         '; 
                     })
                 ->rawColumns(['aksi'])
@@ -151,6 +151,11 @@ class UserController extends Controller
             }
         }
 
+        $request->validate([
+            'foto' => 'image|file|max:3072',
+        ]);
+
+
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
@@ -158,9 +163,10 @@ class UserController extends Controller
 
             $user->foto = $nama;
         }
-        $user->update();
 
-        return response()->json('Data berhasil disimpan', 200);
+        
+        $user->update();
+        return redirect('/dashboard');
     }
 
     // public function profile()
