@@ -125,7 +125,7 @@ Total Pendapatan Penjualan
                     {data:'penjualan'},
                     {data:'aksi', searchable: false, sortable: false},
                 ],
-                dom: 'Brt',
+            
                 bSort : false,
                 
             });

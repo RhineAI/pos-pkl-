@@ -23,6 +23,7 @@
                     <tbody>
                     @foreach ($produk as $key => $item)
                         <tr>
+                            
                             <td width="6%">{{ $key+1 }}</td>
                             <td><span class="badge badge-info">{{ $item->barcode }}</span></td>
                             <td>{{ $item->nama_produk }}</td>
