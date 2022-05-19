@@ -125,9 +125,8 @@ Total Pendapatan Pembelian
                     {data:'penjualan'},
                     {data:'aksi', searchable: false, sortable: false},
                 ],
-                dom: 'Brt',
+
                 bSort : false,
-                bPaginate : false,
             });
 
             $('.datepicker').datepicker({

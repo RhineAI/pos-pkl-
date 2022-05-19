@@ -6,9 +6,8 @@
 
 @push('css')
 <style>
-
     .tampil-bayar {
-        font-size: 4em;
+        font-size: 5em;
         text-align: center;
         height: 100px;
     }
@@ -19,7 +18,7 @@
         background: #615d5d;
     }
 
-    .table-pembelian tbody tr:last-child {
+    .table-penjualan tbody tr:last-child {
         display: none;
     }
 
@@ -42,7 +41,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="active">Transaksi Penjualan</li>
+    <li class="active">Transaksi Penjaualn</li>
 @endsection
 
 @section('content')
@@ -274,13 +273,7 @@
                 $('#barcode').val('');
             })
             .fail(errors => {
-                Swal.fire({
-                    title: 'Gagal!',
-                    text: 'Stok habis, tidak bisa di ditambahkan',
-                    icon: 'warning',
-                    confirmButtonText: 'Kembali',
-                    confirmButtonColor: '#e80c29'
-                })    
+                alert('Tidak dapat menyimpan data');
                 return;
             });
     }
@@ -354,4 +347,5 @@
             })
     }
 </script>
+
 @endpush

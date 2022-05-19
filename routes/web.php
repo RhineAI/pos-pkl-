@@ -110,6 +110,7 @@ Route::group(['middleware' => 'auth'], function () {
 // Route Supplier
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
+    Route::get('/supplier/tambah', [SupplierController::class, 'tambah'])->name('supplier.tambah');
     Route::resource('/supplier', SupplierController::class);
 
     // Route stok laporan pembelian
