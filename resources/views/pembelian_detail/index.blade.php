@@ -6,7 +6,7 @@ Transaksi Pembelian
 @push('css')
 <style>
     .bayar {
-        font-size: 5em;
+        font-size: 3.5em;
         text-align: center;
         height: 100px;
     }
@@ -126,7 +126,7 @@ Transaksi Pembelian
                             <div class="form-group row">
                                 <label for="bayar" class="col-lg-3 control-label">Bayar</label>
                                 <div class="col-lg-8">
-                                    <input type="text" id="bayarrp" class="form-control">
+                                    <input type="text" id="bayarrp" class="form-control" readonly>
                                 </div>
                             </div>
 

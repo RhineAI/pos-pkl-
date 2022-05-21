@@ -164,7 +164,6 @@ class UserController extends Controller
             $user->foto = $nama;
         }
 
-        
         $user->update();
         return redirect('/dashboard');
     }
