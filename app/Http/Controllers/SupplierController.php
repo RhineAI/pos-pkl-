@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
-// use App\Models\ProdukSupplier;
 use App\Models\ProdukSupplier;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
@@ -18,8 +17,7 @@ class SupplierController extends Controller
     public function index()
     {
         $produk = Produk::orderBy('nama_produk')->get();
-        // $produkSupp = ProdukSupplier::orderBy('id_produk_supplier', 'desc')->get();
-
+        
         return view('supplier.index', compact('produk'));
     }
 
@@ -64,8 +62,6 @@ class SupplierController extends Controller
         $supplier->save();
 
         return response()->json('Supplier baru berhasil ditambahkan', 200);
-        // $produkSupp = ProdukSupplier::create($request->all());
-        // $produkSupp->save();
     }
 
     public function tambah(Request $request)

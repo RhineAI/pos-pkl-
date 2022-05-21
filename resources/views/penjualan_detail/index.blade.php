@@ -7,7 +7,7 @@
 @push('css')
 <style>
     .tampil-bayar {
-        font-size: 5em;
+        font-size: 3.5em;
         text-align: center;
         height: 100px;
     }
@@ -185,8 +185,8 @@
             let id = $(this).data('id');
             let jumlah = parseInt($(this).val());
 
-            if (jumlah < 1) {
-                $(this).val(1);
+            if (jumlah < 0) {
+                $(this).val(0);
                 Swal.fire({
                     title: 'Gagal!',
                     text: 'Jumlah tidak boleh kurang dari 1',
@@ -220,8 +220,13 @@
                     });
                 })
                 .fail(errors => {
-                    alert('Tidak dapat menyimpan data');
-                    return;
+                    Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Stok habis, silahkan pilih produk lain',
+                    icon: 'warning',
+                    confirmButtonText: 'Kembali',
+                    confirmButtonColor: '#e80c29'
+                })         
                 });
         });
 

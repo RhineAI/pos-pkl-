@@ -27,8 +27,8 @@ class SatuanController extends Controller
             ->addIndexColumn()
             ->addColumn('act', function ($satuan) {
                 return '
-                <button onclick="edit(`'. route('satuan.update', $satuan->id_satuan) .'`)" class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"> Edit</i></button>
-                <button onclick="deleteData(`'. route('satuan.destroy', $satuan->id_satuan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"> Hapus</i></button>
+                <button onclick="edit(`'. route('satuan.update', $satuan->id_satuan) .'`)" class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>
+                <button onclick="deleteData(`'. route('satuan.destroy', $satuan->id_satuan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
                 ';
             })
             ->rawColumns(['act'])
