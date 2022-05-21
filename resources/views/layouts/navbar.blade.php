@@ -6,8 +6,19 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
+            <div class="mx-3" >
+                <div class="wrapper">
+                    
+                    <div class="display mt-3"> 
+                        <div id="time" style="font-size: 21px; font-style: bold; font-family: century;"></div>
+                    </div>
+                </div>
+               </div>
         </ul>
+
     </div>
+
+    
     <div class="col-md-1">
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -49,3 +60,22 @@
     @csrf
 </form>
 <!-- /.navbar -->
+
+
+
+<script>
+    setInterval(() => {
+        const weekday = ["Minggu","Senin","Selasa","Rabu","Kamis","Juma't","Sabtu"];
+        const eachmonths = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+        const time = document.querySelector('#time');
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = eachmonths[date.getMonth()];
+        let day = weekday[date.getDay()];
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        
+        time.textContent = day + ":" + hours + ":" + minutes + ":" + seconds;
+    });
+</script>

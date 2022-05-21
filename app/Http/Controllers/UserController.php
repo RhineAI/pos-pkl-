@@ -28,8 +28,8 @@ class UserController extends Controller
                 ->addIndexColumn()                
                 ->addColumn('aksi', function($user) { 
                     return '
-                        <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"> Edit<i/></button> 
-                        <button onclick="deleteForm(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"> Hapus</i></button>
+                        <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/></button> 
+                        <button onclick="deleteForm(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
                         '; 
                     })
                 ->rawColumns(['aksi'])
@@ -159,7 +159,6 @@ class UserController extends Controller
             $user->foto = $nama;
         }
         $user->update();
-
         return response()->json('Data berhasil disimpan', 200);
     }
 

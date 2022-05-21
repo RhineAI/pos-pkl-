@@ -6,9 +6,8 @@
 
 @push('css')
 <style>
-
     .tampil-bayar {
-        font-size: 4em;
+        font-size: 5em;
         text-align: center;
         height: 100px;
     }
@@ -19,7 +18,7 @@
         background: #615d5d;
     }
 
-    .table-pembelian tbody tr:last-child {
+    .table-penjualan tbody tr:last-child {
         display: none;
     }
 
@@ -263,7 +262,7 @@
         $('#id_produk').val(id);
         $('#barcode').val(kode);
         hideProduk();
-        // tambahProduk();
+
     }
 
     function tambahProduk() {
@@ -348,4 +347,5 @@
             })
     }
 </script>
+
 @endpush

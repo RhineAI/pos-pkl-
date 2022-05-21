@@ -34,6 +34,7 @@ Data Semua Supplier
         </div>
 </div>
 @includeIf('supplier.form')
+@includeIf('supplier.produk')
 @endsection
 
 @push('scripts')
@@ -97,6 +98,30 @@ Data Semua Supplier
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=nama]').focus();
         }
+
+        function tambahProduk(url) {
+            $('#modal-produk').modal('show')
+            $('#modal-produk .modal-title').text('Tambah Produk');
+
+            $('#modal-produk form')[0].reset();
+            $('#modal-produk form').attr('action', url);
+            $('#modal-produk [name=_method]').val('post');
+            $('#modal-produk [name=name]').focus();
+
+        }
+
+        function hideProduk() {
+            $('#modal-produk').modal('hide');
+        }
+
+        function pilihProduk() {
+            hideProduk();
+            tambahkanProduk();
+        }
+
+        // function tambahkanProduk() {
+            
+        // }
 
         // $(document).on('click', '.edit', function (event) {
         //         let nama = $(this).data('supplier')

@@ -115,7 +115,11 @@ class PenjualanController extends Controller
             $produk->update();
         }
 
-        return redirect()->route('transaksi.done');
+        $cancel = $penjualan;
+
+        $cancel2 = $detail;
+
+        return redirect('/transaksi/done');
     }
 
     /**
@@ -182,16 +186,20 @@ class PenjualanController extends Controller
     public function destroy($id)
     {
         $penjualan = Penjualan::find($id);
-        $detail = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
-        foreach ($detail as $item)
-        {
+        $detail    = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
+        foreach ($detail as $item) {
+            $produk = Produk::find($item->id_produk);
+            if ($produk) {
+                $produk->stok += $item->jumlah;
+                $produk->update();
+            }
+
             $item->delete();
         }
 
         $penjualan->delete();
 
-        // return redirect('daftarpenjualan.index');
-        return response(null);
+        return response(null, 204);
     }
 
 
@@ -208,6 +216,26 @@ class PenjualanController extends Controller
 
         
         return view('transaksi.done', compact('setting' , 'penjualan', 'detail', 'produk'));
+    }
+
+    public function cancel($id) {
+        $penjualan = Penjualan::find($id);
+
+        $detail    = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
+        foreach ($detail as $item) {
+            $produk = Produk::find($item->id_produk);
+            if ($produk) {
+                $produk->stok += $item->jumlah;
+                $produk->update();
+            }
+
+            $item->delete();
+        }
+
+        $penjualan->delete();
+
+        return redirect('/dashboard');
+
     }
 
     public function notaKecil() 

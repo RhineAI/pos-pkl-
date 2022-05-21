@@ -104,11 +104,11 @@
                         <td class="text-right">Rp. {{ format_uang($penjualan->bayar) }}</td>
                     </tr>
                     <tr>
-                        <td>Diterima:</td>
+                        <td>Bayar:</td>
                         <td class="text-right">Rp. {{ format_uang($penjualan->diterima) }}</td>
                     </tr>
                     <tr>
-                        <td>Kembali:</td>
+                        <td>Kembalian:</td>
                         <td class="text-right">Rp. {{ format_uang($penjualan->diterima - $penjualan->bayar) }}</td>
                     </tr>
                 </table>
@@ -129,7 +129,10 @@
                 @endif
                 
                 <a href="{{ route('transaksi.baru') }}"  class="btn btn-outline-info"><i class="fa-solid fa-cart-shopping"></i> Transaksi Baru</a>
-                <a href="" onclick="" class="btn btn-outline-warning"><i class="fa-solid fa-cart-shopping"></i> Batalkan Transaksi</a>
+                <a href="
+                {{ route('transaksi.cancel', $penjualan->id_penjualan) }}
+                "
+                 class="btn btn-outline-warning"><i class="fa-solid fa-cart-shopping"></i> Batalkan Transaksi</a>
                 <a href="{{ route('dashboard') }}"  class="btn btn-outline-success"><i class="fa-solid fa-archway"></i> Dashboard</a>
             </div>
         </div>
