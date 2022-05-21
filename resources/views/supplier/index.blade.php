@@ -119,9 +119,16 @@ Data Semua Supplier
             tambahkanProduk();
         }
 
-        // function tambahkanProduk() {
-            
-        // }
+        function tambahkanProduk() {
+        $.post('{{ route('supplier.tambah') }}', $('.form-produk').serialize())
+            .done(response => {
+                alert('sucess');
+            })
+            .fail(errors => {
+                alert('Tidak dapat menyimpan data');
+                return;
+            });
+    }
 
         // $(document).on('click', '.edit', function (event) {
         //         let nama = $(this).data('supplier')

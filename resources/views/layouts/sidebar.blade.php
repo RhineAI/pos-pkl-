@@ -179,13 +179,37 @@
                 </li>
 
                 <li class="nav-header ml-2">MAIN MENU</li>
-                
+
+                {{-- Transaksi --}}
                 <li class="nav-item">
-                    <a href="{{ route('penjualan.index') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-shopping-cart"></i>
-                        <p>Penjualan</p>
+                        <p>
+                            Transaksi Penjualan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview ml-4">
+                       
+                        <li class="nav-item">
+                            <a href="{{ route('transaksi.baru') }}" class="nav-link">
+                                <p>Transaksi Baru</p>                 
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('transaksi.index') }}" class="nav-link">
+                                <p>Transaksi Aktif</p>
+                            </a>
+                        </li>
+                    </ul>
+                        
+                        
+                    
                 </li>
+            
+                    
+                
                 <li class="nav-item">
                     <a href="{{ route('reportpenjualan.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>

@@ -19,7 +19,7 @@ Dashboard
                     <h1>Selamat Datang</h1>
                     <h5>Anda login sebagai KASIR</h5>
                     <br> 
-                    <a href="{{ route('penjualan.index') }}" class="btn btn-success btn-flat btn-md">Transaksi Baru</a>
+                    <a href="{{ route('transaksi.baru') }}" class="btn btn-success btn-flat btn-md">Transaksi Baru</a>
                     <br> <br>
                 </div>
             </div>
