@@ -28,6 +28,14 @@ class DatabaseSeeder extends Seeder
             'level' => 1
         ]);
 
+        User::Create([
+            'name' => 'Kasir',
+            'username' => 'kasir',
+            'email' => 'kasir@gmail.com',
+            'password' => bcrypt('kasir123'),
+            'level' => 2
+        ]);
+
         Kategori::create([
             'nama_kategori' => 'Makanan'
         ]);
@@ -43,7 +51,6 @@ class DatabaseSeeder extends Seeder
             'id_satuan' => 1,
             'harga_beli' => 10000,
             'harga_jual' => 12000,
-            'diskon' => 0,
             'stok' => 10
         ]);
 
@@ -59,7 +66,6 @@ class DatabaseSeeder extends Seeder
             'id_kategori' => 1,
             'id_satuan' => 1,
             'harga_beli' => 12000,
-            'diskon' => 0,
             'harga_jual' => 18000,
             'stok' => 100,
         ]);

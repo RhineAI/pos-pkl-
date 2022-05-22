@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-    Transaksi Penjualan
+Transaksi Penjualan
 @endsection
 
 @section('breadcrumb')
-    @parent
-    <li class="active">Transaksi Penjualan</li>
+@parent
+<li class="breadcrumb-item active">Transaksi Penjualan</li>
 @endsection
 
 @section('content')
@@ -52,10 +52,10 @@
             <div class="box-body mx-3">
                 <div class="alert alert-success alert-dismissible">
                     <i class="fa fa-check icon"></i>
-                    Data Transaksi telah selesai.
+                    Transaksi Penjualan Berhasil
                 </div>
 
-                <h2 class="mb-4 mt-6 text-center">Preview</h2>
+                <h2 class="mb-4 mt-6 text-center">Info Penjualan</h2>
 
                <div class="preview">
                 <div class="text-center">

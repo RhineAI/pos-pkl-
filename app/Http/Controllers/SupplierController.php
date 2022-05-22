@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produk;
-use App\Models\ProdukSupplier;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
 
@@ -16,9 +14,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $produk = Produk::orderBy('nama_produk')->get();
-        
-        return view('supplier.index', compact('produk'));
+        return view('supplier.index');
     }
 
     public function data() 
@@ -30,9 +26,8 @@ class SupplierController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($supplier) {
                 return '
-                    <button onclick="tambahProduk()"  class="btn btn-xs btn-success btn-flat"><i class="fa-solid fa-plus"></i></button>
-                    <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>
-                    <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
+                    <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"> Edit</i></button>
+                    <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"> Hapus</i></button>
                 ';
             })
             ->rawColumns(['aksi'])
@@ -62,13 +57,6 @@ class SupplierController extends Controller
         $supplier->save();
 
         return response()->json('Supplier baru berhasil ditambahkan', 200);
-    }
-
-    public function tambah(Request $request)
-    {
-        $produkSupplier = new ProdukSupplier();
-        $produkSupplier->id_produk = $request->id_produk; 
-        $produkSupplier->save();
     }
 
     /**

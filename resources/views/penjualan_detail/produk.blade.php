@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content"> 
             <div class="modal-header">
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title">Pilih Produk</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,21 +13,21 @@
             <div class="modal-body">
                 <table class="table table-striped table-bordered table-produk">
                     <thead>
-                        <th width="6%">No</th>
-                        <th>Barcode</th>
+                        <th width="4%">No</th>
+                        <th width="10%">Barcode</th>
                         <th>Nama</th>
                         <th>Harga</th>
-                        <th>Stok</th>
+                        <th width="12%">Stok</th>
                         <th width="6%">Aksi</th>
                     </thead>
                     <tbody>
                     @foreach ($produk as $key => $item)
                         <tr>
                             <td width="6%">{{ $key+1 }}</td>
-                            <td><span class="badge badge-info">{{ $item->barcode }}</span></td>
+                            <td width="10%"><span class="badge badge-info">{{ $item->barcode }}</span></td>
                             <td>{{ $item->nama_produk }}</td>
                             <td>{{ 'Rp. '. format_uang($item->harga_beli) }}</td>
-                            <td>{{ $item->stok }}</td>
+                            <td width="12%">{{ $item->stok }}</td>
                             <td width="6%">
                                 <a href="#" class="btn btn-primary btn-xs btn-flat"
                                 onclick="pilihProduk('{{ $item->id_produk }}', '{{ $item->barcode }}') ">    

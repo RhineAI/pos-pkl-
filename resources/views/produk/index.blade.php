@@ -25,15 +25,14 @@ Data Semua Produk
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Barcode</th>
-                        <th width="20%">Nama Produk</th>
-                        <th>Kategori</th>
-                        <th>Satuan</th>
-                        <th>Harga Beli</th>
-                        <th>Harga Jual</th>
-                        {{-- <th>Diskon</th> --}}
-                        <th>Stok</th>
-                        <th width="8%">Aksi</th>
+                        <th class="text-center">Barcode</th>
+                        <th width="20%" class="text-center">Nama Produk</th>
+                        <th class="text-center">Kategori</th>
+                        <th class="text-center">Satuan</th>
+                        <th class="text-center">Harga Beli</th>
+                        <th class="text-center">Harga Jual</th>
+                        <th class="text-center">Stok</th>
+                        <th width="8%" class="text-center">Aksi</th>
                     </thead>
                 </table>
             </div>

@@ -21,19 +21,21 @@ class UserController extends Controller
 
     public function data()
     {
-        $user = User::IsNotAdmin()->orderBy('id', 'DESC')->get();
+        $user = User::orderBy('id', 'DESC')->get();
 
             return datatables()
                 ->of($user)
                 ->addIndexColumn()                
-                ->addColumn('aksi', function($user) { 
+                ->addColumn('aksi', function($user) {
                     return '
-                        <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/></button> 
-                        <button onclick="deleteForm(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i></button>
+                        <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"> Edit<i/></button> 
+                        <button onclick="deleteForm(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"> Hapus</i></button>
                         '; 
                     })
                 ->rawColumns(['aksi'])
                 ->make(true);
+                
+
     }
 
     /**
@@ -59,11 +61,13 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->level= 2;
+        $user->level= $request->level;
         $user->foto = '/images/monster.png';
+
         $user->save();
 
         return response()->json('Pengguna baru berhasil ditambahkan', 200);
+        
     }
 
     /**
@@ -103,6 +107,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
+        $user->level = $request->level;
         if ($request->has('password') && $request->password != "" ) {
             $user->request = $request->password;
         }
@@ -151,11 +156,6 @@ class UserController extends Controller
             }
         }
 
-        $request->validate([
-            'foto' => 'image|file|max:3072',
-        ]);
-
-
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
@@ -163,10 +163,9 @@ class UserController extends Controller
 
             $user->foto = $nama;
         }
-
-        
         $user->update();
-        return redirect('/dashboard');
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     // public function profile()

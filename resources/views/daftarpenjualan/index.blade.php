@@ -1,30 +1,30 @@
 @extends('layouts.main')
 
 @section('title')
-    Daftar Penjualan
+Daftar Penjualan
 @endsection
 
 @section('breadcrumb')
-    @parent
-    <li class="active">Daftar Penjualan</li>
+@parent
+<li class="breadcrumb-item active">Daftar Penjualan</li>
 @endsection
 
 @section('content')
 <div class="row mx-3">
-    <div class="col-md-12 p-2 mb-3" style="background-color: white">
+    <div class="col-md-12 p-3 mb-3" style="background-color: white">
         <div class="box">
 
             <div class="box-body table-responsive">
                 <table class="table table-striped table-bordered table-penjualan">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Tanggal</th>
-                        <th>Total Item</th>
-                        <th>Total Harga</th>
-                        <th>Diskon</th>
-                        <th>Total Bayar</th>
-                        <th>Kasir</th>
-                        <th width="12%"><i class="fa fa-cog"></i></th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Total Item</th>
+                        <th class="text-center">Total Harga</th>
+                        <th class="text-center">Diskon</th>
+                        <th class="text-center">Total Bayar</th>
+                        <th class="text-center">Kasir</th>
+                        <th width="8%" class="text-center">Aksi</th>
                     </thead>
                 </table>
             </div>
@@ -84,7 +84,7 @@
 
     function deleteData(url) {
         Swal.fire({
-            title: 'Hapus Data yang dipilih?',
+            title: 'Hapus Data Penjualan yang dipilih?',
             icon: 'question',
             iconColor: '#DC3545',
             showDenyButton: true,
@@ -101,7 +101,7 @@
                 .done((response) => {
                     Swal.fire({
                         title: 'Sukses!',
-                        text: 'Data Pembelian berhasil dihapus',
+                        text: 'Data Penjualan berhasil dihapus',
                         icon: 'success',
                         confirmButtonText: 'Lanjut',
                         confirmButtonColor: '#28A745'
@@ -111,7 +111,7 @@
                 .fail((errors) => {
                     Swal.fire({
                         title: 'Gagal!',
-                        text: 'Data Pembelian gagal dihapus',
+                        text: 'Data Penjualan gagal dihapus',
                         icon: 'error',
                         confirmButtonText: 'Kembali',
                         confirmButtonColor: '#DC3545'
@@ -120,7 +120,7 @@
                 });
             } else if (result.isDenied) {
                 Swal.fire({
-                    title: 'Data Pembelian batal dihapus',
+                    title: 'Data Penjualan batal dihapus',
                     icon: 'warning',
                 })
             }

@@ -1,13 +1,18 @@
 @extends('layouts.main')
 
 @section('title')
-    Transaksi Penjualan
+Transaksi Penjualan
+@endsection
+
+@section('breadcrumb')
+@parent
+<li class="breadcrumb-item active">Transaksi Penjualan</li>
 @endsection
 
 @push('css')
 <style>
     .tampil-bayar {
-        font-size: 5em;
+        font-size: 3em;
         text-align: center;
         height: 100px;
     }
@@ -39,11 +44,6 @@
 </style>
 @endpush
 
-@section('breadcrumb')
-    @parent
-    <li class="active">Transaksi Penjaualn</li>
-@endsection
-
 @section('content')
 <div class="row mx-4">
     <div class="col-lg-12" style="background-color: white;">
@@ -54,8 +54,8 @@
                 <form class="form-produk">
                     @csrf
                     <div class="form-group row">
-                        <label for="kode_produk" class="col-lg-3">Tambah Produk</label>
-                        <div class="col-lg-2">
+                        <label for="kode_produk" class="col-lg-2">Tambah Produk</label>
+                        <div class="col-lg-3">
                             <div class="input-group">
                                 <input type="hidden" name="id_penjualan" id="id_penjualan" value="{{ $id_penjualan }}">
                                 <input type="hidden" name="id_produk" id="id_produk">
@@ -72,14 +72,14 @@
 
                 <table class="table table-stiped table-bordered table-penjualan">
                     <thead>
-                        <th width="5%">No</th>
-                        <th>Kode</th>
-                        <th>Nama</th>
-                        <th>Harga</th>
-                        <th width="15%">Jumlah</th>
-                        <th>Diskon</th>
-                        <th>Subtotal</th>
-                        <th width="15%"><i class="fa fa-cog"></i></th>
+                        <th width="4%">No</th>
+                        <th width="10%" class="text-center">Barcode</th>
+                        <th class="text-center">Nama</th>
+                        <th width="15%"class="text-center">Harga</th>
+                        <th width="12%" class="text-center">Jumlah</th>
+                        <th width="6%" class="text-center">Diskon</th>
+                        <th width="15%" class="text-center">Subtotal</th>
+                        <th width="8%" class="text-center">Aksi</th>
                     </thead>
                 </table>
 
@@ -280,7 +280,7 @@
 
     function deleteData(url) {
         Swal.fire({
-            title: 'Hapus Kategori yang dipilih?',
+            title: 'Hapus Data Penjualan yang dipilih?',
             icon: 'question',
             iconColor: '#DC3545',
             showDenyButton: true,
@@ -297,7 +297,7 @@
                 .done((response) => {
                     Swal.fire({
                         title: 'Sukses!',
-                        text: 'Data Kategori berhasil dihapus',
+                        text: 'Data Penjualan berhasil dihapus',
                         icon: 'success',
                         confirmButtonText: 'Lanjut',
                         confirmButtonColor: '#28A745'
@@ -307,7 +307,7 @@
                 .fail((errors) => {
                     Swal.fire({
                         title: 'Gagal!',
-                        text: 'Data Kategori gagal dihapus',
+                        text: 'Data Penjualan gagal dihapus',
                         icon: 'error',
                         confirmButtonText: 'Kembali',
                         confirmButtonColor: '#DC3545'
@@ -316,7 +316,7 @@
                 });
             } else if (result.isDenied) {
                 Swal.fire({
-                    title: 'Data Kategori batal dihapus',
+                    title: 'Data Penjualan batal dihapus',
                     icon: 'warning',
                 })
             }

@@ -23,10 +23,10 @@ Data Semua Supplier
                     <table class="table table-striped table-bordered">
                         <thead>
                             <th width="6%">No</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Telepon</th>
-                            <th width="12%">Aksi</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Alamat</th>
+                            <th class="text-center">Telepon</th>
+                            <th width="12%" class="text-center">Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -34,7 +34,6 @@ Data Semua Supplier
         </div>
 </div>
 @includeIf('supplier.form')
-@includeIf('supplier.produk')
 @endsection
 
 @push('scripts')
@@ -98,37 +97,6 @@ Data Semua Supplier
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=nama]').focus();
         }
-
-        function tambahProduk(url) {
-            $('#modal-produk').modal('show')
-            $('#modal-produk .modal-title').text('Tambah Produk');
-
-            $('#modal-produk form')[0].reset();
-            $('#modal-produk form').attr('action', url);
-            $('#modal-produk [name=_method]').val('post');
-            $('#modal-produk [name=name]').focus();
-
-        }
-
-        function hideProduk() {
-            $('#modal-produk').modal('hide');
-        }
-
-        function pilihProduk() {
-            hideProduk();
-            tambahkanProduk();
-        }
-
-        function tambahkanProduk() {
-        $.post('{{ route('supplier.tambah') }}', $('.form-produk').serialize())
-            .done(response => {
-                alert('sucess');
-            })
-            .fail(errors => {
-                alert('Tidak dapat menyimpan data');
-                return;
-            });
-    }
 
         // $(document).on('click', '.edit', function (event) {
         //         let nama = $(this).data('supplier')

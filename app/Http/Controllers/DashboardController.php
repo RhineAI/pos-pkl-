@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Supplier;
+use App\Models\Pembelian;
+use App\Models\Penjualan;
 
 class DashboardController extends Controller
 {
@@ -17,14 +19,54 @@ class DashboardController extends Controller
     {      
         $produk = Produk::count();
         $supplier = Supplier::count();
+        $seluruh_pembelian = Pembelian::count();
+        $seluruh_penjualan = Penjualan::count();
 
         $tanggal_awal = date('Y-m-01');
         $tanggal_akhir = date('Y-m-d');
 
+        $data_tanggal = array();
+        $data_pengeluaran = array();
+        $data_pendapatan = array();
+
+        // data pengeluaran dan pendapatan
+        while (strtotime($tanggal_awal) <= strtotime($tanggal_akhir)) {
+            $data_tanggal[] = (int) substr($tanggal_awal, 8, 2);
+
+            $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
+            $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
+            
+            $penjualan = Penjualan::first();
+
+            $pengeluaran = $total_pembelian;
+            $data_pengeluaran[] += $pengeluaran;
+            $pendapatan = $total_penjualan;
+            $data_pendapatan[] += $pendapatan;
+
+
+            $tanggal_awal = date('Y-m-d', strtotime("+1day", strtotime($tanggal_awal)));
+
+        }
+
+
+        // // data pendapatan
+        // while (strtotime($tanggal_awal) <= strtotime($tanggal_akhir)) {
+        //     $data_tanggal[] = (int) substr($tanggal_awal, 8, 2);
+            
+        //     $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
+            
+        //     $penjualan = Penjualan::first();
+
+        //     $pendapatan = $total_penjualan;
+        //     $data_pendapatan[] += $pendapatan;
+            
+        //     $tanggal_awal = date('Y-m-d', strtotime("+1day", strtotime($tanggal_awal)));
+        // }
+
         if (auth()->user()->level == 1) {
-            return view('admin.dashboard', compact('produk', 'supplier', 'tanggal_awal', 'tanggal_akhir'));
+            return view('admin.dashboard', compact('produk', 'supplier', 'tanggal_awal', 'tanggal_akhir', 'seluruh_pembelian', 'seluruh_penjualan', 'data_tanggal', 'data_pendapatan', 'data_pengeluaran'));
         } else {
-            return view('kasir.dashboard');
+            return view('kasir.dashboard', compact('produk', 'supplier', 'tanggal_awal', 'tanggal_akhir', 'seluruh_pembelian', 'seluruh_penjualan', 'data_tanggal', 'data_pendapatan', 'data_pengeluaran'));
         }
         
     }

@@ -38,6 +38,18 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="Posisi" class="col-md-3 col-md-offset-1 control-label">Posisi</label>
+                        <div class="col-md-5">
+                            <select name="level" class="form-control" id="Posisi" required>
+                                <option selected>Pilih Posisi</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Kasir</option>
+                            </select>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="password" class="col-md-3 col-lg-offset-1 control-label">Password</label>
                         <div class="col-md-9">
                             <input type="password" name="password" id="password" class="form-control" 

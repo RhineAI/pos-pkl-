@@ -25,8 +25,8 @@ Data Satuan Produk
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Satuan</th>
-                        <th width="13%">Aksi</th>
+                        <th class="text-center">Satuan</th>
+                        <th width="13%" class="text-center">Aksi</th>
                     </thead>
                 </table>
             </div>
