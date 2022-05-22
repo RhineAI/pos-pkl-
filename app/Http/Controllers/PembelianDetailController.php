@@ -118,10 +118,11 @@ class PembelianDetailController extends Controller
         return response(null, 204);
     }
 
+
     function loadForm($diskon = 0, $total, $diterima)
     {
         $bayar = $total - ($diskon / 100 * $total) ;
-        $kembali = ($diterima != 0) ? $diterima - $bayar : 0;
+        $kembali = ($this->checkPrice($diterima) != 0) ? $this->checkPrice($diterima) - $bayar : 0;
         $data  = [
             'totalrp' => format_uang($total),
             'bayar' => $bayar,

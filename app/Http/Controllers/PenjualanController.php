@@ -20,6 +20,23 @@ class PenjualanController extends Controller
         return view('daftarpenjualan.index');
     }
 
+
+    function checkPrice($value)
+    {
+        if (gettype($value) == "string") {
+            $temp = 0;
+            for ($i = 0; $i < strlen($value); $i++) {
+                if ((isset($value[$i]) == true && $value[$i] != ".") && $value[$i] != ",") {
+                    $temp = ($temp * 10) + (int)$value[$i];
+                }
+            }
+            return $temp;
+        } else {
+            return $value;
+        }
+    }
+
+
     public function data() 
     {
         $penjualan = Penjualan::orderBy('id_penjualan', 'desc')->get();
@@ -105,7 +122,7 @@ class PenjualanController extends Controller
         $penjualan->total_harga = $request->total;
         $penjualan->diskon = $request->diskon;
         $penjualan->bayar = $request->bayar;
-        $penjualan->diterima = $request->diterima;
+        $penjualan->diterima = $this->checkPrice($request->diterima);
         $penjualan->update();
 
         $detail = PenjualanDetail::Where('id_penjualan', $penjualan->id_penjualan)->get();
@@ -207,7 +224,8 @@ class PenjualanController extends Controller
         $setting = Setting::first();
         $produk = Produk::first();
 
-        $penjualan = Penjualan::find(session('id_penjualan'));
+        $penjualan = Penjualan::find(session('id_penjualan')); 
+        $penjualan->diterima = $this->checkPrice(format_uang($penjualan->diterima)); 
         if (! $penjualan) 
         {
             abort(404);

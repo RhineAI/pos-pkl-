@@ -40,9 +40,25 @@ class PenjualanDetailController extends Controller
                 return redirect()->route('home');
             }
         }
-
-
     }
+
+
+    public function checkPrice($value)
+    {
+        if (gettype($value) == "string") {
+            $temp = 0;
+            for ($i = 0; $i < strlen($value); $i++) {
+                if ((isset($value[$i]) == true && $value[$i] != ".") && $value[$i] != ",") {
+                    $temp = ($temp * 10) + (int)$value[$i];
+                }
+            }
+            return $temp;
+        } else {
+            return $value;
+        }
+    }
+
+    
 
     public function data($id)
     {
@@ -90,7 +106,7 @@ class PenjualanDetailController extends Controller
     function loadForm($diskon = 0, $total, $diterima)
     {
         $bayar = $total - ($diskon / 100 * $total) ;
-        $kembali = ($diterima != 0) ? $diterima - $bayar : 0;
+        $kembali = ($this->checkPrice($diterima) != 0) ? $this->checkPrice($diterima) - $bayar : 0;
         $data  = [
             'totalrp' => format_uang($total),
             'bayar' => $bayar,
