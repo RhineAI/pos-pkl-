@@ -7,6 +7,7 @@ use App\Models\PenjualanDetail;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Setting;
+use Barryvdh\DomPDF\PDF;
 
 class PenjualanController extends Controller
 {
@@ -19,6 +20,23 @@ class PenjualanController extends Controller
     {
         return view('daftarpenjualan.index');
     }
+
+
+    function checkPrice($value)
+    {
+        if (gettype($value) == "string") {
+            $temp = 0;
+            for ($i = 0; $i < strlen($value); $i++) {
+                if ((isset($value[$i]) == true && $value[$i] != ".") && $value[$i] != ",") {
+                    $temp = ($temp * 10) + (int)$value[$i];
+                }
+            }
+            return $temp;
+        } else {
+            return $value;
+        }
+    }
+
 
     public function data() 
     {
@@ -105,7 +123,7 @@ class PenjualanController extends Controller
         $penjualan->total_harga = $request->total;
         $penjualan->diskon = $request->diskon;
         $penjualan->bayar = $request->bayar;
-        $penjualan->diterima = $request->diterima;
+        $penjualan->diterima = $this->checkPrice($request->diterima);
         $penjualan->update();
 
         $detail = PenjualanDetail::Where('id_penjualan', $penjualan->id_penjualan)->get();
@@ -207,7 +225,8 @@ class PenjualanController extends Controller
         $setting = Setting::first();
         $produk = Produk::first();
 
-        $penjualan = Penjualan::find(session('id_penjualan'));
+        $penjualan = Penjualan::find(session('id_penjualan')); 
+        $penjualan->diterima = $this->checkPrice(format_uang($penjualan->diterima)); 
         if (! $penjualan) 
         {
             abort(404);
@@ -234,7 +253,9 @@ class PenjualanController extends Controller
 
         $penjualan->delete();
 
-        return redirect('/dashboard');
+        // alert('{{ alert }}');
+
+        return redirect('/dashboard')->with('alert', '-');
 
     }
 
@@ -253,8 +274,19 @@ class PenjualanController extends Controller
         return view('daftarpenjualan.nota_kecil', compact('setting', 'penjualan', 'detail', 'produk'));
     }
 
-    // public function notaBesar() 
-    // {
-        
-    // }
+    public function notaBesar()
+    {
+        $setting = Setting::first();
+        $penjualan = Penjualan::find(session('id_penjualan'));
+        if (! $penjualan) {
+            abort(404);
+        }
+        $detail = PenjualanDetail::with('produk')
+            ->where('id_penjualan', session('id_penjualan'))
+            ->get();
+
+        $pdf = PDF::loadView('penjualan.nota_besar', compact('setting', 'penjualan', 'detail'));
+        $pdf->setPaper(0,0,609,440, 'potrait');
+        return $pdf->stream('Transaksi-'. date('Y-m-d-his') .'.pdf');
+    }
 }

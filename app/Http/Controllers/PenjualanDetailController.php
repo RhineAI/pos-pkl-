@@ -40,9 +40,25 @@ class PenjualanDetailController extends Controller
                 return redirect()->route('home');
             }
         }
-
-
     }
+
+
+    public function checkPrice($value)
+    {
+        if (gettype($value) == "string") {
+            $temp = 0;
+            for ($i = 0; $i < strlen($value); $i++) {
+                if ((isset($value[$i]) == true && $value[$i] != ".") && $value[$i] != ",") {
+                    $temp = ($temp * 10) + (int)$value[$i];
+                }
+            }
+            return $temp;
+        } else {
+            return $value;
+        }
+    }
+
+    
 
     public function data($id)
     {
@@ -60,7 +76,6 @@ class PenjualanDetailController extends Controller
             $row['harga_jual']  = 'Rp. '. format_uang($item->produk->harga_jual);
             $row['jumlah']      = '<input type="number" class="form-control input-sm quantity" data-id="'. $item->id_penjualan_detail .'" value="'. $item->jumlah .'">';
                 
-            $row['diskon']      = $item->diskon .' %';
             $row['subtotal']    = 'Rp. '. format_uang($item->subtotal);
             $row['aksi']        = '<div class="btn-group">
                                     <button onclick="deleteData(`'. route('transaksi.destroy', $item->id_penjualan_detail) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
@@ -77,7 +92,6 @@ class PenjualanDetailController extends Controller
             'nama_produk' => '',
             'harga_jual'  => '',
             'jumlah'      => '',
-            'diskon'      => '',
             'subtotal'    => '',
             'aksi'        => '',
         ];
@@ -87,58 +101,12 @@ class PenjualanDetailController extends Controller
             ->addIndexColumn()
             ->rawColumns(['aksi', 'barcode', 'jumlah'])
             ->make(true);
-    }
-
-    // public function data($id)
-    // {
-    //     $detail = PenjualanDetail::with('produk')
-    //         ->where('id_penjualan', $id)
-    //         ->get();
-    //     $data = array();
-    //     $total = 0;
-    //     $total_item = 0;
-
-    //     foreach ($detail as $item) {
-    //         $row = array();
-    //         $row['barcode']     = '<span class="badge badge-info">'. $item->produk->barcode .'</span>';
-    //         $row['nama_produk'] = $item->produk['nama_produk'];
-    //         $row['harga_jual']  = 'Rp. '. format_uang($item->harga_jual);
-    //         $row['jumlah']      = '<input type="number" class="form-control input-sm quantity" data-id="'. $item->id_penjualan_detail .'" value="'. $item->jumlah .'">';
-    //         $row['diskon']      = $item->diskon .' %';
-    //         $row['subtotal']    = 'Rp. '. format_uang($item->subtotal);
-    //         $row['aksi']        = '<div class="btn-group">
-    //                                 <button onclick="deleteData(`'. route('penjualan_detail.destroy', $item->id_penjualan_detail) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
-    //                             </div>';
-    //         $data[] = $row;
-
-    //         $total += $item->harga_jual * $item->jumlah;
-    //         $total_item += $item->jumlah;
-    //     }
-    //     $data[] = [
-    //         'barcode' => '
-    //             <div class="total hide" style="visibility : hidden">'. $total .'</div>
-    //             <div class="total_item hide" style="visibility : hidden">'. $total_item .'</div>',
-    //         'nama_produk' => '',
-    //         'harga_jual'  => '',
-    //         'jumlah'      => '',
-    //         'diskon'      => '',
-    //         'subtotal'    => '',
-    //         'aksi'        => '',
-    //     ];
-
-    //     return datatables()
-    //         ->of($data)
-    //         ->addIndexColumn()
-    //         ->rawColumns(['aksi', 'barcode', 'jumlah'])
-    //         ->make(true);
-    // }
-
-    
+    }   
 
     function loadForm($diskon = 0, $total, $diterima)
     {
         $bayar = $total - ($diskon / 100 * $total) ;
-        $kembali = ($diterima != 0) ? $diterima - $bayar : 0;
+        $kembali = ($this->checkPrice($diterima) != 0) ? $this->checkPrice($diterima) - $bayar : 0;
         $data  = [
             'totalrp' => format_uang($total),
             'bayar' => $bayar,
@@ -179,6 +147,12 @@ class PenjualanDetailController extends Controller
         $detail->id_produk = $produk->id_produk;
         $detail->harga_jual = $produk->harga_jual;
         
+        if ( $request->barcode != $produk->barcode) {
+            $detail->jumlah + 0;
+        } else {
+            $detail->jumlah + 1;
+        }
+
         if ($produk->stok <= $request->jumlah)
         {
             $this->session->set_flashdata('error', 'Jumlah Barang melebihi stok');

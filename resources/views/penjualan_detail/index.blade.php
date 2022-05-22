@@ -77,7 +77,7 @@
                         <th>Nama</th>
                         <th>Harga</th>
                         <th width="15%">Jumlah</th>
-                        <th>Diskon</th>
+              
                         <th>Subtotal</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
@@ -135,7 +135,7 @@
             </div>
 
             <div class="box-footer mb-4 btn-submit">
-                <button type="submit" class="btn btn-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
+                <button type="submit" class="btn btn-outline-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
             </div>
         </div>
     </div>
@@ -165,7 +165,7 @@
                 {data: 'nama_produk'},
                 {data: 'harga_jual'},
                 {data: 'jumlah'},
-                {data: 'diskon'},
+               
                 {data: 'subtotal'},
                 {data: 'aksi', searchable: false, sortable: false},
             ],
@@ -185,17 +185,6 @@
             let id = $(this).data('id');
             let jumlah = parseInt($(this).val());
 
-            if (jumlah < 0) {
-                $(this).val(0);
-                Swal.fire({
-                    title: 'Gagal!',
-                    text: 'Jumlah tidak boleh kurang dari 1',
-                    icon: 'warning',
-                    confirmButtonText: 'Kembali',
-                    confirmButtonColor: '#e80c29'
-                })    
-                return;
-            }
             if (jumlah > 10000) {
                 $(this).val(10000);
                 Swal.fire({
@@ -282,6 +271,30 @@
                 return;
             });
     }
+
+    function formatRupiah(angka, prefix){
+            var number_string   = angka.replace(/[^,\d]/g, '').toString(),
+            split               = number_string.split(','),
+            sisa                = split[0].length % 3,
+            rupiah              = split[0].substr(0, sisa),
+            ribuan              = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if(ribuan){
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
+        }
+
+        function generateRupiah(elemValue) {
+            return $(elemValue).val(formatRupiah($(elemValue).val(), 'Rp. '))
+        }
+
+            $(document).on('keyup', '#diterima', function(e){
+                generateRupiah(this);
+            })
 
     function deleteData(url) {
         Swal.fire({

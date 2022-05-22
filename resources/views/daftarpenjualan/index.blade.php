@@ -101,7 +101,7 @@
                 .done((response) => {
                     Swal.fire({
                         title: 'Sukses!',
-                        text: 'Data Pembelian berhasil dihapus',
+                        text: 'Data Penjualan berhasil dihapus',
                         icon: 'success',
                         confirmButtonText: 'Lanjut',
                         confirmButtonColor: '#28A745'
@@ -111,7 +111,7 @@
                 .fail((errors) => {
                     Swal.fire({
                         title: 'Gagal!',
-                        text: 'Data Pembelian gagal dihapus',
+                        text: 'Data Penjualan gagal dihapus',
                         icon: 'error',
                         confirmButtonText: 'Kembali',
                         confirmButtonColor: '#DC3545'
@@ -120,7 +120,7 @@
                 });
             } else if (result.isDenied) {
                 Swal.fire({
-                    title: 'Data Pembelian batal dihapus',
+                    title: 'Data Penjualan batal dihapus',
                     icon: 'warning',
                 })
             }
