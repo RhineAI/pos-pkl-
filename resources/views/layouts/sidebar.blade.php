@@ -105,6 +105,16 @@
                       </ul>
                   </li>
 
+                  {{-- Pengembalian Barang --}}
+                <li class="nav-item">
+                    <a href="{{ route('pengembalianBarang.index') }}" class="nav-link">
+                        <i class="nav-icon fa-solid fa-arrow-rotate-left"></i>   
+                        <p>
+                            Pengembalian Barang
+                        </p>
+                    </a>
+                </li>
+
                   {{-- Daftar Penjualan --}}
                 <li class="nav-item">
                     <a href="{{ route('daftarpenjualan.index') }}" class="nav-link">

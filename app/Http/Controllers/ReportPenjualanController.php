@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pembelian;
 use App\Models\Pengeluaran;
 use App\Models\Penjualan;
-use Barryvdh\DomPDF\PDF as DomPDF;
+use Barryvdh\DomPDF\Pdf;
 use Illuminate\Http\Request;
-use PDF;
+
 
 class ReportPenjualanController extends Controller
 {
@@ -85,7 +85,7 @@ class ReportPenjualanController extends Controller
     public function exportPDF($awal, $akhir)
     {
         $data = $this->getData($awal, $akhir);
-        $pdf  = DomPDF::loadView('laporan.pdf', compact('awal', 'akhir', 'data'));
+        $pdf  = Pdf::loadView('reportpenjualan.pdf', compact('awal', 'akhir', 'data'));
         $pdf->setPaper('a4', 'potrait');
         
         return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf');

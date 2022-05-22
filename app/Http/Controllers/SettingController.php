@@ -76,6 +76,10 @@ class SettingController extends Controller
         $setting->telepon = $request->telepon;
         $setting->alamat = $request->alamat;
 
+        $request->validate([
+            'path_logo' => 'image|file|max:2048',
+        ]);
+
         if ($request->hasFile('path_logo')) {
             $file = $request->file('path_logo');
             $nama = 'logo-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();

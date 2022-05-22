@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     StokKeluarController,
     PembelianController,
     PembelianDetailController,
+    PengembalianBarangController,
     PenjualanController,
     PenjualanDetailController,
     ReportPembelianController,
@@ -65,6 +66,11 @@ Route::group(['middleware' => 'auth'], function () {
     // Route stok keluar
     Route::get('/stokkeluar/data', [StokKeluarController::class, 'data'])->name('stokkeluar.data');
     Route::resource('/stokkeluar', StokKeluarController::class);
+
+});
+
+Route::group(['middleware' => 'auth'], function () {
+     
 });
 
 // Route record pembelian
@@ -73,12 +79,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/pembelian/{id}/create', [PembelianController::class, 'create'])->name('pembelian.create');
     Route::resource('/pembelian', PembelianController::class)
     ->except('create');
+    // Route::get('/pembelian/cancel/{id}', [PembelianController::class, 'cancel'])->name('pembelian.cancel');
 
     // Route pembelian detail
     Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
+    // Route::get('/pembeliandetail/cancel/{id}', [PembelianController::class, 'cancel'])->name('pembelian_detail.cancel');
     Route::get('/pembelian_detail/loadform/{diskon}/{total}/{diterima}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
+   
     Route::resource('/pembelian_detail', PembelianDetailController::class)
     ->except('create', 'show', 'edit' );
+
+    // Route Pengembalian Barang
+    Route::get('/pengembalianBarang/data', [PengembalianBarangController::class, 'data'])->name('pengembalian_barang.data');
+    Route::resource('/pengembalianBarang', PengembalianBarangController::class);
 
 //  Route record penjualan
 Route::group(['middleware' => 'auth'], function () {
@@ -93,6 +106,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/transaksi/baru', [PenjualanController::class, 'create'])->name('transaksi.baru');
     Route::post('/transaksi/simpan', [PenjualanController::class, 'store'])->name('transaksi.simpan');
     Route::get('/transaksi/done', [PenjualanController::class, 'done'])->name('transaksi.done');
+    Route::get('/transaksi/cancel/{id}', [PenjualanController::class, 'cancel'])->name('transaksi.cancel');
     Route::get('/transaksi/nota-kecil', [PenjualanController::class, 'notaKecil'])->name('transaksi.nota_kecil');
     // Route::get('/transaksi/nota-besar', [PenjualanController::class, 'notaBesar'])->name('transaksi.nota_besar');
 
@@ -101,11 +115,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/transaksi', PenjualanDetailController::class)->except('show');
 });
 
-// Route stok penjualan lama
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::get('/penjualandetail/data', [PenjualanDetailController::class, 'data'])->name('penjualandetail.data');
-//     Route::resource('/penjualandetail', PenjualanDetailController::class);
-// });
 
 // Route Supplier
 Route::group(['middleware' => 'auth'], function () {

@@ -9,6 +9,12 @@ Dashboard
 <li class="breadcrumb-item active">Dashboard</li>
 @endsection
 
+@if(session()->has('alert'))
+    <script>
+         alert('Transaksi Berhasil Dibatalkan')
+    </script>
+@endif
+
 @section('content')
 <section class="content">
     <div class="container-fluid">

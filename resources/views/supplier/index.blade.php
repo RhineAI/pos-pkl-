@@ -125,6 +125,36 @@ Data Semua Supplier
 
         //         $('#modal-form [name=nama]').val(data.nama);
         // }
+        function tambahProduk(url) {
+            $('#modal-produk').modal('show')
+            $('#modal-produk .modal-title').text('Tambah Produk');
+
+            $('#modal-produk form')[0].reset();
+            $('#modal-produk form').attr('action', url);
+            $('#modal-produk [name=_method]').val('post');
+            $('#modal-produk [name=name]').focus();
+
+        }
+
+        function hideProduk() {
+            $('#modal-produk').modal('hide');
+        }
+
+        function pilihProduk() {
+            hideProduk();
+            tambahkanProduk();
+        }
+
+        function tambahkanProduk() {
+        $.post('{{ route('supplier.tambah') }}', $('.form-produk').serialize())
+            .done(response => {
+                alert('sucess');
+            })
+            .fail(errors => {
+                alert('Tidak dapat menyimpan data');
+                return;
+            });
+    }
         
         function editData(url) {
             $('#modal-form').modal('show')

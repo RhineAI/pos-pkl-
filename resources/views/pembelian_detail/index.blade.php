@@ -6,7 +6,7 @@ Transaksi Pembelian
 @push('css')
 <style>
     .bayar {
-        font-size: 5em;
+        font-size: 3.5em;
         text-align: center;
         height: 100px;
     }
@@ -126,7 +126,7 @@ Transaksi Pembelian
                             <div class="form-group row">
                                 <label for="bayar" class="col-lg-3 control-label">Bayar</label>
                                 <div class="col-lg-8">
-                                    <input type="text" id="bayarrp" class="form-control">
+                                    <input type="text" id="bayarrp" class="form-control" readonly>
                                 </div>
                             </div>
 
@@ -150,7 +150,8 @@ Transaksi Pembelian
             </div>
 
             <div class="box-footer mb-4 btn-submit">
-                <button type="submit" class="btn btn-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
+                {{-- <a href=""{{ route('pembelian.cancel', $pembelian->id_pembelian ) }} class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-cart-shopping"></i> Batalkan Transaksi</a> --}}
+                <button type="submit" class="btn btn-outline-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
             </div>
         </div>
     </div>
@@ -196,17 +197,17 @@ Transaksi Pembelian
             let id = $(this).data('id');
             let jumlah = parseInt($(this).val());
 
-            if (jumlah < 1) {
-                $(this).val(1);
-                Swal.fire({
-                    title: 'Gagal!',
-                    text: 'Jumlah tidak boleh kurang dari 1',
-                    icon: 'error',
-                    confirmButtonText: 'Kembali',
-                    confirmButtonColor: '#e80c29'
-                })    
-                return;
-            }
+            // if (jumlah < 1) {
+            //     $(this).val(1);
+            //     Swal.fire({
+            //         title: 'Gagal!',
+            //         text: 'Jumlah tidak boleh kurang dari 1',
+            //         icon: 'error',
+            //         confirmButtonText: 'Kembali',
+            //         confirmButtonColor: '#e80c29'
+            //     })    
+            //     return;
+            // }
             if (jumlah > 10000) {
                 $(this).val(10000);
                 Swal.fire({
@@ -262,35 +263,31 @@ Transaksi Pembelian
 
     });
 
-    // function formatRupiah(angka, prefix){
-    //         var number_string   = angka.replace(/[^,\d]/g, '').toString(),
-    //         split               = number_string.split(','),
-    //         sisa                = split[0].length % 3,
-    //         rupiah              = split[0].substr(0, sisa),
-    //         ribuan              = split[0].substr(sisa).match(/\d{3}/gi);
+    function formatRupiah(angka, prefix){
+            var number_string   = angka.replace(/[^,\d]/g, '').toString(),
+            split               = number_string.split(','),
+            sisa                = split[0].length % 3,
+            rupiah              = split[0].substr(0, sisa),
+            ribuan              = split[0].substr(sisa).match(/\d{3}/gi);
 
-    //         if(ribuan){
-    //             separator = sisa ? '.' : '';
-    //             rupiah += separator + ribuan.join('.');
-    //         }
+            if(ribuan){
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
 
-    //         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-    //         return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
-    //     }
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
+        }
 
-    //     function generateRupiah(elemValue) {
-    //         return $(elemValue).val(formatRupiah($(elemValue).val(), 'Rp. '))
-    //     }
+        function generateRupiah(elemValue) {
+            return $(elemValue).val(formatRupiah($(elemValue).val(), 'Rp. '))
+        }
 
-    //         $(document).on('keyup', '#diterima', function(e){
-    //             generateRupiah(this);
-    //         })
-
-    
-
+            $(document).on('keyup', '#diterima', function(e){
+                generateRupiah(this);
+            })
 
     
-
     function tampilProduk() {
         $('#modal-produk').modal('show');
     }
@@ -388,5 +385,6 @@ Transaksi Pembelian
                 return;
             })
     }
+
 </script>
 @endpush

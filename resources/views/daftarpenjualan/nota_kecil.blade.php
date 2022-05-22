@@ -14,7 +14,7 @@
         }
         p {
             display: block;
-            margin: 3px;
+            margin: 4px;
             font-size: 10pt;
         }
         table td {
@@ -30,7 +30,7 @@
         @media print {
             @page {
                 margin: 0;
-                size: 75mm 
+                size: 85mm 
     ';
     ?>
     <?php 
@@ -42,7 +42,7 @@
     <?php
     $style .= '
             html, body {
-                width: 70mm;
+                width: 80mm;
             }
             .btn-print {
                 display: none;
@@ -112,8 +112,7 @@
     </table>
 
     <p class="text-center">===================================</p>
-    <p class="text-center">-- TERIMA KASIH GES --</p>
-    <p class="text-center">-- SALAM YGY!! --</p>
+    <p class="text-center">-- TERIMA KASIH --</p>
 
     <script>
         let body = document.body;

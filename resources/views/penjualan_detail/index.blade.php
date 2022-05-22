@@ -72,6 +72,7 @@ Transaksi Penjualan
 
                 <table class="table table-stiped table-bordered table-penjualan">
                     <thead>
+<<<<<<< HEAD
                         <th width="4%">No</th>
                         <th width="10%" class="text-center">Barcode</th>
                         <th class="text-center">Nama</th>
@@ -80,6 +81,16 @@ Transaksi Penjualan
                         <th width="6%" class="text-center">Diskon</th>
                         <th width="15%" class="text-center">Subtotal</th>
                         <th width="8%" class="text-center">Aksi</th>
+=======
+                        <th width="5%">No</th>
+                        <th>Kode</th>
+                        <th>Nama</th>
+                        <th>Harga</th>
+                        <th width="15%">Jumlah</th>
+              
+                        <th>Subtotal</th>
+                        <th width="15%"><i class="fa fa-cog"></i></th>
+>>>>>>> ee6a89f45292091418a4e7de8297323cb6e79979
                     </thead>
                 </table>
 
@@ -135,7 +146,7 @@ Transaksi Penjualan
             </div>
 
             <div class="box-footer mb-4 btn-submit">
-                <button type="submit" class="btn btn-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
+                <button type="submit" class="btn btn-outline-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
             </div>
         </div>
     </div>
@@ -165,7 +176,7 @@ Transaksi Penjualan
                 {data: 'nama_produk'},
                 {data: 'harga_jual'},
                 {data: 'jumlah'},
-                {data: 'diskon'},
+               
                 {data: 'subtotal'},
                 {data: 'aksi', searchable: false, sortable: false},
             ],
@@ -185,17 +196,6 @@ Transaksi Penjualan
             let id = $(this).data('id');
             let jumlah = parseInt($(this).val());
 
-            if (jumlah < 1) {
-                $(this).val(1);
-                Swal.fire({
-                    title: 'Gagal!',
-                    text: 'Jumlah tidak boleh kurang dari 1',
-                    icon: 'warning',
-                    confirmButtonText: 'Kembali',
-                    confirmButtonColor: '#e80c29'
-                })    
-                return;
-            }
             if (jumlah > 10000) {
                 $(this).val(10000);
                 Swal.fire({
@@ -220,8 +220,13 @@ Transaksi Penjualan
                     });
                 })
                 .fail(errors => {
-                    alert('Tidak dapat menyimpan data');
-                    return;
+                    Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Stok habis, silahkan pilih produk lain',
+                    icon: 'warning',
+                    confirmButtonText: 'Kembali',
+                    confirmButtonColor: '#e80c29'
+                })         
                 });
         });
 
@@ -262,7 +267,7 @@ Transaksi Penjualan
         $('#id_produk').val(id);
         $('#barcode').val(kode);
         hideProduk();
-        // tambahProduk();
+
     }
 
     function tambahProduk() {
@@ -277,6 +282,30 @@ Transaksi Penjualan
                 return;
             });
     }
+
+    function formatRupiah(angka, prefix){
+            var number_string   = angka.replace(/[^,\d]/g, '').toString(),
+            split               = number_string.split(','),
+            sisa                = split[0].length % 3,
+            rupiah              = split[0].substr(0, sisa),
+            ribuan              = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if(ribuan){
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
+        }
+
+        function generateRupiah(elemValue) {
+            return $(elemValue).val(formatRupiah($(elemValue).val(), 'Rp. '))
+        }
+
+            $(document).on('keyup', '#diterima', function(e){
+                generateRupiah(this);
+            })
 
     function deleteData(url) {
         Swal.fire({
