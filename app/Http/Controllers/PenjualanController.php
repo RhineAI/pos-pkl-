@@ -7,6 +7,7 @@ use App\Models\PenjualanDetail;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Setting;
+use Barryvdh\DomPDF\PDF;
 
 class PenjualanController extends Controller
 {
@@ -273,8 +274,19 @@ class PenjualanController extends Controller
         return view('daftarpenjualan.nota_kecil', compact('setting', 'penjualan', 'detail', 'produk'));
     }
 
-    // public function notaBesar() 
-    // {
-        
-    // }
+    public function notaBesar()
+    {
+        $setting = Setting::first();
+        $penjualan = Penjualan::find(session('id_penjualan'));
+        if (! $penjualan) {
+            abort(404);
+        }
+        $detail = PenjualanDetail::with('produk')
+            ->where('id_penjualan', session('id_penjualan'))
+            ->get();
+
+        $pdf = PDF::loadView('penjualan.nota_besar', compact('setting', 'penjualan', 'detail'));
+        $pdf->setPaper(0,0,609,440, 'potrait');
+        return $pdf->stream('Transaksi-'. date('Y-m-d-his') .'.pdf');
+    }
 }

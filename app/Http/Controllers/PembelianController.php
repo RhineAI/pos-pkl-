@@ -62,25 +62,25 @@ class PembelianController extends Controller
             ->make(true);
     }
 
-    // public function cancel($id) {
-    //     $pembelian = Pembelian::find($id);
+    public function cancel($id) {
+        $pembelian = Pembelian::find($id);
 
-    //     $detail    = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
-    //     foreach ($detail as $item) {
-    //         $produk = Produk::find($item->id_produk);
-    //         if ($produk) {
-    //             $produk->stok -= $item->jumlah;
-    //             $produk->update();
-    //         }
+        $detail    = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
+        foreach ($detail as $item) {
+            $produk = Produk::find($item->id_produk);
+            if ($produk) {
+                $produk->stok -= $item->jumlah;
+                $produk->update();
+            }
 
-    //         $item->delete();
-    //     }
+            $item->delete();
+        }
 
-    //     $pembelian->delete();
+        $pembelian->delete();
 
-    //     return redirect('/dashboard');
+        return redirect('/dashboard');
+    }
 
-    // }
 
     /**
      * Show the form for creating a new resource.

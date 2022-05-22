@@ -14,7 +14,7 @@
         }
         p {
             display: block;
-            margin: 3px;
+            margin: 4px;
             font-size: 10pt;
         }
         table td {
@@ -30,7 +30,7 @@
         @media print {
             @page {
                 margin: 0;
-                size: 90mm 
+                size: 85mm 
     ';
     ?>
     <?php 

@@ -118,6 +118,25 @@ class PembelianDetailController extends Controller
         return response(null, 204);
     }
 
+      public function cancel($id) {
+        $pembelian = Pembelian::find($id);
+
+        $detail    = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
+        foreach ($detail as $item) {
+            $produk = Produk::find($item->id_produk);
+            if ($produk) {
+                $produk->stok -= $item->jumlah;
+                $produk->update();
+            }
+
+            $item->delete();
+        }
+
+        $pembelian->delete();
+
+        return redirect('/dashboard');
+    }
+
 
     function loadForm($diskon = 0, $total, $diterima)
     {

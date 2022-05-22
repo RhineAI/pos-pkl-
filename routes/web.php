@@ -77,12 +77,13 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/pembelian/data', [PembelianController::class, 'data'])->name('pembelian.data');
     Route::get('/pembelian/{id}/create', [PembelianController::class, 'create'])->name('pembelian.create');
-    // Route::get('/pembelian/cancel/{id}', [PembelianController::class, 'cancel'])->name('pembelian.cancel');
     Route::resource('/pembelian', PembelianController::class)
     ->except('create');
+    // Route::get('/pembelian/cancel/{id}', [PembelianController::class, 'cancel'])->name('pembelian.cancel');
 
     // Route pembelian detail
     Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
+    // Route::get('/pembeliandetail/cancel/{id}', [PembelianController::class, 'cancel'])->name('pembelian_detail.cancel');
     Route::get('/pembelian_detail/loadform/{diskon}/{total}/{diterima}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
    
     Route::resource('/pembelian_detail', PembelianDetailController::class)

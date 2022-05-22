@@ -135,7 +135,7 @@
             </div>
 
             <div class="box-footer mb-4 btn-submit">
-                <button type="submit" class="btn btn-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
+                <button type="submit" class="btn btn-outline-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
             </div>
         </div>
     </div>
@@ -185,17 +185,6 @@
             let id = $(this).data('id');
             let jumlah = parseInt($(this).val());
 
-            // if (jumlah < -1) {
-            //     $(this).val(0);
-            //     Swal.fire({
-            //         title: 'Gagal!',
-            //         text: 'Jumlah tidak boleh kurang dari 1',
-            //         icon: 'warning',
-            //         confirmButtonText: 'Kembali',
-            //         confirmButtonColor: '#e80c29'
-            //     })    
-            //     return;
-            // }
             if (jumlah > 10000) {
                 $(this).val(10000);
                 Swal.fire({

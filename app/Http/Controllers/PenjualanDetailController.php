@@ -147,6 +147,12 @@ class PenjualanDetailController extends Controller
         $detail->id_produk = $produk->id_produk;
         $detail->harga_jual = $produk->harga_jual;
         
+        if ( $request->barcode != $produk->barcode) {
+            $detail->jumlah + 0;
+        } else {
+            $detail->jumlah + 1;
+        }
+
         if ($produk->stok <= $request->jumlah)
         {
             $this->session->set_flashdata('error', 'Jumlah Barang melebihi stok');
