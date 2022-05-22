@@ -150,6 +150,7 @@ Transaksi Pembelian
             </div>
 
             <div class="box-footer mb-4 btn-submit">
+                {{-- <a href="{{ route('pembelian.cancel', $pembelian->id_pembelian) }}"class="btn btn-outline-warning"><i class="fa-solid fa-cart-shopping"></i> Batalkan Transaksi</a> --}}
                 <button type="submit" class="btn btn-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan Transaksi</button>
             </div>
         </div>

@@ -234,7 +234,9 @@ class PenjualanController extends Controller
 
         $penjualan->delete();
 
-        return redirect('/dashboard');
+        // alert('{{ alert }}');
+
+        return redirect('/dashboard')->with('alert', '-');
 
     }
 

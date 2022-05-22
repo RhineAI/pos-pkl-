@@ -41,8 +41,8 @@ return new class extends Migration
             $table->unsignedInteger('id_penjualan')->change();
             $table->dropForeign('penjualan_detail_id_penjualan_foreign');
 
-            $table->unsignedInteger('id_produk')->change();
-            $table->dropForeign('produ_id_produk_foreign');
+            // $table->unsignedInteger('id_produk')->change();
+            // $table->dropForeign('produ_id_produk_foreign');
         });
     }
 };

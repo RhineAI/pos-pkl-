@@ -39,6 +39,8 @@ class PembelianDetailController extends Controller
         }
     }
 
+  
+
 
     public function data($id)
     {

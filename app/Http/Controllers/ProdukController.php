@@ -57,12 +57,6 @@ class ProdukController extends Controller
             ->addColumn('barcode', function ($produk) {
                 return '<span class="badge badge-info">'. $produk->barcode .'</span>';
             })
-            // ->addColumn('kategori', function ($produk) {
-            //     return $produk->nama_kategori;
-            // })
-            // ->addColumn('satuan', function ($produk) {
-            //     return $produk->nama_satuan;
-            // })
             ->addColumn('harga_beli', function ($produk) {
                 return 'Rp. '. format_uang($produk->harga_beli);
             })
@@ -72,9 +66,6 @@ class ProdukController extends Controller
             ->addColumn('stok', function ($produk) {
                 return format_uang($produk->stok);
             })
-            // ->addColumn('diskon', function ($produk) {
-            //     return $produk->diskon .' %';
-            // })
             ->addColumn('ud', function($produk) { 
                 return '
                     <button onclick="editData(`'. route('produk.update', $produk->id_produk).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/></button>
