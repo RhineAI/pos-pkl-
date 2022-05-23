@@ -66,7 +66,6 @@ Data Semua Produk
                     {data:'nama_satuan'},
                     {data:'harga_beli'},
                     {data:'harga_jual'},
-                    // {data:'diskon'},
                     {data:'stok'},
                     {data:'ud', searchable: false, sortable: false},
                 ]
