@@ -30,7 +30,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Login untuk memulai aktivitas anda</p>
 
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ route('login') }}" method="post" id="form-login" name="form-login">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" required>
@@ -73,3 +73,61 @@
 
 <!-- /.login-box -->
 @endsection
+
+@push('script')
+    <script>
+        // $('#form-login').validator().on('submit', function (e) {
+        //     .done((response) => {
+        //         Swal.fire({
+        //             title: 'Sukses!',
+        //             text: response,
+        //             icon: 'success',
+        //             confirmButtonText: 'Lanjut',
+        //             confirmButtonColor: '#28A745'
+        //         })
+        //     })
+        //     .fail((errors) => {
+        //         Swal.fire({
+        //             title: 'Gagal!',
+        //             text: 'Data Produk yang diinput sudah ada',
+        //             icon: 'error',
+        //             confirmButtonText: 'Kembali',
+        //             confirmButtonColor: '#DC3545'
+        //         })
+
+        //         return;
+        //     });
+                
+        // });
+
+        $('#form-login').on('submit', function (e) {
+            e.preventDefault()
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize()
+                .done((response) => {
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: response,
+                        icon: 'success',
+                        confirmButtonText: 'Lanjut',
+                        confirmButtonColor: '#28A745'
+                    })
+                })
+                .fail((errors) => {
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data Produk yang diinput sudah ada',
+                        icon: 'error',
+                        confirmButtonText: 'Kembali',
+                        confirmButtonColor: '#DC3545'
+                    })
+
+                    return;
+                });
+            })
+        })
+
+    </script>
+@endpush
