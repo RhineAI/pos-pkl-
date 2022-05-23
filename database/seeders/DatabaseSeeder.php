@@ -51,23 +51,13 @@ class DatabaseSeeder extends Seeder
             'id_satuan' => 1,
             'harga_beli' => 10000,
             'harga_jual' => 12000,
-            'stok' => 10
+            'stok' => 100
         ]);
 
         Supplier::create([
             'nama' => 'Supplier1',
             'alamat' => 'Cianjur',
             'telepon' => '0123456789'
-        ]);
-
-        Produk::create([
-            'barcode' => 'BRC-202205001',
-            'nama_produk' => 'Nasi Goreng',
-            'id_kategori' => 1,
-            'id_satuan' => 1,
-            'harga_beli' => 12000,
-            'harga_jual' => 18000,
-            'stok' => 100,
         ]);
 
         Supplier::create([

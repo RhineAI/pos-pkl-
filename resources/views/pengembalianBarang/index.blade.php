@@ -25,14 +25,14 @@ Pengembalian Barang
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Tanggal</th>
-                        <th>Barcode</th>
-                        <th>Produk</th>
-                        <th>Jumlah (Stok)</th>
-                        <th>Refund</th>
-                        <th>Supplier</th>
-                        <th>Keterangan</th>
-                        <th width="13%">Aksi</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Barcode</th>
+                        <th class="text-center">Produk</th>
+                        <th class="text-center">Jumlah (Stok)</th>
+                        <th class="text-center">Refund</th>
+                        <th class="text-center">Supplier</th>
+                        <th class="text-center">Keterangan</th>
+                        <th width="12%" class="text-center">Aksi</th>
                     </thead>
                 </table>
             </div>

@@ -12,7 +12,7 @@
                   <div class="col-sm-4">
                       <ol class="breadcrumb float-sm-right">
                           @section('breadcrumb')
-                          <li class="breadcrumb-item"><a href="/">Home</a></li>
+                          <li class="breadcrumb-item"><a href="/"><i class="nav-icon fa fa-house-chimney"></i> Dashboard</a></li>
                           @show
                       </ol>
                   </div><!-- /.col -->

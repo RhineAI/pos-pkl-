@@ -46,7 +46,7 @@ Dashboard
                     <div class="icon">
                         <i class="fas fa-cart-plus"></i>
                     </div>
-                    <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="/pembelian" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- .col -->
@@ -92,7 +92,7 @@ Dashboard
                 <div class="col-md-12">
                   <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Grafik Pembelian {{ tanggal_indonesia($tanggal_awal, false) }} s/d {{ tanggal_indonesia($tanggal_akhir, false) }}</h3>
+                      <h3 class="card-title">Grafik Pembelian {{ tanggal_indonesia($TanggalAwal, false) }} s/d {{ tanggal_indonesia($TanggalAkhir, false) }}</h3>
       
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -114,7 +114,7 @@ Dashboard
                 <div class="col-md-12">
                     <div class="card card-success">
                       <div class="card-header">
-                        <h3 class="card-title">Grafik Penjualan {{ tanggal_indonesia($tanggal_awal, false) }} s/d {{ tanggal_indonesia($tanggal_akhir, false) }}</h3>
+                        <h3 class="card-title">Grafik Pembelian {{ tanggal_indonesia($TanggalAwal, false) }} s/d {{ tanggal_indonesia($TanggalAkhir, false) }}</h3>
         
                         <div class="card-tools">
                           <button type="button" class="btn btn-tool" data-card-widget="collapse">

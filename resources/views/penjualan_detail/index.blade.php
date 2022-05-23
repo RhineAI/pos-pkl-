@@ -72,25 +72,14 @@ Transaksi Penjualan
 
                 <table class="table table-stiped table-bordered table-penjualan">
                     <thead>
-<<<<<<< HEAD
                         <th width="4%">No</th>
                         <th width="10%" class="text-center">Barcode</th>
                         <th class="text-center">Nama</th>
                         <th width="15%"class="text-center">Harga</th>
                         <th width="12%" class="text-center">Jumlah</th>
-                        <th width="6%" class="text-center">Diskon</th>
-                        <th width="15%" class="text-center">Subtotal</th>
+                        <th width="12%" class="text-center">Diskon</th>
+                        <th width="12%" class="text-center">Subtotal</th>
                         <th width="8%" class="text-center">Aksi</th>
-=======
-                        <th width="5%">No</th>
-                        <th>Kode</th>
-                        <th>Nama</th>
-                        <th>Harga</th>
-                        <th width="15%">Jumlah</th>
-              
-                        <th>Subtotal</th>
-                        <th width="15%"><i class="fa fa-cog"></i></th>
->>>>>>> ee6a89f45292091418a4e7de8297323cb6e79979
                     </thead>
                 </table>
 

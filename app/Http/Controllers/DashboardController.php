@@ -22,8 +22,12 @@ class DashboardController extends Controller
         $seluruh_pembelian = Pembelian::count();
         $seluruh_penjualan = Penjualan::count();
 
+        $TanggalAwal = date('Y-m-01');
+        $TanggalAkhir = date('Y-m-d');
+
         $tanggal_awal = date('Y-m-01');
         $tanggal_akhir = date('Y-m-d');
+        
 
         $data_tanggal = array();
         $data_pengeluaran = array();
@@ -64,9 +68,9 @@ class DashboardController extends Controller
         // }
 
         if (auth()->user()->level == 1) {
-            return view('admin.dashboard', compact('produk', 'supplier', 'tanggal_awal', 'tanggal_akhir', 'seluruh_pembelian', 'seluruh_penjualan', 'data_tanggal', 'data_pendapatan', 'data_pengeluaran'));
+            return view('admin.dashboard', compact('produk', 'supplier', 'TanggalAwal', 'TanggalAkhir', 'tanggal_awal', 'tanggal_akhir', 'seluruh_pembelian', 'seluruh_penjualan', 'data_tanggal', 'data_pengeluaran', 'data_pendapatan'));
         } else {
-            return view('kasir.dashboard', compact('produk', 'supplier', 'tanggal_awal', 'tanggal_akhir', 'seluruh_pembelian', 'seluruh_penjualan', 'data_tanggal', 'data_pendapatan', 'data_pengeluaran'));
+            return view('kasir.dashboard', compact('produk', 'supplier', 'TanggalAwal', 'TanggalAkhir', 'tanggal_awal', 'tanggal_akhir', 'seluruh_pembelian', 'seluruh_penjualan', 'data_tanggal', 'data_pengeluaran', 'data_pendapatan'));
         }
         
     }

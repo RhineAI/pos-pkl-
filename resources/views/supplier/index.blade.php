@@ -26,7 +26,7 @@ Data Semua Supplier
                             <th class="text-center">Nama</th>
                             <th class="text-center">Alamat</th>
                             <th class="text-center">Telepon</th>
-                            <th width="12%" class="text-center">Aksi</th>
+                            <th width="13%" class="text-center">Aksi</th>
                         </thead>
                     </table>
                 </div>

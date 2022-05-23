@@ -42,7 +42,7 @@ Total Pendapatan Penjualan
                                 <span class="help-block with-errors"></span>
                             </div>
 
-                            <button type="" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-search"></i>Cari</button>
+                            <button type="" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-search"></i> Cari</button>
                          
                         </div>
                     </form>

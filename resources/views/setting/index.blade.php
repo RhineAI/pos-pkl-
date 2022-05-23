@@ -6,7 +6,7 @@ Pengaturan Toko
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Pengaturan</li>
+<li class="breadcrumb-item active">Pengaturan Toko</li>
 @endsection
 
 @section('content')
@@ -47,15 +47,6 @@ Pengaturan Toko
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
-
-                    {{-- <div class="form-group row">
-                        <label for="Logo_Perusahaan" class="col-sm-3 control-label">Logo Perusahaan</label>
-                        <div class="col-sm-5">
-                            <input type="file" name="path_logo" class="form-control" id="Logo_Perusahaan">
-                            <span class="help-block with-errors"></span>
-                            <div class="tampil-logo"></div>
-                        </div>
-                    </div> --}}
 
                     <div class="form-group row">
                         <label for="Logo_Perusahaan" class="col-sm-3 control-label">Logo Perusahaan</label>
