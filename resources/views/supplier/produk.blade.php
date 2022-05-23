@@ -11,11 +11,13 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('supplier.store') }}" method="get">
+                <form action="{{ route('supplier.produk') }}" method="POST" id="simpanProduct">
+                    <input type="hidden" name="id_supplier" id="id_supplier"> 
+                    <input type="hidden" name="id_produk">
                     <table class="table table-striped table-bordered table-produk">
                         <thead>
                             <th>
-                                <input type="checkbox" name="select-all" id="select-all"> 
+                                <input type="checkbox" name="id_produk" id="select-all"> 
                             </th>
                             <th width="6%">No</th>
                             <th>Barcode</th>
@@ -28,7 +30,7 @@
                             <tr>
                                
                                 <td>
-                                    <input type="checkbox" name="checkbox[]" value="{{ $item->id_produk }}">
+                                    <input type="checkbox" name="checkbox[]" id="id_produk" value="{{ $item->id_produk }}">
                                 </td>
                                 <td width="6%">{{ $key+1 }}</td>
                                 <td id="barcode"><span class="badge badge-info">{{ $item->barcode }}</span></td>
@@ -46,14 +48,13 @@
                         @endforeach
                         </tbody>
                     </table>
+                </div>
 
-                </form>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-flat btn-sm" data-dismiss="modal"><i class="fa fa-circle-xmark"></i> Batal</button>
-                <button type="submit" name="submit" onclick="tambahkanProduk()" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-circle-check"></i> Simpan</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat btn-sm" data-dismiss="modal"><i class="fa fa-circle-xmark"></i> Batal</button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-circle-check"></i> Simpan</button>
+                </div>
+            </form>
 
         </div>
     </div>

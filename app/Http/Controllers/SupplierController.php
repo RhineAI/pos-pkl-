@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Supplier;
+use App\Models\Produk;
+use App\Models\ProdukSupplier;
 
 class SupplierController extends Controller
 {
@@ -14,7 +16,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('supplier.index');
+        $produk = Produk::all();
+        return view('supplier.index', ['produk' => $produk]);
     }
 
     public function data() 
@@ -26,12 +29,31 @@ class SupplierController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($supplier) {
                 return '
-                    <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-xs btn-success btn-flat"><i class="bi bi-pencil-square"></i> Edit</button>
-                    <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i> Hapus</button>
+                    <div class="btn-group">
+                        <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-sm btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>
+                        <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-sm btn-danger btn-flat"><i class="bi bi-trash"></i></button>
+                        <button id="tambahProdukSupplier" data-id_supplier="'.$supplier->id_supplier.'" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i></button>
+                    </div>
                 ';
             })
             ->rawColumns(['aksi'])
             ->make(true);
+    }
+
+    public function simpanProduk(Request $request)
+    {
+        foreach ($request->id_produk as $key => $value) {
+            $produk_supplier = new ProdukSupplier();
+            $produk_supplier->id_supplier = $request->id_supplier;
+            $produk_supplier->id_produk = $value;
+
+            $produk_supplier->save();
+        }
+
+        return response([
+            'status' => true,
+            'message' => 'Produk berhasil ditambahkan!'
+        ], 200);
     }
     
 

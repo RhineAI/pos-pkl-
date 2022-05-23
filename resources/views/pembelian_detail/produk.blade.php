@@ -21,21 +21,23 @@
                         <th width="6%">Aksi</th>
                     </thead>
                     <tbody>
-                        @foreach ($produk as $key => $item)
+                        @foreach ($supplier as $key => $item)
+                            @foreach ($item->produk as $k => $produk)
                             <tr>
-                                <td width="6%">{{ $key+1 }}</td>
-                                <td width="10%"><span class="badge badge-info">{{ $item->barcode }}</span></td>
-                                <td>{{ $item->nama_produk }}</td>
-                                <td>{{ 'Rp. '. format_uang($item->harga_beli) }}</td>
-                                <td>{{ $item->stok }}</td>
+                                <td width="6%">{{ $k+1 }}</td>
+                                <td width="10%"><span class="badge badge-info">{{ $produk->barcode }}</span></td>
+                                <td>{{ $produk->nama_produk }}</td>
+                                <td>{{ 'Rp. '. format_uang($produk->harga_beli) }}</td>
+                                <td>{{ $produk->stok }}</td>
                                 <td width="6%">
                                     <a href="#" class="btn btn-primary btn-xs btn-flat"
-                                    onclick="pilihProduk('{{ $item->id_produk }}', '{{ $item->barcode }}') ">    
+                                    onclick="pilihProduk('{{ $produk->id_produk }}', '{{ $produk->barcode }}') ">    
                                         <i class="fa fa-check-circle"></i>
                                         Pilih
                                     </a>
                                 </td>
                             </tr>
+                            @endforeach
                         @endforeach
                     </tbody>
                 </table>

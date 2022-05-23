@@ -13,4 +13,8 @@ class ProdukSupplier extends Model
     protected $primaryKey = 'id_produk_supplier';
     protected $guarded = [];
 
+    public function produk() 
+    {
+        return $this->hasOne(Produk::class, 'id_produk', 'id_produk');
+    }
 }

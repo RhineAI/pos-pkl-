@@ -34,6 +34,7 @@ Data Semua Supplier
         </div>
 </div>
 @includeIf('supplier.form')
+@includeIf('supplier.produk')
 @endsection
 
 @push('scripts')
@@ -98,6 +99,83 @@ Data Semua Supplier
             $('#modal-form [name=nama]').focus();
         }
 
+        $(document).on('click', '#tambahProdukSupplier', function () {
+            let id_supplier = $(this).data('id_supplier');
+            $('#modal-produk').modal('show')
+
+            $('#id_supplier').val(id_supplier)
+        })
+
+        let arrProduct = []
+
+        $(document).on('click', '#id_produk', function () {
+            let id_produk = $(this).val()
+
+            if($(this).is(':checked')) {
+                arrProduct.push(id_produk)
+            } else {
+                let index = arrProduct.indexOf(id_produk)
+                if(index > -1) {
+                    arrProduct.splice(index, 1)
+                }
+            }
+        })
+
+        $("#simpanProduct").on('submit', function (e) {
+            e.preventDefault()
+
+            let finalData = {
+                id_produk: arrProduct,
+                id_supplier: $("#id_supplier").val(),
+                _token: "{{ csrf_token() }}"
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: finalData,
+                success:function (response) {
+                    if(response.status == true) {
+                        $('#modal-produk').modal('hide');
+                        Swal.fire({
+                            title: 'Sukses!',
+                            text: response.message,
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
+                        })
+                        table.ajax.reload();
+                    }
+                }
+            })
+
+            // $.post($(this).attr('action'), data)
+            //     .done((response) => {
+            //         console.log(response)
+            //         // $('#modal-produk').modal('hide');
+            //         // Swal.fire({
+            //         //     title: 'Sukses!',
+            //         //     text: response.message,
+            //         //     icon: 'success',
+            //         //     confirmButtonText: 'Lanjut',
+            //         //     confirmButtonColor: '#28A745'
+            //         // })
+            //         // table.ajax.reload();
+            //     })
+            //     .fail((errors) => {
+            //         Swal.fire({
+            //             title: 'Gagal!',
+            //             text: response.message,
+            //             icon: 'error',
+            //             confirmButtonText: 'Kembali',
+            //             confirmButtonColor: '#DC3545'
+            //         })
+            //         table.ajax.reload();
+    
+            //         return;
+            //     });
+        })
+
         // $(document).on('click', '.edit', function (event) {
         //         let nama = $(this).data('supplier')
         //         let alamat = $(this).data('supplier')
@@ -144,17 +222,6 @@ Data Semua Supplier
             hideProduk();
             tambahkanProduk();
         }
-
-        function tambahkanProduk() {
-        $.post('{{ route('supplier.tambah') }}', $('.form-produk').serialize())
-            .done(response => {
-                alert('sucess');
-            })
-            .fail(errors => {
-                alert('Tidak dapat menyimpan data');
-                return;
-            });
-    }
         
         function editData(url) {
             $('#modal-form').modal('show')

@@ -62,6 +62,8 @@ class PembelianController extends Controller
             ->make(true);
     }
 
+
+
     public function cancel($id) {
         $pembelian = Pembelian::find($id);
 
