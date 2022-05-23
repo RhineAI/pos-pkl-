@@ -21,8 +21,7 @@ class SettingTableSeeder extends Seeder
             'alamat' => 'Jl.Mayor Harun Kabir, Bojong Herang, Kec. Cianjur, Kab. Cianjur, Jawa Barat 43216',
             'telepon' => '087836370765',
             'tipe_nota' => 1, //kecil
-            'path_logo' => '/images/monster.png',
-            'barcode' => 'MS-'
+            'path_logo' => '/images/monster.png'
         ]);
     }
 }

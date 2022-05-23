@@ -39,14 +39,14 @@ Dashboard
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>{{ $seluruh_pembelian }}</h3>
 
-                        <p>Transaksi Pembelian</p>
+                        <p>Total Pembelian</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-cart-plus"></i>
                     </div>
-                    <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="/pembelian" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- .col -->
@@ -54,14 +54,14 @@ Dashboard
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>{{ $seluruh_penjualan }}</h3>
 
-                        <p>Transaksi Penjualan</p>
+                        <p>Total Penjualan</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-cart-plus"></i>
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
-                    <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="/daftarpenjualan" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -92,7 +92,7 @@ Dashboard
                 <div class="col-md-12">
                   <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Grafik Pembelian {{ tanggal_indonesia($tanggal_awal, false) }} s/d {{ tanggal_indonesia($tanggal_akhir, false) }}</h3>
+                      <h3 class="card-title">Grafik Pembelian {{ tanggal_indonesia($TanggalAwal, false) }} s/d {{ tanggal_indonesia($TanggalAkhir, false) }}</h3>
       
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -114,7 +114,7 @@ Dashboard
                 <div class="col-md-12">
                     <div class="card card-success">
                       <div class="card-header">
-                        <h3 class="card-title">Grafik Penjualan {{ tanggal_indonesia($tanggal_awal, false) }} s/d {{ tanggal_indonesia($tanggal_akhir, false) }}</h3>
+                        <h3 class="card-title">Grafik Pembelian {{ tanggal_indonesia($TanggalAwal, false) }} s/d {{ tanggal_indonesia($TanggalAkhir, false) }}</h3>
         
                         <div class="card-tools">
                           <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -153,7 +153,7 @@ Dashboard
             var areaChartCanvas2 = $('#areaChart2').get(0).getContext('2d')
 
             var areaChartData = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: {{ json_encode($data_tanggal) }},
                 datasets: [{
                         label: 'Digital Goods',
                         backgroundColor: 'rgb(3, 119, 252)',
@@ -163,12 +163,12 @@ Dashboard
                         pointStrokeColor: 'rgba(60,141,188,1)',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: [28, 48, 40, 19, 86, 27, 90]
+                        data: {{ json_encode($data_pengeluaran) }}
                     },
                 ]
             }
             var areaChartData2 = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: {{ json_encode($data_tanggal) }},
                 datasets: [{
                         label: 'Digital Goods',
                         backgroundColor: 'rgb(10, 143, 32)',
@@ -178,7 +178,7 @@ Dashboard
                         pointStrokeColor: 'rgba(60,141,188,1)',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: [28, 48, 40, 19, 86, 27, 90]
+                        data: {{ json_encode($data_pendapatan) }}
                     },
                 ]
             }

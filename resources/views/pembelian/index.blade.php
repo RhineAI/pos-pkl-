@@ -11,7 +11,7 @@ Daftar Pembelian
 
 @section('content')
 <div class="row mx-3">
-    <div class="col-md-12 p-2 mb-3" style="background-color: white">
+    <div class="col-md-12 p-3 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addForm()" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah Transaksi</button>
@@ -26,13 +26,13 @@ Daftar Pembelian
                 <table class="table table-striped table-bordered table-pembelian">
                     <thead>
                         <th width="6%">No</th>
-                        <th>Tanggal</th>
-                        <th width="20%">Nama Supplier</th>
-                        <th>Total Item</th>
-                        <th>Total Harga</th>
-                        <th>Diskon</th>
-                        <th>Total Bayar</th>
-                        <th width="12%">Aksi</th>
+                        <th class="text-center">Tanggal</th>
+                        <th width="20%" class="text-center">Nama Supplier</th>
+                        <th class="text-center">Total Item</th>
+                        <th class="text-center">Total Harga</th>
+                        <th class="text-center">Diskon</th>
+                        <th class="text-center">Total Bayar</th>
+                        <th width="8%" class="text-center">Aksi</th>
                     </thead>
                 </table>
             </div>

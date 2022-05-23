@@ -212,20 +212,27 @@
                                 <p>Transaksi Aktif</p>
                             </a>
                         </li>
-                    </ul>
-                        
-                        
-                    
+                    </ul>  
                 </li>
-            
-                    
-                
+
+                {{-- Daftar Penjualan --}}
+                <li class="nav-item">
+                    <a href="{{ route('daftarpenjualan.index') }}" class="nav-link">
+                        <i class="nav-icon fa-solid fa-clipboard-list"></i>
+                        <p>
+                            Daftar Penjualan
+                        </p>
+                    </a>
+                </li>
+
+                {{-- Laporan --}}
                 <li class="nav-item">
                     <a href="{{ route('reportpenjualan.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>Laporan Penjualan</p>
                     </a>
                 </li>
+
                 @endif
             </ul>
         </nav>

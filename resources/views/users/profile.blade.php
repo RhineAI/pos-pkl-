@@ -6,7 +6,7 @@ Update Profile
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Profile</li>
+<li class="breadcrumb-item active">Update Profile</li>
 @endsection
 
 @section('content')

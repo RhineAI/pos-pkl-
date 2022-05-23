@@ -22,10 +22,11 @@ Data Semua Pengguna
                     <table class="table table-striped table-bordered">
                         <thead>
                             <th width="6%">No</th>
-                            <th>Nama</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th width="13%">Aksi</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Username</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Posisi</th>
+                            <th width="13%" class="text-center">Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -38,7 +39,7 @@ Data Semua Pengguna
 @push('scripts')
     <script>
         let table;
-
+        
         $(function () {
             table = $('.table').DataTable({
                 processing: true,
@@ -53,6 +54,7 @@ Data Semua Pengguna
                     {data:'name'},
                     {data:'username'},
                     {data:'email'},
+                    {data:'level'},
                     {data:'aksi', searchable: false, sortable: false},
                 ]
             });
@@ -102,6 +104,30 @@ Data Semua Pengguna
 
             $('#password , #password_confirmation').attr('required', true);
         }
+
+        // $(document).on('click', '.edit', function (event) {
+        //         let nama_kategori = $(this).data('kategori')
+        //         let url = $(this).data('route')
+
+        //         let data = {
+        //             nama_kategori: nama_kategori,
+        //             url: url
+        //         }
+
+        //         editForm(data)
+        // })
+
+        // function editForm(data) {
+        //         $('#modal-form').modal('show')
+        //         $('#modal-form .modal-title').text('Edit Kategori');
+
+        //         $('#modal-form form')[0].reset();
+        //         $('#modal-form form').attr('action', data.url);
+        //         $('#modal-form [name=_method]').val('put');
+        //         $('#modal-form [name=nama_kategori]').focus();
+
+        //         $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
+        // }
         
         function editData(url) {
             $('#modal-form').modal('show')
@@ -118,7 +144,8 @@ Data Semua Pengguna
                 .done((response) => {
                     $('#modal-form [name=name]').val(response.name);
                     $('#modal-form [name=username]').val(response.username);
-                    $('#modal-form [name=email]').val(response.email);                                     
+                    $('#modal-form [name=email]').val(response.email);   
+                    $('#modal-form [name=level]').val(response.level);                                  
                 })
                 .fail((errors) => {
                     alert('Gagal mengubah data!');
@@ -171,6 +198,37 @@ Data Semua Pengguna
             })
         }
 
-       
+        // function deleteForm(url) {
+        //     if (confirm('Hapus Pengguna yang dipilih?')) {
+        //     $.post(url, {
+        //             '_token': $('[name=csrf-token]').attr('content'),
+        //             '_method': 'delete'
+        //         })
+        //         .done((response) => {
+        //             alert(
+        //                 Swal.fire({
+        //                     title: 'Sukses!',
+        //                     text: 'Pengguna berhasil dihapus',
+        //                     icon: 'success',
+        //                     confirmButtonText: 'Lanjut',
+        //                     confirmButtonColor: '#28A745'
+        //                 })                       
+        //             );
+        //             table.ajax.reload();
+        //         })
+        //         .fail((errors) => {
+        //             alert(
+        //                 Swal.fire({
+        //                     title: 'Gagal!',
+        //                     text: 'Pengguna gagal dihapus',
+        //                     icon: 'error',
+        //                     confirmButtonText: 'Kembali',
+        //                     confirmButtonColor: '#DC3545'
+        //                 })                       
+        //             );
+        //             return;
+        //         });
+        //     }
+        // }
     </script>
 @endpush

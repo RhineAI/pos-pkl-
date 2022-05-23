@@ -9,16 +9,16 @@
 
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
-    <div class="col-md-11">
+    <div class="col-md-10">
         <ul class="navbar-nav">
-            <li class="nav-item mt-2">
+            <li class="nav-item my-2">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
 
-            <div class="col-md-5 mx-6" >
+            <div class="col-md-5" >
                 <div class="wrapper">
                     
-                    <div class="display mt-3"> 
+                    <div class="display my-2"> 
                         <div id="time" style="font-size: 21px; font-style: bold; font-family: century;"></div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
         
     </div>
 
-    <div class="col-md-1">
+    <div class="col-md-2">
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                
@@ -38,6 +38,7 @@
                         <img src="{{ asset('images/'.Auth::user()->foto) }}" class="user-image images-profile"
                             alt="User Image">
                     </a>
+                    <span class="hidden-xs">{{ auth()->user()->username }}</span>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
@@ -45,9 +46,9 @@
                                 alt="User Image">
     
                             <p>
-                                <b>Username</b> : <i>{{ auth()->user()->username }}</i>
+                                <b>Username</b> : {{ auth()->user()->username }}
                                 <br>
-                                <b>Email</b> : <i>{{ auth()->user()->email }}</i>
+                                <b>Email</b> : {{ auth()->user()->email }}
                             </p>
                         </li>
                         <!-- Menu Footer-->

@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <table class="table table-striped table-bordered table-detail">
                     <thead>
-                        <th width="6%">No</th>
+                        <th width="4%">No</th>
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Harga</th>

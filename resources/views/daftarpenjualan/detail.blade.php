@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="modal-supplier">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Detail Penjualan</h4>
@@ -12,8 +12,8 @@
             <div class="modal-body">
                 <table class="table table-striped table-bordered table-detail">
                     <thead>
-                        <th width="6%">No</th>
-                        <th>Kode</th>
+                        <th width="4%">No</th>
+                        <th>Barcode</th>
                         <th>Nama</th>
                         <th>Harga</th>
                         <th>Jumlah</th>

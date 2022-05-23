@@ -42,7 +42,7 @@ Total Pendapatan Penjualan
                                 <span class="help-block with-errors"></span>
                             </div>
 
-                            <button type="" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                            <button type="" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-search"></i> Cari</button>
                          
                         </div>
                     </form>
@@ -68,15 +68,15 @@ Total Pendapatan Penjualan
                                     {{-- <th colspan="2" rowspan="1"class="text-center">KETERANGAN</th> 
                                 </tr> --}} 
                                 
-                                    <th width="6%" class="">No</th>
-                                    <th width="12%">Tanggal</th>
+                                    <th width="4%" class="text-center">No</th>
+                                    <th class="text-center">Tanggal</th>
                                     {{-- <th width="10%" colspan="1">Nota</th> --}}
                                     {{-- <th width="12%" colspan="1" class="text-center">Harga</th>
                                     <th width="10%" colspan="1" class="text-center">Diskon</th>
                                     <th width="13%" colspan="1" class="text-center">Total Bayar</th> --}}
                                     {{-- <th width="11%" colspan="1" class="text-center">Kasir</th> --}}
-                                    <th width=13% colspan="1" class="text-center"> Total Pendapatan </th>
-                                    <th width="13%" colspan="1" class="text-center"><i class="fas fa-cog"></i> Aksi</th>
+                                    <th class="text-center">Total Pendapatan</th>
+                                    <th width="8%" class="text-center">Aksi</th>
                               
                             </thead>
                         </table>

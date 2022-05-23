@@ -23,10 +23,10 @@ Data Semua Supplier
                     <table class="table table-striped table-bordered">
                         <thead>
                             <th width="6%">No</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Telepon</th>
-                            <th width="12%">Aksi</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Alamat</th>
+                            <th class="text-center">Telepon</th>
+                            <th width="13%" class="text-center">Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -98,6 +98,33 @@ Data Semua Supplier
             $('#modal-form [name=nama]').focus();
         }
 
+        // $(document).on('click', '.edit', function (event) {
+        //         let nama = $(this).data('supplier')
+        //         let alamat = $(this).data('supplier')
+        //         let telepon = $(this).data('supplier')
+        //         let url = $(this).data('route')
+
+        //         let data = {
+        //             nama: nama,
+        //             alamat: alamat ,
+        //             telepon: telepon,
+        //             url: url
+        //         }
+
+        //         editForm(data)
+        // })
+
+        // function editForm(data) {
+        //         $('#modal-form').modal('show')
+        //         $('#modal-form .modal-title').text('Edit Supplier');
+
+        //         $('#modal-form form')[0].reset();
+        //         $('#modal-form form').attr('action', data.url);
+        //         $('#modal-form [name=_method]').val('put');
+        //         $('#modal-form [name=nama]').focus();
+
+        //         $('#modal-form [name=nama]').val(data.nama);
+        // }
         function tambahProduk(url) {
             $('#modal-produk').modal('show')
             $('#modal-produk .modal-title').text('Tambah Produk');

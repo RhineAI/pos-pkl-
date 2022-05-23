@@ -124,7 +124,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
-        function preview(selector, temporaryFile, width = 200) {
+        function preview(selector, temporaryFile, width = 100) {
             $(selector).empty();
             $(selector).append(`<img src="${window.URL.createObjectURL(temporaryFile)}" width="${width}">`);
         }

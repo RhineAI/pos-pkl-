@@ -15,7 +15,7 @@
                 <div class="modal-body">
 
                     <div class="form-group row">
-                        <label for="id_produk" class="col-md-3 col-md-offset-1 control-label">Kategori</label>
+                        <label for="id_produk" class="col-md-3 col-md-offset-1 control-label">Produk</label>
                         <div class="col-md-9">
                             <select name="id_produk" id="id_produk" class="form-control" required>
                                 <option value="">Pilih Produk</option>

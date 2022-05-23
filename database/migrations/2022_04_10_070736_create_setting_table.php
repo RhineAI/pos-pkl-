@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('setting', function (Blueprint $table) {
             $table->increments('id_setting');
-            $table->string(30)('nama_perusahaan');
+            $table->string('nama_perusahaan', 30);
             $table->text('alamat');
             $table->char('telepon');
             $table->tinyInteger('tipe_nota');
             $table->string('path_logo');
-            $table->string('barcode');
             $table->timestamps();
         });
     }
