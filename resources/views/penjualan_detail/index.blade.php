@@ -169,9 +169,10 @@ Transaksi Penjualan
                 {data: 'subtotal'},
                 {data: 'aksi', searchable: false, sortable: false},
             ],
-            dom: 'Brt',
             bSort: false,
-            paginate: false
+            paginate: false,
+            searching: false,
+            info: false
         })
         .on('draw.dt', function () {
             loadForm($('#diskon').val());

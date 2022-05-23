@@ -50,15 +50,15 @@ Transaksi Pembelian
                 <table>
                     <tr>
                         <td>Supplier</td>
-                        <td>: {{ $supplier->nama }}</td>
+                        <td>: {{ $findSupplier->nama }}</td>
                     </tr>
                     <tr>
                         <td>Telepon</td>
-                        <td>: {{ $supplier->telepon }}</td>
+                        <td>: {{ $findSupplier->telepon }}</td>
                     </tr>
                     <tr>
                         <td>Alamat</td>
-                        <td>: {{ $supplier->alamat }}</td>
+                        <td>: {{ $findSupplier->alamat }}</td>
                     </tr>
                 </table>
             </div>
@@ -184,13 +184,18 @@ Transaksi Pembelian
                 {data: 'subtotal'},
                 {data: 'aksi', searchable: false, sortable: false},
             ],
-            dom: 'Brt',
             bSort: false,
-            paginate: false
+            paginate: false,
+            paginate: false,
+            searching: false,
+            info: false
         })
         .on('draw.dt', function () {
             loadForm($('#diskon').val());
         });
+
+        table.buttons('.buttonsToHide').nodes().addClass('hidden');
+
         table2 = $('.table-produk').DataTable();
 
         $(document).on('input', '.quantity', function () {

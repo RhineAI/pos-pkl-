@@ -25,7 +25,7 @@ class UserController extends Controller
 
             return datatables()
                 ->of($user)
-                ->addIndexColumn()                
+                ->addIndexColumn()              
                 ->addColumn('aksi', function($user) {
                     return '
                         <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"></i> Edit</button> 
@@ -108,6 +108,7 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->level = $request->level;
+        
         if ($request->has('password') && $request->password != "" ) {
             $user->request = $request->password;
         }
@@ -155,6 +156,10 @@ class UserController extends Controller
                 return response()->json('Password lama tidak sesuai', 422);
             }
         }
+
+        $request->validate([
+            'foto' => 'image|file|max:3072',
+        ]);
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');

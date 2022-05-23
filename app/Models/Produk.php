@@ -16,4 +16,8 @@ class Produk extends Model
     public function pengembalianBarang() {
         return $this->belongsTo(PengembalianBarang::class, 'id_produk', 'id_produk');
     }
+    
+    public function supplier() {
+        return $this->belongsToMany(Supplier::class, 'produk_supplier', 'id_supplier', 'id_produk');
+    }
 }

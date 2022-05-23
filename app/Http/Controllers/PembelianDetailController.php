@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembelian;
 use App\Models\PembelianDetail;
 use App\Models\Produk;
+use App\Models\ProdukSupplier;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 
@@ -13,15 +14,16 @@ class PembelianDetailController extends Controller
     public function index()
     {
         $id_pembelian = session('id_pembelian');
-        $produk = Produk::orderBy('nama_produk')->get();
-        $supplier = Supplier::find(session('id_supplier'));
+        $supplier = Supplier::where('id_supplier', '=', session('id_supplier'))->with('produk')->get();
+        $findSupplier = Supplier::find(session('id_supplier'));
+        // dd($supplier);
         $diskon = Pembelian::find($id_pembelian)->diskon ?? 0;
 
         if (! $supplier) {
             abort(404);
         }
 
-        return view('pembelian_detail.index', compact('id_pembelian', 'produk', 'supplier', 'diskon'));
+        return view('pembelian_detail.index', compact('id_pembelian', 'supplier', 'findSupplier', 'diskon'));
     }
 
     public function checkPrice($value)

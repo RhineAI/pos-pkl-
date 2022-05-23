@@ -79,6 +79,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/pembelian/{id}/create', [PembelianController::class, 'create'])->name('pembelian.create');
     Route::resource('/pembelian', PembelianController::class)
     ->except('create');
+
+    Route::get('/pembelian/{id}/return', [PembelianController::class, 'return'])->name('pembelian.batalkan');
     // Route::get('/pembelian/cancel/{id}', [PembelianController::class, 'cancel'])->name('pembelian.cancel');
 
     // Route pembelian detail
@@ -120,7 +122,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
     Route::get('/supplier/tambah', [SupplierController::class, 'tambah'])->name('supplier.tambah');
+    Route::post('/supplier/simpan-produk', [SupplierController::class, 'simpanProduk'])->name('supplier.produk');
     Route::resource('/supplier', SupplierController::class);
+
 
     // Route stok laporan pembelian
     Route::get('/reportpembelian/data/{awal}/{akhir}', [ReportPembelianController::class, 'data'])->name('reportpembelian.data');
@@ -155,6 +159,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

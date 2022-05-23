@@ -73,28 +73,29 @@ Pengembalian Barang
                 if (! e.preventDefault()) {
                     $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                         .done((response) => {
-                            $('#modal-form').modal('hide');
-                            Swal.fire({
-                                title: 'Sukses!',
-                                text: response,
-                                icon: 'success',
-                                confirmButtonText: 'Lanjut',
-                                confirmButtonColor: '#28A745'
-                            })
-                            table.ajax.reload();
+                            if(response.status == true) {
+                                $('#modal-form').modal('hide');
+                                Swal.fire({
+                                    title: 'Sukses!',
+                                    text: response.message,
+                                    icon: 'success',
+                                    confirmButtonText: 'Lanjut',
+                                    confirmButtonColor: '#28A745'
+                                })
+                                table.ajax.reload();
+                            } else {
+                                Swal.fire({
+                                    title: 'Gagal!',
+                                    text: 'Terdapat Kesalahan',
+                                    icon: 'error',
+                                    confirmButtonText: 'Kembali',
+                                    confirmButtonColor: '#DC3545'
+                                })
+                                table.ajax.reload();
+                
+                                return;
+                            }
                         })
-                        .fail((errors) => {
-                            Swal.fire({
-                                title: 'Gagal!',
-                                text: 'Terdapat Kesalahan',
-                                icon: 'error',
-                                confirmButtonText: 'Kembali',
-                                confirmButtonColor: '#DC3545'
-                            })
-                            table.ajax.reload();
-            
-                            return;
-                        });
                 }
             });
         }); 
