@@ -32,7 +32,7 @@ class UserController extends Controller
                         <button onclick="deleteForm(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i> Hapus</button>
                         '; 
                     })
-                ->rawColumns(['aksi'])
+                ->rawColumns(['aksi', 'level'])
                 ->make(true);
                 
 

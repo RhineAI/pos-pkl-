@@ -50,11 +50,9 @@ Transaksi Penjualan
     <div class="col-lg-12">
         <div class="box">
             <div class="box-body mx-3">
-                <div class="alert alert-success alert-dismissible">
-                    <i class="fa fa-check icon"></i>
-                    Transaksi Penjualan Berhasil
+                <div class="alert alert-success text-white" id="alert"><i class="fa fa-circle-check"></i>
+                    &nbsp; Transaksi Penjualan Berhasil
                 </div>
-
                 <h2 class="mb-4 mt-6 text-center">Info Penjualan</h2>
 
                <div class="preview">
@@ -129,10 +127,7 @@ Transaksi Penjualan
                 @endif
                 
                 <a href="{{ route('transaksi.baru') }}"  class="btn btn-outline-info"><i class="fa-solid fa-cart-shopping"></i> Transaksi Baru</a>
-                <a href="
-                {{ route('transaksi.cancel', $penjualan->id_penjualan) }}
-                "
-                 class="btn btn-outline-warning"><i class="fa-solid fa-cart-shopping"></i> Batalkan Transaksi</a>
+                <a href="{{ route('transaksi.cancel', $penjualan->id_penjualan) }}" class="btn btn-outline-warning"><i class="fa-solid fa-cart-shopping"></i> Batalkan Transaksi</a>
                 <a href="{{ route('dashboard') }}"  class="btn btn-outline-success"><i class="fa-solid fa-archway"></i> Dashboard</a>
             </div>
         </div>
@@ -175,5 +170,12 @@ Transaksi Penjualan
 
         if (window.focus) newWindow.focus();
     }
+
+    var time = document.getElementById("alert");
+
+    setTimeout(function(){
+        time.style.display = "none";
+    }, 3000);
+
 </script>
 @endpush

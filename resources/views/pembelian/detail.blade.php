@@ -13,11 +13,11 @@
                 <table class="table table-striped table-bordered table-detail">
                     <thead>
                         <th width="4%">No</th>
-                        <th>Kode</th>
-                        <th>Nama</th>
-                        <th>Harga</th>
-                        <th>Jumlah</th>
-                        <th>Subtotal</th>
+                        <th class="text-center">Barcode</th>
+                        <th class="text-center">Nama</th>
+                        <th class="text-center">Harga</th>
+                        <th class="text-center">Jumlah</th>
+                        <th class="text-center">Subtotal</th>
                     </thead>
                    
                 </table>

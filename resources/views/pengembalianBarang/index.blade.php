@@ -24,14 +24,14 @@ Pengembalian Barang
             <div class="box-body table-responsive">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <th width="6%">No</th>
-                        <th class="text-center">Tanggal</th>
-                        <th class="text-center">Barcode</th>
+                        <th width="5%">No</th>
+                        <th width="10%" class="text-center">Tanggal</th>
+                        <th width="10%" class="text-center">Barcode</th>
                         <th class="text-center">Produk</th>
-                        <th class="text-center">Jumlah (Stok)</th>
-                        <th class="text-center">Refund</th>
+                        <th width="13%" class="text-center">Jumlah (Stok)</th>
+                        <th  width="10%" class="text-center">Refund</th>
                         <th class="text-center">Supplier</th>
-                        <th class="text-center">Keterangan</th>
+                        <th width="10%" class="text-center">Keterangan</th>
                         <th width="12%" class="text-center">Aksi</th>
                     </thead>
                 </table>
@@ -107,7 +107,7 @@ Pengembalian Barang
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
-            $('#modal-form [name=nama_kategori]').focus();
+            $('#modal-form [name=nama_produk]').focus();
         }
 
         $(document).on('click', '.edit', function (event) {
@@ -136,7 +136,7 @@ Pengembalian Barang
 
         function deleteForm(url) {
             Swal.fire({
-                title: 'Hapus Record data yang dipilih?',
+                title: 'Hapus Data Pengembalian Barang yang dipilih?',
                 icon: 'question',
                 iconColor: '#DC3545',
                 showDenyButton: true,
@@ -153,7 +153,7 @@ Pengembalian Barang
                     .done((response) => {
                         Swal.fire({
                             title: 'Sukses!',
-                            text: 'Record Data berhasil dihapus',
+                            text: 'Data Pengembalian Barang berhasil dihapus',
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
@@ -163,7 +163,7 @@ Pengembalian Barang
                     .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Record Data gagal dihapus',
+                            text: 'Data Pengembalian Barang gagal dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'
@@ -172,7 +172,7 @@ Pengembalian Barang
                     });
                 } else if (result.isDenied) {
                     Swal.fire({
-                        title: 'Record data batal dihapus',
+                        title: 'Data Pengembalian Barang batal dihapus',
                         icon: 'warning',
                     })
                 }

@@ -67,8 +67,8 @@ Transaksi Pembelian
                 <form class="form-produk">
                     @csrf
                     <div class="form-group row">
-                        <label for="kode_produk" class="col-md-2">Tambah Produk</label>
-                        <div class="col-md-2">
+                        <label for="kode_produk" class="col-lg-2">Tambah Produk</label>
+                        <div class="col-lg-3">
                             <div class="input-group">
                                 <input type="hidden" name="id_pembelian" id="id_pembelian" value="{{ $id_pembelian }}">
                                 <input type="hidden" name="id_produk" id="id_produk">
@@ -85,13 +85,13 @@ Transaksi Pembelian
 
                 <table class="table table-stiped table-bordered table-pembelian">
                     <thead>
-                        <th width="6%%">No</th>
-                        <th width="6%">Kode</th>
-                        <th>Nama</th>
-                        <th width="16%">Harga</th>
-                        <th width="12%">Jumlah</th>
-                        <th width="17%">Subtotal</th>
-                        <th width="6%">Aksi</th>
+                        <th width="4%">No</th>
+                        <th width="10%" class="text-center">Barcode</th>
+                        <th class="text-center">Nama</th>
+                        <th width="15%" class="text-center">Harga</th>
+                        <th width="12%" class="text-center">Jumlah</th>
+                        <th width="12%" class="text-center">Subtotal</th>
+                        <th width="8%"  class="text-center">Aksi</th>
                     </thead>
                 </table>
 
@@ -324,7 +324,7 @@ Transaksi Pembelian
 
     function deleteData(url) {
         Swal.fire({
-            title: 'Hapus Kategori yang dipilih?',
+            title: 'Hapus Data Pembelian yang dipilih?',
             icon: 'question',
             iconColor: '#DC3545',
             showDenyButton: true,
@@ -341,7 +341,7 @@ Transaksi Pembelian
                 .done((response) => {
                     Swal.fire({
                         title: 'Sukses!',
-                        text: 'Data Kategori berhasil dihapus',
+                        text: 'Data Pembelian berhasil dihapus',
                         icon: 'success',
                         confirmButtonText: 'Lanjut',
                         confirmButtonColor: '#28A745'
@@ -351,7 +351,7 @@ Transaksi Pembelian
                 .fail((errors) => {
                     Swal.fire({
                         title: 'Gagal!',
-                        text: 'Data Kategori gagal dihapus',
+                        text: 'Data Pembelian gagal dihapus',
                         icon: 'error',
                         confirmButtonText: 'Kembali',
                         confirmButtonColor: '#DC3545'
@@ -360,7 +360,7 @@ Transaksi Pembelian
                 });
             } else if (result.isDenied) {
                 Swal.fire({
-                    title: 'Data Kategori batal dihapus',
+                    title: 'Data Pembelian batal dihapus',
                     icon: 'warning',
                 })
             }

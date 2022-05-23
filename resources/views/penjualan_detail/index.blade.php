@@ -268,7 +268,14 @@ Transaksi Penjualan
                 $('#barcode').val('');
             })
             .fail(errors => {
-                alert('Tidak dapat menyimpan data');
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Input Produk terlebih dahulu!',
+                    icon: 'warning',
+                    iconColor:'#DC3545',
+                    confirmButtonText: 'Omkey',
+                    confirmButtonColor: '#DC3545'
+                })
                 return;
             });
     }
