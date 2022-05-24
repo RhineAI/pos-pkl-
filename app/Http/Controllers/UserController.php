@@ -25,7 +25,16 @@ class UserController extends Controller
 
             return datatables()
                 ->of($user)
-                ->addIndexColumn()              
+                ->addIndexColumn()          
+                ->addColumn('level', function ($row) {
+                    if ($row->level == 1) {
+                        $level = 'Admin';
+                    } else {
+                        $level = 'Kasir';
+                    }
+                    
+                    return $level;
+                })    
                 ->addColumn('aksi', function($user) {
                     return '
                         <button onclick="editData(`'. route('users.update', $user->id).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"></i> Edit</button> 

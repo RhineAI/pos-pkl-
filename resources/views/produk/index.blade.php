@@ -153,6 +153,31 @@ Data Semua Produk
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=nama_produk]').focus();
         }
+        
+        function editData(url) {
+            $('#modal-form').modal('show')
+            $('#modal-form .modal-title').text('Edit Produk');
+
+            $('#modal-form form')[0].reset();
+            $('#modal-form form').attr('action', url);
+            $('#modal-form [name=_method]').val('put');
+            $('#modal-form [name=nama_produk]').focus();
+
+            $.get(url)
+                .done((response) => {
+                    $('#modal-form [name=nama_produk]').val(response.nama_produk);
+                    $('#modal-form [name=id_kategori]').val(response.id_kategori);
+                    $('#modal-form [name=id_satuan]').val(response.id_satuan);
+                    $('#modal-form [name=harga_beli]').val(response.harga_beli);
+                    $('#modal-form [name=harga_jual]').val(response.harga_jual);
+                    $('#modal-form [name=diskon]').val(response.diskon);
+                    $('#modal-form [name=stok]').val(response.stok);    
+                })
+                .fail((errors) => {
+                    alert('Gagal mengubah data!');
+                    return;
+                });
+        }
 
         // $(document).on('click', '.edit', function (event) {
         //         let nama_produk = $(this).data('produk')
@@ -201,31 +226,6 @@ Data Semua Produk
         //         $('#modal-form [name=diskon]').val(data.diskon);
         //         $('#modal-form [name=stok]').val(data.stok);
         // }
-        
-        function editData(url) {
-            $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Produk');
-
-            $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', url);
-            $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama_produk]').focus();
-
-            $.get(url)
-                .done((response) => {
-                    $('#modal-form [name=nama_produk]').val(response.nama_produk);
-                    $('#modal-form [name=id_kategori]').val(response.id_kategori);
-                    $('#modal-form [name=id_satuan]').val(response.id_satuan);
-                    $('#modal-form [name=harga_beli]').val(response.harga_beli);
-                    $('#modal-form [name=harga_jual]').val(response.harga_jual);
-                    $('#modal-form [name=diskon]').val(response.diskon);
-                    $('#modal-form [name=stok]').val(response.stok);    
-                })
-                .fail((errors) => {
-                    alert('Gagal mengubah data!');
-                    return;
-                });
-        }
 
         function deleteForm(url) {
             Swal.fire({

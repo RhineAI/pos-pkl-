@@ -86,7 +86,7 @@ Pengembalian Barang
                             } else {
                                 Swal.fire({
                                     title: 'Gagal!',
-                                    text: 'Terdapat Kesalahan',
+                                    text: 'Pengembalian barang gagal!',
                                     icon: 'error',
                                     confirmButtonText: 'Kembali',
                                     confirmButtonColor: '#DC3545'
@@ -107,32 +107,55 @@ Pengembalian Barang
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
-            $('#modal-form [name=nama_produk]').focus();
+            $('#modal-form [name=id_produk]').focus();
         }
 
-        $(document).on('click', '.edit', function (event) {
-            let nama_kategori = $(this).data('kategori')
-            let url = $(this).data('route')
-
-            let data = {
-                nama_kategori: nama_kategori,
-                url: url
-            }
-
-            editForm(data)
-        })
-        
-        function editForm(data) {
+        function editForm(url) {
             $('#modal-form').modal('show')
             $('#modal-form .modal-title').text('Edit Pengembalian Barang');
 
             $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', data.url);
+            $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama_kategori]').focus();
+            $('#modal-form [name=id_produk]').focus();
 
-            $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
+            $.get(url)
+                .done((response) => {
+                    console.log(response);
+                    $('#modal-form select[name=id_produk]').val(response.id_produk);
+                    $('#modal-form input[name=jumlah]').val(response.jumlah);
+                    $('#modal-form select[name=id_supplier]').val(response.id_supplier);
+                    $('#modal-form input[name=keterangan]').val(response.keterangan);    
+                })
+                .fail((errors) => {
+                    alert('Gagal mengubah data!');
+                    return;
+                });
         }
+
+        // $(document).on('click', '.edit', function (event) {
+        //     let nama_kategori = $(this).data('kategori')
+        //     let url = $(this).data('route')
+
+        //     let data = {
+        //         nama_kategori: nama_kategori,
+        //         url: url
+        //     }
+
+        //     editForm(data)
+        // })
+        
+        // function editForm(data) {
+        //     $('#modal-form').modal('show')
+        //     $('#modal-form .modal-title').text('Edit Pengembalian Barang');
+
+        //     $('#modal-form form')[0].reset();
+        //     $('#modal-form form').attr('action', data.url);
+        //     $('#modal-form [name=_method]').val('put');
+        //     $('#modal-form [name=nama_kategori]').focus();
+
+        //     $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
+        // }
 
         function deleteForm(url) {
             Swal.fire({
