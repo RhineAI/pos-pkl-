@@ -74,34 +74,10 @@
 <!-- /.login-box -->
 @endsection
 
-@push('script')
-    <script>
-        // $('#form-login').validator().on('submit', function (e) {
-        //     .done((response) => {
-        //         Swal.fire({
-        //             title: 'Sukses!',
-        //             text: response,
-        //             icon: 'success',
-        //             confirmButtonText: 'Lanjut',
-        //             confirmButtonColor: '#28A745'
-        //         })
-        //     })
-        //     .fail((errors) => {
-        //         Swal.fire({
-        //             title: 'Gagal!',
-        //             text: 'Data Produk yang diinput sudah ada',
-        //             icon: 'error',
-        //             confirmButtonText: 'Kembali',
-        //             confirmButtonColor: '#DC3545'
-        //         })
-
-        //         return;
-        //     });
-                
-        // });
-
+    {{-- <script>
         $('#form-login').on('submit', function (e) {
             e.preventDefault()
+            
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -129,5 +105,4 @@
             })
         })
 
-    </script>
-@endpush
+    </script> --}}

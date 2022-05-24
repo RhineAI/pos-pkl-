@@ -73,7 +73,8 @@ Daftar Pembelian
         table1 = $('.table-detail').DataTable({
             processing: true,
             bSort: false,
-            dom: 'Brt',
+            info: false,
+            paginate: false,
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'barcode'},

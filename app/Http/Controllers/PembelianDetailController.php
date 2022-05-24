@@ -93,6 +93,7 @@ class PembelianDetailController extends Controller
             return response()->json('Data gagal disimpan', 400);
         }
 
+
         $detail = new PembelianDetail();
         $detail->id_pembelian = $request->id_pembelian;
         $detail->id_produk = $produk->id_produk;
