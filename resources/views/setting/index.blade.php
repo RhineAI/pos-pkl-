@@ -26,9 +26,18 @@ Pengaturan Toko
                     <div class="form-group row">
                         <label for="Nama_Perusahaan" class="col-sm-3 control-label">Nama Perusahaan</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama_perusahaan" class="form-control" id="Nama_Perusahaan" required
-                                autofocus>
-                            <span class="help-block with-errors"></span>
+                            <input type="text" name="nama_perusahaan" class="form-control @error('nama_perusahaan') is-invalid @enderror" id="Nama_Perusahaan" required
+                                autofocus minlength="3" maxlength="15" placeholder="3-15 Characters required">
+                                <p class="placeholder-glow">
+                                    <span class="placeholder col-12" style="font-style: italic">3-15 Characters required</span>
+                                </p>
+                                @error('nama_perusahaan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                
+                            {{-- <span class="help-block with-errors"></span> --}}
                         </div>
                     </div>
 
@@ -43,7 +52,7 @@ Pengaturan Toko
                     <div class="form-group row">
                         <label for="No_Telepon" class="col-sm-3 control-label">No. Telepon</label>
                         <div class="col-sm-9">
-                            <input type="text" name="telepon" class="form-control" id="No_Telepon" required>
+                            <input type="text" name="telepon" class="form-control" id="No_Telepon" required maxlength="13" minlength="10" placeholder="10-13 Numbers required" >
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>

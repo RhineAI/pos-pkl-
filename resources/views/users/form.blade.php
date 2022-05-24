@@ -16,7 +16,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-md-3 col-md-offset-1 control-label">Nama </label>
                         <div class="col-md-9">
-                            <input type="text" name="name" id="name" class="form-control"  autofocus>
+                            <input type="text" name="name" id="name" class="form-control" autofocus placeholder="ex. Rin" minlength="1">
                         </div>
                         <span class="help-block with-errors"></span>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="form-group row">
                         <label for="username" class="col-md-3 col-md-offset-1 control-label">Username </label>
                         <div class="col-md-9">
-                            <input type="text" name="username" id="username" class="form-control" >
+                            <input type="text" name="username" id="username" class="form-control" minlength="1" maxlength="15" placeholder="Username Maximum 15 characters" >
                         </div>
                         <span class="help-block with-errors"></span>
                     </div>
@@ -32,7 +32,7 @@
                     <div class="form-group row">
                         <label for="email" class="col-md-3 col-md-offset-1 control-label">Email </label>
                         <div class="col-md-9">
-                            <input type="email" name="email" id="email" class="form-control" >
+                            <input type="email" name="email" id="email" class="form-control" placeholder="ex. 123xy@gmail.com" >
                         </div>
                         <span class="help-block with-errors"></span>
                     </div>

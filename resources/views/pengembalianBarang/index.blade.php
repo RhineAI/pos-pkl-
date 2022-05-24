@@ -110,30 +110,27 @@ Pengembalian Barang
             $('#modal-form [name=nama_produk]').focus();
         }
 
-        $(document).on('click', '.edit', function (event) {
-            let nama_kategori = $(this).data('kategori')
-            let url = $(this).data('route')
-
-            let data = {
-                nama_kategori: nama_kategori,
-                url: url
-            }
-
-            editForm(data)
-        })
-        
-        function editForm(data) {
+        function editForm(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Pengembalian Barang');
+            $('#modal-form .modal-title').text('Edit Produk');
 
             $('#modal-form form')[0].reset();
-            $('#modal-form form').attr('action', data.url);
+            $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('put');
-            $('#modal-form [name=nama_kategori]').focus();
+            $('#modal-form [name=id_produk]').focus();
 
-            $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
+            $.get(url)
+                .done((response) => {
+                    $('#modal-form [name=id_produk]').val(response.id_produk);
+                    $('#modal-form [name=jumlah]').val(response.jumlah);
+                    $('#modal-form [name=id_supplier]').val(response.id_supplier);
+                    $('#modal-form [name=keterangan]').val(response.keterangan);
+                })
+                .fail((errors) => {
+                    alert('Gagal mengubah data!');
+                    return;
+                });
         }
-
         function deleteForm(url) {
             Swal.fire({
                 title: 'Hapus Data Pengembalian Barang yang dipilih?',
