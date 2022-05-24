@@ -9,10 +9,17 @@ Daftar Pembelian
 <li class="breadcrumb-item active">Daftar Pembelian</li>
 @endsection
 
+@if(session()->has('failed'))
+<div class="alert alert-danger text-white" id="alert"><i class="fa fa-circle-check"></i>
+    &nbsp; {{ session()->get('alert') }}
+</div>
+@endif
+
 @section('content')
 <div class="row mx-3">
     <div class="col-md-12 p-3 mb-3" style="background-color: white">
         <div class="box">
+            
             <div class="box-header with-border">
                 <button onclick="addForm()" class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i> Tambah Transaksi</button>
 
@@ -126,7 +133,7 @@ Daftar Pembelian
                     .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Data Pembelian batal dihapus',
+                            text: 'Stok Produk sisa 10, tidak bisa dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'

@@ -197,10 +197,25 @@ class PembelianController extends Controller
     {
         $pembelian = Pembelian::find($id);
         $detail    = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
+
+        
         foreach ($detail as $item) {
             $produk = Produk::find($item->id_produk);
+            $checkProduk = Produk::orderBy('id_produk');
             if ($produk) {
-                $produk->stok -= $item->jumlah;
+                if($produk->stok >= 10 ) {
+                    $produk->stok -= $item->jumlah;    
+                }
+
+                // elseif($produk->stok <= 10 ) {
+                //     return redirect('/pembelian')->session()->flash('failed', 'Barang gagal disimpan');
+
+                // }
+
+                else {
+                    return redirect('/pembelian')->session()->flash('failed', 'Barang gagal disimpan');
+                }
+                    
                 $produk->update();
             }
             $item->delete();

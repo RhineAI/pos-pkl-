@@ -64,6 +64,10 @@ class ProdukController extends Controller
                 return 'Rp. '. format_uang($produk->harga_jual);
             })
             ->addColumn('stok', function ($produk) {
+                // if($produk->stok < 1)
+                // {
+                //     $stok = 'Habis';
+                // }
                 return format_uang($produk->stok);
             })
             ->addColumn('ud', function($produk) { 

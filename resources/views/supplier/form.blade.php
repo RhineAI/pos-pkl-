@@ -17,21 +17,21 @@
                     <div class="form-group row">
                         <label for="nama" class="col-md-2 col-md-offset-1 control-label"><h5 class="my-2">Nama</h5></label>
                             <div class="col-md-10">
-                               <input type="text" name="nama" id="nama" class="form-control" required autofocus>
+                               <input type="text" name="nama" id="nama" class="form-control" required autofocus placeholder="ex. PT.IndoJaya" maxlength="30">
                             </div>
                     </div>
                       
                     <div class="form-group row">
                         <label for="alamat" class="col-md-2 col-md-offset-1 control-label"><h5 class="my-2">Alamat</h5></label>
                             <div class="col-md-10">
-                               <input type="text" name="alamat" id="alamat" class="form-control" required autofocus>
+                               <input type="text" name="alamat" id="alamat" class="form-control" required placeholder="ex. Jl.Kemayoran no 7334b">
                             </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="telepon" class="col-md-2 col-md-offset-1 control-label"><h5 class="my-2">Telepon</h5></label>
                             <div class="col-md-10">
-                               <input type="text" name="telepon" id="telepon" class="form-control" required>
+                               <input type="text" name="telepon" id="telepon" class="form-control" required placeholder="10-13 Numbers required" minlength="10" maxlength="13">
                             </div>
                     </div>
     

@@ -1,7 +1,9 @@
 <style>
-    .time {
-        font-style: italic;
-        font-size: 90px;
+    #time {
+        font-family: garamond;
+        font-size: 25px; 
+        font-style: bold;
+        margin-top: 12px;
     }
 </style>
 
@@ -19,7 +21,7 @@
                 <div class="wrapper">
                     
                     <div class="display my-2"> 
-                        <div id="time" style="font-size: 21px; font-style: bold; font-family: century;"></div>
+                        <div id="time"></div>
                     </div>
                 </div>
                </div>
