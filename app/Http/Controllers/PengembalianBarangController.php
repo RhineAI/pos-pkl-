@@ -156,9 +156,24 @@ class PengembalianBarangController extends Controller
      */
     public function destroy($id)
     {
+        // $pengembalian = PengembalianBarang::find($id);
+        // $pengembalian->delete();
+
+        // return response(null,204);
+
         $pengembalian = PengembalianBarang::find($id);
+        $detail    = PengembalianBarang::where('id_pengembalian_barang', $pengembalian->id_pengembalian_barang)->get();
+        foreach ($detail as $item) {
+            $produk = Produk::find($item->id_produk);
+            if ($produk) {
+                $produk->stok += $item->jumlah;
+                $produk->update();
+            }
+            $item->delete();
+        }
+
         $pengembalian->delete();
 
-        return response(null,204);
+        return response(null, 204);
     }
 }

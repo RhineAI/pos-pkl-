@@ -108,7 +108,7 @@
                   {{-- Pengembalian Barang --}}
                 <li class="nav-item">
                     <a href="{{ route('pengembalianBarang.index') }}" class="nav-link">
-                        <i class="nav-icon fa-solid fa-arrow-rotate-left"></i>   
+                        <i class="nav-icon fa-solid fa-arrow-right-arrow-left"></i>  
                         <p>
                             Pengembalian Barang
                         </p>
@@ -129,7 +129,7 @@
                   {{-- Supplier --}}
                 <li class="nav-item">
                     <a href="{{ route('supplier.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-truck"></i>
+                        <i class="nav-icon fa-solid fa-truck-field"></i>
                         <p>
                             Supplier
                         </p>
@@ -163,7 +163,7 @@
                 {{-- Users --}}
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-users"></i>
+                        <i class="nav-icon fa-solid fa-people-group"></i>
                         <p>
                             Pengguna
                         </p>
@@ -172,7 +172,7 @@
                 {{-- Settings --}}
                 <li class="nav-item">
                     <a href="{{ route('setting.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-cog"></i>
+                        <i class="nav-icon fa-solid fa-screwdriver-wrench"></i>
                         <p>
                             Pengaturan
                         </p>
