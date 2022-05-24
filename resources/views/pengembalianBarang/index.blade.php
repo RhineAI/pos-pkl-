@@ -112,7 +112,7 @@ Pengembalian Barang
 
         function editForm(url) {
             $('#modal-form').modal('show')
-            $('#modal-form .modal-title').text('Edit Pengembalian Barang');
+            $('#modal-form .modal-title').text('Edit Produk');
 
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
@@ -121,17 +121,25 @@ Pengembalian Barang
 
             $.get(url)
                 .done((response) => {
+<<<<<<< HEAD
                     console.log(response);
                     $('#modal-form select[name=id_produk]').val(response.id_produk);
                     $('#modal-form input[name=jumlah]').val(response.jumlah);
                     $('#modal-form select[name=id_supplier]').val(response.id_supplier);
                     $('#modal-form input[name=keterangan]').val(response.keterangan);    
+=======
+                    $('#modal-form [name=id_produk]').val(response.id_produk);
+                    $('#modal-form [name=jumlah]').val(response.jumlah);
+                    $('#modal-form [name=id_supplier]').val(response.id_supplier);
+                    $('#modal-form [name=keterangan]').val(response.keterangan);
+>>>>>>> 873256ced33f7cf6958c5a9384c2ccb923150f48
                 })
                 .fail((errors) => {
                     alert('Gagal mengubah data!');
                     return;
                 });
         }
+<<<<<<< HEAD
 
         // $(document).on('click', '.edit', function (event) {
         //     let nama_kategori = $(this).data('kategori')
@@ -157,6 +165,8 @@ Pengembalian Barang
         //     $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
         // }
 
+=======
+>>>>>>> 873256ced33f7cf6958c5a9384c2ccb923150f48
         function deleteForm(url) {
             Swal.fire({
                 title: 'Hapus Data Pengembalian Barang yang dipilih?',

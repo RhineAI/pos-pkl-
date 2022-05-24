@@ -118,7 +118,9 @@ class PengembalianBarangController extends Controller
      */
     public function show($id)
     {
-        //
+        $pengembalian = PengembalianBarang::find($id);
+        
+        return response()->json($pengembalian);
     }
 
     /**
@@ -142,7 +144,20 @@ class PengembalianBarangController extends Controller
     public function update(Request $request, $id)
     {
         $pengembalian = PengembalianBarang::find($id);
+
+        $findProduct = Produk::find($pengembalian->id_produk);
+
+        // if($request->has('jumlah') && $request->jumlah >= $pengembalian->jumlah )
+
+        $findProduct->stok -= $pengembalian->jumlah;
+        $findProduct->save($request->all());
+   
+
+
         $pengembalian->update($request->all());
+
+        
+
 
         return response()->json('Data Pengembalian berhasil diupdate', 200);
     }
@@ -155,9 +170,24 @@ class PengembalianBarangController extends Controller
      */
     public function destroy($id)
     {
+        // $pengembalian = PengembalianBarang::find($id);
+        // $pengembalian->delete();
+
+        // return response(null,204);
+
         $pengembalian = PengembalianBarang::find($id);
+        $detail    = PengembalianBarang::where('id_pengembalian_barang', $pengembalian->id_pengembalian_barang)->get();
+        foreach ($detail as $item) {
+            $produk = Produk::find($item->id_produk);
+            if ($produk) {
+                $produk->stok += $item->jumlah;
+                $produk->update();
+            }
+            $item->delete();
+        }
+
         $pengembalian->delete();
 
-        return response(null,204);
+        return response(null, 204);
     }
 }

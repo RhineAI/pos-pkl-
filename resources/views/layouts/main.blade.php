@@ -31,9 +31,7 @@
     <link rel="stylesheet" href="{{ ('/AdminLTE-master/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{ ('/AdminLTE-master/plugins/daterangepicker/daterangepicker.css') }}">
-    <!-- summernote -->
-    <link rel="stylesheet" href="{{ ('/AdminLTE-master/plugins/summernote/summernote-bs4.min.css') }}">
-    <!-- DataTables -->
+       <!-- DataTables -->
     <link rel="stylesheet" href="{{ ('/AdminLTE-master/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet"
         href="{{ ('/AdminLTE-master/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">

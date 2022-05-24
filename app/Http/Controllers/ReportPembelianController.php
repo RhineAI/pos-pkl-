@@ -84,7 +84,7 @@ class ReportPembelianController extends Controller
     public function exportPDF($awal, $akhir)
     {
         $data = $this->getData($awal, $akhir);
-        $pdf  = DomPDF::loadView('laporan.pdf', compact('awal', 'akhir', 'data'));
+        $pdf  = DomPDF::loadView('reportpembelian.export_pdf', compact('awal', 'akhir', 'data'));
         $pdf->setPaper('a4', 'potrait');
         
         return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf');
