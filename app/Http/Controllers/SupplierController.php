@@ -77,12 +77,37 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         // $supplier = Supplier::create($request->all());
+        $validasiNama = Supplier::find('nama');
         $supplier = new Supplier();
-        
-        $supplier->nama = $request->nama;
+
+        // $validasi = $request->validate([
+        //     'nama' => 'unique:users'
+        // ]);
+
+        if($request->nama == $validasiNama)
+        {
+            // ([
+            //     'status' => false,
+            //     'message' => 'gagal'
+            // ]);
+        } else {
+            $supplier->nama = $request->nama;
+        }
+
         $supplier->alamat = $request->alamat;
         $supplier->telepon = $request->telepon;
         $supplier->save();
+
+        // $validatedData = $request->validate([
+        //     'nama' => 'required|max:255|unique:users',
+        //     'alamat' => 'required',
+        //     'telepon' => 'required|min:10|max:13'
+        // ]);
+
+        // $validatedData['password'] = bcrypt($validatedData['password']);
+        // $validatedData['password'] = Hash::make($validatedData['password']);
+
+        // Supplier::create($validatedData);
 
         return redirect('/supplier')->with('alert', 'Berhasil Ditambahkan');
     }

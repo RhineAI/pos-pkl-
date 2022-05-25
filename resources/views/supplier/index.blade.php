@@ -78,6 +78,7 @@ Data Semua Supplier
             setTimeout(function(){
             time.style.display = "none";
         }, 2000);
+        
 
         let table;
 
