@@ -84,12 +84,13 @@ Pengembalian Barang
                                 })
                                 table.ajax.reload();
                             } else {
-                                Swal.fire({
-                                    title: 'Gagal!',
-                                    text: 'Pengembalian barang gagal!',
-                                    icon: 'error',
+                                $('#modal-form').modal('hide');
+                                Swal.fire({                    
+                                    title: 'Sukses!',
+                                    text: 'Berhasil Diupdate',
+                                    icon: 'success',
                                     confirmButtonText: 'Kembali',
-                                    confirmButtonColor: '#DC3545'
+                                    confirmButtonColor: '#28A745'
                                 })
                                 table.ajax.reload();
                 
@@ -121,7 +122,7 @@ Pengembalian Barang
 
             $.get(url)
                 .done((response) => {
-                    $('#modal-form [name=id_produk]').val(response.id_produk);
+                    $('#modal-form [name=id_produk]').val(response.id_produk).attr('disabled', true);
                     $('#modal-form [name=jumlah]').val(response.jumlah);
                     $('#modal-form [name=id_supplier]').val(response.id_supplier);
                     $('#modal-form [name=keterangan]').val(response.keterangan);

@@ -144,17 +144,46 @@ class PengembalianBarangController extends Controller
     public function update(Request $request, $id)
     {
         $pengembalian = PengembalianBarang::find($id);
-
         $findProduct = Produk::find($pengembalian->id_produk);
 
-        // if($request->has('jumlah') && $request->jumlah >= $pengembalian->jumlah )
+        if($pengembalian->jumlah >= $request->jumlah){
+            $findProduct->stok += $pengembalian->jumlah;   
 
-        $findProduct->stok -= $pengembalian->jumlah;
-        $findProduct->save($request->all());
+            $findProduct->stok -= $request->jumlah;
+            $findProduct->update();
+        } else{
+            $findProduct->stok += $pengembalian->jumlah;   
+
+            $findProduct->stok -= $request->jumlah;
+            $findProduct->update();
+        }
    
+        $pengembalian->id_produk = $pengembalian->id_produk;
 
+        // if($pengembalian->id_produk == $request->id_produk)
+        // {
+        //     if($pengembalian->jumlah >= $request->jumlah){
+        //         $findProduct->stok += $request->id_produk->
+            
+        //         $findProduct->stok += $pengembalian->jumlah;   
+    
+        //         $findProduct->stok -= $request->jumlah;
+        //         $findProduct->update();
+        //     } else{
+        //         $findProduct->stok += $pengembalian->jumlah;   
+    
+        //         $findProduct->stok -= $request->jumlah;
+        //         $findProduct->update();
+        //     }
+        // }else{
 
-        $pengembalian->update($request->all());
+        // }
+
+        $pengembalian->jumlah = $request->jumlah;
+        $pengembalian->id_supplier = $request->id_supplier;
+        $pengembalian->keterangan = $request->keterangan;
+
+        $pengembalian->update();
 
         
 
