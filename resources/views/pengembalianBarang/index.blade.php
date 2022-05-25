@@ -86,7 +86,7 @@ Pengembalian Barang
                             } else {
                                 Swal.fire({
                                     title: 'Gagal!',
-                                    text: 'Terdapat Kesalahan',
+                                    text: 'Pengembalian barang gagal!',
                                     icon: 'error',
                                     confirmButtonText: 'Kembali',
                                     confirmButtonColor: '#DC3545'
@@ -107,7 +107,7 @@ Pengembalian Barang
             $('#modal-form form')[0].reset();
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
-            $('#modal-form [name=nama_produk]').focus();
+            $('#modal-form [name=id_produk]').focus();
         }
 
         function editForm(url) {
