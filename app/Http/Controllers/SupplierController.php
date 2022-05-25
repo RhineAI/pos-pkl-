@@ -97,10 +97,6 @@ class SupplierController extends Controller
         $supplier->alamat = $request->alamat;
         $supplier->telepon = $request->telepon;
         $supplier->save();
-<<<<<<< HEAD
-        
-        return redirect('/supplier')->with('alert', 'Supplier baru berhasil ditambahkan');
-=======
 
         // $validatedData = $request->validate([
         //     'nama' => 'required|max:255|unique:users',
@@ -114,7 +110,6 @@ class SupplierController extends Controller
         // Supplier::create($validatedData);
 
         return redirect('/supplier')->with('alert', 'Berhasil Ditambahkan');
->>>>>>> e0af6c7bf7af796632cfdaa08396dfe89c178c2f
     }
 
     /**
