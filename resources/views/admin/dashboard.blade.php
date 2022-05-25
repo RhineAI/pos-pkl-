@@ -8,7 +8,11 @@ Dashboard
 @parent
 <li class="breadcrumb-item active">Dashboard</li>
 @endsection
-
+@if(session()->has('alert'))
+<div class="alert alert-success text-white" id="alert"><i class="fa fa-circle-check"></i>
+    &nbsp; {{ session()->get('alert') }}
+</div>
+@endif
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -227,6 +231,12 @@ Dashboard
                 data: areaChartData2,
                 options: areaChartOptions2
             })
+
+            var time = document.getElementById("alert");
+            
+            setTimeout(function(){
+                time.style.display = "none";
+            }, 3000);
         })
     </script>
 @endpush

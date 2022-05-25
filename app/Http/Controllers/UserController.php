@@ -162,7 +162,7 @@ class UserController extends Controller
                     return response()->json('Konfirmasi password tidak sesuai', 422);
                 }
             } else {
-                return response()->json('Password lama tidak sesuai', 422);
+                return response()->json('Password lama tidak sesuai', 421);
             }
         }
 
