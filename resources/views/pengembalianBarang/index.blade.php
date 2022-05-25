@@ -121,52 +121,16 @@ Pengembalian Barang
 
             $.get(url)
                 .done((response) => {
-<<<<<<< HEAD
-                    console.log(response);
-                    $('#modal-form select[name=id_produk]').val(response.id_produk);
-                    $('#modal-form input[name=jumlah]').val(response.jumlah);
-                    $('#modal-form select[name=id_supplier]').val(response.id_supplier);
-                    $('#modal-form input[name=keterangan]').val(response.keterangan);    
-=======
                     $('#modal-form [name=id_produk]').val(response.id_produk);
                     $('#modal-form [name=jumlah]').val(response.jumlah);
                     $('#modal-form [name=id_supplier]').val(response.id_supplier);
                     $('#modal-form [name=keterangan]').val(response.keterangan);
->>>>>>> 873256ced33f7cf6958c5a9384c2ccb923150f48
                 })
                 .fail((errors) => {
                     alert('Gagal mengubah data!');
                     return;
                 });
         }
-<<<<<<< HEAD
-
-        // $(document).on('click', '.edit', function (event) {
-        //     let nama_kategori = $(this).data('kategori')
-        //     let url = $(this).data('route')
-
-        //     let data = {
-        //         nama_kategori: nama_kategori,
-        //         url: url
-        //     }
-
-        //     editForm(data)
-        // })
-        
-        // function editForm(data) {
-        //     $('#modal-form').modal('show')
-        //     $('#modal-form .modal-title').text('Edit Pengembalian Barang');
-
-        //     $('#modal-form form')[0].reset();
-        //     $('#modal-form form').attr('action', data.url);
-        //     $('#modal-form [name=_method]').val('put');
-        //     $('#modal-form [name=nama_kategori]').focus();
-
-        //     $('#modal-form [name=nama_kategori]').val(data.nama_kategori);
-        // }
-
-=======
->>>>>>> 873256ced33f7cf6958c5a9384c2ccb923150f48
         function deleteForm(url) {
             Swal.fire({
                 title: 'Hapus Data Pengembalian Barang yang dipilih?',
