@@ -372,6 +372,7 @@ Transaksi Penjualan
                 return;
             })
     }
+
 </script>
 
 @endpush

@@ -122,16 +122,33 @@ Update Profile
                     $('[name=email]').val(response.email);
                     $('.tampil-foto').html(`<img src="{{ url('/') }}${response.foto}" width="100">`);
                     $('.images-profile').attr('src', `{{ url('/') }}/${response.foto}`);
-                    $('.alert').fadeIn();
-                    setTimeout(() => {
-                        $('.alert').fadeOut();
-                    }, 3000);
+                    Swal.fire({
+                            title: 'Sukses!',
+                            text: 'Update Profile berhasil! ',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
+                        })                       
+                        return; 
                 })
                 .fail(errors => {
                     if (errors.status == 422) {
-                        alert(errors.responseJSON); 
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Konfirmasi password tidak sesuai',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
+                        })                       
+                        return; 
                     } else {
-                        alert('Tidak dapat menyimpan data');
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Password lama tidak sesuai',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
+                        })   
                     }
                     return;
                 });

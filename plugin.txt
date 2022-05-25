@@ -1,13 +1,13 @@
 Plugin
 
-1. composer install
-2. npm install -g npm
-3. npm install sweetalert2
-4. composer require yajra/laravel-datatables-oracle:"~9.0"
+composer install
+npm install -g npm
+npm install sweetalert2
+composer require yajra/laravel-datatables-oracle:"~9.0"
    php artisan vendor:publish --tag=datatables
-5. composer require doctrine/dbal
-6. composer dump-autoload
-7. composer require milon/barcode
+composer require doctrine/dbal
+composer dump-autoload
+composer require milon/barcode
    php artisan vendor:publish -> choose number that contains "Milon\Barcode\.."
-8. composer require barryvdh/laravel-dompdf
+composer require barryvdh/laravel-dompdf
    php artisan config:cache

@@ -54,8 +54,7 @@ class PengembalianBarangController extends Controller
             })
             ->addColumn('aksi', function($pengembalianBarang) { 
                 return '
-                    <button onclick="editForm (`'. route('pengembalianBarang.update', $pengembalianBarang->id_pengembalian_barang).'`)
-                        " class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/> Edit</button>
+                <button onclick="editForm(`'. route('pengembalianBarang.update', $pengembalianBarang->id_pengembalian_barang).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/> Edit</button>
                     <button onclick="deleteForm(`'. route('pengembalianBarang.destroy', $pengembalianBarang->id_pengembalian_barang) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i> Hapus</button>
                     '; 
                 })
