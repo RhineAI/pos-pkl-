@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id_pengembalian_barang');
             $table->integer('id_produk');
             $table->integer('jumlah');
-            $table->integer('id_supplier');
+            // $table->integer('id_supplier');
             $table->string('keterangan');
             $table->timestamps();
         });

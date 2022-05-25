@@ -24,7 +24,10 @@
                     @foreach ($produk as $key => $item)
                         <tr>
                             <td width="6%">{{ $key+1 }}</td>
-                            <td width="10%"><span class="badge badge-info">{{ $item->barcode }}</span></td>
+                            <td width="10%">
+                                <span hidden class="id_produk">{{ value($item->id_produk) }}</span>
+                                <span class="badge badge-info">{{ $item->barcode }}</span>
+                            </td>
                             <td>{{ $item->nama_produk }}</td>
                             <td>{{ 'Rp. '. format_uang($item->harga_beli) }}</td>
                             <td width="12%">{{ $item->stok }}</td>

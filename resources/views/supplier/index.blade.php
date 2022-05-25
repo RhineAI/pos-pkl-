@@ -185,8 +185,9 @@ Data Semua Supplier
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
-                        }) 
-                        table.ajax.reload();
+                        }).then(function() {
+                            location.reload()
+                        })
                     })
                     .fail((errors) => {
                         Swal.fire({
