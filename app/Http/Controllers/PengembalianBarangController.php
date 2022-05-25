@@ -80,21 +80,21 @@ class PengembalianBarangController extends Controller
      */
     public function store(Request $request)
     {
-        // $pengembalian = PengembalianBarang::create($request->all())->save();
-
-        // // $detail = PengembalianBarang::where('id_pengembalian_barang', $pengembalian->id_pengembalian_barang)->get();
-        // // foreach ($detail as $item) {
-        // //     $produk = Produk::find($item->id_produk);
-        // //     $produk->stok -= $item->jumlah;
-        // //     $produk->update();
-        // // }
-
-        // // return $pengembalian;'
-
+        
         $pengembalian = new PengembalianBarang();
         $pengembalian->id_produk = $request->id_produk;
         $pengembalian->id_supplier = $request->id_supplier;
-        $pengembalian->jumlah = $request->jumlah;
+        
+        $produk = Produk::find('id_produk')->where('id_produk', $request->id_produk)->get();
+        if($request->jumlah >= $produk->stok){
+            $pengembalian->jumlah = $request->jumlah;
+        } else {
+            return response()->json([
+                'status' => true,
+                'message' => 'Stok di master data kurang'
+            ]);
+        }
+
         $pengembalian->keterangan = $request->keterangan;
         $pengembalian->save();
 
@@ -105,7 +105,7 @@ class PengembalianBarangController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Pengembalian barang berhasil!'
+            'message' => 'Pengembalian barang berhasil!',
         ], 200);
 
     }

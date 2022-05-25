@@ -78,6 +78,7 @@ Data Semua Supplier
             setTimeout(function(){
             time.style.display = "none";
         }, 2000);
+        
 
         let table;
 
@@ -185,8 +186,9 @@ Data Semua Supplier
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
-                        }) 
-                        table.ajax.reload();
+                        }).then(function() {
+                            location.reload()
+                        })
                     })
                     .fail((errors) => {
                         Swal.fire({
@@ -223,6 +225,14 @@ Data Semua Supplier
             $('#modal-produk').modal('show')
 
             $('#id_supplier').val(id_supplier)
+
+            // var produk = $('input:checkbox:checked.produk').map(function() {
+            //     return this.value; }).get().join(",");
+            // $(document).ready(function() {
+            //     $('#selectProduct').change(function() {
+            //         if($(this))
+            //     });
+            // });
         })
 
         let arrProduct = []

@@ -142,30 +142,47 @@ class PenjualanDetailController extends Controller
             return response()->json('Data gagal disimpan', 400);
         }
 
-        $detail = new PenjualanDetail();
-        $detail->id_penjualan = $request->id_penjualan;
-        $detail->id_produk = $produk->id_produk;
-        $detail->harga_jual = $produk->harga_jual;
+        // $checkBarang = $this->db->get_where('penjualan_detail', ['id_produk' => $produk])->row_array();
+        // $penjualan = PenjualanDetail::where('id_penjualan_detail', $request->id_produk); 
+
+        // if($penjualan->id_produk == $request->id_produk) {
+        //     //maka update
+        //     $update = $penjualan->jumlah + 1;
+        //     $update->update();
+
+        // }else {
+            $detail = new PenjualanDetail();
+            $detail->id_penjualan = $request->id_penjualan;
+            $detail->id_produk = $produk->id_produk;
+            // if($request->id_produk == $detail->produk){
+            //     $detail->jumlah + 1;
+            // }
+
+            $detail->harga_jual = $produk->harga_jual;
+            
+            if ( $request->barcode != $produk->barcode) {
+                $detail->jumlah + 0;
+            } else {
+                
+                $detail->jumlah + 1;
+            }
+
+            if ($produk->stok <= $request->jumlah)
+            {
+                $this->session->set_flashdata('error', 'Jumlah Barang melebihi stok');
+            } else
+            {
+                $detail->jumlah = 1;
+            }
+
+            $detail->diskon = 0;
+            $detail->subtotal = $produk->harga_jual;
+            $detail->save();
+
+            return response()->json('Data berhasil disimpan', 200);
+        // }
+
         
-        if ( $request->barcode != $produk->barcode) {
-            $detail->jumlah + 0;
-        } else {
-            $detail->jumlah + 1;
-        }
-
-        if ($produk->stok <= $request->jumlah)
-        {
-            $this->session->set_flashdata('error', 'Jumlah Barang melebihi stok');
-        } else
-        {
-            $detail->jumlah = 1;
-        }
-
-        $detail->diskon = 0;
-        $detail->subtotal = $produk->harga_jual;
-        $detail->save();
-
-        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**

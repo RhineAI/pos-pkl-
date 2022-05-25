@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('produk_supplier', function (Blueprint $table) {
             $table->increments('id_produk_supplier');
-            $table->integer('id_supplier');
+            // $table->integer('id_supplier');
             $table->integer('id_produk');
             $table->timestamps();
         });

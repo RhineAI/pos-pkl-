@@ -77,7 +77,7 @@ class SettingController extends Controller
         $setting->alamat = $request->alamat;
 
         $request->validate([
-            'path_logo' => 'image|file|max:2048',
+            'path_logo' => 'image|file|max:4096',
         ]);
 
         if ($request->hasFile('path_logo')) {

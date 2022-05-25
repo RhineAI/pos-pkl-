@@ -61,6 +61,8 @@ Pengaturan Toko
                         <div class="col-sm-5">
                             <input type="file" name="path_logo" class="form-control" id="Logo_Perusahaan"
                                 onchange="preview('.tampil-logo', this.files[0])">
+                            <span class="placeholder" style="font-style: italic">Max 4mb</span>
+
                             <span class="help-block with-errors"></span>
                             <div class="tampil-logo mt-3"></div>
                         </div>

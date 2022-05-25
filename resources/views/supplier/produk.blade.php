@@ -30,7 +30,7 @@
                             <tr>
                                
                                 <td>
-                                    <input type="checkbox" name="checkbox[]" id="id_produk" value="{{ $item->id_produk }}">
+                                    <input type="checkbox" name="checkbox[]" id="id_produk" class="produk" value="{{ $item->id_produk }}">
                                 </td>
                                 <td width="6%">{{ $key+1 }}</td>
                                 <td id="barcode"><span class="badge badge-info">{{ $item->barcode }}</span></td>
