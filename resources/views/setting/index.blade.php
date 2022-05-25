@@ -35,8 +35,7 @@ Pengaturan Toko
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                @enderror
-                                
+                                @enderror              
                             {{-- <span class="help-block with-errors"></span> --}}
                         </div>
                     </div>
@@ -72,7 +71,7 @@ Pengaturan Toko
                         <div class="col-sm-4">
                             <select name="tipe_nota" class="form-control" id="tipe_nota" required>
                                 <option value="1">Nota Kecil</option>
-                                <option value="2">Nota Besar</option>
+                                {{-- <option value="2">Nota Besar</option> --}}
                             </select>
                             <span class="help-block with-errors"></span>
                         </div>
