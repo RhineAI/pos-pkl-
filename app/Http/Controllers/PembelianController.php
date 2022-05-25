@@ -201,13 +201,14 @@ class PembelianController extends Controller
         
         foreach ($detail as $item) {
             $produk = Produk::find($item->id_produk);
-            $checkProduk = Produk::where('id_produk', $item->id_produk);
+            // $checkProduk = Produk::where('id_produk', $item->id_produk);
             if ($produk) {
-                if($produk->stok >= 10 ) {
+                if($produk->stok >= $item->jumlah ) {
                     $produk->stok -= $item->jumlah;    
-                } elseif($checkProduk->stok >= $item->jumlah) {
-                    $produk->stok -= $item->jumlah;    
-                }
+                } 
+                // elseif($checkProduk->stok >= $item->jumlah) {
+                //     $produk->stok -= $item->jumlah;    
+                // }
                 else {
                     return redirect('/pembelian')->session()->flash('failed', 'Barang gagal disimpan');
                 }   

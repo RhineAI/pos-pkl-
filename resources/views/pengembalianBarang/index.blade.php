@@ -29,7 +29,7 @@ Pengembalian Barang
                         <th width="10%" class="text-center">Barcode</th>
                         <th class="text-center">Produk</th>
                         <th width="13%" class="text-center">Jumlah (Stok)</th>
-                        <th  width="10%" class="text-center">Refund</th>
+                        <th  width="14%" class="text-center">Refund</th>
                         <th class="text-center">Supplier</th>
                         <th width="10%" class="text-center">Keterangan</th>
                         <th width="12%" class="text-center">Aksi</th>
@@ -109,6 +109,11 @@ Pengembalian Barang
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=id_produk]').focus();
+
+            // $('#id_produk').on('change' function(e) {
+            //     document.getElementById('id_produk');
+            //     var response.max = $('#id_produk');
+            })
         }
 
         function editForm(url) {

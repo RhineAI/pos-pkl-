@@ -254,6 +254,10 @@ Transaksi Penjualan
     }
 
     function pilihProduk(id, kode) {
+        // $('body').on('click', ('#selectProduct') function() {
+        //     let checkProduct = $('#id_produk')
+        // })
+
         $('#id_produk').val(id);
         $('#barcode').val(kode);
         hideProduk();

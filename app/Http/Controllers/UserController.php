@@ -168,7 +168,7 @@ class UserController extends Controller
         }
 
         $request->validate([
-            'foto' => 'image|file|max:3072',
+            'foto' => 'image|file|max:5000',
         ]);
 
         if ($request->hasFile('foto')) {

@@ -133,7 +133,7 @@ Daftar Pembelian
                     .fail((errors) => {
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Stok Produk sisa 10, tidak bisa dihapus',
+                            text: 'Salah satu stok Produk habis, tidak bisa dihapus',
                             icon: 'error',
                             confirmButtonText: 'Kembali',
                             confirmButtonColor: '#DC3545'

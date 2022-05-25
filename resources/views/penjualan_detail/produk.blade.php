@@ -32,7 +32,7 @@
                             <td>{{ 'Rp. '. format_uang($item->harga_beli) }}</td>
                             <td width="12%">{{ $item->stok }}</td>
                             <td width="6%">
-                                <a href="#" class="btn btn-primary btn-xs btn-flat"
+                                <a href="#" id="selectProduct" class="btn btn-primary btn-xs btn-flat"
                                 onclick="pilihProduk('{{ $item->id_produk }}', '{{ $item->barcode }}') ">    
                                     <i class="fa fa-check-circle"></i>
                                     Pilih
