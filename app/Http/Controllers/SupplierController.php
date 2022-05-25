@@ -30,8 +30,8 @@ class SupplierController extends Controller
             ->addColumn('aksi', function ($supplier) {
                 return '
                     <div class="btn-group">
-                        <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-sm btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>
-                        <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-sm btn-danger btn-flat"><i class="bi bi-trash"></i></button>
+                        <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-sm btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>&nbsp;&nbsp;
+                        <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-sm btn-danger btn-flat"><i class="bi bi-trash"></i></button>&nbsp;&nbsp;
                         <button id="tambahProdukSupplier" data-id_supplier="'.$supplier->id_supplier.'" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i></button>
                     </div>
                 ';
@@ -81,8 +81,8 @@ class SupplierController extends Controller
         $supplier->alamat = $request->alamat;
         $supplier->telepon = $request->telepon;
         $supplier->save();
-
-        return redirect('/supplier')->with('alert', 'Berhasil Ditambahkan');
+        
+        return redirect('/supplier')->with('alert', 'Supplier baru berhasil ditambahkan');
     }
 
     /**
@@ -124,7 +124,7 @@ class SupplierController extends Controller
         $supplier->telepon = $request->telepon;
         $supplier->update();
 
-        return redirect('/supplier')->with('update', 'Berhasil Diupdate');
+        return redirect('/supplier')->with('update', 'Supplier baru berhasil diupdate');
         // return response()->json('berhasil', 200);
     }
 
