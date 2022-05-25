@@ -75,10 +75,14 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        $supplier = Supplier::create($request->all());
+        // $supplier = Supplier::create($request->all());
+        $supplier = new Supplier();
+        $supplier->nama = $request->nama;
+        $supplier->alamat = $request->alamat;
+        $supplier->telepon = $request->telepon;
         $supplier->save();
 
-        return response()->json('Supplier baru berhasil ditambahkan', 200);
+        return redirect('/supplier')->with('alert', 'Berhasil Ditambahkan');
     }
 
     /**
@@ -115,9 +119,13 @@ class SupplierController extends Controller
     public function update(Request $request, $id)
     {
         $supplier = Supplier::find($id);
-        $supplier->update($request->all());
+        $supplier->nama = $request->nama;
+        $supplier->alamat = $request->alamat;
+        $supplier->telepon = $request->telepon;
+        $supplier->update();
 
-        return response()->json('Supplier berhasil diupdate', 200);
+        return redirect('/supplier')->with('update', 'Berhasil Diupdate');
+        // return response()->json('berhasil', 200);
     }
 
     /**
@@ -129,7 +137,18 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         $supplier = Supplier::find($id);
+        
+        $produk_supplier = ProdukSupplier::where('id_supplier', $supplier->id_supplier)->get();
+        $produk_supplier->delete();
+        
         $supplier->delete();
+        // if(Supplier::destroy($id)){
+        //     return 'success';
+        // }else{
+        //     return 'fail';
+        // }
+
+        // return redirect('/supplier')->with('delete', 'Berhasil Diupdate');
 
         return response(null,204);
     }
