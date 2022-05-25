@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pembelian', function (Blueprint $table) {
             $table->increments('id_pembelian');
             $table->string('kode_pembelian');
-            $table->integer('id_supplier');
+            // $table->integer('id_supplier');
             $table->integer('total_item');
             $table->integer('total_harga');
             $table->float('diskon')->default(0);  

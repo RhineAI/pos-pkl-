@@ -17,4 +17,6 @@ class ProdukSupplier extends Model
     {
         return $this->hasOne(Produk::class, 'id_produk', 'id_produk');
     }
+
+    
 }

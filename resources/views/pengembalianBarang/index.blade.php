@@ -29,7 +29,7 @@ Pengembalian Barang
                         <th width="10%" class="text-center">Barcode</th>
                         <th class="text-center">Produk</th>
                         <th width="13%" class="text-center">Jumlah (Stok)</th>
-                        <th  width="10%" class="text-center">Refund</th>
+                        <th  width="14%" class="text-center">Refund</th>
                         <th class="text-center">Supplier</th>
                         <th width="10%" class="text-center">Keterangan</th>
                         <th width="12%" class="text-center">Aksi</th>
@@ -84,12 +84,13 @@ Pengembalian Barang
                                 })
                                 table.ajax.reload();
                             } else {
-                                Swal.fire({
-                                    title: 'Gagal!',
-                                    text: 'Pengembalian barang gagal!',
-                                    icon: 'error',
+                                $('#modal-form').modal('hide');
+                                Swal.fire({                    
+                                    title: 'Sukses!',
+                                    text: 'Berhasil Diupdate',
+                                    icon: 'success',
                                     confirmButtonText: 'Kembali',
-                                    confirmButtonColor: '#DC3545'
+                                    confirmButtonColor: '#28A745'
                                 })
                                 table.ajax.reload();
                 
@@ -108,6 +109,11 @@ Pengembalian Barang
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=id_produk]').focus();
+
+            // $('#id_produk').on('change' function(e) {
+            //     document.getElementById('id_produk');
+            //     var response.max = $('#id_produk');
+            })
         }
 
         function editForm(url) {
@@ -121,7 +127,7 @@ Pengembalian Barang
 
             $.get(url)
                 .done((response) => {
-                    $('#modal-form [name=id_produk]').val(response.id_produk);
+                    $('#modal-form [name=id_produk]').val(response.id_produk).attr('disabled', true);
                     $('#modal-form [name=jumlah]').val(response.jumlah);
                     $('#modal-form [name=id_supplier]').val(response.id_supplier);
                     $('#modal-form [name=keterangan]').val(response.keterangan);

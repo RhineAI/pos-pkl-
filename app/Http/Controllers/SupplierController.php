@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\Produk;
 use App\Models\ProdukSupplier;
+use Illuminate\Support\Facades\DB;
 
 class SupplierController extends Controller
 {
@@ -76,13 +77,44 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         // $supplier = Supplier::create($request->all());
+        $validasiNama = Supplier::find('nama');
         $supplier = new Supplier();
-        $supplier->nama = $request->nama;
+
+        // $validasi = $request->validate([
+        //     'nama' => 'unique:users'
+        // ]);
+
+        if($request->nama == $validasiNama)
+        {
+            // ([
+            //     'status' => false,
+            //     'message' => 'gagal'
+            // ]);
+        } else {
+            $supplier->nama = $request->nama;
+        }
+
         $supplier->alamat = $request->alamat;
         $supplier->telepon = $request->telepon;
         $supplier->save();
+<<<<<<< HEAD
         
         return redirect('/supplier')->with('alert', 'Supplier baru berhasil ditambahkan');
+=======
+
+        // $validatedData = $request->validate([
+        //     'nama' => 'required|max:255|unique:users',
+        //     'alamat' => 'required',
+        //     'telepon' => 'required|min:10|max:13'
+        // ]);
+
+        // $validatedData['password'] = bcrypt($validatedData['password']);
+        // $validatedData['password'] = Hash::make($validatedData['password']);
+
+        // Supplier::create($validatedData);
+
+        return redirect('/supplier')->with('alert', 'Berhasil Ditambahkan');
+>>>>>>> e0af6c7bf7af796632cfdaa08396dfe89c178c2f
     }
 
     /**
@@ -138,9 +170,12 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::find($id);
         
-        $produk_supplier = ProdukSupplier::where('id_supplier', $supplier->id_supplier)->get();
-        $produk_supplier->delete();
+        // $produk_supplier = ProdukSupplier::where('id_supplier', $supplier->id_supplier)->delete();
         
+        // dd($supplier);
+
+        // DB::table('produk_supplier')->where('id_supplier', $supplier->id_supplier)->delete();
+        // $supplier->produk()->detach();
         $supplier->delete();
         // if(Supplier::destroy($id)){
         //     return 'success';
@@ -150,6 +185,6 @@ class SupplierController extends Controller
 
         // return redirect('/supplier')->with('delete', 'Berhasil Diupdate');
 
-        return response(null,204);
+        return response(null,200);
     }
 }

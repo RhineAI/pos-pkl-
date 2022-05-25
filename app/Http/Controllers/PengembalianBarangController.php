@@ -80,21 +80,21 @@ class PengembalianBarangController extends Controller
      */
     public function store(Request $request)
     {
-        // $pengembalian = PengembalianBarang::create($request->all())->save();
-
-        // // $detail = PengembalianBarang::where('id_pengembalian_barang', $pengembalian->id_pengembalian_barang)->get();
-        // // foreach ($detail as $item) {
-        // //     $produk = Produk::find($item->id_produk);
-        // //     $produk->stok -= $item->jumlah;
-        // //     $produk->update();
-        // // }
-
-        // // return $pengembalian;'
-
+        
         $pengembalian = new PengembalianBarang();
         $pengembalian->id_produk = $request->id_produk;
         $pengembalian->id_supplier = $request->id_supplier;
-        $pengembalian->jumlah = $request->jumlah;
+        
+        $produk = Produk::find('id_produk')->where('id_produk', $request->id_produk)->get();
+        if($request->jumlah >= $produk->stok){
+            $pengembalian->jumlah = $request->jumlah;
+        } else {
+            return response()->json([
+                'status' => true,
+                'message' => 'Stok di master data kurang'
+            ]);
+        }
+
         $pengembalian->keterangan = $request->keterangan;
         $pengembalian->save();
 
@@ -105,7 +105,7 @@ class PengembalianBarangController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Pengembalian barang berhasil!'
+            'message' => 'Pengembalian barang berhasil!',
         ], 200);
 
     }
@@ -144,17 +144,46 @@ class PengembalianBarangController extends Controller
     public function update(Request $request, $id)
     {
         $pengembalian = PengembalianBarang::find($id);
-
         $findProduct = Produk::find($pengembalian->id_produk);
 
-        // if($request->has('jumlah') && $request->jumlah >= $pengembalian->jumlah )
+        if($pengembalian->jumlah >= $request->jumlah){
+            $findProduct->stok += $pengembalian->jumlah;   
 
-        $findProduct->stok -= $pengembalian->jumlah;
-        $findProduct->save($request->all());
+            $findProduct->stok -= $request->jumlah;
+            $findProduct->update();
+        } else{
+            $findProduct->stok += $pengembalian->jumlah;   
+
+            $findProduct->stok -= $request->jumlah;
+            $findProduct->update();
+        }
    
+        $pengembalian->id_produk = $pengembalian->id_produk;
 
+        // if($pengembalian->id_produk == $request->id_produk)
+        // {
+        //     if($pengembalian->jumlah >= $request->jumlah){
+        //         $findProduct->stok += $request->id_produk->
+            
+        //         $findProduct->stok += $pengembalian->jumlah;   
+    
+        //         $findProduct->stok -= $request->jumlah;
+        //         $findProduct->update();
+        //     } else{
+        //         $findProduct->stok += $pengembalian->jumlah;   
+    
+        //         $findProduct->stok -= $request->jumlah;
+        //         $findProduct->update();
+        //     }
+        // }else{
 
-        $pengembalian->update($request->all());
+        // }
+
+        $pengembalian->jumlah = $request->jumlah;
+        $pengembalian->id_supplier = $request->id_supplier;
+        $pengembalian->keterangan = $request->keterangan;
+
+        $pengembalian->update();
 
         
 
