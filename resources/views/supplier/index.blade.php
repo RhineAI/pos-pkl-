@@ -19,8 +19,8 @@ Data Semua Supplier
                     <div class="alert alert-success text-white" id="alert"><i class="fas fa-circle-check"></i>&nbsp;&nbsp;{{ session()->get('alert') }}</div>
                 @endif
 
-                @if(session()->has('update'))    
-                <div class="alert alert-success text-white" id="update"><i class="fas fa-circle-check"></i>&nbsp;&nbsp;{{ session()->get('update') }}
+                @if(session()->has('alert2'))    
+                <div class="alert alert-success text-white" id="alert2"><i class="fas fa-circle-check"></i>&nbsp;&nbsp;{{ session()->get('alert2') }}
                 </div>                    
                 @endif
 
@@ -48,18 +48,6 @@ Data Semua Supplier
 
 @push('scripts')
     <script>
-        var time = document.getElementById("alert");
-
-            setTimeout(function(){
-            time.style.display = "none";
-        }, 2000);
-
-        var time = document.getElementById("update");
-
-            setTimeout(function(){
-            time.style.display = "none";
-        }, 2000);
-        
 
         let table;
 
@@ -260,12 +248,17 @@ Data Semua Supplier
             })
         })
 
-        var time = document.getElementById("update");
+        var time = document.getElementById("alert");
 
-        setTimeout(function(){
-        time.style.display = "none";
+            setTimeout(function(){
+            time.style.display = "none";
         }, 3000);
 
+        var time = document.getElementById("alert2");
+
+            setTimeout(function(){
+            time.style.display = "none";
+        }, 3000);
        
     </script>
 @endpush

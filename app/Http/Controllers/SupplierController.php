@@ -109,7 +109,7 @@ class SupplierController extends Controller
 
         // Supplier::create($validatedData);
 
-        return redirect('/supplier')->with('alert', 'Berhasil Ditambahkan');
+        return redirect('/supplier')->with('alert', 'Supplier baru berhasil ditambahkan');
     }
 
     /**
@@ -151,7 +151,7 @@ class SupplierController extends Controller
         $supplier->telepon = $request->telepon;
         $supplier->update();
 
-        return redirect('/supplier')->with('update', 'Supplier baru berhasil diupdate');
+        return redirect('/supplier')->with('alert2', 'Supplier berhasil diupdate');
         // return response()->json('berhasil', 200);
     }
 
