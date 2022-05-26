@@ -77,22 +77,24 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         // $supplier = Supplier::create($request->all());
-        $validasiNama = Supplier::find('nama');
+        // $validasiNama = Supplier::find('nama');
         $supplier = new Supplier();
 
         // $validasi = $request->validate([
-        //     'nama' => 'unique:users'
+        //     'nama' => 'unique:supplier'
         // ]);
 
-        if($request->nama == $validasiNama)
-        {
-            // ([
-            //     'status' => false,
-            //     'message' => 'gagal'
-            // ]);
-        } else {
-            $supplier->nama = $request->nama;
-        }
+        $supplier->nama = $request->nama;
+
+        // if($request->nama == $validasiNama)
+        // {
+        //     // ([
+        //     //     'status' => false,
+        //     //     'message' => 'gagal'
+        //     // ]);
+        // } else {
+        //     $supplier->nama = $request->nama;
+        // }
 
         $supplier->alamat = $request->alamat;
         $supplier->telepon = $request->telepon;

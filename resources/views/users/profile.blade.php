@@ -27,7 +27,7 @@ Update Profile
                         <label for="Nama" class="col-sm-3 control-label">Nama</label>
                         <div class="col-sm-9">
                             <input type="text" name="name" class="form-control" id="Nama" required
-                                autofocus value="{{ $profile->name }}">
+                                autofocus value="{{ $profile->name }}" maxlength="15" minlength="3">
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ Update Profile
                         <label for="Username" class="col-sm-3 control-label">Username</label>
                         <div class="col-sm-9">
                             <input type="text" name="username" class="form-control" id="Username" required
-                            autofocus value="{{ $profile->username }}">
+                            autofocus value="{{ $profile->username }}" maxlength="15" minlength="3">
                         </div>
                         <span class="help-block with-errors"></span>
                     </div>
@@ -128,8 +128,10 @@ Update Profile
                             icon: 'success',
                             confirmButtonText: 'Lanjut',
                             confirmButtonColor: '#28A745'
+                        }).then(function(){
+                            location.reload('/dashboard');
                         })                       
-                        return; 
+                        // return; 
                 })
                 .fail(errors => {
                     if (errors.status == 422) {

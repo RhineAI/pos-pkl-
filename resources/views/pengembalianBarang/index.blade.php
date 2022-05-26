@@ -101,6 +101,79 @@ Pengembalian Barang
             });
         }); 
 
+        $(function () {
+            $(document).on('change', '#id_produk', function () {
+                let product_id =  $(this).val()
+                $.ajax({
+                    url: "{{ url('/') }}/pengembalianBarang/findProduct/"+product_id,
+                    method: 'POST',
+                    data: {
+                        product_id: product_id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success:function(response) {
+                        console.log(response)
+                        let maxStokHidden = response.data.stok 
+                        $("#maxStokHidden").val(maxStokHidden)
+                        $("#maxStokHidden").attr('max', maxStokHidden)
+                    }
+                })
+            })
+            $(document).on('keyup', '#jumlah', function () {
+                let maxStokHidden = parseInt($("#maxStokHidden").val())
+                let quantity = parseInt($(this).val())
+
+                if (quantity > maxStokHidden) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Quantity melebihi batas stok!',
+                        showConfirmButton: true,
+                    })
+                    $(this).val($("#maxStokHidden").val())
+                }
+            })
+        })
+
+
+        // $(function() {
+        //     $(document).on('change', '#id_produk', function () {
+        //         let product_id = $(this).val()
+        //         $.ajax({
+        //             url: "{{ url('/') }}/pengembalianBarang/findProduct/"+product_id,
+        //             method: 'POST',
+        //             data: {
+        //                 product_id: product_id,
+        //                 _token: '{{ csrf_token() }}'
+        //                 // _token: "$('[name=csrf-token]')"
+        //             },
+        //             dataType: 'json',
+        //                 success:function(response) {
+        //                 console.log(response)
+        //                 let maxStokHidden = response.data.stok 
+        //                 $("#maxStokHidden").val(maxStokHidden)
+        //                 $("#maxStokHidden").attr('max', maxStokHidden)
+        //             }
+        //         })
+        //     })
+
+        //     $(document).on('keyup', '#jumlah', function () {
+        //         let maxStokHidden = parseInt($("#maxStokHidden").val())
+        //         let quantity = parseInt($(this).val())
+
+        //         if (quantity > maxStokHidden) {
+        //             Swal.fire({
+        //                 icon: 'info',
+        //                 title: 'Quantity melebihi batas stok!',
+        //                 showConfirmButton: true,
+        //             })
+        //             $(this).val($("#maxStokHidden").val())
+        //         }
+        //     })
+
+        // })
+
+
         function addForm(url) {
             $('#modal-form').modal('show')
             $('#modal-form .modal-title').text('Pengembalian Barang');
@@ -109,11 +182,7 @@ Pengembalian Barang
             $('#modal-form form').attr('action', url);
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=id_produk]').focus();
-
-            // $('#id_produk').on('change' function(e) {
-            //     document.getElementById('id_produk');
-            //     var response.max = $('#id_produk');
-            })
+           
         }
 
         function editForm(url) {

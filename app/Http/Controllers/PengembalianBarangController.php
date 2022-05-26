@@ -85,16 +85,16 @@ class PengembalianBarangController extends Controller
         $pengembalian->id_produk = $request->id_produk;
         $pengembalian->id_supplier = $request->id_supplier;
         
-        $produk = Produk::find('id_produk')->where('id_produk', $request->id_produk)->get();
-        if($request->jumlah >= $produk->stok){
-            $pengembalian->jumlah = $request->jumlah;
-        } else {
-            return response()->json([
-                'status' => true,
-                'message' => 'Stok di master data kurang'
-            ]);
-        }
-
+        // $produk = Produk::find('id_produk')->where('id_produk', $request->id_produk)->get();
+        // if($request->jumlah >= $produk->stok){
+        //     $pengembalian->jumlah = $request->jumlah;
+        // } else {
+        //     return response()->json([
+        //         'status' => true,
+        //         'message' => 'Stok di master data kurang'
+        //     ]);
+        // }
+        $pengembalian->jumlah = $request->jumlah;
         $pengembalian->keterangan = $request->keterangan;
         $pengembalian->save();
 
@@ -109,6 +109,20 @@ class PengembalianBarangController extends Controller
         ], 200);
 
     }
+
+    public function findProduct(Request $request){
+        if ($request->ajax()) {
+            $product = Produk::where('id_produk', $request->id_produk)->first();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'success get product',
+                'data' => $product
+            ]);
+        }
+    }
+
+    
 
     /**
      * Display the specified resource.

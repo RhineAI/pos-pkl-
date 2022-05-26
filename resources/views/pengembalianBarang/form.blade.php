@@ -30,8 +30,8 @@
                     <div class="form-group row">
                         <label for="jumlah" class="col-md-3 col-md-offset-1 control-label">Jumlah</label>
                         <div class="col-md-9">
-                            <input type="number" name="jumlah" id="jumlah" class="form-control" autofocus
-                                required placeholder="0">
+                            <input type="number" name="jumlah" id="jumlah" class="form-control" autofocus required placeholder="0">
+                            <input type="hidden" class="form-control" id="maxStokHidden">
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
