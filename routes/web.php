@@ -94,6 +94,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Route Pengembalian Barang
     Route::get('/pengembalianBarang/data', [PengembalianBarangController::class, 'data'])->name('pengembalian_barang.data');
     Route::resource('/pengembalianBarang', PengembalianBarangController::class);
+    // Route::resource('/pengembalianBarang', PurchaseController::class);
+    Route::post('pengembalianBarang/findProduct/{product_id}', [PengembalianBarangController::class, 'findProduct']);
+
 
 //  Route record penjualan
 Route::group(['middleware' => 'auth'], function () {
