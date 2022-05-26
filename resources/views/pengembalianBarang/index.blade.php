@@ -110,11 +110,7 @@ Pengembalian Barang
             $('#modal-form [name=_method]').val('post');
             $('#modal-form [name=id_produk]').focus();
 
-            // $('#id_produk').on('change' function(e) {
-            //     document.getElementById('id_produk');
-            //     var response.max = $('#id_produk');
-            })
-        }
+            };
 
         function editForm(url) {
             $('#modal-form').modal('show')

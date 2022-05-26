@@ -16,31 +16,12 @@ Data Semua Supplier
         <div class="col-md-12 p-2 mb-3" style="background-color: white">
             <div class="box">
                 @if(session()->has('alert'))
-                    <div class="p-3 alert alert-success d-flex text-white" id="alert">{{ session()->get('alert') }}</div>
+                    <div class="alert alert-success text-white" id="alert"><i class="fas fa-circle-check"></i>&nbsp;&nbsp;{{ session()->get('alert') }}</div>
                 @endif
 
-                @if(session()->has('update'))
-                    
-                    <div class=" p-3 alert alert-success d-flex text-white" id="update"><i class="fas fa-circle-check"></i>{{ session()->get('update') }}
-                    </div>
-                    @push('script')
-                        <script>
-                            $('#alert').ready(
-                               alert(
-                                    Swal.fire({
-                                        title: 'Sukses!',
-                                        text: 'P',
-                                        icon: 'success',
-                                        confirmButtonText: 'Lanjut',
-                                        confirmButtonColor: '#28A745'
-                                    })
-                               );
-                            );
-                        </script>
-                        
-                    @endpush
-           
-                    
+                @if(session()->has('alert2'))    
+                <div class="alert alert-success text-white" id="alert2"><i class="fas fa-circle-check"></i>&nbsp;&nbsp;{{ session()->get('alert2') }}
+                </div>                    
                 @endif
 
                 <div class="box-header with-border">
@@ -67,18 +48,6 @@ Data Semua Supplier
 
 @push('scripts')
     <script>
-        var time = document.getElementById("alert");
-
-            setTimeout(function(){
-            time.style.display = "none";
-        }, 2000);
-
-        var time = document.getElementById("update");
-
-            setTimeout(function(){
-            time.style.display = "none";
-        }, 2000);
-        
 
         let table;
 
@@ -279,6 +248,17 @@ Data Semua Supplier
             })
         })
 
+        var time = document.getElementById("alert");
+
+            setTimeout(function(){
+            time.style.display = "none";
+        }, 3000);
+
+        var time = document.getElementById("alert2");
+
+            setTimeout(function(){
+            time.style.display = "none";
+        }, 3000);
        
     </script>
 @endpush
