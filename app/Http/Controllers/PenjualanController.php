@@ -255,7 +255,7 @@ class PenjualanController extends Controller
 
         // alert('{{ alert }}');
 
-        return redirect('/dashboard')->with('alert', 'Transaksi dibatalkan');
+        return redirect('/dashboard')->with('alert', 'Transaksi Penjualan dibatalkan');
 
     }
 

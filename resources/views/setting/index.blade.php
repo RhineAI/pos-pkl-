@@ -105,14 +105,24 @@ Pengaturan Toko
                 })
                 .done(response => {
                     showData();
-                    $('.alert').fadeIn();
-                    setTimeout(() => {
-                        $('.alert').fadeOut();
-                    }, 3000);
+                    Swal.fire({
+                            title: 'Sukses!',
+                            text: 'Update Pengaturan Toko berhasil',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
+                        })                       
+                    return; 
                 })
                 .fail(errors => {
-                    alert('Tidak dapat menyimpan data');
-                    return;
+                    Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Update Pengaturan Toko gagal',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
+                        })                       
+                    return; 
                 });
             }
         });
