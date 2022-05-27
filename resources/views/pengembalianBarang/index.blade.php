@@ -16,7 +16,7 @@ Pengembalian Barang
     <div class="col-md-12 p-2 mb-3" style="background-color: white">
         <div class="box">
             <div class="box-header with-border">
-                <button onclick="addForm('{{ route('pengembalianBarang.store') }}')"
+                <button onclick="addForm()"
                     class="btn btn-sm btn-flat btn-primary btn-flat mx-2 my-3"><i class="fa fa-plus-circle"></i>
                     Tambah</button>
             </div>
@@ -25,13 +25,13 @@ Pengembalian Barang
                 <table class="table table-striped table-bordered">
                     <thead>
                         <th width="5%">No</th>
-                        <th width="10%" class="text-center">Tanggal</th>
-                        <th width="10%" class="text-center">Barcode</th>
-                        <th class="text-center">Produk</th>
-                        <th width="13%" class="text-center">Jumlah (Stok)</th>
+                        <th width="10%" class="text-center">Invoice</th>
+                        <th width="10%" class="text-center">Produk</th>
+                        <th class="text-center">Jumlah Asal</th>
+                        <th width="13%" class="text-center">Jumlah Kembali</th>
                         <th  width="14%" class="text-center">Refund</th>
-                        <th class="text-center">Supplier</th>
-                        <th width="10%" class="text-center">Keterangan</th>
+                        {{-- <th class="text-center">Supplier</th>
+                        <th width="10%" class="text-center">Keterangan</th> --}}
                         <th width="12%" class="text-center">Aksi</th>
                     </thead>
                 </table>
@@ -58,13 +58,11 @@ Pengembalian Barang
                 },
                 columns: [
                    {data:'DT_RowIndex', searchable: false, sortable: false},
-                   {data:'tanggal'},
-                   {data:'barcode'},
+                   {data:'invoice'},
                    {data:'nama_produk'},
-                   {data:'jumlah'},
-                   {data:'harga'},
-                   {data:'nama'},
-                   {data:'keterangan'},
+                   {data:'jumlah_asal'},
+                   {data:'jumlah_kembali'},
+                   {data:'subtotal'},
                    {data:'aksi', searchable: false, sortable: false},
                 ]
             });
@@ -136,42 +134,6 @@ Pengembalian Barang
         })
 
 
-        // $(function() {
-        //     $(document).on('change', '#id_produk', function () {
-        //         let product_id = $(this).val()
-        //         $.ajax({
-        //             url: "{{ url('/') }}/pengembalianBarang/findProduct/"+product_id,
-        //             method: 'POST',
-        //             data: {
-        //                 product_id: product_id,
-        //                 _token: '{{ csrf_token() }}'
-        //                 // _token: "$('[name=csrf-token]')"
-        //             },
-        //             dataType: 'json',
-        //                 success:function(response) {
-        //                 console.log(response)
-        //                 let maxStokHidden = response.data.stok 
-        //                 $("#maxStokHidden").val(maxStokHidden)
-        //                 $("#maxStokHidden").attr('max', maxStokHidden)
-        //             }
-        //         })
-        //     })
-
-        //     $(document).on('keyup', '#jumlah', function () {
-        //         let maxStokHidden = parseInt($("#maxStokHidden").val())
-        //         let quantity = parseInt($(this).val())
-
-        //         if (quantity > maxStokHidden) {
-        //             Swal.fire({
-        //                 icon: 'info',
-        //                 title: 'Quantity melebihi batas stok!',
-        //                 showConfirmButton: true,
-        //             })
-        //             $(this).val($("#maxStokHidden").val())
-        //         }
-        //     })
-
-        // })
 
 
         function addForm(url) {

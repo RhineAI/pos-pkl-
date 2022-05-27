@@ -77,7 +77,7 @@ Transaksi Penjualan
                         <th class="text-center">Nama</th>
                         <th width="15%"class="text-center">Harga</th>
                         <th width="12%" class="text-center">Jumlah</th>
-                        <th width="12%" class="text-center">Diskon</th>
+                    
                         <th width="12%" class="text-center">Subtotal</th>
                         <th width="8%" class="text-center">Aksi</th>
                     </thead>

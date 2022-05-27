@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -27,11 +26,11 @@ class DashboardController extends Controller
 
         $tanggal_awal = date('Y-m-01');
         $tanggal_akhir = date('Y-m-d');
-        
 
         $data_tanggal = array();
         $data_pengeluaran = array();
         $data_pendapatan = array();
+        $data_pemasukkan = array();
 
         // data pengeluaran dan pendapatan
         while (strtotime($tanggal_awal) <= strtotime($tanggal_akhir)) {
@@ -46,7 +45,7 @@ class DashboardController extends Controller
             $data_pengeluaran[] += $pengeluaran;
             $pendapatan = $total_penjualan;
             $data_pendapatan[] += $pendapatan;
-
+            $data_pemasukkan = $total_penjualan;
 
             $tanggal_awal = date('Y-m-d', strtotime("+1day", strtotime($tanggal_awal)));
 
@@ -70,7 +69,7 @@ class DashboardController extends Controller
         if (auth()->user()->level == 1) {
             return view('admin.dashboard', compact('produk', 'supplier', 'TanggalAwal', 'TanggalAkhir', 'tanggal_awal', 'tanggal_akhir', 'seluruh_pembelian', 'seluruh_penjualan', 'data_tanggal', 'data_pengeluaran', 'data_pendapatan'));
         } else {
-            return view('kasir.dashboard', compact('produk', 'supplier', 'TanggalAwal', 'TanggalAkhir', 'tanggal_awal', 'tanggal_akhir', 'seluruh_pembelian', 'seluruh_penjualan', 'data_tanggal', 'data_pengeluaran', 'data_pendapatan'));
+            return view('kasir.dashboard', compact('TanggalAwal', 'TanggalAkhir', 'tanggal_awal', 'tanggal_akhir', 'seluruh_penjualan', 'data_tanggal', 'data_pendapatan', 'data_pemasukkan'));
         }
         
     }

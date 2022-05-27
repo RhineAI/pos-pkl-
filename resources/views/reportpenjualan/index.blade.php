@@ -76,7 +76,7 @@ Total Pendapatan Penjualan
                                     <th width="13%" colspan="1" class="text-center">Total Bayar</th> --}}
                                     {{-- <th width="11%" colspan="1" class="text-center">Kasir</th> --}}
                                     <th class="text-center">Total Pendapatan</th>
-                                    <th width="8%" class="text-center">Aksi</th>
+                                    {{-- <th width="8%" class="text-center">Aksi</th> --}}
                               
                             </thead>
                         </table>
@@ -123,9 +123,9 @@ Total Pendapatan Penjualan
                     // {data:'bayar'},
                     // {data:'id_user'},
                     {data:'penjualan'},
-                    {data:'aksi', searchable: false, sortable: false},
+                    // {data:'aksi', searchable: false, sortable: false},
                 ],
-            
+                dom: 'Brt',
                 bSort : false,
                 
             });

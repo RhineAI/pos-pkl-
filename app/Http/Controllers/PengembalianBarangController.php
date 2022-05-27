@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembelian;
+use App\Models\PembelianDetail;
 use App\Models\PengembalianBarang;
 use App\Models\Produk;
 use App\Models\Supplier;
@@ -16,10 +18,14 @@ class PengembalianBarangController extends Controller
      */
     public function index()
     {
-        $produk = Produk::all()->pluck('id_produk', 'nama_produk');
-        $supplier = Supplier::all()->pluck('id_supplier', 'nama');
+        // $produk = Produk::all()->pluck('id_produk', 'nama_produk');
+        // $supplier = Supplier::all()->pluck('id_supplier', 'nama');
+        $pembelian = Pembelian::orderBy('id_pembelian', 'desc')->get();
 
-        return view('pengembalianBarang.index', compact('supplier', 'produk'));
+        // $pembelian = Pembelian::all()->pluck('id_pembelian', 'kode_pembelian');
+        // $pembelianDetail = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian);
+
+        return view('pengembalianBarang.index', compact('pembelian'));
     }
 
     public function data()
@@ -34,27 +40,26 @@ class PengembalianBarangController extends Controller
         return datatables()
             ->of($pengembalianBarang)
             ->addIndexColumn()
-            ->addColumn('tanggal', function($pengembalianBarang) {
-                return tanggal_indonesia($pengembalianBarang->created_at, false);
+            ->addColumn('invoice', function($pengembalianBarang) {
+                return $pengembalianBarang->invoice;
             })
-            ->addColumn('barcode', function ($pengembalianBarang) {
-                return '<span class="badge badge-info">'. $pengembalianBarang->produk->barcode .'</span>';
-            })
-            // ->addColumn('nama_produk', function ($pengembalianBarang) {
-            //     return $pengembalianBarang->produk->nama_produk;
+            // ->addColumn('barcode', function ($pengembalianBarang) {
+            //     return '<span class="badge badge-info">'. $pengembalianBarang->produk->barcode .'</span>';
             // })
-            ->addColumn('jumlah', function ($pengembalianBarang) {
-                return $pengembalianBarang->jumlah;
+            ->addColumn('nama_produk', function ($pengembalianBarang) {
+                return $pengembalianBarang->produk->nama_produk;
             })
-            ->addColumn('keterangan', function ($pengembalianBarang) {
-                return $pengembalianBarang->keterangan;
+            ->addColumn('jumlah_asal', function ($pengembalianBarang) {
+                return $pengembalianBarang->jumlah_asal;
             })
-            ->addColumn('harga', function ($pengembalianBarang) {
-                return 'Rp. '. format_uang($pengembalianBarang->produk->harga_beli * $pengembalianBarang->jumlah) .',-';
+            ->addColumn('jumlah_kembali', function ($pengembalianBarang) {
+                return $pengembalianBarang->jumlah_kembali;
+            })
+            ->addColumn('subtotal', function ($pengembalianBarang) {
+                return 'Rp. '. format_uang($pengembalianBarang->produk->harga_beli * $pengembalianBarang->jumlah_kembali) .',-';
             })
             ->addColumn('aksi', function($pengembalianBarang) { 
                 return '
-                <button onclick="editForm(`'. route('pengembalianBarang.update', $pengembalianBarang->id_pengembalian_barang).'`)" class="btn btn-xs btn-success btn-flat><i class=bi bi-pencil-square"><i/> Edit</button>
                     <button onclick="deleteForm(`'. route('pengembalianBarang.destroy', $pengembalianBarang->id_pengembalian_barang) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="bi bi-trash"></i> Hapus</button>
                     '; 
                 })

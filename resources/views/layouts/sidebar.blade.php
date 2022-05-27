@@ -77,43 +77,59 @@
                           </p>
                       </a>
                       <ul class="nav nav-treeview ml-4">
-                          <li class="nav-item">
-                              <a href="{{ route('pembelian.index') }}" class="nav-link">
-                                  <p>Pembelian</p>
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="" class="nav-link">
-                                  <p>Penjualan</p>
-                                  <i class="right fas fa-angle-left"></i>
-                              </a>
-                              <ul class="nav nav-treeview ml-4">
-                                <li class="nav-item">
-                                    <a href="{{ route('transaksi.baru') }}" class="nav-link">
-                                        <p>Transaksi Baru</p>                 
-                                    </a>
-                                </li>
 
-                                <li class="nav-item">
-                                    <a href="{{ route('transaksi.index') }}" class="nav-link">
-                                        <p>Transaksi Aktif</p>
-                                    </a>
-                                </li>
-                              </ul>
-                          </li>
+                          <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <p>Pembelian</p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview ml-4">
+                              <li class="nav-item">
+                                  <a href="{{ route('pembelian.index') }}" class="nav-link">
+                                      <p>Transaksi Baru</p>                 
+                                  </a>
+                              </li>
+
+                              <li class="nav-item">
+                                  <a href="{{ route('return_barang.index') }}" class="nav-link">
+                                      <p>Pengembalian Barang</p>
+                                  </a>
+                              </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <p>Penjualan</p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview ml-4">
+                            <li class="nav-item">
+                                <a href="{{ route('transaksi.baru') }}" class="nav-link">
+                                    <p>Transaksi Baru</p>                 
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('transaksi.index') }}" class="nav-link">
+                                    <p>Transaksi Aktif</p>
+                                </a>
+                            </li>
+                            </ul>
+                        </li>
                           
                       </ul>
                   </li>
 
                   {{-- Pengembalian Barang --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('pengembalianBarang.index') }}" class="nav-link">
                         <i class="nav-icon fa-solid fa-arrow-right-arrow-left"></i>  
                         <p>
                             Pengembalian Barang
                         </p>
                     </a>
-                </li>
+                </li> --}}
 
                   {{-- Daftar Penjualan --}}
                 <li class="nav-item">

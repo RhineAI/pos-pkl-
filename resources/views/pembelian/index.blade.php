@@ -34,6 +34,7 @@ Daftar Pembelian
                     <thead>
                         <th width="6%">No</th>
                         <th class="text-center">Tanggal</th>
+                        <th width="12%" class="text-center">Invoice</th>
                         <th width="20%" class="text-center">Nama Supplier</th>
                         <th class="text-center">Total Item</th>
                         <th class="text-center">Total Harga</th>
@@ -49,13 +50,16 @@ Daftar Pembelian
 
 @includeIf('pembelian.supplier')
 @includeIf('pembelian.detail')
+@includeIf('pembelian.return')
 @endsection
 
 @push('scripts')
 <script>
-    let table, table1;
+    let table, table1, table2;
 
     $(function () {
+        $('body').addClass('sidebar-collapse');
+
         table = $('.table-pembelian').DataTable({
             responsive: true,
             processing: true,
@@ -67,6 +71,7 @@ Daftar Pembelian
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'tanggal'},
+                {data: 'kode_pembelian'},
                 {data: 'supplier'},
                 {data: 'total_item'},
                 {data: 'total_harga'},
@@ -77,6 +82,7 @@ Daftar Pembelian
         });
 
         $('.table-supplier').DataTable();
+
         table1 = $('.table-detail').DataTable({
             processing: true,
             bSort: false,
@@ -87,11 +93,95 @@ Daftar Pembelian
                 {data: 'barcode'},
                 {data: 'nama_produk'},
                 {data: 'harga_beli'},
-                {data: 'jumlah'},
+                {data: 'jumlah'},  
                 {data: 'subtotal'},
             ]
         })
+
+        table2 = $('.table-return').DataTable({
+            processing: true,
+            bSort: false,
+            info: false,
+            paginate: false,
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'barcode'},
+                {data: 'nama_produk'},
+                {data: 'harga_beli'},
+                {data: 'jumlah'},
+                {data: 'jumlah2'},
+                {data: 'subtotal'},
+                {data: 'aksi'},
+            ]
+        })
     });
+
+    $(document).on('click', '#returnBarang', function(e) {
+        e.preventDefault()
+        let row = $(this).closest('tr')
+
+        let id = $(this).data('id')
+        let jumlah = parseInt(row.find('td:eq(4)').text())
+        let retur = parseInt(row.find('td:eq(5)').find('input').val())
+
+        $.ajax({
+            method: 'PATCH',
+            url: $(this).data('route'),
+            data: {
+                id_pembelian_detail: id,
+                jumlah: retur,
+                _token: "{{ csrf_token() }}",
+            },
+            cache: false,
+            dataType: 'json',
+            success:function(response) {
+                console.log(response)
+                if(response.status == true) {
+                    Swal.fire({
+                        title: 'Produk berhasil di retur!',
+                        icon: 'success',
+                        confirmButtonText: 'Onghey!',
+                    }).then(function () {
+                        $('#returnBarang').modal('hide');
+                        
+                        table.ajax.reload();
+                    })
+                }
+            }
+        })
+    })
+
+    $(document).on('keyup change', '#jumlah', function (e) {
+        let row = $(this).closest('tr')
+
+        let jumlah = parseInt(row.find('td:eq(4)').text())
+        let jumlahBaru = $(this).val()
+
+        if(jumlahBaru > jumlah ) {
+            Swal.fire({
+                title: 'Jumlah retur melebih batas!',
+                icon: 'info',
+                confirmButtonText: 'Lanjut',
+            }) 
+            $(this).val(jumlah)
+        }else if(jumlahBaru<0) {
+            Swal.fire({
+                title: 'Tentukan Jumlah retur!',
+                icon: 'info',
+                confirmButtonText: 'Lanjut',
+            })
+            $(this).val(0)
+        }
+        // if(jumlah <0) {
+        //     Swal.fire({
+        //         title: 'Jumlah retur melebih batas!',
+        //         icon: 'info',
+        //         confirmButtonText: 'Lanjut',
+        //     })
+        //     $(this).val(jumlah)
+        // }
+
+    })
 
     function addForm() {
         $('#modal-supplier').modal('show');
@@ -103,6 +193,21 @@ Daftar Pembelian
         table1.ajax.url(url);
         table1.ajax.reload();
     }
+
+    function returnBarang(url) {
+        $('#modal-return').modal('show');
+        $('#modal-return .modal-title').text('Return Barang')
+
+        table2.ajax.url(url);
+        table2.ajax.reload();
+
+    }
+
+    $(document).on('click', '#return', function () {
+        let id_pembelian = $(this).data('id_pembelian');
+      
+    })
+
 
     function deleteData(url) {
             Swal.fire({
