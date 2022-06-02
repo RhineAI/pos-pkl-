@@ -70,7 +70,7 @@ Transaksi Penjualan
                     </div>
                 </form>
 
-                <table class="table table-stiped table-bordered table-penjualan">
+                <table class="table table-striped table-bordered table-penjualan">
                     <thead>
                         <th width="4%">No</th>
                         <th width="10%" class="text-center">Barcode</th>

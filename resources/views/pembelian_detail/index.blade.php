@@ -83,7 +83,7 @@ Transaksi Pembelian
                     </div>
                 </form>
 
-                <table class="table table-stiped table-bordered table-pembelian">
+                <table class="table table-striped table-bordered table-pembelian">
                     <thead>
                         <th width="4%">No</th>
                         <th width="10%" class="text-center">Barcode</th>

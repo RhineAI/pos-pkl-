@@ -41,7 +41,8 @@ class PengembalianBarangController extends Controller
             ->of($pengembalianBarang)
             ->addIndexColumn()
             ->addColumn('invoice', function($pengembalianBarang) {
-                return $pengembalianBarang->invoice;
+                return '<span class="badge badge-danger">'. $pengembalianBarang->invoice .'</span>';
+
             })
             // ->addColumn('barcode', function ($pengembalianBarang) {
             //     return '<span class="badge badge-info">'. $pengembalianBarang->produk->barcode .'</span>';

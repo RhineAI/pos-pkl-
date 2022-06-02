@@ -29,13 +29,14 @@ class ReturnController extends Controller
                 return tanggal_indonesia($pengembalian->created_at, false);
             })
             ->addColumn('invoice', function($pengembalian) {
-                return $pengembalian->kode_pembelian;
+                return '<span class="badge badge-danger">'. $pengembalian->kode_pembelian .'</span>';
+
             })
             ->addColumn('nama_produk', function($pengembalian) {
                 return $pengembalian->nama_produk ;
             })
             ->addColumn('barcode', function($pengembalian) {
-                return $pengembalian->barcode;
+                return '<span class="badge badge-info">'. $pengembalian->barcode .'</span>';
             })
             ->addColumn('jumlah_awal', function($pengembalian) {
                 return $pengembalian->jumlah_awal + $pengembalian->jumlah_retur;
@@ -43,6 +44,7 @@ class ReturnController extends Controller
             ->addColumn('jumlah_retur', function($pengembalian) {
                 return $pengembalian->jumlah_retur;
             })
+            ->rawColumns(['invoice', 'barcode'])
             ->make(true);
     }
 

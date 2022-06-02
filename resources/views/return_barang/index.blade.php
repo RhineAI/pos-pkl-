@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-Data Kategori Produk
+Data Pengembalian Barang
 @endsection
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Kategori</li>
+<li class="breadcrumb-item active">Return</li>
 @endsection
 
 @section('content')

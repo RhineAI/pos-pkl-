@@ -24,7 +24,7 @@ Dashboard
                 <!-- .col -->
                 <div class="col-lg-6 col-12">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>{{ $seluruh_penjualan }}</h3>
     
@@ -39,7 +39,7 @@ Dashboard
                 <!-- .col -->
                 <div class="col-lg-6 col-12">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-info">
                         <div class="inner">
                             <h3>Rp. {{ format_uang($data_pemasukkan) }}</h3>
     

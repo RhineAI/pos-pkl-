@@ -47,7 +47,7 @@ class PembelianController extends Controller
                 return $pembelian->supplier->nama;
             })
             ->addColumn('kode_pembelian', function($pembelian) {
-                return $pembelian->kode_pembelian;
+                return '<span class="badge badge-danger">'. $pembelian->kode_pembelian .'</span>';
             })
             ->addColumn('total_harga', function($pembelian) {
                 return 'Rp. ' . format_uang($pembelian->total_harga) . ' ,-';
@@ -66,7 +66,7 @@ class PembelianController extends Controller
 
                ';
             }) 
-            ->rawColumns(['aksi'])
+            ->rawColumns(['aksi', 'kode_pembelian'])
             ->make(true);
     }
 
