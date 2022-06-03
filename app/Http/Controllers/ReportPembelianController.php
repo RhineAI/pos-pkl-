@@ -72,19 +72,10 @@ class ReportPembelianController extends Controller
             ->make(true);
     }
 
-    // public function data($awal, $akhir)
-    // {
-    //     $data = $this->getData($awal, $akhir);
-
-    //     return datatables()
-    //         ->of($data)
-    //         ->make(true);
-    // }
-
     public function exportPDF($awal, $akhir)
     {
         $data = $this->getData($awal, $akhir);
-        $pdf  = DomPDF::loadView('reportpembelian.export_pdf', compact('awal', 'akhir', 'data'));
+        $pdf  = PDF::loadView('reportpembelian.pdf', compact('data', 'awal', 'akhir'));
         $pdf->setPaper('a4', 'potrait');
         
         return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf');
