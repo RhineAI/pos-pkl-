@@ -51,7 +51,10 @@
                class="btn btn-outline-light btn-floating m-1"
                class="text-white"
                role="button"
-               href="https://api.whatsapp.com/send?phone=6287836370765&app=facebook&entry_point=page_cta&fbclid=IwAR1pGIXWQvaknRGgowNK5OZt_SD7WDY6OImFOQUTvjfBwufzwrwn0qi4wUk"
+               href="
+               https://wa.wizard.id/22cf51
+               {{-- https://api.whatsapp.com/send?phone=6287836370765&app=facebook&entry_point=page_cta&fbclid=IwAR1pGIXWQvaknRGgowNK5OZt_SD7WDY6OImFOQUTvjfBwufzwrwn0qi4wUk --}}
+               "
                ><i class="fab fa-whatsapp"></i
               ></a>
 
