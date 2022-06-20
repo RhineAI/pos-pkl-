@@ -243,7 +243,7 @@
 
                 {{-- Laporan --}}
                 <li class="nav-item">
-                    <a href="{{ route('reportpenjualan.index') }}" class="nav-link">
+                    <a href="{{ route('laporan.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>Laporan Penjualan</p>
                     </a>
