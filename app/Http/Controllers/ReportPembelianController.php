@@ -44,9 +44,9 @@ class ReportPembelianController extends Controller
             $row['tanggal'] = tanggal_indonesia($tanggal, false);
             // $row['nota'] = 'INV-202005'. $penjualan->kode_penjualan ;
             $row['penjualan'] = 'Rp. '.format_uang($total_pembelian);
-            $row['aksi']        = '<div class="btn-group">
-                                    <button onclick="{{ route(`daftarpenjualan.index`) }}" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i> Detail</button>
-                                </div>';
+            // $row['aksi']        = '<div class="btn-group">
+            //                         <button onclick="{{ route(`daftarpenjualan.index`) }}" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i> Detail</button>
+            //                     </div>';
 
             $data[] = $row;
         }
@@ -72,19 +72,10 @@ class ReportPembelianController extends Controller
             ->make(true);
     }
 
-    // public function data($awal, $akhir)
-    // {
-    //     $data = $this->getData($awal, $akhir);
-
-    //     return datatables()
-    //         ->of($data)
-    //         ->make(true);
-    // }
-
     public function exportPDF($awal, $akhir)
     {
         $data = $this->getData($awal, $akhir);
-        $pdf  = DomPDF::loadView('reportpembelian.export_pdf', compact('awal', 'akhir', 'data'));
+        $pdf  = PDF::loadView('reportpembelian.pdf', compact('data', 'awal', 'akhir'));
         $pdf->setPaper('a4', 'potrait');
         
         return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf');

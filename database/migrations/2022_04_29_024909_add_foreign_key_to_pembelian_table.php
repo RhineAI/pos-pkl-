@@ -14,14 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pembelian', function (Blueprint $table) {
-            $table->unsignedInteger('id_supplier')->change();
+            // $table->increments('id_pembelian');
+            $table->unsignedInteger('id_supplier')->nullable()->after('id_pembelian');
             $table->foreign('id_supplier')
                   ->references('id_supplier')
                   ->on('supplier')
-                  ->onUpdate('restrict')
-                  ->onDelete('restrict');
-
-            
+                  ->onUpdate('cascade')
+                  ->onDelete('set null');
         });
     }
 

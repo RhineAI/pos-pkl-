@@ -114,6 +114,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->name = $request->name;
+
         $user->username = $request->username;
         $user->email = $request->email;
         $user->level = $request->level;
@@ -162,12 +163,12 @@ class UserController extends Controller
                     return response()->json('Konfirmasi password tidak sesuai', 422);
                 }
             } else {
-                return response()->json('Password lama tidak sesuai', 422);
+                return response()->json('Password lama tidak sesuai', 421);
             }
         }
 
         $request->validate([
-            'foto' => 'image|file|max:3072',
+            'foto' => 'image|file|max:5000',
         ]);
 
         if ($request->hasFile('foto')) {

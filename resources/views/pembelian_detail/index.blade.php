@@ -83,7 +83,7 @@ Transaksi Pembelian
                     </div>
                 </form>
 
-                <table class="table table-stiped table-bordered table-pembelian">
+                <table class="table table-striped table-bordered table-pembelian">
                     <thead>
                         <th width="4%">No</th>
                         <th width="10%" class="text-center">Barcode</th>
@@ -317,7 +317,14 @@ Transaksi Pembelian
                 $('#barcode').val('');
             })
             .fail(errors => {
-                alert('Tidak dapat menyimpan data');
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Input Produk terlebih dahulu!',
+                    icon: 'warning',
+                    iconColor:'#DC3545',
+                    confirmButtonText: 'Omkey',
+                    confirmButtonColor: '#DC3545'
+                })
                 return;
             });
     }

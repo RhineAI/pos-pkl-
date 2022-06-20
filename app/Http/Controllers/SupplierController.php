@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\Produk;
 use App\Models\ProdukSupplier;
+use Illuminate\Support\Facades\DB;
 
 class SupplierController extends Controller
 {
@@ -17,7 +18,9 @@ class SupplierController extends Controller
     public function index()
     {
         $produk = Produk::all();
-        return view('supplier.index', ['produk' => $produk]);
+        $supplier = Supplier::all();
+        $produk_supplier = ProdukSupplier::all();
+        return view('supplier.index', compact('produk', 'supplier', 'produk_supplier'));
     }
 
     public function data() 
@@ -30,8 +33,8 @@ class SupplierController extends Controller
             ->addColumn('aksi', function ($supplier) {
                 return '
                     <div class="btn-group">
-                        <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-sm btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>
-                        <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-sm btn-danger btn-flat"><i class="bi bi-trash"></i></button>
+                        <button onclick="editData(`'. route('supplier.update', $supplier->id_supplier).'`)"  class="btn btn-sm btn-success btn-flat"><i class="bi bi-pencil-square"></i></button>&nbsp;&nbsp;
+                        <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id_supplier) .'`)" class="btn btn-sm btn-danger btn-flat"><i class="bi bi-trash"></i></button>&nbsp;&nbsp;
                         <button id="tambahProdukSupplier" data-id_supplier="'.$supplier->id_supplier.'" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i></button>
                     </div>
                 ';
@@ -75,10 +78,42 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        $supplier = Supplier::create($request->all());
+        // $supplier = Supplier::create($request->all());
+        // $validasiNama = Supplier::find('nama');
+        $supplier = new Supplier();
+
+        // $validasi = $request->validate([
+        //     'nama' => 'unique:supplier'
+        // ]);
+
+        $supplier->nama = $request->nama;
+
+        // if($request->nama == $validasiNama)
+        // {
+        //     // ([
+        //     //     'status' => false,
+        //     //     'message' => 'gagal'
+        //     // ]);
+        // } else {
+        //     $supplier->nama = $request->nama;
+        // }
+
+        $supplier->alamat = $request->alamat;
+        $supplier->telepon = $request->telepon;
         $supplier->save();
 
-        return response()->json('Supplier baru berhasil ditambahkan', 200);
+        // $validatedData = $request->validate([
+        //     'nama' => 'required|max:255|unique:users',
+        //     'alamat' => 'required',
+        //     'telepon' => 'required|min:10|max:13'
+        // ]);
+
+        // $validatedData['password'] = bcrypt($validatedData['password']);
+        // $validatedData['password'] = Hash::make($validatedData['password']);
+
+        // Supplier::create($validatedData);
+
+        return redirect('/supplier')->with('alert', 'Supplier baru berhasil ditambahkan');
     }
 
     /**
@@ -115,9 +150,13 @@ class SupplierController extends Controller
     public function update(Request $request, $id)
     {
         $supplier = Supplier::find($id);
-        $supplier->update($request->all());
+        $supplier->nama = $request->nama;
+        $supplier->alamat = $request->alamat;
+        $supplier->telepon = $request->telepon;
+        $supplier->update();
 
-        return response()->json('Supplier berhasil diupdate', 200);
+        return redirect('/supplier')->with('alert2', 'Supplier berhasil diupdate');
+        // return response()->json('berhasil', 200);
     }
 
     /**
@@ -129,8 +168,22 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         $supplier = Supplier::find($id);
-        $supplier->delete();
+        
+        // $produk_supplier = ProdukSupplier::where('id_supplier', $supplier->id_supplier)->delete();
+        
+        // dd($supplier);
 
-        return response(null,204);
+        // DB::table('produk_supplier')->where('id_supplier', $supplier->id_supplier)->delete();
+        // $supplier->produk()->detach();
+        $supplier->delete();
+        // if(Supplier::destroy($id)){
+        //     return 'success';
+        // }else{
+        //     return 'fail';
+        // }
+
+        // return redirect('/supplier')->with('delete', 'Berhasil Diupdate');
+
+        return response(null,200);
     }
 }

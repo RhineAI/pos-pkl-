@@ -35,8 +35,7 @@ Pengaturan Toko
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                @enderror
-                                
+                                @enderror              
                             {{-- <span class="help-block with-errors"></span> --}}
                         </div>
                     </div>
@@ -62,6 +61,8 @@ Pengaturan Toko
                         <div class="col-sm-5">
                             <input type="file" name="path_logo" class="form-control" id="Logo_Perusahaan"
                                 onchange="preview('.tampil-logo', this.files[0])">
+                            <span class="placeholder" style="font-style: italic">Max 4mb</span>
+
                             <span class="help-block with-errors"></span>
                             <div class="tampil-logo mt-3"></div>
                         </div>
@@ -72,7 +73,7 @@ Pengaturan Toko
                         <div class="col-sm-4">
                             <select name="tipe_nota" class="form-control" id="tipe_nota" required>
                                 <option value="1">Nota Kecil</option>
-                                <option value="2">Nota Besar</option>
+                                {{-- <option value="2">Nota Besar</option> --}}
                             </select>
                             <span class="help-block with-errors"></span>
                         </div>
@@ -104,14 +105,24 @@ Pengaturan Toko
                 })
                 .done(response => {
                     showData();
-                    $('.alert').fadeIn();
-                    setTimeout(() => {
-                        $('.alert').fadeOut();
-                    }, 3000);
+                    Swal.fire({
+                            title: 'Sukses!',
+                            text: 'Update Pengaturan Toko berhasil',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
+                        })                       
+                    return; 
                 })
                 .fail(errors => {
-                    alert('Tidak dapat menyimpan data');
-                    return;
+                    Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Update Pengaturan Toko gagal',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
+                        })                       
+                    return; 
                 });
             }
         });
