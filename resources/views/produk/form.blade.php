@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     
-                    <div class="input-group mb-3 row"> 
+                    <div class="input-group mb-3 row mx-1"> 
                         <label for="harga_beli" class="col-md-2 col-md-offset-1 control-label pr-2">Harga Beli</label>
                         <div class="input-group-prepend"> 
                             <span class="input-group-text">RP.</span> 
@@ -59,7 +59,7 @@
                         <span class="help-block with-errors"></span>
                     </div>
                 
-                    <div class="input-group mb-3 row"> 
+                    <div class="input-group mb-3 row mx-1"> 
                         <label for="harga_jual" class="col-md-2 col-md-offset-1 control-label pr-2">Harga Jual</label>
                         <div class="input-group-prepend"> 
                             <span class="input-group-text">RP.</span> 
