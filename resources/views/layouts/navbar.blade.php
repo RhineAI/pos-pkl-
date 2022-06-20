@@ -1,9 +1,13 @@
 <style>
-    #time {
-        font-family: garamond;
-        font-size: 25px; 
-        font-style: bold;
-        margin-top: 12px;
+    .clock {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        transform: translateX(-50%) translateY(-50%);
+        color: #36120e;
+        font-size: 20px;
+        font-family: 'Times New Roman';
+        letter-spacing: 3px;
     }
 </style>
 
@@ -17,14 +21,11 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
 
-            <div class="col-md-5" >
-                <div class="wrapper">
+            <div class="col-md-12" >
                     
-                    <div class="display my-2"> 
-                        <div id="time"></div>
-                    </div>
-                </div>
-               </div>
+                <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+
+            </div>
 
         </ul>
         
@@ -56,9 +57,9 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="">
-                                <a href="{{ route('user.profile') }}" class="btn btn-success btn-flat btn-sm"><i class="fa fa-pen-to-square"></i> Update Profile</a>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="#" class="btn btn-danger btn-flat btn-sm"
+                                <a href="{{ route('user.profile') }}" class="btn btn-success btn-flat btn-sm rounded"><i class="fa fa-pen-to-square"></i> Update Profile</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="#" class="btn btn-danger btn-flat btn-sm rounded"
                                     onclick="$('#logout-form').submit()"><i class="fa fa-arrow-right-from-bracket"></i> Logout</a>
                             </div>
                         </li>
@@ -74,18 +75,36 @@
 </form>
 <!-- /.navbar -->
     <script>
-        setInterval(() => {
-            const weekday = ["Minggu","Senin","Selasa","Rabu","Kamis","Juma't","Sabtu"];
-            const eachmonths = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-            const time = document.querySelector('#time');
-            let date = new Date();
-            let year = date.getFullYear();
-            let month = eachmonths[date.getMonth()];
-            let day = weekday[date.getDay()];
-            let hours = date.getHours();
-            let minutes = date.getMinutes();
-            let seconds = date.getSeconds();
-            
-            time.textContent = day + ":" + hours + ":" + minutes + ":" + seconds;
-        });
+       function showTime(){
+                var date = new Date();
+                const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+                var d = days[date.getDay()]; // 0 - 23
+                var h = date.getHours(); // 0 - 23
+                var m = date.getMinutes(); // 0 - 59
+                var s = date.getSeconds(); // 0 - 59
+                var session = "AM";
+                
+                if(h == 0){
+                    h = 12;
+                }
+                
+                if(h > 12){
+                    h = h - 12;
+                    session = "PM";
+                }
+                
+                h = (h < 10) ? "0" + h : h;
+                m = (m < 10) ? "0" + m : m;
+                s = (s < 10) ? "0" + s : s;
+                
+                var time = d + " " + h + ":" + m + ":" + s + " " + session;
+                document.getElementById("MyClockDisplay").innerText = time;
+                document.getElementById("MyClockDisplay").textContent = time;
+                
+                setTimeout(showTime, 1000);
+                
+            }
+
+            showTime();
     </script>

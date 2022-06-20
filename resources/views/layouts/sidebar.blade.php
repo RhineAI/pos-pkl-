@@ -152,8 +152,18 @@
                     </a>
                 </li>
 
+                 {{-- Laporan --}}
+                 <li class="nav-item">
+                    <a href="{{ route('laporan.index') }}" class="nav-link">
+                        <i class="nav-icon fa-solid fa-chart-pie"></i>
+                        <p>
+                            Laporan
+                        </p>
+                    </a>
+                </li>
 
-                {{-- Laporan --}}
+
+                {{-- Laporan
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -174,7 +184,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 {{-- Users --}}
                 <li class="nav-item">

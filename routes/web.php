@@ -2,6 +2,7 @@
 use App\Http\Controllers\{
     DashboardController,
     KategoriController,
+    LaporanController,
     SatuanController,
     ProdukController,
     SupplierController,
@@ -134,11 +135,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/supplier/simpan-produk', [SupplierController::class, 'simpanProduk'])->name('supplier.produk');
     Route::resource('/supplier', SupplierController::class);
 
+    //Route Laporan
+    Route::get('/laporan/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('laporan.data');
+    Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.export_pdf');
+    Route::resource('/laporan', LaporanController::class);
 
-    // Route stok laporan pembelian
-    Route::get('/reportpembelian/data/{awal}/{akhir}', [ReportPembelianController::class, 'data'])->name('reportpembelian.data');
-    Route::get('/reportpembelian/pdf/{awal}/{akhir}', [ReportPembelianController::class, 'exportPDF'])->name('reportpembelian.export_pdf');
-    Route::resource('/reportpembelian', ReportPembelianController::class);
+
+    // Route laporan pembelian
+    // Route::get('/reportpembelian/data/{awal}/{akhir}', [ReportPembelianController::class, 'data'])->name('reportpembelian.data');
+    // Route::get('/reportpembelian/pdf/{awal}/{akhir}', [ReportPembelianController::class, 'exportPDF'])->name('reportpembelian.export_pdf');
+    // Route::resource('/reportpembelian', ReportPembelianController::class);
 
     //Route pengguna
     Route::get('/users/data', [UserController::class, 'data'])->name('users.data');
@@ -151,14 +157,14 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
     // Route stok penjualan
-    Route::get('/penjualan/data', [PenjualanController::class, 'data'])->name('penjualan.data');
-    Route::resource('/penjualan', PenjualanController::class);
+    // Route::get('/penjualan/data', [PenjualanController::class, 'data'])->name('penjualan.data');
+    // Route::resource('/penjualan', PenjualanController::class);
 
     // Route stok laporan penjualan
-    Route::resource('/reportpenjualan', ReportPenjualanController::class);
+    // Route::resource('/reportpenjualan', ReportPenjualanController::class);
     // Route::get('/reportpenjualan', [ReportPenjualanController::class, 'refresh'])->name('reportpenjualan.refresh');
-    Route::get('/reportpenjualan/data/{awal}/{akhir}', [ReportPenjualanController::class, 'data'])->name('reportpenjualan.data');
-    Route::get('/reportpenjualan/pdf/{awal}/{akhir}', [ReportPenjualanController::class, 'exportPDF'])->name('reportpenjualan.export_pdf');
+    // Route::get('/reportpenjualan/data/{awal}/{akhir}', [ReportPenjualanController::class, 'data'])->name('reportpenjualan.data');
+    // Route::get('/reportpenjualan/pdf/{awal}/{akhir}', [ReportPenjualanController::class, 'exportPDF'])->name('reportpenjualan.export_pdf');
 
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
