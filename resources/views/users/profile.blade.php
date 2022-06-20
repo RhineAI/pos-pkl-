@@ -27,7 +27,7 @@ Update Profile
                         <label for="Nama" class="col-sm-3 control-label">Nama</label>
                         <div class="col-sm-9">
                             <input type="text" name="name" class="form-control" id="Nama" required
-                                autofocus value="{{ $profile->name }}">
+                                autofocus value="{{ $profile->name }}" maxlength="15" minlength="3">
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ Update Profile
                         <label for="Username" class="col-sm-3 control-label">Username</label>
                         <div class="col-sm-9">
                             <input type="text" name="username" class="form-control" id="Username" required
-                            autofocus value="{{ $profile->username }}">
+                            autofocus value="{{ $profile->username }}" maxlength="15" minlength="3">
                         </div>
                         <span class="help-block with-errors"></span>
                     </div>
@@ -122,16 +122,35 @@ Update Profile
                     $('[name=email]').val(response.email);
                     $('.tampil-foto').html(`<img src="{{ url('/') }}${response.foto}" width="100">`);
                     $('.images-profile').attr('src', `{{ url('/') }}/${response.foto}`);
-                    $('.alert').fadeIn();
-                    setTimeout(() => {
-                        $('.alert').fadeOut();
-                    }, 3000);
+                    Swal.fire({
+                            title: 'Sukses!',
+                            text: 'Update Profile berhasil! ',
+                            icon: 'success',
+                            confirmButtonText: 'Lanjut',
+                            confirmButtonColor: '#28A745'
+                        }).then(function(){
+                            location.reload('/dashboard');
+                        })                       
+                        // return; 
                 })
                 .fail(errors => {
                     if (errors.status == 422) {
-                        alert(errors.responseJSON); 
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Konfirmasi password tidak sesuai',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
+                        })                       
+                        return; 
                     } else {
-                        alert('Tidak dapat menyimpan data');
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Password lama tidak sesuai',
+                            icon: 'error',
+                            confirmButtonText: 'Kembali',
+                            confirmButtonColor: '#DC3545'
+                        })   
                     }
                     return;
                 });

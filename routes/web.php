@@ -15,6 +15,7 @@ use App\Http\Controllers\{
     PenjualanDetailController,
     ReportPembelianController,
     ReportPenjualanController,
+    ReturnController,
     UserController,
     SettingController 
 
@@ -74,27 +75,35 @@ Route::group(['middleware' => 'auth'], function () {
      
 });
 
-// Route record pembelian
 Route::group(['middleware' => 'auth'], function () {
+
+    // Route record pembelian
     Route::get('/pembelian/data', [PembelianController::class, 'data'])->name('pembelian.data');
     Route::get('/pembelian/{id}/create', [PembelianController::class, 'create'])->name('pembelian.create');
+    Route::get('/pembelian_detail/{id}/return', [PembelianController::class, 'return'])->name('pembelian.return');
     Route::resource('/pembelian', PembelianController::class)
     ->except('create');
 
-    Route::get('/pembelian/{id}/return', [PembelianController::class, 'return'])->name('pembelian.batalkan');
-    // Route::get('/pembelian/cancel/{id}', [PembelianController::class, 'cancel'])->name('pembelian.cancel');
+    // Route return barang
+    Route::get('/return_barang/data', [ReturnController::class, 'data'])->name('return_barang.data');
+    Route::resource('/return_barang', ReturnController::class);
+
 
     // Route pembelian detail
     Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
-    // Route::get('/pembeliandetail/cancel/{id}', [PembelianController::class, 'cancel'])->name('pembelian_detail.cancel');
+    Route::patch('/pembelian_detail/{id}/return_barang', [PembelianDetailController::class, 'return_barang'])->name('pembelian_detail.return_barang');
     Route::get('/pembelian_detail/loadform/{diskon}/{total}/{diterima}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
    
     Route::resource('/pembelian_detail', PembelianDetailController::class)
     ->except('create', 'show', 'edit' );
 
+
     // Route Pengembalian Barang
-    Route::get('/pengembalianBarang/data', [PengembalianBarangController::class, 'data'])->name('pengembalian_barang.data');
-    Route::resource('/pengembalianBarang', PengembalianBarangController::class);
+    // Route::get('/pengembalianBarang/data', [PengembalianBarangController::class, 'data'])->name('pengembalian_barang.data');
+    // Route::resource('/pengembalianBarang', PengembalianBarangController::class);
+    // Route::resource('/pengembalianBarang', PurchaseController::class);
+    // Route::post('pengembalianBarang/findProduct/{product_id}', [PengembalianBarangController::class, 'findProduct']);
+
 
 //  Route record penjualan
 Route::group(['middleware' => 'auth'], function () {

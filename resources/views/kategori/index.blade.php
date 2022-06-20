@@ -26,7 +26,7 @@ Data Kategori Produk
                     <thead>
                         <th width="6%">No</th>
                         <th class="text-center">Kategori</th>
-                        <th width="13%" class="text-center">Aksi</th>
+                        <th width="15%" class="text-center">Aksi</th>
                     </thead>
                 </table>
             </div>

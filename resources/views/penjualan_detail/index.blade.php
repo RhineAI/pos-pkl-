@@ -70,14 +70,14 @@ Transaksi Penjualan
                     </div>
                 </form>
 
-                <table class="table table-stiped table-bordered table-penjualan">
+                <table class="table table-striped table-bordered table-penjualan">
                     <thead>
                         <th width="4%">No</th>
                         <th width="10%" class="text-center">Barcode</th>
                         <th class="text-center">Nama</th>
                         <th width="15%"class="text-center">Harga</th>
                         <th width="12%" class="text-center">Jumlah</th>
-                        <th width="12%" class="text-center">Diskon</th>
+                    
                         <th width="12%" class="text-center">Subtotal</th>
                         <th width="8%" class="text-center">Aksi</th>
                     </thead>
@@ -254,6 +254,10 @@ Transaksi Penjualan
     }
 
     function pilihProduk(id, kode) {
+        // $('body').on('click', ('#selectProduct') function() {
+        //     let checkProduct = $('#id_produk')
+        // })
+
         $('#id_produk').val(id);
         $('#barcode').val(kode);
         hideProduk();
@@ -372,6 +376,7 @@ Transaksi Penjualan
                 return;
             })
     }
+
 </script>
 
 @endpush

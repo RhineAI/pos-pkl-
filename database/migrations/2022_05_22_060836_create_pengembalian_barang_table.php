@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('pengembalian_barang', function (Blueprint $table) {
             $table->increments('id_pengembalian_barang');
+            $table->integer('invoice');
             $table->integer('id_produk');
-            $table->integer('jumlah');
-            $table->integer('id_supplier');
+            $table->integer('jumlah_asal');
+            $table->integer('jumlah_kembali');
+            
             $table->string('keterangan');
             $table->timestamps();
         });

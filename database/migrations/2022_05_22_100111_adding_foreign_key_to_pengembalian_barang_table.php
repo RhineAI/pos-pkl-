@@ -14,12 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pengembalian_barang', function (Blueprint $table) {
-            $table->unsignedInteger('id_supplier')->change();
+            // $table->increments('id_pengembalian_barang');
+            $table->unsignedInteger('id_supplier')->nullable()->after('id_pengembalian_barang');
             $table->foreign('id_supplier')
                 ->references('id_supplier')
                 ->on('supplier')
-                ->onUpdate('restrict')
-                ->onDelete('restrict');
+                ->onUpdate('cascade')
+                ->onDelete('set null');
         });
     }
 

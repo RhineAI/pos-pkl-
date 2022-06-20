@@ -13,11 +13,6 @@ Daftar Penjualan
 <div class="row mx-3">
     <div class="col-md-12 p-3 mb-3" style="background-color: white">
         <div class="box">
-            @if(session()->has('alert'))
-            <div class="alert alert-success text-white" id="alert"><i class="fa fa-circle-check"></i>
-                &nbsp; {{ session()->get('alert') }}
-            </div>
-            @endif
             <div class="box-body table-responsive">
                 <table class="table table-striped table-bordered table-penjualan">
                     <thead>
@@ -131,11 +126,6 @@ Daftar Penjualan
         })
     }
 
-    var time = document.getElementById("alert");
-    
-    setTimeout(function(){
-        time.style.display = "none";
-    }, 3000);
 
 </script>
 @endpush
